@@ -2,133 +2,201 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ARXION | Neural Command Center</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARXION (ARXN) | Neural Treasury & X-Evolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; font-family: 'Share Tech Mono', monospace; color: #00F3FF; }
+        :root {
+            --gold: #d4af37;
+            --neon-blue: #00f3ff;
+            --dark-bg: #020408;
+            --grid-line: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* The Signature LiquidChain Grid */
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+
+        /* Navigation Bar */
+        nav {
+            padding: 25px 0;
+            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron'; font-weight: 700; font-size: 1.6rem; letter-spacing: 4px; }
+        .logo span { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #888; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Hero Section with Presale Widget */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            padding: 100px 0;
+            align-items: center;
+        }
+
+        .hero-text h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 25px; font-weight: 800; }
+        .gold-glow { color: var(--gold); text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+
+        .audit-info {
+            display: inline-block;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 5px 15px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* Presale Box (15 Stages) */
+        .presale-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stage-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 0.9rem; }
+        .live-pulse { color: var(--neon-blue); animation: blink 2s infinite; font-weight: bold; }
         
-        /* تأثير الرادار الخلفي */
-        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .progress-bar { height: 8px; background: #111; border-radius: 4px; margin-bottom: 20px; position: relative; }
+        .progress-fill { height: 100%; background: var(--gold); width: 15%; box-shadow: 0 0 15px var(--gold); }
 
-        /* واجهة الأوامر */
-        .ui-overlay {
-            position: relative; z-index: 10; height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: radial-gradient(circle, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
+        /* Tokenomics Matrix */
+        .tokenomics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--glass-border); margin: 50px 0; }
+        .matrix-cell { background: var(--dark-bg); padding: 50px; text-align: center; }
+        .matrix-cell h3 { font-family: 'Orbitron'; color: var(--gold); font-size: 1.8rem; margin-bottom: 10px; }
+
+        /* Buttons */
+        .btn-primary { 
+            width: 100%; padding: 15px; background: #fff; border: none; font-weight: 800; 
+            font-family: 'Orbitron'; cursor: pointer; transition: 0.3s; margin-top: 15px;
         }
+        .btn-primary:hover { background: var(--gold); }
 
-        .system-status { position: absolute; top: 20px; left: 20px; font-size: 12px; line-height: 1.5; }
-        
-        .main-frame {
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            padding: 40px; position: relative;
-            backdrop-filter: blur(5px);
-            clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
-        }
+        /* Responsive */
+        @media (max-width: 768px) { .hero { grid-template-columns: 1fr; text-align: center; } }
 
-        /* الزوايا التقنية */
-        .corner { position: absolute; width: 20px; height: 20px; border: 2px solid var(--gold); }
-        .top-left { top: -2px; left: -2px; border-right: none; border-bottom: none; }
-        .bottom-right { bottom: -2px; right: -2px; border-left: none; border-top: none; }
-
-        .glitch-title {
-            font-size: 60px; text-transform: uppercase; letter-spacing: 10px;
-            animation: glitch 2s infinite; color: #fff; text-shadow: 2px 0 #D4AF37, -2px 0 #00F3FF;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        .action-btn {
-            background: transparent; border: 1px solid #00F3FF; color: #00F3FF;
-            padding: 15px 40px; cursor: pointer; margin-top: 30px;
-            font-family: 'Share Tech Mono'; transition: 0.3s;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-        }
-
-        .action-btn:hover { background: #00F3FF; color: #000; box-shadow: 0 0 20px #00F3FF; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
 <body>
 
-<canvas id="canvas-bg"></canvas>
+    <div class="grid-overlay"></div>
 
-<div class="ui-overlay">
-    <div class="system-status">
-        [ SYSTEM: ONLINE ]<br>
-        [ NETWORK: ENCRYPTED ]<br>
-        [ TREASURY: AUTONOMOUS ]<br>
-        [ LOCATION: ARXION CORE ]
-    </div>
+    <nav>
+        <div class="container nav-flex">
+            <div class="logo">ARX<span>X</span>ION</div>
+            <ul class="nav-links">
+                <li><a href="#vision">Vision</a></li>
+                <li><a href="#presale">Presale</a></li>
+                <li><a href="#tokenomics">Economics</a></li>
+                <li><a href="#roadmap">Path</a></li>
+                <li><a href="#socials">Socials</a></li>
+            </ul>
+            <button style="background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px 15px; font-family: 'Orbitron';">Connect</button>
+        </div>
+    </nav>
 
-    <div class="main-frame" data-aos="zoom-in">
-        <div class="corner top-left"></div>
-        <div class="corner bottom-right" style="border-color: #00F3FF;"></div>
+    <main class="container">
         
-        <h1 class="glitch-title">ARXION</h1>
-        <p style="color: #D4AF37;">STAKE IN THE NEURAL REVOLUTION</p>
-        
-        <div id="sold-counter" style="font-size: 24px; margin: 20px 0;">0 / 400,000,000 ARXN</div>
-        
-        <button class="action-btn" onclick="initiateLink()">INITIATE NEURAL LINK</button>
-    </div>
-</div>
+        <section class="hero" id="presale">
+            <div class="hero-text">
+                <div class="audit-info">✓ Security Audit: SolidProof Verified</div>
+                <h1>Empowering The <br> <span class="gold-glow">Neural Treasury</span></h1>
+                <p>Arxion (ARXN) is a self-decoding genetic asset designed for autonomous wealth scaling through AI-driven protocols.</p>
+                <div style="margin-top: 30px; color: var(--neon-blue);">
+                    <a href="#" style="color: inherit; text-decoration: none; margin-right: 15px;">Telegram ↗</a>
+                    <a href="#" style="color: inherit; text-decoration: none; margin-right: 15px;">Twitter ↗</a>
+                    <a href="#" style="color: inherit; text-decoration: none;">Discord ↗</a>
+                </div>
+            </div>
 
-<script>
-    // رسم جزيئات متحركة في الخلفية (الرادار)
-    const canvas = document.getElementById('canvas-bg');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+            <div class="presale-card">
+                <div class="stage-header">
+                    <span>PRESALE STAGE: 01/15</span>
+                    <span class="live-pulse">● LIVE</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 25px;">
+                    <div><small style="color: #666;">Current Price</small><p>$0.001</p></div>
+                    <div><small style="color: #666;">Next Price</small><p>$0.0015</p></div>
+                </div>
+                <div style="font-size: 0.75rem; color: #888; margin-bottom: 10px;">ACCEPTED METHODS:</div>
+                <div style="letter-spacing: 2px; margin-bottom: 20px;">BNB | USDT | ETH | CARD</div>
+                <button class="btn-primary">BUY ARXN NOW</button>
+            </div>
+        </section>
 
-    let particles = [];
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2;
-            this.speedX = Math.random() * 1 - 0.5;
-            this.speedY = Math.random() * 1 - 0.5;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.size > 0.2) this.size -= 0.01;
-        }
-        draw() {
-            ctx.fillStyle = 'rgba(0, 243, 255, 0.5)';
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
+        <h2 style="text-align: center; font-family: 'Orbitron'; margin-bottom: 30px;">Tokenomics</h2>
+        <section class="tokenomics">
+            <div class="matrix-cell">
+                <h3>400M</h3>
+                <p>TOTAL SUPPLY</p>
+            </div>
+            <div class="matrix-cell">
+                <h3>25%</h3>
+                <p>STRATEGIC BURN</p>
+            </div>
+            <div class="matrix-cell">
+                <h3>LOCK</h3>
+                <p>2YR LIQUIDITY</p>
+            </div>
+        </section>
 
-    function init() {
-        for (let i = 0; i < 100; i++) particles.push(new Particle());
-    }
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-        }
-        requestAnimationFrame(animate);
-    }
-    init(); animate();
+        <section style="padding: 60px 0; border-top: 1px solid var(--glass-border);">
+            <h2 style="font-family: 'Orbitron'; margin-bottom: 40px;">The X-Path (Roadmap)</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                <div style="border-left: 2px solid var(--gold); padding-left: 20px;">
+                    <h4 style="color: var(--gold);">Phase 1: Genesis</h4>
+                    <p style="font-size: 0.85rem; color: #aaa;">15-Stage Presale, Whitepaper Release, SolidProof Audit.</p>
+                </div>
+                <div style="border-left: 2px solid var(--neon-blue); padding-left: 20px;">
+                    <h4 style="color: var(--neon-blue);">Phase 2: Growth</h4>
+                    <p style="font-size: 0.85rem; color: #aaa;">Tier-2 CEX Listings, Global Influencer Campaign.</p>
+                </div>
+                <div style="border-left: 2px solid #fff; padding-left: 20px;">
+                    <h4>Phase 3: Evolution</h4>
+                    <p style="font-size: 0.85rem; color: #aaa;">Listings on Binance, KuCoin, MEXC, and Bybit.</p>
+                </div>
+            </div>
+        </section>
 
-    // تشغيل الصوت عند الضغط
-    function initiateLink() {
-        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
-        audio.play();
-        alert("COMMENCING NEURAL DECODING...");
-    }
-</script>
+    </main>
+
+    <footer style="padding: 50px 0; border-top: 1px solid var(--glass-border); text-align: center; margin-top: 100px;">
+        <p style="font-size: 0.8rem; color: #555;">© 2025 ARXION. All Rights Reserved. Verified by SolidProof.</p>
+    </footer>
 
 </body>
 </html>
