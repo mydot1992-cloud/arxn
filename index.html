@@ -2,242 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION | The Self-Decoding AI Asset</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-    
+    <title>ARXION | Neural Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gold: #D4AF37;
-            --blue: #00F3FF;
-            --dark-bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --neon-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: #ffffff;
-            font-family: 'Rajdhani', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        /* Cyberpunk Background */
-        .grid-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-                              linear-gradient(90px, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-        }
-
-        /* Header */
-        header {
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass);
-            position: sticky; top: 0; z-index: 100;
-        }
-
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 24px; color: var(--blue); letter-spacing: 2px; }
-        .logo span { color: var(--gold); }
-
-        /* Main Container */
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center; }
-
-        /* Presale Widget */
-        .presale-card {
-            background: var(--glass);
-            border: 1px solid var(--blue);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            margin: 0 auto;
-            box-shadow: var(--neon-shadow);
-        }
-
-        .stage-badge { background: var(--gold); color: black; padding: 5px 15px; border-radius: 50px; font-weight: bold; }
+        body, html { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; font-family: 'Share Tech Mono', monospace; color: #00F3FF; }
         
-        .timer { font-family: 'Orbitron', sans-serif; font-size: 30px; color: var(--gold); margin: 20px 0; }
+        /* تأثير الرادار الخلفي */
+        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 
-        .input-group { margin: 20px 0; text-align: left; }
-        select, input {
-            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--blue);
-            background: rgba(0,0,0,0.5); color: white; margin-top: 10px; box-sizing: border-box;
+        /* واجهة الأوامر */
+        .ui-overlay {
+            position: relative; z-index: 10; height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
         }
 
-        .wealth-sim {
-            background: rgba(212, 175, 55, 0.1);
-            padding: 15px; border-radius: 10px; border: 1px dashed var(--gold);
-            margin-top: 20px; font-size: 14px;
+        .system-status { position: absolute; top: 20px; left: 20px; font-size: 12px; line-height: 1.5; }
+        
+        .main-frame {
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            padding: 40px; position: relative;
+            backdrop-filter: blur(5px);
+            clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
         }
 
-        .btn-main {
-            width: 100%; background: var(--blue); color: black; border: none; padding: 15px;
-            font-size: 18px; font-weight: bold; cursor: pointer; border-radius: 10px; margin-top: 20px;
-            transition: 0.3s; font-family: 'Orbitron', sans-serif;
+        /* الزوايا التقنية */
+        .corner { position: absolute; width: 20px; height: 20px; border: 2px solid var(--gold); }
+        .top-left { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .bottom-right { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        .glitch-title {
+            font-size: 60px; text-transform: uppercase; letter-spacing: 10px;
+            animation: glitch 2s infinite; color: #fff; text-shadow: 2px 0 #D4AF37, -2px 0 #00F3FF;
         }
-        .btn-main:hover { background: var(--gold); box-shadow: 0 0 20px var(--gold); }
 
-        /* Stats Section */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 50px; }
-        .stat-item { background: var(--glass); padding: 20px; border-radius: 15px; }
-
-        /* Live Notification */
-        .notification {
-            position: fixed; bottom: -100px; left: 20px; background: #111; border: 1px solid var(--blue);
-            padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 15px;
-            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
-        .notification.show { bottom: 20px; }
 
-        /* Roadmap & Team */
-        .section-title { font-family: 'Orbitron', sans-serif; margin: 60px 0 30px; color: var(--gold); }
-        .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .phase-card { background: var(--glass); padding: 25px; border-radius: 15px; border-top: 3px solid var(--blue); text-align: left; }
+        .action-btn {
+            background: transparent; border: 1px solid #00F3FF; color: #00F3FF;
+            padding: 15px 40px; cursor: pointer; margin-top: 30px;
+            font-family: 'Share Tech Mono'; transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        }
+
+        .action-btn:hover { background: #00F3FF; color: #000; box-shadow: 0 0 20px #00F3FF; }
     </style>
 </head>
 <body>
 
-<div class="grid-bg"></div>
+<canvas id="canvas-bg"></canvas>
 
-<header>
-    <div class="logo">ARXION <span>X</span></div>
-    <div class="socials">
-        <i class="fab fa-telegram fa-lg" style="margin:0 10px; cursor:pointer"></i>
-        <i class="fab fa-x-twitter fa-lg" style="margin:0 10px; cursor:pointer"></i>
-        <i class="fab fa-discord fa-lg" style="margin:0 10px; cursor:pointer"></i>
+<div class="ui-overlay">
+    <div class="system-status">
+        [ SYSTEM: ONLINE ]<br>
+        [ NETWORK: ENCRYPTED ]<br>
+        [ TREASURY: AUTONOMOUS ]<br>
+        [ LOCATION: ARXION CORE ]
     </div>
-</header>
 
-<div class="container">
-    <div class="presale-card">
-        <span class="stage-badge">STAGE 1 / 15</span>
-        <h2 style="font-family:'Orbitron'">Presale is LIVE</h2>
-        <div class="timer" id="timer">47:59:59</div>
+    <div class="main-frame" data-aos="zoom-in">
+        <div class="corner top-left"></div>
+        <div class="corner bottom-right" style="border-color: #00F3FF;"></div>
         
-        <div class="input-group">
-            <label>Select Payment Method</label>
-            <select id="cryptoType" onchange="calculate()">
-                <option value="BNB">BNB (Binance Smart Chain)</option>
-                <option value="ETH">ETH (Ethereum Network)</option>
-                <option value="SOL">SOL (Solana)</option>
-                <option value="USDT">USDT (Tether)</option>
-                <option value="USDC">USDC (Circle)</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label>Amount to Spend</label>
-            <input type="number" id="payAmount" placeholder="0.00" oninput="calculate()">
-        </div>
-
-        <div class="wealth-sim">
-            <div id="tokenOutput">You will receive: 0 $ARXN</div>
-            <div id="profitOutput" style="color:var(--gold); font-weight:bold; margin-top:5px;">
-                Expected Value at Listing: $0.00 (6x Potential)
-            </div>
-        </div>
-
-        <button class="btn-main" onclick="buyClick()">ESTABLISH NEURAL LINK</button>
-    </div>
-
-    <div class="stats-grid">
-        <div class="stat-item"><h4>Total Planned Burn</h4><p style="color:var(--gold)">50,000,000 ARXN</p></div>
-        <div class="stat-item"><h4>Security Audit</h4><p style="color:var(--blue)">Verified</p></div>
-        <div class="stat-item"><h4>Liquidity Lock</h4><p style="color:var(--blue)">180 Days</p></div>
-    </div>
-
-    <h3 class="section-title">THE X-EVOLUTION ROADMAP</h3>
-    <div class="roadmap-grid">
-        <div class="phase-card"><h3>Phase 1</h3><p>Genesis Launch & Smart Contract Audit.</p></div>
-        <div class="phase-card"><h3>Phase 2</h3><p>Global Marketing & Community Expansion.</p></div>
-        <div class="phase-card"><h3>Phase 3</h3><p>Tier-1 Exchange Listings & Neural Treasury Activation.</p></div>
-        <div class="phase-card"><h3>Phase 4</h3><p>Global AI Governance & Ecosystem Maturity.</p></div>
+        <h1 class="glitch-title">ARXION</h1>
+        <p style="color: #D4AF37;">STAKE IN THE NEURAL REVOLUTION</p>
+        
+        <div id="sold-counter" style="font-size: 24px; margin: 20px 0;">0 / 400,000,000 ARXN</div>
+        
+        <button class="action-btn" onclick="initiateLink()">INITIATE NEURAL LINK</button>
     </div>
 </div>
-
-<div id="notif" class="notification">
-    <div id="coinIcon" style="font-size: 24px;"><i class="fas fa-microchip" style="color:var(--blue)"></i></div>
-    <div>
-        <div id="notifTitle" style="font-weight:bold; font-size:14px;">Incoming Transaction</div>
-        <div id="notifSub" style="font-size:12px; opacity:0.7">Connected to Neural Link...</div>
-    </div>
-</div>
-
-<audio id="sfxClick" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
-<audio id="sfxSuccess" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
-<audio id="sfxHover" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
 
 <script>
-    const stagePrice = 0.01;
-    const listingPrice = 0.06;
-    const sfxClick = document.getElementById('sfxClick');
-    const sfxSuccess = document.getElementById('sfxSuccess');
-    const sfxHover = document.getElementById('sfxHover');
+    // رسم جزيئات متحركة في الخلفية (الرادار)
+    const canvas = document.getElementById('canvas-bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    // 1. Calculator & Wealth Simulator
-    function calculate() {
-        let amt = document.getElementById('payAmount').value || 0;
-        let type = document.getElementById('cryptoType').value;
-        let rate = 1;
-
-        // Mock rates for calculation
-        if(type === 'BNB') rate = 600;
-        if(type === 'ETH') rate = 2500;
-        if(type === 'SOL') rate = 150;
-        if(type === 'USDT' || type === 'USDC') rate = 1;
-
-        let usdValue = amt * rate;
-        let tokens = usdValue / stagePrice;
-        let futureVal = tokens * listingPrice;
-
-        document.getElementById('tokenOutput').innerText = You will receive: ${tokens.toLocaleString()} $ARXN;
-        document.getElementById('profitOutput').innerText = Expected Value at Listing: $${futureVal.toLocaleString()} (6x Potential);
+    let particles = [];
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) this.size -= 0.01;
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(0, 243, 255, 0.5)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
 
-    // 2. Audio Interactions
-    function buyClick() {
-        sfxSuccess.play();
-        alert("Establishing Neural Link with your Wallet...");
+    function init() {
+        for (let i = 0; i < 100; i++) particles.push(new Particle());
     }
-
-    document.querySelectorAll('button, select, input, i').forEach(el => {
-        el.addEventListener('click', () => sfxClick.play());
-        el.addEventListener('mouseenter', () => { sfxHover.volume = 0.2; sfxHover.play(); });
-    });
-
-    // 3. Recursive 48h Timer
-    function startTimer() {
-        let time = 48 * 3600;
-        setInterval(() => {
-            let h = Math.floor(time / 3600);
-            let m = Math.floor((time % 3600) / 60);
-            let s = time % 60;
-            document.getElementById('timer').innerText = ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')};
-            if (--time < 0) time = 48 * 3600;
-        }, 1000);
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        requestAnimationFrame(animate);
     }
-    startTimer();
+    init(); animate();
 
-    // 4. Global Live Transactions
-    const cryptos = ["BNB", "ETH", "USDT", "USDC", "SOL"];
-    setInterval(() => {
-        let c = cryptos[Math.floor(Math.random()*cryptos.length)];
-        let a = (Math.random() * 10 + 0.1).toFixed(2);
-        document.getElementById('notifTitle').innerText = New Purchase: ${a} ${c};
-        let notif = document.getElementById('notif');
-        notif.classList.add('show');
-        setTimeout(() => notif.classList.remove('show'), 5000);
-    }, 15000);
+    // تشغيل الصوت عند الضغط
+    function initiateLink() {
+        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
+        audio.play();
+        alert("COMMENCING NEURAL DECODING...");
+    }
 </script>
 
 </body>
-</html
+</html>
