@@ -21,6 +21,7 @@
             overflow-x: hidden;
         }
 
+        /* Particles Background */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -36,4 +37,175 @@
 
         nav {
             display: flex;
-            justify-content
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            background: rgba(0,0,0,0.85);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Orbitron';
+            font-size: 2rem;
+            letter-spacing: 8px;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron';
+            font-size: clamp(3rem, 10vw, 6rem);
+            margin: 0;
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 15px;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 1000px;
+            border-radius: 10px;
+        }
+
+        .lux-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 15px 40px;
+            font-family: 'Orbitron';
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+            margin: 10px;
+        }
+
+        .lux-btn:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 30px var(--gold);
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue), var(--gold));
+            box-shadow: 0 0 15px var(--blue);
+            width: 65%; /* نسبة البيع المسبق */
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover { border-color: var(--blue); }
+
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="master-wrapper">
+        <nav>
+            <div class="logo">ARXION</div>
+            <button class="lux-btn" style="padding: 8px 15px; font-size: 0.7rem;">CONNECT WALLET</button>
+        </nav>
+
+        <section class="hero">
+            <p style="color: var(--blue); letter-spacing: 5px;">THE SELF-DECODING ASSET</p>
+            <h1>ARXION</h1>
+            <p style="max-width: 600px; color: #ccc; font-size: 1.1rem; margin-top: 20px;">
+                The first AI-Sovereign protocol managed by the Neural Treasury.
+            </p>
+            <div style="margin-top: 30px;">
+                <button class="lux-btn">Enter Presale</button>
+                <button class="lux-btn" style="border-color: var(--blue); color: var(--blue);">Whitepaper</button>
+            </div>
+        </section>
+
+        <div class="glass-panel">
+            <h2 style="font-family: 'Orbitron'; color: var(--gold); text-align: center; margin: 0;">NEURAL TREASURY STATUS</h2>
+            <div class="progress-bar-bg">
+                <div class="progress-fill"></div>
+            </div>
+            <p style="text-align: center;">Presale Phase 1: 65% Completed</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="card">
+                <h3 style="color: var(--blue);">X-EVOLUTION</h3>
+                <p>Genetic code intelligence that adapts to market trends.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--blue);">NEURAL CORE</h3>
+                <p>Fully autonomous treasury management with zero human bias.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--blue);">HOLOGRAPHIC UI</h3>
+                <p>Real-time data visualization of the AI sovereign protocol.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 100 },
+                "color": { "value": "#ffd700" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 2 },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00f3ff",
+                    "opacity": 0.3,
+                    "width": 1
+                },
+                "move": { "enable": true, "speed": 1.5 }
+            }
+        });
+    </script>
+</body>
+</html>
