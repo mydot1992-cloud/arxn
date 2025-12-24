@@ -3,227 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION (ARXN) | The Sovereign AI Asset</title>
+    <title>ARXION | Sovereign Intelligence Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-blue: #00f2ff;
-            --gold: #ffd700;
-            --bg-void: #020617;
+            --cyan-glow: #00f2ff;
+            --gold-glow: #ffd700;
+            --bg-deep: #020408;
         }
 
         body {
-            background-color: var(--bg-void);
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
 
-        .orbitron { font-family: 'Orbitron', sans-serif; }
-
-        /* Animated Grid Background - LiquidChain Style Evolution */
-        .grid-bg {
-            position: fixed;
-            inset: 0;
-            background-image: 
-                linear-gradient(to right, rgba(0, 242, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+        /* تأثير الخلفية الشبكية والجزيئات */
+        .cyber-grid {
+            position: fixed; inset: 0;
+            background-image: radial-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
-            z-index: -2;
-        }
-
-        /* The Giant X Portal */
-        .x-portal {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Orbitron';
-            font-weight: 900;
-            font-size: 75vw;
-            color: rgba(0, 242, 255, 0.015);
             z-index: -1;
-            pointer-events: none;
-            user-select: none;
         }
 
-        /* Glassmorphism Panels */
+        /* حرف X المركزي المتوهج خلف العناصر */
+        .central-x {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60vw; font-weight: 900;
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.03), rgba(255, 215, 0, 0.03));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: blur(5px); z-index: -1; pointer-events: none;
+        }
+
+        /* الكروت الزجاجية الفائقة (The Floating Glass) */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-top: 2px solid rgba(0, 242, 255, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            background: rgba(10, 15, 25, 0.6);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 30px;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
         }
 
-        /* Progress Bar Animation */
-        .progress-bar {
-            height: 10px;
+        /* الأزرار الهولوغرامية */
+        .hologram-btn {
+            background: #fff;
+            color: #000;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hologram-btn:hover {
+            background: var(--cyan-glow);
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        /* شريط التقدم النيوني */
+        .neo-progress {
+            height: 4px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            border-radius: 10px;
             overflow: hidden;
-            position: relative;
         }
-        .progress-fill {
-            width: 72%;
-            height: 100%;
-            background: linear-gradient(90deg, #00f2ff, #0066ff);
-            box-shadow: 0 0 15px #00f2ff;
-            position: relative;
-            animation: progress-pulse 3s infinite;
+        .neo-fill {
+            width: 72.4%; height: 100%;
+            background: var(--cyan-glow);
+            box-shadow: 0 0 15px var(--cyan-glow);
         }
 
-        @keyframes progress-pulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; }
-            100% { opacity: 0.8; }
-        }
-
-        /* Futuristic Input Fields */
-        .arxn-input {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .arxn-input:focus {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
-            outline: none;
-        }
-
-        .gold-gradient {
+        .gold-text {
             background: linear-gradient(90deg, #ffd700, #b8860b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="bg-void">
+<body>
 
-    <div class="grid-bg"></div>
-    <div class="x-portal">X</div>
+    <div class="cyber-grid"></div>
+    <div class="central-x">X</div>
 
-    <nav class="container mx-auto px-6 py-6 flex justify-between items-center relative z-10">
+    <nav class="p-8 flex justify-between items-center max-w-7xl mx-auto relative z-10">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-gradient-to-tr from-[#00f2ff] to-[#0066ff] rounded flex items-center justify-center font-black text-black orbitron">X</div>
-            <span class="text-2xl font-black orbitron tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">ARXION</span>
+            <div class="w-8 h-8 bg-cyan-500 rounded rotate-45 flex items-center justify-center">
+                <span class="rotate-[-45deg] font-black text-black text-xs">A</span>
+            </div>
+            <span class="text-2xl font-extrabold tracking-tighter">ARXION.</span>
         </div>
-        <div class="hidden md:flex gap-10 text-[11px] orbitron font-bold tracking-[0.2em] text-gray-400">
-            <a href="#" class="hover:text-[#00f2ff] transition">ECOSYSTEM</a>
-            <a href="#" class="hover:text-[#00f2ff] transition">TREASURY</a>
-            <a href="#" class="hover:text-[#00f2ff] transition">DOCS</a>
+        <div class="hidden md:flex gap-10 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+            <a href="#" class="hover:text-white transition">Treasury</a>
+            <a href="#" class="hover:text-white transition">Evolution</a>
+            <a href="#" class="hover:text-white transition">Nexus</a>
         </div>
-        <button class="bg-white text-black px-8 py-2 rounded-full font-black orbitron text-xs hover:bg-[#00f2ff] transition-all shadow-lg">
-            CONNECT WALLET
-        </button>
+        <button class="border border-white/10 px-5 py-2 rounded-xl text-xs font-bold hover:bg-white/5">SEARCH</button>
     </nav>
 
-    <main class="container mx-auto px-6 py-12 lg:py-24 grid lg:grid-cols-12 gap-16 relative z-10">
+    <main class="max-w-7xl mx-auto px-8 pt-20 grid lg:grid-cols-12 gap-10 items-center">
         
-        <div class="lg:col-span-7 space-y-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/5 border border-white/10">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
-                <span class="text-[10px] uppercase orbitron tracking-widest text-gray-400">Neural Treasury v2.0 Live</span>
-            </div>
-            <h1 class="text-6xl md:text-8xl font-black orbitron leading-[0.85]">
-                THE <span class="text-[#00f2ff]">X-CORE</span> <br> 
-                <span class="gold-gradient">SOVEREIGNTY</span>
+        <div class="lg:col-span-7 glass-panel p-16 min-h-[400px] flex flex-col justify-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-transparent to-transparent opacity-50"></div>
+            <h1 class="text-7xl md:text-8xl font-black leading-none mb-4">
+                SOVEREIGN <br> <span class="gold-text">ASSET.</span>
             </h1>
-            <p class="text-xl text-gray-400 max-w-xl leading-relaxed font-light">
-                Join the evolution of digital assets. <span class="text-white font-bold">Arxion (ARXN)</span> is a self-decoding AI asset managed by a decentralized neural command center.
+            <p class="text-gray-400 text-lg max-w-md">
+                Unlocking the next dimension of neural liquidity. Controlled by the core.
             </p>
-            
-            <div class="flex gap-6 max-w-md">
-                <div class="glass-panel p-5 rounded-2xl flex-1 text-center">
-                    <div class="text-[9px] text-gray-500 orbitron uppercase mb-1">Pre-sale Price</div>
-                    <div class="text-xl font-black orbitron text-[#00f2ff]">$0.012</div>
-                </div>
-                <div class="glass-panel p-5 rounded-2xl flex-1 text-center border-t-[#ffd700]">
-                    <div class="text-[9px] text-gray-500 orbitron uppercase mb-1">Listing Price</div>
-                    <div class="text-xl font-black orbitron text-[#ffd700]">$0.080</div>
-                </div>
-            </div>
         </div>
 
-        <div class="lg:col-span-5">
-            <div class="glass-panel p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#00f2ff]/10 blur-[80px]"></div>
-                
-                <div class="flex justify-between items-end mb-8">
-                    <h2 class="text-2xl font-black orbitron">PRESALE PHASE 1</h2>
-                    <span class="text-[10px] text-[#00f2ff] font-bold animate-pulse">● LIVE NOW</span>
-                </div>
+        <div class="lg:col-span-5 glass-panel p-10 flex flex-col gap-8">
+            <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Presale Engine</span>
+                <span class="text-[10px] text-cyan-400 animate-pulse">● PHASE 1 ACTIVE</span>
+            </div>
 
-                <div class="space-y-3 mb-10">
-                    <div class="flex justify-between text-xs font-bold orbitron">
-                        <span class="text-gray-400">Raised: $3,620,000</span>
-                        <span class="text-white">Goal: $5,000,000</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                    <div class="text-[10px] text-right text-gray-500 font-bold uppercase">Progress: 72.4%</div>
-                </div>
-
-                <div class="space-y-5">
-                    <div class="relative group">
-                        <label class="text-[10px] text-gray-500 uppercase orbitron font-bold absolute left-5 top-3">You Send</label>
-                        <input type="number" value="1000" class="w-full arxn-input p-6 pt-10 rounded-2xl font-black orbitron text-xl">
-                        <div class="absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2 bg-white/5 px-3 py-2 rounded-xl">
-                            <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="w-5 h-5">
-                            <span class="font-bold text-xs">USDT</span>
-                        </div>
-                    </div>
-
-                    <div class="relative group">
-                        <label class="text-[10px] text-gray-500 uppercase orbitron font-bold absolute left-5 top-3">You Get</label>
-                        <input type="number" value="83333" readonly class="w-full arxn-input p-6 pt-10 rounded-2xl font-black orbitron text-xl text-[#ffd700]">
-                        <div class="absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2 bg-[#00f2ff]/10 px-3 py-2 rounded-xl">
-                            <span class="font-bold text-xs text-[#00f2ff]">ARXN</span>
-                        </div>
+            <div class="space-y-6">
+                <div class="bg-black/40 border border-white/5 p-6 rounded-2xl">
+                    <label class="text-[10px] text-gray-500 uppercase font-bold block mb-2">You Allocate</label>
+                    <div class="flex justify-between items-center text-2xl font-bold">
+                        <input type="text" value="5,000" class="bg-transparent outline-none w-full">
+                        <span class="text-sm">USDT</span>
                     </div>
                 </div>
 
-                <button class="w-full mt-10 bg-white text-black font-black py-5 rounded-2xl orbitron tracking-[0.3em] hover:bg-[#00f2ff] hover:scale-[1.02] transition-all shadow-2xl">
-                    EXECUTE PURCHASE
-                </button>
-
-                <div class="mt-6 flex justify-center gap-4 grayscale opacity-40">
-                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="h-5">
-                    <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" class="h-5">
-                    <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" class="h-5">
+                <div class="bg-black/40 border border-white/5 p-6 rounded-2xl border-l-2 border-l-cyan-500">
+                    <label class="text-[10px] text-gray-500 uppercase font-bold block mb-2">Neural Distribution</label>
+                    <div class="flex justify-between items-center text-2xl font-bold text-cyan-400">
+                        <input type="text" value="412,000" readonly class="bg-transparent outline-none w-full">
+                        <span class="text-sm text-white">ARXN</span>
+                    </div>
                 </div>
             </div>
+
+            <div class="space-y-2">
+                <div class="neo-progress">
+                    <div class="neo-fill"></div>
+                </div>
+                <div class="text-[10px] text-center font-bold text-gray-500">
+                    <span class="text-white">72.4%</span> ALLOCATION FILLED
+                </div>
+            </div>
+
+            <button class="hologram-btn w-full py-6 rounded-2xl text-sm">
+                Initiate Acquisition
+            </button>
         </div>
     </main>
 
-    <section class="container mx-auto px-6 py-20">
-        <div class="grid md:grid-cols-4 gap-6">
-            <div class="glass-panel p-6 rounded-2xl">
-                <div class="text-[9px] text-gray-500 orbitron mb-1 tracking-widest">TREASURY VALUE</div>
-                <div class="text-2xl font-black orbitron text-[#00f2ff]">$42.8M</div>
-            </div>
-            <div class="glass-panel p-6 rounded-2xl">
-                <div class="text-[9px] text-gray-500 orbitron mb-1 tracking-widest">NEURAL LOAD</div>
-                <div class="text-2xl font-black orbitron">0.02ms</div>
-            </div>
-            <div class="glass-panel p-6 rounded-2xl">
-                <div class="text-[9px] text-gray-500 orbitron mb-1 tracking-widest">ECOSYSTEM STAGE</div>
-                <div class="text-2xl font-black orbitron gold-gradient">X-PORTAL</div>
-            </div>
-            <div class="glass-panel p-6 rounded-2xl bg-black/80 border-red-500/20">
-                <div class="text-[9px] text-red-500 orbitron mb-1 tracking-widest animate-pulse">LIVE NODE</div>
-                <div class="text-xs font-mono text-blue-400 truncate">> Decoding Block_72...</div>
-            </div>
+    <div class="fixed bottom-10 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl glass-panel p-5 px-10 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="h-4 opacity-50">
+            <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase">Security: Quantum Encrypted. Optimal</span>
         </div>
-    </section>
-
-    <footer class="border-t border-white/5 py-10 opacity-30">
-        <div class="container mx-auto px-6 text-center text-[10px] orbitron tracking-[0.5em] uppercase">
-            Arxion Project © 2025 | Neural Command Center
+        <div class="flex gap-6 opacity-30">
+            <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" class="h-4">
+            <img src="https://cryptologos.cc/logos/chainlink-link-logo.png" class="h-4">
         </div>
-    </footer>
+    </div>
 
 </body>
 </html>
