@@ -3,302 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION (ARXN) | The Self-Decoding Asset Protocol</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>ARXION | The Self-Decoding AI Asset</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --gold: #D4AF37;
             --blue: #00F3FF;
-            --bg: #030303;
-            --card-glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(212, 175, 55, 0.2);
+            --dark-bg: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --neon-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background-color: var(--bg);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Hero Background with Particles simulation */
-        .hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
+        /* Cyberpunk Background */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90px, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -1;
         }
 
-        /* Header like BitcoinHyper */
+        /* Header */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 20px 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(3, 3, 3, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo {
-            font-family: 'Syncopate';
-            font-size: 24px;
-            color: var(--gold);
-            text-decoration: none;
-            letter-spacing: 4px;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--blue); }
-
-        .btn-connect {
-            background: linear-gradient(90deg, var(--gold), #f1c40f);
-            color: #000;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 12px;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        /* Main Section */
-        .hero-section {
             display: flex;
-            flex-wrap: wrap;
-            min-height: 100vh;
-            padding: 120px 5% 50px;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass);
+            position: sticky; top: 0; z-index: 100;
         }
 
-        .hero-text { flex: 1; min-width: 300px; padding-right: 50px; }
-        .hero-text h1 {
-            font-size: 4rem;
-            font-family: 'Syncopate';
-            line-height: 1.1;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 24px; color: var(--blue); letter-spacing: 2px; }
+        .logo span { color: var(--gold); }
+
+        /* Main Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+
+        /* Presale Widget */
+        .presale-card {
+            background: var(--glass);
+            border: 1px solid var(--blue);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: var(--neon-shadow);
         }
 
-        /* Presale Widget - Styled like BitcoinHyper */
-        .presale-widget {
-            flex: 0 0 450px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 30px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-            text-align: center;
+        .stage-badge { background: var(--gold); color: black; padding: 5px 15px; border-radius: 50px; font-weight: bold; }
+        
+        .timer { font-family: 'Orbitron', sans-serif; font-size: 30px; color: var(--gold); margin: 20px 0; }
+
+        .input-group { margin: 20px 0; text-align: left; }
+        select, input {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--blue);
+            background: rgba(0,0,0,0.5); color: white; margin-top: 10px; box-sizing: border-box;
         }
 
-        .presale-header { margin-bottom: 20px; }
-        .presale-header h3 { font-family: 'Syncopate'; color: var(--gold); font-size: 18px; }
-
-        /* Countdown */
-        .timer {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .timer-unit { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; min-width: 60px; }
-        .timer-unit span { display: block; font-size: 20px; font-weight: 800; color: var(--blue); }
-        .timer-unit label { font-size: 9px; text-transform: uppercase; opacity: 0.6; }
-
-        /* Progress Bar */
-        .progress-container { margin: 25px 0; text-align: left; }
-        .progress-bar {
-            height: 12px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        .progress-fill {
-            width: 78%; /* Sample value */
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--blue));
-            box-shadow: 0 0 15px var(--blue);
+        .wealth-sim {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 15px; border-radius: 10px; border: 1px dashed var(--gold);
+            margin-top: 20px; font-size: 14px;
         }
 
-        /* Purchase Box */
-        .buy-box {
-            background: rgba(0,0,0,0.2);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
+        .btn-main {
+            width: 100%; background: var(--blue); color: black; border: none; padding: 15px;
+            font-size: 18px; font-weight: bold; cursor: pointer; border-radius: 10px; margin-top: 20px;
+            transition: 0.3s; font-family: 'Orbitron', sans-serif;
         }
-        .payment-methods {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 15px;
-        }
-        .pay-btn {
-            background: none; border: 1px solid rgba(255,255,255,0.1);
-            color: #fff; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 11px;
-            display: flex; align-items: center; gap: 5px; transition: 0.3s;
-        }
-        .pay-btn.active { border-color: var(--blue); background: rgba(0, 243, 255, 0.05); }
+        .btn-main:hover { background: var(--gold); box-shadow: 0 0 20px var(--gold); }
 
-        .input-group { position: relative; margin-top: 15px; }
-        input {
-            width: 100%;
-            padding: 15px;
-            background: #000;
-            border: 1px solid var(--border);
-            color: #fff;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-        .input-label { font-size: 10px; position: absolute; right: 15px; top: 18px; color: var(--gold); font-weight: bold; }
+        /* Stats Section */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 50px; }
+        .stat-item { background: var(--glass); padding: 20px; border-radius: 15px; }
 
-        .main-buy-btn {
-            width: 100%;
-            padding: 18px;
-            margin-top: 20px;
-            background: linear-gradient(90deg, #00D2FF, #00F3FF);
-            border: none;
-            border-radius: 12px;
-            color: #000;
-            font-weight: 800;
-            font-family: 'Syncopate';
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.3);
-            transition: 0.3s;
+        /* Live Notification */
+        .notification {
+            position: fixed; bottom: -100px; left: 20px; background: #111; border: 1px solid var(--blue);
+            padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 15px;
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
         }
-        .main-buy-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 243, 255, 0.5); }
+        .notification.show { bottom: 20px; }
 
-        /* Featured Section Icons like BitcoinHyper */
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 50px 5%;
-            background: rgba(212, 175, 55, 0.02);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-        .feat-item { text-align: center; opacity: 0.5; transition: 0.3s; filter: grayscale(1); }
-        .feat-item:hover { opacity: 1; filter: grayscale(0); }
-
-        @media (max-width: 900px) {
-            .hero-section { flex-direction: column; text-align: center; padding-top: 100px; }
-            .hero-text { padding-right: 0; margin-bottom: 50px; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .presale-widget { width: 100%; flex: none; }
-        }
+        /* Roadmap & Team */
+        .section-title { font-family: 'Orbitron', sans-serif; margin: 60px 0 30px; color: var(--gold); }
+        .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .phase-card { background: var(--glass); padding: 25px; border-radius: 15px; border-top: 3px solid var(--blue); text-align: left; }
     </style>
 </head>
 <body>
 
-    <div class="hero-bg"></div>
+<div class="grid-bg"></div>
 
-    <header>
-        <a href="#" class="logo">ARXION</a>
-        <nav class="nav-links">
-            <a href="#about">About</a>
-            <a href="#tokenomics">Tokenomics</a>
-            <a href="#roadmap">Roadmap</a>
-            <a href="#whitepaper">Whitepaper</a>
-            <button class="btn-connect">Connect Wallet</button>
-        </nav>
-    </header>
+<header>
+    <div class="logo">ARXION <span>X</span></div>
+    <div class="socials">
+        <i class="fab fa-telegram fa-lg" style="margin:0 10px; cursor:pointer"></i>
+        <i class="fab fa-x-twitter fa-lg" style="margin:0 10px; cursor:pointer"></i>
+        <i class="fab fa-discord fa-lg" style="margin:0 10px; cursor:pointer"></i>
+    </div>
+</header>
 
-    <main class="hero-section">
-        <div class="hero-text">
-            <span style="color: var(--blue); letter-spacing: 5px; font-weight: 800; font-size: 12px; text-transform: uppercase;">The Fastest AI Layer 2 Protocol</span>
-            <h1>SCALABILITY & INTELLIGENCE FOR BLOCKCHAIN</h1>
-            <p style="font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 30px;">
-                Arxion ($ARXN) is the first self-decoding neural asset. Harness the power of the Neural Treasury and experience lightning-fast transactions.
-            </p>
-            <div style="display: flex; gap: 20px;">
-                <a href="#" style="color: #fff; text-decoration: none; border: 1px solid #fff; padding: 12px 30px; border-radius: 50px; font-size: 12px; font-weight: bold;">Audit Report</a>
-                <a href="#" style="color: var(--blue); text-decoration: none; padding: 12px 0; font-size: 12px; font-weight: bold;">Join Telegram <i class="fa-solid fa-arrow-right"></i></a>
+<div class="container">
+    <div class="presale-card">
+        <span class="stage-badge">STAGE 1 / 15</span>
+        <h2 style="font-family:'Orbitron'">Presale is LIVE</h2>
+        <div class="timer" id="timer">47:59:59</div>
+        
+        <div class="input-group">
+            <label>Select Payment Method</label>
+            <select id="cryptoType" onchange="calculate()">
+                <option value="BNB">BNB (Binance Smart Chain)</option>
+                <option value="ETH">ETH (Ethereum Network)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="USDT">USDT (Tether)</option>
+                <option value="USDC">USDC (Circle)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Amount to Spend</label>
+            <input type="number" id="payAmount" placeholder="0.00" oninput="calculate()">
+        </div>
+
+        <div class="wealth-sim">
+            <div id="tokenOutput">You will receive: 0 $ARXN</div>
+            <div id="profitOutput" style="color:var(--gold); font-weight:bold; margin-top:5px;">
+                Expected Value at Listing: $0.00 (6x Potential)
             </div>
         </div>
 
-        <div class="presale-widget">
-            <div class="presale-header">
-                <h3>PRESALE IS LIVE!</h3>
-                <p style="font-size: 11px; opacity: 0.7; margin-top: 5px;">Stage 1: Secure your $ARXN at the lowest price.</p>
-            </div>
-
-            <div class="timer">
-                <div class="timer-unit"><span id="days">00</span><label>Days</label></div>
-                <div class="timer-unit"><span id="hours">22</span><label>Hours</label></div>
-                <div class="timer-unit"><span id="minutes">45</span><label>Mins</label></div>
-                <div class="timer-unit"><span id="seconds">12</span><label>Secs</label></div>
-            </div>
-
-            <div class="progress-container">
-                <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: bold;">
-                    <span>RAISED: $12,450,230</span>
-                    <span style="color: var(--gold);">TARGET: $15,000,000</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-            </div>
-
-            <p style="font-weight: 800; color: var(--gold); margin-bottom: 15px;">1 $ARXN = 0.0125 USDT</p>
-
-            <div class="buy-box">
-                <div class="payment-methods">
-                    <button class="pay-btn active"><i class="fa-brands fa-ethereum"></i> ETH</button>
-                    <button class="pay-btn"><i class="fa-solid fa-coins"></i> USDT</button>
-                    <button class="pay-btn"><i class="fa-solid fa-credit-card"></i> CARD</button>
-                </div>
-
-                <div class="input-group">
-                    <input type="number" placeholder="0.00">
-                    <span class="input-label">ETH YOU PAY</span>
-                </div>
-                <div class="input-group">
-                    <input type="number" placeholder="0" readonly>
-                    <span class="input-label">ARXN YOU RECEIVE</span>
-                </div>
-
-                <button class="main-buy-btn">BUY $ARXN NOW</button>
-            </div>
-
-            <p style="font-size: 10px; opacity: 0.5; margin-top: 15px;">Powered by Neural Treasury Secure Payment</p>
-        </div>
-    </main>
-
-    <div class="featured-grid">
-        <div class="feat-item"><h3 style="font-family: 'Syncopate'; font-size: 14px;">BINANCE</h3></div>
-        <div class="feat-item"><h3 style="font-family: 'Syncopate'; font-size: 14px;">COINMARKETCAP</h3></div>
-        <div class="feat-item"><h3 style="font-family: 'Syncopate'; font-size: 14px;">BLOOMBERG</h3></div>
-        <div class="feat-item"><h3 style="font-family: 'Syncopate'; font-size: 14px;">COINTELEGRAPH</h3></div>
-        <div class="feat-item"><h3 style="font-family: 'Syncopate'; font-size: 14px;">YAHOO FINANCE</h3></div>
+        <button class="btn-main" onclick="buyClick()">ESTABLISH NEURAL LINK</button>
     </div>
 
-    <footer style="padding: 50px 5%; text-align: center; border-top: 1px solid var(--border);">
-        <p style="font-family: 'Syncopate'; color: var(--gold); font-size: 12px; letter-spacing: 3px;">ARXION PROTOCOL © 2025</p>
-        <p style="font-size: 10px; opacity: 0.4; margin-top: 10px;">Investment in crypto assets involves high risk. ARXN is a utility token for the Arxion Ecosystem.</p>
-    </footer>
+    <div class="stats-grid">
+        <div class="stat-item"><h4>Total Planned Burn</h4><p style="color:var(--gold)">50,000,000 ARXN</p></div>
+        <div class="stat-item"><h4>Security Audit</h4><p style="color:var(--blue)">Verified</p></div>
+        <div class="stat-item"><h4>Liquidity Lock</h4><p style="color:var(--blue)">180 Days</p></div>
+    </div>
+
+    <h3 class="section-title">THE X-EVOLUTION ROADMAP</h3>
+    <div class="roadmap-grid">
+        <div class="phase-card"><h3>Phase 1</h3><p>Genesis Launch & Smart Contract Audit.</p></div>
+        <div class="phase-card"><h3>Phase 2</h3><p>Global Marketing & Community Expansion.</p></div>
+        <div class="phase-card"><h3>Phase 3</h3><p>Tier-1 Exchange Listings & Neural Treasury Activation.</p></div>
+        <div class="phase-card"><h3>Phase 4</h3><p>Global AI Governance & Ecosystem Maturity.</p></div>
+    </div>
+</div>
+
+<div id="notif" class="notification">
+    <div id="coinIcon" style="font-size: 24px;"><i class="fas fa-microchip" style="color:var(--blue)"></i></div>
+    <div>
+        <div id="notifTitle" style="font-weight:bold; font-size:14px;">Incoming Transaction</div>
+        <div id="notifSub" style="font-size:12px; opacity:0.7">Connected to Neural Link...</div>
+    </div>
+</div>
+
+<audio id="sfxClick" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+<audio id="sfxSuccess" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
+<audio id="sfxHover" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+
+<script>
+    const stagePrice = 0.01;
+    const listingPrice = 0.06;
+    const sfxClick = document.getElementById('sfxClick');
+    const sfxSuccess = document.getElementById('sfxSuccess');
+    const sfxHover = document.getElementById('sfxHover');
+
+    // 1. Calculator & Wealth Simulator
+    function calculate() {
+        let amt = document.getElementById('payAmount').value || 0;
+        let type = document.getElementById('cryptoType').value;
+        let rate = 1;
+
+        // Mock rates for calculation
+        if(type === 'BNB') rate = 600;
+        if(type === 'ETH') rate = 2500;
+        if(type === 'SOL') rate = 150;
+        if(type === 'USDT' || type === 'USDC') rate = 1;
+
+        let usdValue = amt * rate;
+        let tokens = usdValue / stagePrice;
+        let futureVal = tokens * listingPrice;
+
+        document.getElementById('tokenOutput').innerText = You will receive: ${tokens.toLocaleString()} $ARXN;
+        document.getElementById('profitOutput').innerText = Expected Value at Listing: $${futureVal.toLocaleString()} (6x Potential);
+    }
+
+    // 2. Audio Interactions
+    function buyClick() {
+        sfxSuccess.play();
+        alert("Establishing Neural Link with your Wallet...");
+    }
+
+    document.querySelectorAll('button, select, input, i').forEach(el => {
+        el.addEventListener('click', () => sfxClick.play());
+        el.addEventListener('mouseenter', () => { sfxHover.volume = 0.2; sfxHover.play(); });
+    });
+
+    // 3. Recursive 48h Timer
+    function startTimer() {
+        let time = 48 * 3600;
+        setInterval(() => {
+            let h = Math.floor(time / 3600);
+            let m = Math.floor((time % 3600) / 60);
+            let s = time % 60;
+            document.getElementById('timer').innerText = ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')};
+            if (--time < 0) time = 48 * 3600;
+        }, 1000);
+    }
+    startTimer();
+
+    // 4. Global Live Transactions
+    const cryptos = ["BNB", "ETH", "USDT", "USDC", "SOL"];
+    setInterval(() => {
+        let c = cryptos[Math.floor(Math.random()*cryptos.length)];
+        let a = (Math.random() * 10 + 0.1).toFixed(2);
+        document.getElementById('notifTitle').innerText = New Purchase: ${a} ${c};
+        let notif = document.getElementById('notif');
+        notif.classList.add('show');
+        setTimeout(() => notif.classList.remove('show'), 5000);
+    }, 15000);
+</script>
 
 </body>
-</html>
+</html
