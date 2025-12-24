@@ -3,165 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arxion Official Presale | $ARXN – Layer 3 Blockchain</title>
+    <title>ARXION | The X-Sovereign Protocol</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00f2ff; --bg-black: #000000; --card-bg: #0f0f0f; }
-        body { background-color: var(--bg-black); color: #ffffff; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        :root { --neon: #00f2ff; --bg: #020202; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
-        /* The exact glow background from the site */
-        .hero-glow {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; height: 800px;
-            background: radial-gradient(circle at 50% 20%, rgba(0, 242, 255, 0.15) 0%, transparent 70%);
-            z-index: -1;
+        /* THE X-GLOW: السر في توهج حرف X */
+        .glow-x {
+            color: var(--neon);
+            text-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon), 0 0 60px var(--neon);
+            animation: pulse-x 1.5s infinite ease-in-out;
+            display: inline-block;
+            font-style: italic;
+            font-weight: 900;
+        }
+        @keyframes pulse-x {
+            0%, 100% { filter: brightness(1); transform: scale(1) rotate(2deg); }
+            50% { filter: brightness(1.8); transform: scale(1.1) rotate(0deg); }
         }
 
-        /* Presale Box - Exact Replica */
-        .presale-container {
-            background: var(--card-bg); border: 1px solid #1f1f1f; border-radius: 24px;
-            padding: 35px; box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+        /* حاوية النيون المشعة */
+        .neon-card {
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 35px;
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.05), inset 0 0 20px rgba(0, 242, 255, 0.02);
+            backdrop-filter: blur(15px);
         }
 
-        .timer-unit { background: #1a1a1a; padding: 12px; border-radius: 10px; min-width: 72px; text-align: center; }
-        .timer-val { font-size: 26px; font-weight: 900; display: block; line-height: 1; }
-        .timer-label { font-size: 9px; color: #555; text-transform: uppercase; font-weight: 800; margin-top: 4px; display: block; }
+        /* الدائرة البيانية - Tokenomics */
+        .chart-svg { transform: rotate(-90deg); width: 240px; height: 240px; }
+        .segment { fill: transparent; stroke-width: 12; transition: 0.5s; stroke-linecap: round; }
+        .seg-presale { stroke: var(--neon); stroke-dasharray: 40 100; filter: drop-shadow(0 0 10px var(--neon)); }
+        .seg-liq { stroke: #bc13fe; stroke-dasharray: 25 100; stroke-dashoffset: -40; }
+        .seg-stake { stroke: #ff0055; stroke-dasharray: 20 100; stroke-dashoffset: -65; }
 
-        .progress-track { background: #1a1a1a; height: 12px; border-radius: 20px; overflow: hidden; margin: 15px 0; }
-        .progress-fill { background: var(--primary); height: 100%; width: 45.8%; box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); }
-
-        .btn-tab { background: #151515; border: 1px solid #222; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 12px; text-align: center; cursor: pointer; }
-        .btn-tab.active { border-color: var(--primary); background: rgba(0, 242, 255, 0.05); color: var(--primary); }
-
-        .input-wrap { background: #000; border: 1px solid #1f1f1f; border-radius: 14px; padding: 18px; margin-bottom: 15px; }
-        .input-wrap label { font-size: 9px; color: #555; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; display: block; }
-
-        .buy-now-btn {
-            background: #ffffff; color: #000000; width: 100%; padding: 20px; border-radius: 50px;
-            font-weight: 900; text-transform: uppercase; letter-spacing: 1px; font-size: 15px;
-            transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        /* الأزرار الاحترافية */
+        .btn-action {
+            background: #fff; color: #000; padding: 22px; border-radius: 60px;
+            font-weight: 900; text-transform: uppercase; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 2px;
         }
-        .buy-now-btn:hover { background: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 242, 255, 0.3); }
+        .btn-action:hover { background: var(--neon); box-shadow: 0 0 50px var(--neon); transform: translateY(-5px); }
+        .btn-action:active { transform: scale(0.92); }
 
-        .nav-link { font-size: 13px; font-weight: 700; color: #777; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s; }
-        .nav-link:hover { color: #fff; }
+        .input-wrap { background: #000; border: 1px solid #1a1a1a; border-radius: 20px; padding: 20px; transition: 0.3s; }
+        .input-wrap:focus-within { border-color: var(--neon); box-shadow: 0 0 15px rgba(0,242,255,0.1); }
     </style>
 </head>
 <body>
 
-    <div class="hero-glow"></div>
-
-    <header class="max-w-[1400px] mx-auto px-6 py-8 flex justify-between items-center">
+    <header class="max-w-[1400px] mx-auto px-6 py-10 flex justify-between items-center relative z-50">
         <div class="flex items-center gap-3">
-            <div class="w-9 h-9 bg-cyan-400 rounded-lg flex items-center justify-center font-black text-black italic">A</div>
-            <span class="text-2xl font-black tracking-tighter">ARXION</span>
+            <div class="w-11 h-11 bg-cyan-400 rounded-xl flex items-center justify-center font-black text-black shadow-[0_0_20px_#00f2ff]">A</div>
+            <span class="text-3xl font-black tracking-tighter uppercase italic">AR<span class="glow-x">X</span>ION</span>
         </div>
-        <nav class="hidden lg:flex gap-10">
-            <a href="#" class="nav-link">Staking</a>
-            <a href="#" class="nav-link">About</a>
-            <a href="#" class="nav-link">How To Buy</a>
-            <a href="#" class="nav-link">Tokenomics</a>
-            <a href="#" class="nav-link">FAQS</a>
-            <a href="#" class="nav-link">Whitepaper</a>
-        </nav>
-        <button class="bg-cyan-400 text-black px-7 py-2.5 rounded-full font-extrabold text-sm uppercase tracking-wide">Buy $ARXN</button>
+        <div class="flex items-center gap-10">
+            <nav class="hidden md:flex gap-10 text-[11px] font-black uppercase tracking-[0.2em] text-gray-500">
+                <a href="#" class="hover:text-cyan-400 transition" onmouseenter="hoverSfx.play()">Network</a>
+                <a href="#" class="hover:text-cyan-400 transition" onmouseenter="hoverSfx.play()">Treasury</a>
+                <a href="#" class="hover:text-cyan-400 transition" onmouseenter="hoverSfx.play()">X-Docs</a>
+            </nav>
+            <button onclick="clickSfx.play()" class="border-2 border-cyan-400 text-cyan-400 px-8 py-2.5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-cyan-400 hover:text-black transition-all">Connect Wallet</button>
+        </div>
     </header>
 
-    <main class="max-w-[1400px] mx-auto px-6 pt-16 grid lg:grid-cols-12 gap-16 items-start">
+    <main class="max-w-[1400px] mx-auto px-6 py-12 grid lg:grid-cols-12 gap-20">
         
-        <div class="lg:col-span-7 space-y-10">
-            <div class="inline-flex items-center gap-3 bg-cyan-950/40 text-cyan-400 border border-cyan-800/30 px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest">
-                <span class="flex h-2 w-2 relative">
+        <div class="lg:col-span-7 space-y-12">
+            <div class="inline-flex items-center gap-3 bg-cyan-950/40 text-cyan-400 border border-cyan-400/30 px-6 py-2 rounded-full text-[11px] font-black tracking-widest uppercase">
+                <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
                 </span>
-                $ARXN Presale Is LIVE!
+                X-Evolution Protocol Is Active
             </div>
-
-            <h1 class="text-7xl lg:text-[100px] font-black leading-[0.85] tracking-tighter">
-                ARXION <br> <span class="text-gray-600">LAYER 3</span> <br> PRESALE
+            
+            <h1 class="text-7xl lg:text-[115px] font-black leading-[0.8] tracking-tighter uppercase">
+                AR<span class="glow-x">X</span>ION <br> <span class="text-gray-800 italic">PROTOCOL</span>
             </h1>
 
-            <p class="text-gray-400 text-xl leading-relaxed max-w-xl font-medium">
-                Arxion is a Layer 3 blockchain that unifies Bitcoin's capital, Ethereum's DeFi depth, and Solana's speed. The first-ever unified execution layer linking the world's largest blockchains.
+            <p class="text-gray-500 text-2xl leading-relaxed max-w-xl border-l-4 border-cyan-400 pl-10 font-medium">
+                The first self-governing asset. Decentralized. Sovereign. Powered by the <span class="text-white">Neural Treasury</span>.
             </p>
 
-            <div class="flex gap-4">
-                <button class="bg-white text-black px-10 py-4 rounded-full font-black uppercase text-sm">Read The Lightpaper</button>
-            </div>
-
-            <div class="flex gap-12 pt-10 border-t border-white/5">
-                <div>
-                    <div class="text-4xl font-black text-cyan-400">3145%</div>
-                    <div class="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em] mt-1">Staking Rewards</div>
+            <div class="flex flex-col md:flex-row items-center gap-16 pt-8">
+                <div class="relative">
+                    <svg class="chart-svg" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="42" class="segment seg-presale"></circle>
+                        <circle cx="50" cy="50" r="42" class="segment seg-liq"></circle>
+                        <circle cx="50" cy="50" r="42" class="segment seg-stake"></circle>
+                    </svg>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                        <span class="text-3xl font-black block neon-text">40%</span>
+                        <span class="text-[9px] text-gray-600 font-black uppercase">Genesis</span>
+                    </div>
                 </div>
-                <div>
-                    <div class="text-4xl font-black text-white">Audited</div>
-                    <div class="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em] mt-1">Trust And Safety</div>
+                <div class="space-y-5">
+                    <div class="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-cyan-400"><div class="w-4 h-4 rounded-md bg-cyan-400 shadow-[0_0_10px_#00f2ff]"></div> 40% Public Sale</div>
+                    <div class="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-purple-500"><div class="w-4 h-4 rounded-md bg-[#bc13fe]"></div> 25% Liquidity Lock</div>
+                    <div class="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-pink-500"><div class="w-4 h-4 rounded-md bg-[#ff0055]"></div> 20% Neural Staking</div>
                 </div>
             </div>
         </div>
 
         <div class="lg:col-span-5">
-            <div class="presale-container">
-                <div class="text-center mb-10">
-                    <h3 class="text-[10px] font-black tracking-[0.4em] text-gray-500 uppercase mb-8">BUY $ARXN PRESALE NOW!</h3>
-                    <div class="flex justify-center gap-3">
-                        <div class="timer-unit"><span class="timer-val">01</span><span class="timer-label">Days</span></div>
-                        <div class="timer-unit"><span class="timer-val">13</span><span class="timer-label">Hours</span></div>
-                        <div class="timer-unit"><span class="timer-val">34</span><span class="timer-label">Mins</span></div>
-                        <div class="timer-unit"><span class="timer-val">06</span><span class="timer-label">Secs</span></div>
+            <div class="neon-card p-12 space-y-10 relative">
+                <div class="text-center">
+                    <span class="text-[11px] font-black tracking-[0.6em] text-gray-600 uppercase">Stage 1: Opening</span>
+                    <h3 class="text-3xl font-black text-white mt-4">$0.012 / AR<span class="text-cyan-400">X</span>N</h3>
+                    
+                    <div class="flex justify-center gap-4 mt-8">
+                        <div class="bg-white/5 px-5 py-4 rounded-2xl min-w-[80px]"><span class="text-3xl font-black block">00</span><span class="text-[8px] text-gray-500 font-black">DAYS</span></div>
+                        <div class="bg-white/5 px-5 py-4 rounded-2xl min-w-[80px]"><span class="text-3xl font-black block">00</span><span class="text-[8px] text-gray-500 font-black">HRS</span></div>
+                        <div class="bg-white/5 px-5 py-4 rounded-2xl min-w-[80px]"><span class="text-3xl font-black block">00</span><span class="text-[8px] text-gray-500 font-black">MINS</span></div>
                     </div>
                 </div>
 
-                <div class="mb-8">
-                    <div class="flex justify-between text-[11px] font-black uppercase mb-2">
-                        <span class="text-gray-600">USD Raised:</span>
-                        <span class="text-white">$308,140.71 / $678,005.56</span>
-                    </div>
-                    <div class="progress-track"><div class="progress-fill"></div></div>
-                    <div class="text-center text-[10px] font-black text-gray-500 uppercase mt-2 tracking-widest italic">Price rise in 24 hours</div>
-                </div>
-
-                <div class="text-center font-black text-xl mb-8">1 $ARXN = $0.0128</div>
-
-                <div class="grid grid-cols-2 gap-3 mb-6">
-                    <div class="btn-tab active">BUY WITH CRYPTO</div>
-                    <div class="btn-tab">BUY WITH CARD</div>
-                </div>
-
-                <div class="space-y-3">
+                <div class="space-y-4">
                     <div class="input-wrap">
-                        <label>Pay with ETH</label>
+                        <div class="flex justify-between text-[10px] font-black text-gray-600 uppercase mb-2"><span>Pay with</span><span>Balance: 0.00</span></div>
                         <div class="flex justify-between items-center">
-                            <input type="text" placeholder="0" class="bg-transparent text-2xl font-black outline-none w-full">
-                            <span class="text-sm font-black text-gray-500 uppercase">ETH</span>
+                            <input type="number" placeholder="0.0" oninput="hoverSfx.play()" class="bg-transparent text-3xl font-black outline-none w-full">
+                            <div class="flex items-center gap-2"><i class="fab fa-ethereum text-gray-500"></i> <span class="text-sm font-black text-gray-500">ETH</span></div>
                         </div>
                     </div>
-                    <div class="input-wrap">
-                        <label>Receive $ARXN</label>
+                    <div class="input-wrap border-cyan-900/50">
+                        <div class="flex justify-between text-[10px] font-black text-gray-600 uppercase mb-2"><span>Receive</span><span>Est. Value</span></div>
                         <div class="flex justify-between items-center">
-                            <input type="text" placeholder="0" readonly class="bg-transparent text-2xl font-black outline-none w-full text-cyan-400">
-                            <span class="text-sm font-black text-gray-500 uppercase">ARXN</span>
+                            <input type="text" placeholder="0" readonly class="bg-transparent text-3xl font-black outline-none w-full text-cyan-400">
+                            <span class="text-sm font-black text-white">AR<span class="glow-x text-xs">X</span>N</span>
                         </div>
                     </div>
                 </div>
 
-                <button class="buy-now-btn mt-6">Buy $ARXN Presale NOW</button>
+                <div class="pt-2">
+                    <div class="flex justify-between text-[10px] font-black uppercase mb-3 text-gray-500"><span>Progress: 0%</span><span>Goal: $678,005</span></div>
+                    <div class="h-2.5 bg-white/5 rounded-full overflow-hidden border border-white/5"><div class="h-full bg-cyan-400 w-0 shadow-[0_0_20px_#00f2ff]"></div></div>
+                </div>
+
+                <button onclick="clickSfx.play()" class="btn-action w-full">Initiate Protocol Acquisition</button>
             </div>
         </div>
     </main>
 
-    <footer class="max-w-[1400px] mx-auto px-6 py-24 opacity-20 border-t border-white/5 mt-20">
-        <div class="flex flex-wrap justify-between gap-10 items-center font-black text-2xl grayscale">
-            <span>COINMARKETCAP</span>
-            <span>COINGECKO</span>
-            <span>BINANCE</span>
-            <span>UNISWAP</span>
-            <span>DEXTOOLS</span>
+    <section class="max-w-[1400px] mx-auto px-6 py-32 border-t border-white/5">
+        <h2 class="text-center text-4xl font-black uppercase tracking-tighter mb-16 italic">Core <span class="glow-x">Entities</span></h2>
+        <div class="grid md:grid-cols-3 gap-12">
+            <div class="p-10 rounded-[40px] bg-white/5 border border-white/5 hover:border-cyan-400 transition-all text-center group">
+                <i class="fas fa-microchip text-4xl text-gray-700 group-hover:text-cyan-400 mb-8 transition-colors"></i>
+                <h4 class="font-black text-xl mb-3 tracking-tight">NEXUS PRIME</h4>
+                <p class="text-[10px] font-black text-gray-600 uppercase tracking-widest">Lead Architect Engine</p>
+            </div>
+            <div class="p-10 rounded-[40px] bg-white/5 border border-white/5 hover:border-cyan-400 transition-all text-center group">
+                <i class="fas fa-shield-halved text-4xl text-gray-700 group-hover:text-cyan-400 mb-8 transition-colors"></i>
+                <h4 class="font-black text-xl mb-3 tracking-tight">THE GUARDIAN</h4>
+                <p class="text-[10px] font-black text-gray-600 uppercase tracking-widest">Treasury Guard Protocol</p>
+            </div>
+            <div class="p-10 rounded-[40px] bg-white/5 border border-white/5 hover:border-cyan-400 transition-all text-center group">
+                <i class="fas fa-satellite-dish text-4xl text-gray-700 group-hover:text-cyan-400 mb-8 transition-colors"></i>
+                <h4 class="font-black text-xl mb-3 tracking-tight">PULSE SYNDICATE</h4>
+                <p class="text-[10px] font-black text-gray-600 uppercase tracking-widest">Growth Distribution</p>
+            </div>
         </div>
+    </section>
+
+    <footer class="max-w-[1400px] mx-auto px-6 py-20 border-t border-white/10 flex flex-wrap justify-between items-center opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all">
+        <div class="flex items-center gap-3"><i class="fab fa-bitcoin text-3xl"></i><span class="font-black text-xl uppercase">Binance</span></div>
+        <div class="flex items-center gap-3"><i class="fas fa-horse-head text-3xl text-pink-500"></i><span class="font-black text-xl uppercase">Uniswap</span></div>
+        <div class="flex items-center gap-3"><i class="fas fa-chart-line text-3xl text-blue-500"></i><span class="font-black text-xl uppercase">MarketCap</span></div>
+        <p class="text-[11px] font-black uppercase tracking-[0.5em]">© 2025 AR<span class="text-cyan-400">X</span>ION PROTOCOL</p>
     </footer>
+
+    <script>
+        const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
+        const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3');
+        clickSfx.volume = 0.5;
+        hoverSfx.volume = 0.15;
+    </script>
 
 </body>
 </html>
