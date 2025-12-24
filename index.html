@@ -2,174 +2,185 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ARXION | Sovereign Interface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARXION | Sovereign Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
     <style>
-        :root { --cyan: #00f2ff; --gold: #ffd700; --dark: #000000; }
+        :root { --neon: #00f2ff; --gold: #ffd700; --void: #000000; }
+        
         body { 
-            background-color: var(--dark); 
+            background: var(--void); 
             color: white; 
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Space Grotesk', sans-serif; 
             overflow: hidden; 
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* 1. خلفية الخيوط العصبية (Neural Nodes) */
-        .neural-net {
+        /* 1. Cinematic Grain (The Texture you requested) */
+        .grain {
             position: fixed; inset: 0;
-            background: radial-gradient(circle at 50% 50%, #00f2ff0a 0%, transparent 60%);
-            z-index: -2;
-        }
-        .neural-net::after {
-            content: ""; position: absolute; inset: 0;
-            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.1;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.25; pointer-events: none; z-index: 100;
+            filter: contrast(170%) brightness(120%);
         }
 
-        /* 2. حرف X المركزي المتوهج (مثل الصورة تماماً) */
-        .glowing-x {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-family: 'Syncopate', sans-serif;
-            font-size: 55vw; line-height: 1;
-            background: linear-gradient(135deg, rgba(0,242,255,0.05) 0%, rgba(255,215,0,0.05) 100%);
+        /* 2. Light Leak (The source of depth behind layers) */
+        .light-leak {
+            position: fixed; top: 30%; right: 20%;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.12) 0%, transparent 70%);
+            z-index: -1; filter: blur(100px);
+        }
+
+        /* 3. The Massive "X" Portal Backdrop */
+        .portal-backdrop {
+            position: absolute; font-family: 'Inter', sans-serif; font-weight: 900;
+            font-size: 85vh; line-height: 1; opacity: 0.05;
+            background: linear-gradient(135deg, var(--neon), var(--gold));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: blur(2px); z-index: -1;
-            box-shadow: 0 0 100px rgba(0,242,255,0.05);
+            z-index: 0; transform: translateX(-15%); filter: blur(5px);
         }
 
-        /* 3. كرت الزجاج الهولوغرامي (Glassmorphism Pro) */
-        .hologram-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 24px;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02);
+        /* 4. Layered Stage (Architectural Overlap) */
+        .stage {
+            position: relative; width: 95%; max-width: 1600px; height: 700px;
+            display: flex; align-items: center; z-index: 10;
         }
 
-        /* الحافة المضيئة (The Neon Rim) */
-        .hologram-card::before {
-            content: ""; position: absolute; inset: -1px;
-            background: linear-gradient(135deg, var(--cyan), transparent, var(--gold));
-            border-radius: 24px; z-index: -1; opacity: 0.3;
+        /* Title Layer (Background depth) */
+        .title-layer {
+            position: absolute; left: 0; z-index: 2;
+            padding: 100px; max-width: 1000px;
         }
 
-        /* 4. حقول الإدخال الاحترافية */
-        .input-box {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 16px 20px;
+        .massive-text {
+            font-family: 'Inter', sans-serif; font-weight: 900;
+            font-size: clamp(80px, 12vw, 200px); line-height: 0.8;
+            letter-spacing: -0.06em; text-transform: uppercase;
         }
 
-        /* 5. زر التنفيذ المتوهج (مثل الصورة) */
-        .init-btn {
-            background: #ffffff;
-            color: #000;
-            font-family: 'Syncopate', sans-serif;
-            font-weight: 700;
-            padding: 20px;
-            border-radius: 100px;
-            box-shadow: 0 0 30px rgba(255,255,255,0.2), 0 0 60px rgba(0,242,255,0.2);
+        .gold-liquid {
+            background: linear-gradient(180deg, #fff, var(--gold), #7a6200);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));
+        }
+
+        /* Module Layer (Floating Glass Overlay) */
+        .module-layer {
+            position: absolute; right: 5%; z-index: 5;
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(80px) saturate(200%);
+            padding: 60px; border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: -60px 60px 150px rgba(0,0,0,1);
+            width: 580px;
+            transform: translateY(10%) rotateX(2deg) rotateY(-5deg);
+        }
+
+        .module-layer::after {
+            content: ""; position: absolute; top: 0; left: 20%; width: 60%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon), transparent);
+            box-shadow: 0 0 20px var(--neon);
+        }
+
+        /* 5. Precision Inputs */
+        .glass-input {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 24px; padding: 30px; margin-bottom: 25px;
             transition: 0.4s;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
         }
-        .init-btn:hover {
-            background: var(--cyan);
-            box-shadow: 0 0 40px var(--cyan);
-            transform: translateY(-2px);
+        .glass-input:focus-within {
+            border-color: var(--neon);
+            transform: translateX(10px);
         }
 
-        .gold-text {
-            background: linear-gradient(90deg, #ffd700, #b8860b);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .btn-evolve {
+            background: #fff; color: #000; width: 100%; padding: 28px;
+            border-radius: 100px; font-weight: 900; font-family: 'Inter', sans-serif;
+            text-transform: uppercase; letter-spacing: 0.3em;
+            box-shadow: 0 0 50px rgba(255,255,255,0.2);
+            transition: 0.4s; cursor: pointer;
+        }
+        .btn-evolve:hover {
+            background: var(--neon);
+            box-shadow: 0 0 80px rgba(0, 242, 255, 0.6);
+            transform: translateY(-5px);
         }
 
+        /* 6. Navigation & Footer */
+        nav { position: fixed; top: 50px; left: 80px; z-index: 100; }
+        .footer-status {
+            position: fixed; bottom: 50px; left: 80px;
+            font-size: 10px; font-weight: 700; letter-spacing: 0.6em;
+            text-transform: uppercase; opacity: 0.2;
+        }
     </style>
 </head>
 <body>
 
-    <div class="neural-net"></div>
-    <div class="glowing-x">X</div>
+    <div class="grain"></div>
+    <div class="light-leak"></div>
+    <div class="portal-backdrop">X</div>
 
-    <header class="flex justify-between items-center p-10 max-w-7xl mx-auto relative z-10">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 border-2 border-cyan-400 rotate-45 flex items-center justify-center">
-                <div class="w-4 h-4 bg-cyan-400"></div>
-            </div>
-            <span class="text-2xl font-bold syncopate tracking-tighter">ARXION.</span>
-        </div>
-        <div class="flex gap-12 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500">
-            <a href="#">Treasury</a><a href="#">Evolution</a><a href="#">Nexus</a>
-        </div>
-        <div class="p-2 border border-white/10 rounded-lg cursor-pointer">
-            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        </div>
-    </header>
+    <nav>
+        <div class="text-3xl font-black italic tracking-tighter">ARXION.</div>
+    </nav>
 
-    <main class="max-w-7xl mx-auto px-10 grid lg:grid-cols-12 gap-10 items-center pt-10">
+    <div class="stage">
         
-        <div class="lg:col-span-7 hologram-card p-16 overflow-hidden">
-            <div class="absolute -top-1 left-0 w-1/2 h-1 bg-cyan-500 shadow-[0_0_15px_#00f2ff]"></div>
-            
-            <h1 class="text-7xl lg:text-9xl font-bold leading-none mb-6 tracking-tighter uppercase">
-                Sovereign <br> <span class="gold-text">Asset.</span>
-            </h1>
-            <p class="text-xl text-gray-500 max-w-md font-light">
-                Distributed Neural Protocol for the next evolution of decentralized liquidity.
+        <div class="title-layer">
+            <h1 class="massive-text">SOVEREIGN</h1>
+            <h1 class="massive-text gold-liquid">ASSET.</h1>
+            <p class="text-gray-600 text-2xl mt-10 font-light max-w-lg border-l border-white/10 pl-10 italic">
+                Self-Decoding Asset Architecture. <br>Managed by Sovereign AI Treasury.
             </p>
         </div>
 
-        <div class="lg:col-span-5 hologram-card p-10 flex flex-col gap-8 border-t-cyan-500">
-            <div class="flex justify-between items-center">
-                <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Presale Engine</h3>
+        <div class="module-layer">
+            <div class="flex justify-between items-center mb-10">
+                <span class="text-[10px] font-black tracking-[0.6em] text-gray-700">NEURAL ENGINE</span>
+                <span class="text-[9px] font-bold text-cyan-400">ACTIVE SYSTEM</span>
             </div>
 
-            <div class="space-y-4">
-                <div class="input-box">
-                    <span class="text-[10px] text-gray-600 uppercase font-bold block mb-2 tracking-widest">You Allocate</span>
-                    <div class="flex justify-between items-center">
-                        <input type="text" value="5,000" class="bg-transparent text-3xl font-bold outline-none w-full">
-                        <span class="text-sm font-bold text-gray-400 tracking-tighter">USDT</span>
-                    </div>
-                </div>
-
-                <div class="input-box border-l-2 border-l-cyan-500">
-                    <span class="text-[10px] text-gray-600 uppercase font-bold block mb-2 tracking-widest">Neural Distribution</span>
-                    <div class="flex justify-between items-center">
-                        <input type="text" value="412,000" readonly class="bg-transparent text-3xl font-bold outline-none w-full text-cyan-400">
-                        <span class="text-sm font-bold text-cyan-400">ARXN</span>
-                    </div>
+            <div class="glass-input">
+                <span class="text-[10px] font-black text-gray-700 tracking-[0.2em]">ALLOCATE USDT</span>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-5xl font-black">5,000</span>
+                    <span class="text-xs font-bold text-gray-500 uppercase">USDT</span>
                 </div>
             </div>
 
-            <div class="space-y-3">
-                <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full bg-cyan-400 shadow-[0_0_10px_#00f2ff]" style="width: 72.4%"></div>
-                </div>
-                <div class="text-[10px] text-center font-bold tracking-widest text-gray-500">
-                    <span class="text-white">72.4%</span> ALLOCATION FILLED
+            <div class="glass-input" style="border-left: 5px solid var(--neon);">
+                <span class="text-[10px] font-black text-cyan-900 tracking-[0.2em]">ARXN DISTRIBUTION</span>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-5xl font-black text-cyan-400">412,000</span>
+                    <span class="text-xs font-bold text-white/20 uppercase">ARXN</span>
                 </div>
             </div>
 
-            <div class="init-btn">INITIATE ACQUISITION</div>
+            <div class="my-10">
+                <div class="flex justify-between text-[10px] font-bold text-gray-700 mb-3 tracking-widest uppercase">
+                    <span>Progressive Allocation</span>
+                    <span class="text-white">72.4%</span>
+                </div>
+                <div class="h-[2px] w-full bg-white/5 relative">
+                    <div class="absolute h-full bg-cyan-400 shadow-[0_0_20px_#00f2ff]" style="width: 72.4%"></div>
+                </div>
+            </div>
+
+            <button class="btn-evolve">Initiate Evolution</button>
         </div>
-    </main>
 
-    <footer class="fixed bottom-0 w-full p-6 border-t border-white/5 bg-black/40 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto flex justify-between items-center text-[9px] font-bold tracking-[0.4em] text-gray-600 uppercase">
-            <div class="flex items-center gap-4">
-                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="h-3 opacity-30">
-                <span>Security: Quantum Encrypted. Optimal</span>
-            </div>
-            <div class="flex gap-10">
-                <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" class="h-3 grayscale opacity-30">
-                <img src="https://cryptologos.cc/logos/chainlink-link-logo.png" class="h-3 grayscale opacity-30">
-            </div>
-        </div>
-    </footer>
+    </div>
+
+    <div class="footer-status">
+        Security: Quantum Encrypted Core // Protocol v1.0
+    </div>
 
 </body>
 </html>
