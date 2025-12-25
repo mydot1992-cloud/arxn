@@ -3,187 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION | The X-Sovereign Protocol</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Arxion (ARXN) | The Sovereign Fortress</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --neon: #00f2ff; --bg: #020202; }
-        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        :root {
+            --primary-purple: #bc13fe;
+            --fire-orange: #ff4500;
+            --bg-dark: #080808;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-glow: conic-gradient(from 0deg, transparent, var(--fire-orange), transparent);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg-dark); 
+            color: #fff; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
         
-        /* THE X-GLOW: السر في توهج حرف X */
-        .glow-x {
-            color: var(--neon);
-            text-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon), 0 0 60px var(--neon);
-            animation: pulse-x 1.5s infinite ease-in-out;
+        /* Header Area */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(8, 8, 8, 0.9); backdrop-filter: blur(15px); z-index: 1000;
+            border-bottom: 1px solid rgba(188, 19, 254, 0.2);
+        }
+        .logo { font-family: 'Orbitron'; font-weight: 900; color: var(--fire-orange); letter-spacing: 3px; font-size: 1.5rem; }
+
+        /* The Animated Glowing Button */
+        .glow-wrapper {
+            position: relative;
             display: inline-block;
-            font-style: italic;
-            font-weight: 900;
-        }
-        @keyframes pulse-x {
-            0%, 100% { filter: brightness(1); transform: scale(1) rotate(2deg); }
-            50% { filter: brightness(1.8); transform: scale(1.1) rotate(0deg); }
-        }
-
-        /* حاوية النيون المشعة */
-        .neon-card {
-            background: rgba(10, 10, 10, 0.9);
-            border: 1px solid rgba(0, 242, 255, 0.3);
-            border-radius: 35px;
-            box-shadow: 0 0 50px rgba(0, 242, 255, 0.05), inset 0 0 20px rgba(0, 242, 255, 0.02);
-            backdrop-filter: blur(15px);
+            padding: 2px; /* The thickness of the glow */
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            margin-top: 25px;
+            width: 100%;
         }
 
-        /* الدائرة البيانية - Tokenomics */
-        .chart-svg { transform: rotate(-90deg); width: 240px; height: 240px; }
-        .segment { fill: transparent; stroke-width: 12; transition: 0.5s; stroke-linecap: round; }
-        .seg-presale { stroke: var(--neon); stroke-dasharray: 40 100; filter: drop-shadow(0 0 10px var(--neon)); }
-        .seg-liq { stroke: #bc13fe; stroke-dasharray: 25 100; stroke-dashoffset: -40; }
-        .seg-stake { stroke: #ff0055; stroke-dasharray: 20 100; stroke-dashoffset: -65; }
-
-        /* الأزرار الاحترافية */
-        .btn-action {
-            background: #fff; color: #000; padding: 22px; border-radius: 60px;
-            font-weight: 900; text-transform: uppercase; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            letter-spacing: 2px;
+        .glow-wrapper::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, var(--fire-orange), transparent);
+            animation: rotateGlow 4s linear infinite;
         }
-        .btn-action:hover { background: var(--neon); box-shadow: 0 0 50px var(--neon); transform: translateY(-5px); }
-        .btn-action:active { transform: scale(0.92); }
 
-        .input-wrap { background: #000; border: 1px solid #1a1a1a; border-radius: 20px; padding: 20px; transition: 0.3s; }
-        .input-wrap:focus-within { border-color: var(--neon); box-shadow: 0 0 15px rgba(0,242,255,0.1); }
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .buy-btn {
+            position: relative;
+            z-index: 2;
+            background: #111;
+            color: #fff;
+            padding: 18px;
+            border-radius: 10px;
+            border: none;
+            width: 100%;
+            font-family: 'Orbitron';
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover { background: #1a1a1a; color: var(--fire-orange); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; padding: 0 5%;
+            background: radial-gradient(circle at center, #1a0b2e 0%, #080808 100%);
+        }
+        .hero h1 { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 10px; }
+        .hero p { max-width: 700px; color: #aaa; margin-bottom: 30px; font-size: 1.1rem; }
+
+        /* Presale Box */
+        .presale-container {
+            background: var(--card-bg); border: 1px solid rgba(188, 19, 254, 0.2);
+            padding: 35px; border-radius: 20px; width: 100%; max-width: 420px;
+            backdrop-filter: blur(20px); box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+
+        .countdown { display: flex; justify-content: space-between; margin-bottom: 25px; }
+        .count-unit span { display: block; font-size: 1.8rem; font-weight: 900; color: var(--fire-orange); font-family: 'Orbitron'; }
+        .count-unit label { font-size: 0.7rem; color: #666; letter-spacing: 1px; }
+
+        /* Roadmap Grid */
+        .section { padding: 80px 8%; }
+        .section-header { text-align: center; margin-bottom: 50px; font-family: 'Orbitron'; font-size: 2rem; color: var(--fire-orange); }
+        
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .phase-card {
+            background: rgba(255,255,255,0.02);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 3px solid var(--primary-purple);
+            transition: 0.3s;
+        }
+
+        .phase-card:hover { background: rgba(188, 19, 254, 0.05); transform: translateY(-5px); }
+        .phase-card h4 { font-family: 'Orbitron'; color: var(--primary-purple); margin-bottom: 10px; font-size: 0.9rem; }
+        .phase-card p { font-size: 0.85rem; color: #ccc; }
+
+        /* Team & Footer */
+        .team-box { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; }
+        .member { text-align: center; }
+        .avatar { width: 90px; height: 90px; background: linear-gradient(45deg, var(--primary-purple), var(--fire-orange)); border-radius: 50%; margin: 0 auto 15px; }
+
+        footer { padding: 40px; text-align: center; border-top: 1px solid #1a1a1a; margin-top: 50px; }
+        .legal { font-size: 0.7rem; color: #444; margin-top: 20px; line-height: 1.4; }
+
     </style>
 </head>
 <body>
 
-    <header class="max-w-[1400px] mx-auto px-6 py-10 flex justify-between items-center relative z-50">
-        <div class="flex items-center gap-3">
-            <div class="w-11 h-11 bg-cyan-400 rounded-xl flex items-center justify-center font-black text-black shadow-[0_0_20px_#00f2ff]">A</div>
-            <span class="text-3xl font-black tracking-tighter uppercase italic">AR<span class="glow-x">X</span>ION</span>
-        </div>
-        <div class="flex items-center gap-10">
-            <nav class="hidden md:flex gap-10 text-[11px] font-black uppercase tracking-[0.2em] text-gray-500">
-                <a href="#" class="hover:text-cyan-400 transition" onmouseenter="hoverSfx.play()">Network</a>
-                <a href="#" class="hover:text-cyan-400 transition" onmouseenter="hoverSfx.play()">Treasury</a>
-                <a href="#" class="hover:text-cyan-400 transition" onmouseenter="hoverSfx.play()">X-Docs</a>
-            </nav>
-            <button onclick="clickSfx.play()" class="border-2 border-cyan-400 text-cyan-400 px-8 py-2.5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-cyan-400 hover:text-black transition-all">Connect Wallet</button>
-        </div>
-    </header>
+<header>
+    <div class="logo">ARXION</div>
+    <div class="nav-links">
+        <a href="#roadmap" style="color:#fff; text-decoration:none; margin-left:20px; font-size:0.9rem;">Roadmap</a>
+        <a href="#team" style="color:#fff; text-decoration:none; font-size:0.9rem;">Team</a>
+    </div>
+</header>
 
-    <main class="max-w-[1400px] mx-auto px-6 py-12 grid lg:grid-cols-12 gap-20">
+<section class="hero">
+    <h1>ARXION (ARXN)</h1>
+    <p>The Sovereign Digital Fortress. A high-security asset designed to shield your wealth in the decentralized world.</p>
+
+    <div class="presale-container">
+        <div class="countdown">
+            <div class="count-unit"><span id="days">00</span><label>DAYS</label></div>
+            <div class="count-unit"><span id="hours">00</span><label>HOURS</label></div>
+            <div class="count-unit"><span id="mins">00</span><label>MINS</label></div>
+            <div class="count-unit"><span id="secs">00</span><label>SECS</label></div>
+        </div>
+
+        <p style="font-size: 0.8rem; color: #888; margin-bottom: 5px;">Presale Progress: 45%</p>
+        <div style="background: #222; height: 8px; border-radius: 10px; overflow: hidden;">
+            <div style="width: 45%; height: 100%; background: var(--fire-orange);"></div>
+        </div>
+
+        <div class="glow-wrapper">
+            <button class="buy-btn" onclick="alert('Connect your wallet to buy ARXN')">Buy ARXN Now</button>
+        </div>
         
-        <div class="lg:col-span-7 space-y-12">
-            <div class="inline-flex items-center gap-3 bg-cyan-950/40 text-cyan-400 border border-cyan-400/30 px-6 py-2 rounded-full text-[11px] font-black tracking-widest uppercase">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
-                </span>
-                X-Evolution Protocol Is Active
-            </div>
-            
-            <h1 class="text-7xl lg:text-[115px] font-black leading-[0.8] tracking-tighter uppercase">
-                AR<span class="glow-x">X</span>ION <br> <span class="text-gray-800 italic">PROTOCOL</span>
-            </h1>
+        <p style="margin-top: 20px; font-size: 0.75rem; color: #555;">Current Price: 1 ARXN = $0.012 | Min: 0.1 BNB/ETH</p>
+    </div>
+</section>
 
-            <p class="text-gray-500 text-2xl leading-relaxed max-w-xl border-l-4 border-cyan-400 pl-10 font-medium">
-                The first self-governing asset. Decentralized. Sovereign. Powered by the <span class="text-white">Neural Treasury</span>.
-            </p>
+<section class="section" id="roadmap">
+    <h2 class="section-header">The 15-Phase Roadmap</h2>
+    <div class="roadmap-grid">
+        <div class="phase-card"><h4>PHASE 01</h4><p>Foundations and Core Logic development.</p></div>
+        <div class="phase-card"><h4>PHASE 02</h4><p>Security Infrastructure Deployment.</p></div>
+        <div class="phase-card"><h4>PHASE 03</h4><p>Community Fortress Building.</p></div>
+        <div class="phase-card"><h4>PHASE 04</h4><p>Official Smart Contract Audit.</p></div>
+        <div class="phase-card"><h4>PHASE 05</h4><p>Presale Launch - Stage 01.</p></div>
+        <div class="phase-card"><h4>PHASE 06</h4><p>Influencer & Shield Marketing.</p></div>
+        <div class="phase-card"><h4>PHASE 07</h4><p>Global Strategic Partnerships.</p></div>
+        <div class="phase-card"><h4>PHASE 08</h4><p>Presale Launch - Stage 02.</p></div>
+        <div class="phase-card"><h4>PHASE 09</h4><p>DEX Listing (Uniswap/Pancake).</p></div>
+        <div class="phase-card"><h4>PHASE 10</h4><p>CoinMarketCap & Gecko Submission.</p></div>
+        <div class="phase-card"><h4>PHASE 11</h4><p>Initial Token Burn Event.</p></div>
+        <div class="phase-card"><h4>PHASE 12</h4><p>DAO Governance Activation.</p></div>
+        <div class="phase-card"><h4>PHASE 13</h4><p>Tier-2 CEX Exchange Listings.</p></div>
+        <div class="phase-card"><h4>PHASE 14</h4><p>Arxion Mobile Shield App.</p></div>
+        <div class="phase-card"><h4>PHASE 15</h4><p>Tier-1 Exchange (Binance/KuCoin).</p></div>
+    </div>
+</section>
 
-            <div class="flex flex-col md:flex-row items-center gap-16 pt-8">
-                <div class="relative">
-                    <svg class="chart-svg" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="42" class="segment seg-presale"></circle>
-                        <circle cx="50" cy="50" r="42" class="segment seg-liq"></circle>
-                        <circle cx="50" cy="50" r="42" class="segment seg-stake"></circle>
-                    </svg>
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                        <span class="text-3xl font-black block neon-text">40%</span>
-                        <span class="text-[9px] text-gray-600 font-black uppercase">Genesis</span>
-                    </div>
-                </div>
-                <div class="space-y-5">
-                    <div class="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-cyan-400"><div class="w-4 h-4 rounded-md bg-cyan-400 shadow-[0_0_10px_#00f2ff]"></div> 40% Public Sale</div>
-                    <div class="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-purple-500"><div class="w-4 h-4 rounded-md bg-[#bc13fe]"></div> 25% Liquidity Lock</div>
-                    <div class="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-pink-500"><div class="w-4 h-4 rounded-md bg-[#ff0055]"></div> 20% Neural Staking</div>
-                </div>
-            </div>
-        </div>
+<section class="section" id="team">
+    <h2 class="section-header">Project Guardians</h2>
+    <div class="team-box">
+        <div class="member"><div class="avatar"></div><h4>E. Arxion</h4><p>Founder</p></div>
+        <div class="member"><div class="avatar" style="filter: hue-rotate(90deg);"></div><h4>Cipher Guard</h4><p>Lead Dev</p></div>
+        <div class="member"><div class="avatar" style="filter: hue-rotate(180deg);"></div><h4>Nova Ops</h4><p>Marketing</p></div>
+    </div>
+</section>
 
-        <div class="lg:col-span-5">
-            <div class="neon-card p-12 space-y-10 relative">
-                <div class="text-center">
-                    <span class="text-[11px] font-black tracking-[0.6em] text-gray-600 uppercase">Stage 1: Opening</span>
-                    <h3 class="text-3xl font-black text-white mt-4">$0.012 / AR<span class="text-cyan-400">X</span>N</h3>
-                    
-                    <div class="flex justify-center gap-4 mt-8">
-                        <div class="bg-white/5 px-5 py-4 rounded-2xl min-w-[80px]"><span class="text-3xl font-black block">00</span><span class="text-[8px] text-gray-500 font-black">DAYS</span></div>
-                        <div class="bg-white/5 px-5 py-4 rounded-2xl min-w-[80px]"><span class="text-3xl font-black block">00</span><span class="text-[8px] text-gray-500 font-black">HRS</span></div>
-                        <div class="bg-white/5 px-5 py-4 rounded-2xl min-w-[80px]"><span class="text-3xl font-black block">00</span><span class="text-[8px] text-gray-500 font-black">MINS</span></div>
-                    </div>
-                </div>
+<footer>
+    <h3 style="font-family: 'Orbitron'; color: var(--fire-orange); margin-bottom: 10px;">ARXION</h3>
+    <p style="font-size: 0.9rem; color: #777;">&copy; 2025 Arxion Project. Built for the Decentralized Future.</p>
+    <div class="legal">
+        LEGAL DISCLAIMER: Investing in cryptocurrency involves significant risk. ARXN is a utility token. Information provided on this website does not constitute financial or investment advice.
+    </div>
+</footer>
 
-                <div class="space-y-4">
-                    <div class="input-wrap">
-                        <div class="flex justify-between text-[10px] font-black text-gray-600 uppercase mb-2"><span>Pay with</span><span>Balance: 0.00</span></div>
-                        <div class="flex justify-between items-center">
-                            <input type="number" placeholder="0.0" oninput="hoverSfx.play()" class="bg-transparent text-3xl font-black outline-none w-full">
-                            <div class="flex items-center gap-2"><i class="fab fa-ethereum text-gray-500"></i> <span class="text-sm font-black text-gray-500">ETH</span></div>
-                        </div>
-                    </div>
-                    <div class="input-wrap border-cyan-900/50">
-                        <div class="flex justify-between text-[10px] font-black text-gray-600 uppercase mb-2"><span>Receive</span><span>Est. Value</span></div>
-                        <div class="flex justify-between items-center">
-                            <input type="text" placeholder="0" readonly class="bg-transparent text-3xl font-black outline-none w-full text-cyan-400">
-                            <span class="text-sm font-black text-white">AR<span class="glow-x text-xs">X</span>N</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-2">
-                    <div class="flex justify-between text-[10px] font-black uppercase mb-3 text-gray-500"><span>Progress: 0%</span><span>Goal: $678,005</span></div>
-                    <div class="h-2.5 bg-white/5 rounded-full overflow-hidden border border-white/5"><div class="h-full bg-cyan-400 w-0 shadow-[0_0_20px_#00f2ff]"></div></div>
-                </div>
-
-                <button onclick="clickSfx.play()" class="btn-action w-full">Initiate Protocol Acquisition</button>
-            </div>
-        </div>
-    </main>
-
-    <section class="max-w-[1400px] mx-auto px-6 py-32 border-t border-white/5">
-        <h2 class="text-center text-4xl font-black uppercase tracking-tighter mb-16 italic">Core <span class="glow-x">Entities</span></h2>
-        <div class="grid md:grid-cols-3 gap-12">
-            <div class="p-10 rounded-[40px] bg-white/5 border border-white/5 hover:border-cyan-400 transition-all text-center group">
-                <i class="fas fa-microchip text-4xl text-gray-700 group-hover:text-cyan-400 mb-8 transition-colors"></i>
-                <h4 class="font-black text-xl mb-3 tracking-tight">NEXUS PRIME</h4>
-                <p class="text-[10px] font-black text-gray-600 uppercase tracking-widest">Lead Architect Engine</p>
-            </div>
-            <div class="p-10 rounded-[40px] bg-white/5 border border-white/5 hover:border-cyan-400 transition-all text-center group">
-                <i class="fas fa-shield-halved text-4xl text-gray-700 group-hover:text-cyan-400 mb-8 transition-colors"></i>
-                <h4 class="font-black text-xl mb-3 tracking-tight">THE GUARDIAN</h4>
-                <p class="text-[10px] font-black text-gray-600 uppercase tracking-widest">Treasury Guard Protocol</p>
-            </div>
-            <div class="p-10 rounded-[40px] bg-white/5 border border-white/5 hover:border-cyan-400 transition-all text-center group">
-                <i class="fas fa-satellite-dish text-4xl text-gray-700 group-hover:text-cyan-400 mb-8 transition-colors"></i>
-                <h4 class="font-black text-xl mb-3 tracking-tight">PULSE SYNDICATE</h4>
-                <p class="text-[10px] font-black text-gray-600 uppercase tracking-widest">Growth Distribution</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="max-w-[1400px] mx-auto px-6 py-20 border-t border-white/10 flex flex-wrap justify-between items-center opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all">
-        <div class="flex items-center gap-3"><i class="fab fa-bitcoin text-3xl"></i><span class="font-black text-xl uppercase">Binance</span></div>
-        <div class="flex items-center gap-3"><i class="fas fa-horse-head text-3xl text-pink-500"></i><span class="font-black text-xl uppercase">Uniswap</span></div>
-        <div class="flex items-center gap-3"><i class="fas fa-chart-line text-3xl text-blue-500"></i><span class="font-black text-xl uppercase">MarketCap</span></div>
-        <p class="text-[11px] font-black uppercase tracking-[0.5em]">© 2025 AR<span class="text-cyan-400">X</span>ION PROTOCOL</p>
-    </footer>
-
-    <script>
-        const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
-        const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3');
-        clickSfx.volume = 0.5;
-        hoverSfx.volume = 0.15;
-    </script>
+<script>
+    // Simple Countdown Script
+    const targetDate = new Date("Dec 31, 2025 23:59:59").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    }, 1000);
+</script>
 
 </body>
 </html>
