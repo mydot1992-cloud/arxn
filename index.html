@@ -3,223 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION (ARXN) | Mirror Protocol</title>
+    <title>ARXION X | GENESIS</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            /* ألواننا الخاصة على هيكل ريمتكس */
-            --primary: #FF4500; /* Fire Orange */
-            --secondary: #7851A9; /* Royal Purple */
-            --dark-bg: #050505;
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --border-color: rgba(255, 255, 255, 0.08);
-        }
+        :root { --orange: #FF4500; --purple: #7851A9; --bg: #000; --border: rgba(255,255,255,0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: #fff; font-family: 'Syncopate', sans-serif; overflow-x: hidden; }
+        
+        /* Background Glows */
+        .glow { position: fixed; width: 40vw; height: 40vw; border-radius: 50%; filter: blur(150px); z-index: -1; opacity: 0.2; }
+        .glow-1 { top: -10%; left: -10%; background: var(--orange); }
+        .glow-2 { bottom: -10%; right: -10%; background: var(--purple); }
 
-        body {
-            background-color: var(--dark-bg);
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-            /* الخلفية المتدرجة المشابهة للموقع الأصلي */
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(255, 69, 0, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(120, 81, 169, 0.08) 0%, transparent 40%);
-        }
+        /* Navigation */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; border-bottom: 1px solid var(--border); backdrop-filter: blur(20px); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .logo { font-family: 'Orbitron'; font-size: 2rem; font-weight: 900; letter-spacing: 4px; }
+        .logo span { color: var(--orange); }
+        .logo i { color: var(--purple); font-style: normal; }
 
-        /* 1. Navigation Bar (Mirror Style) */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 8%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(15px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            box-sizing: border-box;
-        }
-        .logo { font-family: 'Orbitron'; font-weight: 900; font-size: 1.6rem; letter-spacing: 1px; }
-        .logo .orange { color: var(--primary); }
-        .logo .purple { color: var(--secondary); }
+        /* Main Section */
+        main { display: flex; padding: 180px 8% 100px; gap: 80px; align-items: center; min-height: 100vh; }
+        .content { flex: 1.2; }
+        .content h1 { font-size: 5.5rem; line-height: 0.9; margin-bottom: 30px; letter-spacing: -4px; text-transform: uppercase; }
+        .content p { font-family: 'Orbitron'; color: #666; font-size: 1rem; line-height: 1.8; max-width: 500px; letter-spacing: 1px; }
 
-        .nav-menu a { color: #888; text-decoration: none; margin: 0 20px; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
-        .nav-menu a:hover { color: #fff; }
+        /* The Card - ابن حرام تقنياً */
+        .presale-card { flex: 0.8; background: rgba(255,255,255,0.01); border: 1px solid var(--border); border-radius: 2px; padding: 50px; position: relative; backdrop-filter: blur(50px); }
+        .presale-card::before { content: ''; position: absolute; top: -1px; left: -1px; width: 50px; height: 50px; border-top: 2px solid var(--orange); border-left: 2px solid var(--orange); }
+        .presale-card::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 50px; height: 50px; border-bottom: 2px solid var(--purple); border-right: 2px solid var(--purple); }
 
-        .nav-btns { display: flex; align-items: center; gap: 15px; }
-        .btn-whitepaper { color: #fff; text-decoration: none; font-size: 0.85rem; border: 1px solid var(--border-color); padding: 8px 18px; border-radius: 6px; }
-        .btn-connect { background: var(--primary); color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+        .price-line { display: flex; justify-content: space-between; margin-bottom: 30px; font-family: 'Orbitron'; font-weight: 900; }
+        .price-line span { color: var(--orange); font-size: 1.2rem; }
 
-        /* 2. Hero Section (Mirror Layout) */
-        .hero {
-            max-width: 1300px;
-            margin: auto;
-            padding: 160px 5% 80px;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 50px;
-            align-items: flex-start;
-        }
+        /* Timer 2-Day Loop */
+        .timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 40px 0; }
+        .time-unit { background: #080808; padding: 20px 10px; border: 1px solid var(--border); text-align: center; }
+        .time-unit b { display: block; font-size: 2rem; color: #fff; margin-bottom: 5px; }
+        .time-unit small { font-size: 0.6rem; color: #444; text-transform: uppercase; }
 
-        .hero-content h1 {
-            font-size: 4.8rem;
-            line-height: 1;
-            font-weight: 800;
-            margin: 0 0 25px;
-            letter-spacing: -3px;
-        }
-        .hero-content p {
-            font-size: 1.15rem;
-            color: #999;
-            line-height: 1.6;
-            max-width: 550px;
-            margin-bottom: 40px;
-        }
+        /* Inputs */
+        .input-group { position: relative; margin-bottom: 20px; }
+        .input-group input { width: 100%; background: #000; border: 1px solid var(--border); padding: 20px; color: #fff; font-family: 'Orbitron'; font-size: 1.2rem; outline: none; transition: 0.3s; }
+        .input-group input:focus { border-color: var(--orange); }
+        .input-group label { position: absolute; top: -10px; left: 15px; background: #000; padding: 0 10px; font-size: 0.7rem; color: #444; }
 
-        /* 3. The Presale Card (The Exact Replica) */
-        .presale-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(40px);
-            border: 1px solid var(--border-color);
-            border-radius: 28px;
-            padding: 40px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            position: relative;
-        }
-        .presale-card::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
+        .buy-btn { width: 100%; padding: 25px; background: #fff; color: #000; border: none; font-family: 'Syncopate'; font-weight: 900; cursor: pointer; transition: 0.3s; letter-spacing: 2px; }
+        .buy-btn:hover { background: var(--orange); color: #fff; }
 
-        .status-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 12px; font-weight: 600; }
-        .progress-bar { background: rgba(255,255,255,0.05); height: 10px; border-radius: 10px; overflow: hidden; margin-bottom: 30px; }
-        .progress-fill { width: 45%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
-
-        /* Timer 2-Day Logic Box */
-        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 30px; }
-        .time-box { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); padding: 15px 5px; border-radius: 12px; text-align: center; }
-        .time-box div { font-size: 1.6rem; font-weight: 800; color: #fff; font-family: 'Orbitron'; }
-        .time-box label { font-size: 0.6rem; color: #555; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Currency Select Mirror */
-        .currency-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-        .tab { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 12px; border-radius: 10px; text-align: center; cursor: pointer; font-size: 0.8rem; opacity: 0.6; }
-        .tab.active { border-color: var(--primary); opacity: 1; background: rgba(255, 69, 0, 0.05); }
-
-        .input-area { background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; margin-bottom: 15px; }
-        .input-area label { display: block; font-size: 0.7rem; color: #666; margin-bottom: 5px; }
-        .input-area input { background: none; border: none; color: #fff; font-size: 1.3rem; font-weight: 800; width: 100%; outline: none; }
-
-        .main-buy-btn {
-            width: 100%; padding: 20px; border-radius: 12px; border: none;
-            background: linear-gradient(90deg, var(--primary), #ff6a00);
-            color: #fff; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s;
-        }
-        .main-buy-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3); }
-
-        /* 4. Partners & Audit Icons */
-        .audit-strip { display: flex; gap: 30px; margin-top: 40px; opacity: 0.3; }
-
+        .audit { margin-top: 40px; display: flex; gap: 40px; filter: grayscale(1); opacity: 0.2; }
     </style>
 </head>
 <body>
 
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
 <nav>
-    <div class="logo"><span class="orange">ARXION</span> <span class="purple">X</span></div>
-    <div class="nav-menu">
-        <a href="#">Ecosystem</a>
-        <a href="#">How it works</a>
-        <a href="#">Roadmap</a>
-    </div>
-    <div class="nav-btns">
-        <a href="#" class="btn-whitepaper">Whitepaper</a>
-        <button class="btn-connect">Connect Wallet</button>
-    </div>
+    <div class="logo">ARXION <i>X</i></div>
+    <button style="background:none; border:1px solid #333; color:#fff; padding:10px 30px; font-family: 'Orbitron'; font-size: 0.8rem; cursor:pointer;">CONNECT_NODE</button>
 </nav>
 
-<div class="hero">
-    <div class="hero-content">
-        <div style="display:inline-block; padding: 6px 14px; background: rgba(255, 69, 0, 0.1); border-radius: 20px; color: var(--primary); font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; border: 1px solid rgba(255, 69, 0, 0.15);">
-            STAGE 1: THE GENESIS IS LIVE
-        </div>
-        <h1>The World's <br>Most <span style="color: var(--primary);">Intelligent</span> <br>Asset.</h1>
-        <p>Arxion (ARXN) is a self-decoding neural protocol designed to bridge the gap between AI-driven finance and global banking systems.</p>
-        
-        <div class="audit-strip">
+<main>
+    <div class="content">
+        <div style="color: var(--orange); font-size: 0.8rem; margin-bottom: 20px;">[ INITIALIZING STAGE 01 ]</div>
+        <h1>DECODE <br>THE <span>VOID.</span></h1>
+        <p>Arxion is a sovereign AI-driven asset. The first of its kind to self-regulate price floors via Neural Treasury protocols.</p>
+        <div class="audit">
             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/CertiK_Logo.png" height="30">
             <img src="https://solidproof.io/img/logo/logo-white.png" height="30">
         </div>
     </div>
 
     <div class="presale-card">
-        <div class="status-row">
-            <span>Stage 1: LIVE</span>
-            <span style="color: var(--primary);">1 ARXN = $0.0050</span>
+        <div class="price-line">
+            <label>CURRENT STAGE 01</label>
+            <span>$0.0050</span>
         </div>
-        <div class="progress-bar"><div class="progress-fill"></div></div>
-
-        <div class="timer-grid">
-            <div class="time-box"><div id="d">02</div><label>Days</label></div>
-            <div class="time-box"><div id="h">00</div><label>Hours</label></div>
-            <div class="time-box"><div id="m">00</div><label>Mins</label></div>
-            <div class="time-box"><div id="s">00</div><label>Secs</label></div>
+        
+        <div style="height: 2px; background: #111; width: 100%; margin-bottom: 30px;">
+            <div style="width: 40%; height: 100%; background: var(--orange);"></div>
         </div>
 
-        <div class="currency-tabs">
-            <div class="tab active">USDT</div>
-            <div class="tab">ETH</div>
-            <div class="tab">BNB</div>
+        <div class="timer">
+            <div class="time-unit"><b id="d">02</b><small>Days</small></div>
+            <div class="time-unit"><b id="h">00</b><small>Hrs</small></div>
+            <div class="time-unit"><b id="m">00</b><small>Min</small></div>
+            <div class="time-unit"><b id="s">00</b><small>Sec</small></div>
         </div>
 
-        <div class="input-area">
-            <label>Amount you pay</label>
-            <input type="number" id="pay" value="1000" oninput="updateRec()">
+        <div class="input-group">
+            <label>SEND USDT</label>
+            <input type="number" id="pay" value="1000" oninput="calc()">
         </div>
-        <div class="input-area">
-            <label>Amount you receive</label>
-            <input type="number" id="rec" readonly>
+        <div class="input-group">
+            <label>GET ARXN</label>
+            <input type="number" id="get" readonly>
         </div>
 
-        <button class="main-buy-btn">BUY ARXN NOW</button>
-        <p style="text-align: center; font-size: 0.75rem; color: #444; margin-top: 15px;">Next Price: $0.0065 | Listing Price: $0.0250</p>
+        <button class="buy-btn">AUTHORIZE PURCHASE</button>
     </div>
-</div>
+</main>
 
 <script>
-    // حاسبة استلام العملات
-    function updateRec() {
-        document.getElementById('rec').value = Math.floor(document.getElementById('pay').value / 0.0050);
+    function calc() {
+        document.getElementById('get').value = Math.floor(document.getElementById('pay').value / 0.0050);
     }
-    updateRec();
+    calc();
 
-    // عداد اليومين (2-Day Loop) - تكرار تلقائي
-    function startCycle() {
-        const cycleLength = 2 * 24 * 60 * 60 * 1000; 
-        const reference = new Date("2025-12-25T00:00:00").getTime();
-
-        function update() {
+    function countdown() {
+        const cycle = 2 * 24 * 60 * 60 * 1000;
+        const start = new Date("2025-12-25T00:00:00").getTime();
+        setInterval(() => {
             const now = new Date().getTime();
-            const remaining = cycleLength - ((now - reference) % cycleLength);
-
-            const d = Math.floor(remaining / (1000 * 60 * 60 * 24));
-            const h = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((remaining % (1000 * 60)) / 1000);
-
-            document.getElementById('d').innerText = d.toString().padStart(2, '0');
-            document.getElementById('h').innerText = h.toString().padStart(2, '0');
-            document.getElementById('m').innerText = m.toString().padStart(2, '0');
-            document.getElementById('s').innerText = s.toString().padStart(2, '0');
-        }
-        setInterval(update, 1000);
-        update();
+            const diff = cycle - ((now - start) % cycle);
+            document.getElementById('d').innerText = Math.floor(diff/86400000).toString().padStart(2,'0');
+            document.getElementById('h').innerText = Math.floor((diff%86400000)/3600000).toString().padStart(2,'0');
+            document.getElementById('m').innerText = Math.floor((diff%3600000)/60000).toString().padStart(2,'0');
+            document.getElementById('s').innerText = Math.floor((diff%60000)/1000).toString().padStart(2,'0');
+        }, 1000);
     }
-    startCycle();
+    countdown();
 </script>
-
 </body>
 </html>
