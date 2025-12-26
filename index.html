@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[7:45 am, 26/12/2025] 😤: <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,66 +11,53 @@
         body, html { margin: 0; padding: 0; overflow-x: hidden; background: var(--bg); font-family: 'Orbitron', sans-serif; color: white; scroll-behavior: smooth; }
         
         /* 3D Canvas Background */
+        #canvas-container…
+[7:48 am, 26/12/2025] 😤: sdafsdf
+[7:48 am, 26/12/2025] 😤: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ARXION (ARXN) | THE SOVEREIGN EMPEROR</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --fire: #FF4500; --purple: #7851A9; --gold: #FFD700; --bg: #000; }
+        body, html { margin: 0; padding: 0; overflow-x: hidden; background: var(--bg); font-family: 'Orbitron', sans-serif; color: white; scroll-behavior: smooth; }
+        
         #canvas-container { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; }
         .content-layer { position: relative; z-index: 10; pointer-events: none; }
         .interactive { pointer-events: auto; }
 
-        /* PORTAL SYSTEM (FIXED) */
+        /* بوابة الدخول المعدلة - الحل النهائي */
         #portal { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: #000; display: flex; justify-content: center; align-items: center; 
-            z-index: 99999; transition: opacity 1.2s ease, visibility 1.2s ease; cursor: pointer;
+            z-index: 999999; transition: all 1s ease; cursor: pointer;
         }
         .x-gate { font-size: clamp(120px, 25vw, 250px); color: var(--purple); text-shadow: 0 0 60px var(--purple); font-weight: 900; animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.8; } }
 
-        /* NAVIGATION */
         nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.9); border-bottom: 1px solid rgba(120,81,169,0.3); }
         .logo { font-size: clamp(22px, 5vw, 35px); font-weight: 900; color: var(--fire); letter-spacing: 4px; }
-        .logo span { color: var(--purple); }
-        .btn-connect { background: linear-gradient(45deg, var(--purple), #4B0082); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-size: 12px; font-weight: bold; transition: 0.3s; box-shadow: 0 0 15px var(--purple); }
+        .btn-connect { background: linear-gradient(45deg, var(--purple), #4B0082); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: bold; }
 
-        /* STAGES BOX */
         .stages-box { background: rgba(255,255,255,0.03); border: 1px solid var(--purple); margin: 30px 5%; padding: 25px; border-radius: 20px; backdrop-filter: blur(10px); }
         .track { background: #111; height: 12px; border-radius: 10px; margin: 15px 0; overflow: hidden; }
-        .fill { width: 6.66%; height: 100%; background: linear-gradient(90deg, var(--purple), var(--fire)); box-shadow: 0 0 20px var(--fire); }
+        .fill { width: 6.66%; height: 100%; background: linear-gradient(90deg, var(--purple), var(--fire)); }
 
-        /* HERO AREA */
         .hero { display: flex; flex-wrap: wrap; gap: 40px; padding: 50px 5%; justify-content: center; }
-        .hero-text { flex: 1; min-width: 300px; }
-        .hero-text h1 { font-size: clamp(40px, 10vw, 70px); line-height: 1; margin: 0; font-weight: 900; }
-        
-        .buy-card { background: rgba(0,0,0,0.95); border: 2px solid var(--purple); padding: 35px; border-radius: 30px; width: 100%; max-width: 420px; box-shadow: 0 0 50px rgba(120, 81, 169, 0.2); }
-        .timer-val { font-size: 38px; color: var(--fire); font-weight: bold; text-align: center; text-shadow: 0 0 10px var(--fire); }
-        
-        .coin-wrap { display: flex; gap: 10px; margin: 25px 0; }
-        .coin-btn { flex: 1; background: #0a0a0a; border: 1px solid #222; padding: 15px; border-radius: 15px; cursor: pointer; text-align: center; transition: 0.3s; }
-        .coin-btn.active { border-color: var(--fire); background: rgba(255, 69, 0, 0.15); box-shadow: 0 0 15px var(--fire); }
-        .coin-btn img { width: 28px; margin-bottom: 5px; }
+        .buy-card { background: rgba(0,0,0,0.95); border: 2px solid var(--purple); padding: 35px; border-radius: 30px; width: 100%; max-width: 420px; }
+        .timer-val { font-size: 38px; color: var(--fire); font-weight: bold; text-align: center; }
 
-        /* THE MONASTERY VAULT */
         .vault-area { text-align: center; padding: 100px 5%; }
-        .vault-core { width: 140px; height: 140px; border: 5px solid var(--gold); border-radius: 50%; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 75px; color: var(--gold); box-shadow: 0 0 40px var(--gold); animation: spin 25s linear infinite; }
+        .vault-core { width: 140px; height: 140px; border: 5px solid var(--gold); border-radius: 50%; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 75px; color: var(--gold); animation: spin 25s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* WHITEPAPER */
-        .wp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 40px 5%; }
-        .wp-card { background: rgba(255,255,255,0.02); padding: 35px; border-radius: 20px; border: 1px solid #222; transition: 0.4s; }
-        .wp-card:hover { border-color: var(--fire); transform: translateY(-5px); }
-        .wp-card h3 { color: var(--gold); letter-spacing: 2px; }
-
-        /* TITAN 30 */
-        .titan-wrap { padding: 60px 5%; overflow-x: auto; }
         .titan-table { width: 100%; border-collapse: collapse; min-width: 650px; background: rgba(0,0,0,0.7); }
-        .titan-table th { background: var(--purple); padding: 18px; text-align: left; font-size: 14px; }
-        .titan-table td { padding: 18px; border-bottom: 1px solid #111; font-size: 14px; }
         .rank-1 { color: var(--gold); border: 2px solid var(--gold); background: rgba(255, 215, 0, 0.08); font-weight: bold; }
-
-        input { width: 100%; padding: 18px; background: #000; border: 1px solid #333; color: white; border-radius: 12px; box-sizing: border-box; font-family: 'Orbitron'; }
-        .btn-buy { width: 100%; padding: 22px; background: linear-gradient(45deg, var(--fire), var(--purple)); border: none; border-radius: 15px; color: white; font-weight: bold; font-size: 20px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-        .btn-buy:hover { transform: scale(1.02); box-shadow: 0 0 30px var(--fire); }
-
-        @media (max-width: 768px) { .hero { text-align: center; } .hero-text { text-align: center; } }
+        
+        .btn-buy { width: 100%; padding: 22px; background: linear-gradient(45deg, var(--fire), var(--purple)); border: none; border-radius: 15px; color: white; font-weight: bold; font-size: 20px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -84,53 +71,37 @@
 <div class="content-layer">
     <nav class="interactive">
         <div class="logo">ARX<span>ION</span></div>
-        <button class="btn-connect interactive" onclick="alert('Initializing Sovereign Connection...')">CONNECT WALLET</button>
+        <button class="btn-connect interactive" onclick="alert('Connected to Arxion Mainnet')">CONNECT WALLET</button>
     </nav>
 
     <div class="stages-box interactive">
-        <div style="display: flex; justify-content: space-between; font-size: 14px;">
-            <span style="color: var(--gold); font-weight: bold;">PRESALE STAGE 1 / 15</span>
-            <span style="color: var(--fire); font-weight: bold;">$0.001 → $0.15</span>
+        <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--gold);">STAGE 1 / 15</span>
+            <span style="color: var(--fire);">$0.001 → $0.15</span>
         </div>
         <div class="track"><div class="fill"></div></div>
     </div>
 
     <div class="hero">
-        <div class="hero-text interactive">
+        <div class="hero-text interactive" style="flex:1; min-width:300px;">
             <h1>THE <br><span style="color: var(--fire);">REFLECTION</span> <br>SHIELD</h1>
-            <p style="color: #888; font-size: 18px; margin-top: 20px;">The Autonomous Self-Decoding Asset. <br>Secured by Genetic Code Intelligence.</p>
+            <p style="color: #888; font-size: 18px;">Autonomous Self-Decoding Assets.</p>
         </div>
 
         <div class="buy-card interactive">
             <div class="timer-val" id="timer">48:00:00</div>
-            <p style="text-align: center; font-size: 10px; color: #555; margin-bottom: 20px;">PRICE INCREASES EVERY 48 HOURS</p>
-            <div class="coin-wrap">
-                <div class="coin-btn active" onclick="sel(this)"><img src="https://cryptologos.cc/logos/tether-usdt-logo.png"><br><span>USDT</span></div>
-                <div class="coin-btn" onclick="sel(this)"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png"><br><span>ETH</span></div>
-                <div class="coin-btn" onclick="sel(this)"><img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png"><br><span>BNB</span></div>
-            </div>
-            <input type="number" placeholder="Enter Amount">
             <button class="btn-buy">PURCHASE ARXN</button>
         </div>
     </div>
 
     <div class="vault-area interactive">
         <div class="vault-core">X</div>
-        <h2 style="letter-spacing: 12px; font-size: clamp(25px, 6vw, 40px);">THE MONASTERY VAULT</h2>
-        <p style="color: var(--fire); font-size: 14px; letter-spacing: 5px; font-weight: bold; margin-top: 10px;">AUTONOMOUS NEURAL TREASURY</p>
-        <p style="color: #666; max-width: 800px; margin: 30px auto; line-height: 2;">A cryptographic fortress governing the 1,000,000,000 supply with automated burn protocols and liquidity shielding.</p>
+        <h2>THE MONASTERY VAULT</h2>
     </div>
 
-    <div class="wp-grid interactive">
-        <div class="wp-card"><h3>Architecture</h3><p>Deep-dive into self-decoding neural systems and shield protocols.</p></div>
-        <div class="wp-card"><h3>Tokenomics</h3><p>Analysis of the 15-stage appreciation and 1B supply management.</p></div>
-        <div class="wp-card"><h3>Security</h3><p>Encryption standards enforced by the Shadow Architect collective.</p></div>
-    </div>
-
-    <div class="titan-wrap interactive">
-        <h2 style="text-align: center; color: var(--gold); letter-spacing: 10px; margin-bottom: 40px;">TITAN 30 ELITE</h2>
+    <div style="padding: 60px 5%; overflow-x: auto;" class="interactive">
         <table class="titan-table">
-            <thead><tr><th>Rank</th><th>Elite Wallet</th><th>Investment</th><th>Tier</th></tr></thead>
+            <thead><tr><th>Rank</th><th>Elite Wallet</th><th>Investment</th></tr></thead>
             <tbody id="titan-rows"></tbody>
         </table>
     </div>
@@ -139,77 +110,44 @@
 <script>
     // 3D Engine
     let scene, camera, renderer, system;
-    let mX = 0, mY = 0, tX = 0, tY = 0;
-
     function init3D() {
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('canvas-container').appendChild(renderer.domElement);
-
         const geo = new THREE.BufferGeometry();
-        const count = 3500;
-        const pos = new Float32Array(count * 3);
-        for(let i=0; i<count*3; i++) pos[i] = (Math.random() - 0.5) * 15;
-        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-        system = new THREE.Points(geo, new THREE.PointsMaterial({ color: 0x7851A9, size: 0.025, transparent: true, opacity: 0.7 }));
-        scene.add(system);
-        camera.position.z = 5;
+        const p = new Float32Array(3000 * 3);
+        for(let i=0; i<3000*3; i++) p[i] = (Math.random() - 0.5) * 15;
+        geo.setAttribute('position', new THREE.BufferAttribute(p, 3));
+        system = new THREE.Points(geo, new THREE.PointsMaterial({ color: 0x7851A9, size: 0.02 }));
+        scene.add(system); camera.position.z = 5;
     }
-
-    // Tracking Mouse & Touch
-    const updateMove = (x, y) => {
-        mX = (x - window.innerWidth / 2) / 150;
-        mY = (y - window.innerHeight / 2) / 150;
-    };
-    document.addEventListener('mousemove', (e) => updateMove(e.clientX, e.clientY));
-    document.addEventListener('touchmove', (e) => updateMove(e.touches[0].clientX, e.touches[0].clientY));
-
-    function animate() {
-        requestAnimationFrame(animate);
-        tX += (mX - tX) * 0.05; tY += (mY - tY) * 0.05;
-        system.rotation.y += 0.001;
-        system.rotation.x = -tY; system.rotation.y = tX;
-        renderer.render(scene, camera);
-    }
+    function animate() { requestAnimationFrame(animate); system.rotation.y += 0.002; renderer.render(scene, camera); }
     init3D(); animate();
 
-    // Portal Logic (Fixed for Eyad)
+    // الحل النهائي لمشكلة الدخول
     function enterEmpire() {
-        const p = document.getElementById('portal');
-        p.style.opacity = '0';
-        p.style.pointerEvents = 'none'; // CRITICAL: Makes site clickable
-        setTimeout(() => { p.style.visibility = 'hidden'; }, 1200);
+        const portal = document.getElementById('portal');
+        portal.style.opacity = '0'; // إخفاء بصري
+        portal.style.pointerEvents = 'none'; // السماح بالضغط على ما خلفه فوراً
+        setTimeout(() => {
+            portal.remove(); // حذف العنصر نهائياً من الصفحة
+        }, 1000);
     }
 
-    function sel(e) {
-        document.querySelectorAll('.coin-btn').forEach(b => b.classList.remove('active'));
-        e.classList.add('active');
-    }
-
-    // Timer 48H
+    // Timer & Titan Rows
     setInterval(() => {
-        const cycle = 48 * 3600 * 1000;
-        const d = cycle - (new Date().getTime() % cycle);
-        const h = Math.floor(d / (1000 * 3600));
-        const m = Math.floor((d % (1000 * 3600)) / (1000 * 60));
-        const s = Math.floor((d % (1000 * 60)) / 1000);
-        document.getElementById('timer').innerText = ${h}h : ${m}m : ${s}s;
+        const d = (48*3600*1000) - (new Date().getTime() % (48*3600*1000));
+        const h = Math.floor(d/(3600*1000));
+        document.getElementById('timer').innerText = ${h}h : ${Math.floor((d/60000)%60)}m : ${Math.floor((d/1000)%60)}s;
     }, 1000);
 
-    // Titan Rows
     const tr = document.getElementById('titan-rows');
     for(let i=1; i<=30; i++) {
-        const isGold = i === 1 ? 'rank-1' : '';
-        tr.innerHTML += <tr class="${isGold}"><td>#${i}</td><td>0x${Math.random().toString(16).slice(2,12)}...</td><td>$${(600000/i).toLocaleString()}</td><td>${i<5?'🐋 King Whale':'🦈 Great Shark'}</td></tr>;
+        const gold = i === 1 ? 'rank-1' : '';
+        tr.innerHTML += <tr class="${gold}"><td>#${i}</td><td>0x${Math.random().toString(16).slice(2,10)}...</td><td>$${(500000/i).toLocaleString()}</td></tr>;
     }
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
 </script>
 </body>
 </html>
