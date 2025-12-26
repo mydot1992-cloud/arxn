@@ -9,53 +9,69 @@
     <style>
         :root { --fire: #FF4500; --purple: #7851A9; --gold: #FFD700; --bg: #000; }
         body, html { margin: 0; padding: 0; overflow-x: hidden; background: var(--bg); font-family: 'Orbitron', sans-serif; color: white; scroll-behavior: smooth; }
+        
+        /* Background 3D Canvas */
         #canvas-container { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; }
         .content-layer { position: relative; z-index: 10; pointer-events: none; }
         .interactive { pointer-events: auto; }
 
-        /* PORTAL GATE */
-        #portal { position: fixed; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 10000; transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1); }
-        .x-gate { font-size: 220px; color: var(--purple); cursor: pointer; text-shadow: 0 0 60px var(--purple); font-weight: 900; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        /* THE X PORTAL GATEWAY */
+        #portal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 10000; transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1); cursor: pointer; }
+        .x-gate { font-size: clamp(100px, 20vw, 220px); color: var(--purple); text-shadow: 0 0 60px var(--purple); font-weight: 900; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
 
-        /* HEADER */
-        nav { padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--purple); }
-        .logo { font-size: 35px; font-weight: 900; color: var(--fire); letter-spacing: 5px; }
-        .btn-connect { background: linear-gradient(45deg, var(--purple), #4B0082); color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; box-shadow: 0 0 20px var(--purple); transition: 0.3s; }
-        .btn-connect:hover { background: var(--fire); box-shadow: 0 0 30px var(--fire); transform: translateY(-3px); }
+        /* NAVIGATION */
+        nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.9); border-bottom: 1px solid rgba(120,81,169,0.3); }
+        .logo { font-size: clamp(20px, 5vw, 32px); font-weight: 900; color: var(--fire); letter-spacing: 3px; }
+        .logo span { color: var(--purple); }
+        .btn-connect { background: linear-gradient(45deg, var(--purple), #4B0082); color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-size: clamp(10px, 3vw, 14px); transition: 0.3s; box-shadow: 0 0 15px var(--purple); }
+        .btn-connect:hover { background: var(--fire); box-shadow: 0 0 25px var(--fire); transform: scale(1.05); }
 
-        /* 15 STAGES BAR */
-        .stages-container { background: rgba(120, 81, 169, 0.05); border: 1px solid var(--purple); margin: 40px 5%; padding: 30px; border-radius: 20px; }
-        .track { background: #111; height: 15px; border-radius: 20px; margin: 20px 0; overflow: hidden; border: 1px solid #333; }
-        .fill { width: 6.66%; height: 100%; background: linear-gradient(90deg, var(--purple), var(--fire)); box-shadow: 0 0 20px var(--fire); }
+        /* PRE-SALE STAGES */
+        .stages-box { background: rgba(255,255,255,0.03); border: 1px solid var(--purple); margin: 20px 5%; padding: 20px; border-radius: 15px; backdrop-filter: blur(10px); }
+        .track { background: #111; height: 10px; border-radius: 10px; margin: 15px 0; overflow: hidden; }
+        .fill { width: 6.66%; height: 100%; background: linear-gradient(90deg, var(--purple), var(--fire)); box-shadow: 0 0 15px var(--fire); }
 
-        /* HERO SECTION */
-        .hero { display: flex; flex-wrap: wrap; gap: 50px; padding: 60px 5%; justify-content: space-between; }
-        .buy-card { background: rgba(0,0,0,0.85); border: 2px solid var(--purple); padding: 40px; border-radius: 35px; width: 450px; box-shadow: 0 0 50px rgba(120, 81, 169, 0.2); }
-        .timer { font-size: 40px; color: var(--fire); text-align: center; font-weight: bold; margin-bottom: 20px; text-shadow: 0 0 10px var(--fire); }
+        /* HERO AREA */
+        .hero { display: flex; flex-wrap: wrap; gap: 30px; padding: 40px 5%; justify-content: center; text-align: center; }
+        .hero-text { flex: 1; min-width: 300px; text-align: left; }
+        .hero-text h1 { font-size: clamp(35px, 8vw, 60px); line-height: 1; margin: 0; }
         
-        .coin-selector { display: flex; gap: 15px; margin: 30px 0; }
-        .coin-btn { flex: 1; background: #0a0a0a; border: 1px solid #222; padding: 15px; border-radius: 15px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .coin-btn.active { border-color: var(--fire); background: rgba(255, 69, 0, 0.1); box-shadow: 0 0 15px var(--fire); }
-        .coin-btn img { width: 30px; margin-bottom: 8px; }
+        .buy-card { background: rgba(0,0,0,0.9); border: 2px solid var(--purple); padding: 30px; border-radius: 25px; width: 100%; max-width: 400px; box-shadow: 0 0 40px rgba(120, 81, 169, 0.2); }
+        .timer-val { font-size: 32px; color: var(--fire); font-weight: bold; margin-bottom: 10px; }
+        
+        /* CURRENCY LOGOS */
+        .coin-wrap { display: flex; gap: 10px; margin: 20px 0; }
+        .coin-btn { flex: 1; background: #0a0a0a; border: 1px solid #222; padding: 12px; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+        .coin-btn.active { border-color: var(--fire); background: rgba(255, 69, 0, 0.1); }
+        .coin-btn img { width: 24px; margin-bottom: 5px; }
 
-        /* MONASTERY VAULT */
-        .vault { text-align: center; padding: 120px 5%; }
-        .vault-core { width: 150px; height: 150px; border: 5px solid var(--gold); border-radius: 50%; margin: 0 auto 40px; display: flex; align-items: center; justify-content: center; font-size: 80px; color: var(--gold); box-shadow: 0 0 40px var(--gold); animation: spin 25s linear infinite; }
+        /* THE MONASTERY VAULT */
+        .vault-area { text-align: center; padding: 80px 5%; }
+        .vault-core { width: 120px; height: 120px; border: 4px solid var(--gold); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 60px; color: var(--gold); box-shadow: 0 0 30px var(--gold); animation: spin 20s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* EXCHANGES */
-        .exchanges { padding: 80px 5%; text-align: center; border-top: 1px solid #111; }
-        .ex-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; opacity: 0.7; }
-        .ex-grid img { height: 35px; filter: grayscale(1); transition: 0.4s; cursor: pointer; }
-        .ex-grid img:hover { filter: grayscale(0); transform: scale(1.2); }
+        .ex-logos { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 40px 5%; opacity: 0.6; }
+        .ex-logos img { height: 30px; filter: grayscale(1); transition: 0.3s; }
+        .ex-logos img:hover { filter: grayscale(0); transform: scale(1.1); }
 
-        /* TITAN 30 */
-        .titan-table { width: 100%; border-collapse: collapse; margin-top: 50px; background: rgba(0,0,0,0.5); }
-        .titan-table td, th { padding: 18px; text-align: left; border-bottom: 1px solid #222; }
-        .rank-1 { color: var(--gold); background: rgba(255, 215, 0, 0.05); font-weight: bold; border: 1px solid var(--gold); }
+        /* WHITEPAPER */
+        .wp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 40px 5%; }
+        .wp-card { background: rgba(255,255,255,0.02); padding: 25px; border-radius: 15px; border: 1px solid #222; transition: 0.3s; }
+        .wp-card:hover { border-color: var(--fire); }
 
-        .btn-buy { width: 100%; padding: 22px; background: linear-gradient(45deg, var(--fire), var(--purple)); border: none; border-radius: 15px; color: white; font-weight: bold; font-size: 20px; cursor: pointer; margin-top: 25px; }
+        /* TITAN 30 TABLE */
+        .titan-wrap { padding: 40px 5%; overflow-x: auto; }
+        .titan-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        .titan-table th { background: var(--purple); padding: 15px; text-align: left; }
+        .titan-table td { padding: 15px; border-bottom: 1px solid #111; }
+        .rank-1 { color: var(--gold); border: 2px solid var(--gold); background: rgba(255, 215, 0, 0.05); }
+
+        input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: white; border-radius: 10px; box-sizing: border-box; }
+        .btn-buy { width: 100%; padding: 18px; background: linear-gradient(45deg, var(--fire), var(--purple)); border: none; border-radius: 12px; color: white; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 15px; }
+
+        @media (max-width: 768px) { .hero-text { text-align: center; } .hero-text h1 { font-size: 40px; } }
     </style>
 </head>
 <body>
@@ -69,99 +85,138 @@
 <div class="content-layer">
     <nav class="interactive">
         <div class="logo">ARX<span>ION</span></div>
-        <button class="btn-connect" onclick="connect()">CONNECT WALLET</button>
+        <button class="btn-connect" onclick="alert('Securing Neural Connection...')">CONNECT WALLET</button>
     </nav>
 
-    <div class="stages-container interactive">
-        <div style="display: flex; justify-content: space-between;">
-            <h2 style="margin: 0; color: var(--gold);">PRESALE STAGE 1 / 15</h2>
-            <span style="color: var(--fire); font-weight: bold;">$0.001 → LISTING $0.15</span>
+    <div class="stages-box interactive">
+        <div style="display: flex; justify-content: space-between; font-size: 12px;">
+            <span style="color: var(--gold);">STAGE 1 / 15</span>
+            <span style="color: var(--fire);">$0.001 → $0.15</span>
         </div>
         <div class="track"><div class="fill"></div></div>
     </div>
 
     <div class="hero">
-        <div style="flex: 1; min-width: 350px;">
-            <h1 style="font-size: 65px; margin: 0; line-height: 1;">THE <span style="color: var(--fire);">REFLECTION</span> <br>SHIELD</h1>
-            <p style="color: #666; font-size: 18px; margin-top: 30px;">Engineered for the 1,000,000,000 elite assets. Governed by the Shadow Architects.</p>
+        <div class="hero-text">
+            <h1>THE <br><span style="color: var(--fire);">REFLECTION</span> <br>SHIELD</h1>
+            <p style="color: #666;">The Self-Decoding Asset. Governed by Genetic Code Intelligence.</p>
+            <div class="ex-logos interactive">
+                <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png">
+                <img src="https://cryptologos.cc/logos/okb-okb-logo.png">
+                <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png">
+            </div>
         </div>
 
         <div class="buy-card interactive">
-            <div class="timer" id="clock">48:00:00</div>
-            <div class="coin-selector">
+            <div class="timer-val" id="timer">48:00:00</div>
+            <div class="coin-wrap">
                 <div class="coin-btn active" onclick="sel(this)"><img src="https://cryptologos.cc/logos/tether-usdt-logo.png"><br><span>USDT</span></div>
                 <div class="coin-btn" onclick="sel(this)"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png"><br><span>ETH</span></div>
                 <div class="coin-btn" onclick="sel(this)"><img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png"><br><span>BNB</span></div>
             </div>
-            <input type="number" placeholder="Enter Contribution Amount" style="width: 100%; padding: 18px; background: #000; border: 1px solid #333; color: white; border-radius: 12px; box-sizing: border-box;">
-            <button class="btn-buy">ACQUIRE ARXN</button>
+            <input type="number" placeholder="Enter Amount">
+            <button class="btn-buy">PURCHASE ARXN</button>
         </div>
     </div>
 
-    <div class="vault interactive">
+    <div class="vault-area interactive">
         <div class="vault-core">X</div>
-        <h2 style="letter-spacing: 15px; font-size: 40px; margin: 0;">THE MONASTERY VAULT</h2>
-        <p style="color: var(--fire); letter-spacing: 5px; font-weight: bold;">AUTONOMOUS NEURAL TREASURY</p>
-        <p style="color: #888; max-width: 800px; margin: 30px auto; line-height: 2;">A self-decoding cryptographic fortress securing the billion-asset supply through Genetic Code Intelligence.</p>
+        <h2 style="letter-spacing: 10px;">THE MONASTERY VAULT</h2>
+        <p style="color: var(--fire); font-size: 12px; letter-spacing: 4px; font-weight: bold;">AUTONOMOUS NEURAL TREASURY</p>
     </div>
 
-    <div class="exchanges interactive">
-        <p style="color: #444; letter-spacing: 3px; font-size: 12px;">CEX & DEX INTEGRATION</p>
-        <div class="ex-grid">
-            <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" title="Binance">
-            <img src="https://cryptologos.cc/logos/okb-okb-logo.png" title="OKX">
-            <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png" title="Uniswap">
-            <img src="https://cryptologos.cc/logos/pancakeswap-cake-logo.png" title="PancakeSwap">
-        </div>
+    <div class="wp-grid interactive">
+        <div class="wp-card"><h3>Architecture</h3><p>Self-decoding cryptographic protocols.</p></div>
+        <div class="wp-card"><h3>Tokenomics</h3><p>1B supply governance and burn cycles.</p></div>
+        <div class="wp-card"><h3>Security</h3><p>Shadow Architect genetic encryption.</p></div>
     </div>
 
-    <div style="padding: 100px 5%;" class="interactive">
-        <h2 style="text-align: center; color: var(--gold); letter-spacing: 10px;">TITAN 30 LEADERBOARD</h2>
+    <div class="titan-wrap interactive">
+        <h2 style="text-align: center; color: var(--gold); letter-spacing: 5px;">TITAN 30 LEADERBOARD</h2>
         <table class="titan-table">
-            <thead><tr><th>Rank</th><th>Elite Wallet</th><th>Investment</th><th>Status</th></tr></thead>
-            <tbody id="titan-body"></tbody>
+            <thead><tr><th>Rank</th><th>Wallet</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody id="titan-rows"></tbody>
         </table>
     </div>
 </div>
 
 <script>
-    // 3D SYSTEM
-    let s, c, r, sys; let mX=0, mY=0, tX=0, tY=0;
-    function init() {
-        s = new THREE.Scene();
-        c = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-        r = new THREE.WebGLRenderer({antialias:true, alpha:true});
-        r.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('canvas-container').appendChild(r.domElement);
-        const g = new THREE.BufferGeometry(); const count=3500; const p = new Float32Array(count*3);
-        for(let i=0; i<count*3; i++) p[i]=(Math.random()-0.5)*15;
-        g.setAttribute('position', new THREE.BufferAttribute(p, 3));
-        sys = new THREE.Points(g, new THREE.PointsMaterial({color:0x7851A9, size:0.02, transparent:true}));
-        s.add(sys); c.position.z=5;
-    }
-    document.addEventListener('mousemove', (e)=>{ mX=(e.clientX-window.innerWidth/2)/200; mY=(e.clientY-window.innerHeight/2)/200; });
-    function loop() { requestAnimationFrame(loop); tX+=(mX-tX)*0.05; tY+=(mY-tY)*0.05; sys.rotation.y+=0.001; sys.rotation.x=-tY; sys.rotation.y=tX; r.render(s, c); }
-    init(); loop();
+    // 3D Particles Engine
+    let scene, camera, renderer, system;
+    let mX = 0, mY = 0, tX = 0, tY = 0;
 
-    function enterEmpire() { 
-        document.getElementById('portal').style.opacity='0'; 
-        setTimeout(()=>document.getElementById('portal').style.display='none', 1500);
+    function init3D() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        const geo = new THREE.BufferGeometry();
+        const count = 3000;
+        const pos = new Float32Array(count * 3);
+        for(let i=0; i<count*3; i++) pos[i] = (Math.random() - 0.5) * 15;
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        system = new THREE.Points(geo, new THREE.PointsMaterial({ color: 0x7851A9, size: 0.02, transparent: true }));
+        scene.add(system);
+        camera.position.z = 5;
     }
-    function sel(e) { document.querySelectorAll('.coin-btn').forEach(b=>b.classList.remove('active')); e.classList.add('active'); }
-    
-    // TIMER
+
+    document.addEventListener('mousemove', (e) => {
+        mX = (e.clientX - window.innerWidth / 2) / 200;
+        mY = (e.clientY - window.innerHeight / 2) / 200;
+    });
+
+    // Touch support for Mobile
+    document.addEventListener('touchmove', (e) => {
+        mX = (e.touches[0].clientX - window.innerWidth / 2) / 200;
+        mY = (e.touches[0].clientY - window.innerHeight / 2) / 200;
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+        tX += (mX - tX) * 0.05; tY += (mY - tY) * 0.05;
+        system.rotation.y += 0.001;
+        system.rotation.x = -tY; system.rotation.y = tX;
+        renderer.render(scene, camera);
+    }
+    init3D(); animate();
+
+    // UI Functions
+    function enterEmpire() {
+        const p = document.getElementById('portal');
+        p.style.opacity = '0';
+        p.style.pointerEvents = 'none';
+        setTimeout(() => p.style.display = 'none', 1200);
+    }
+
+    function sel(e) {
+        document.querySelectorAll('.coin-btn').forEach(b => b.classList.remove('active'));
+        e.classList.add('active');
+    }
+
+    // Timer Logic
     setInterval(() => {
-        const d = (48*3600*1000) - (new Date().getTime() % (48*3600*1000));
-        const h = Math.floor(d/(3600*1000)); const m = Math.floor((d%(3600*1000))/(60*1000)); const s = Math.floor((d%(60*1000))/1000);
-        document.getElementById('clock').innerText = ${h}h : ${m}m : ${s}s;
+        const cycle = 48 * 3600 * 1000;
+        const d = cycle - (new Date().getTime() % cycle);
+        const h = Math.floor(d / (1000 * 3600));
+        const m = Math.floor((d % (1000 * 3600)) / (1000 * 60));
+        const s = Math.floor((d % (1000 * 60)) / 1000);
+        document.getElementById('timer').innerText = ${h}h : ${m}m : ${s}s;
     }, 1000);
 
-    // TITAN GENERATOR
-    const tb = document.getElementById('titan-body');
+    // Titan 30 List
+    const tr = document.getElementById('titan-rows');
     for(let i=1; i<=30; i++) {
-        const gold = i===1 ? 'rank-1' : '';
-        tb.innerHTML += <tr class="${gold}"><td>#${i}</td><td>0x${Math.random().toString(16).slice(2,12)}...</td><td>$${(500000/i).toLocaleString()}</td><td>${i<5?'🐋 Whale':'🦈 Shark'}</td></tr>;
+        const goldClass = i === 1 ? 'rank-1' : '';
+        tr.innerHTML += <tr class="${goldClass}"><td>#${i}</td><td>0x${Math.random().toString(16).slice(2,10)}...</td><td>$${(500000/i).toLocaleString()}</td><td>${i<5?'Whale':'Shark'}</td></tr>;
     }
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
 </script>
 </body>
 </html>
