@@ -1,208 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION X | THE SUPREME AI SOVEREIGNTY</title>
+    <title>ARXION X | THE SUPREME QUANTUM ENGINE</title>
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@200;900&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS ENGINE (EXTENDED) --- */
         :root { 
-            --fire-orange: #FF4500; --royal-purple: #7851A9; --gold: #D4AF37; 
-            --bg: #000000; --card-bg: rgba(10, 10, 10, 0.95); --border: rgba(255, 255, 255, 0.05);
+            --orange: #FF4500; --purple: #7851A9; --gold: #D4AF37; 
+            --bg: #000; --glass: rgba(255, 255, 255, 0.03);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); color: #fff; font-family: 'Cairo', sans-serif; 
+            overflow-x: hidden; cursor: crosshair;
+        }
+        .eng { font-family: 'Orbitron', sans-serif; }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed; width: 100%; height: 100%; z-index: 1; top: 0; pointer-events: none;
+        }
+
+        /* --- X-Portal Background --- */
+        .x-bg {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 60vw; font-family: 'Orbitron'; font-weight: 900;
+            color: rgba(120, 81, 169, 0.03); z-index: 0; pointer-events: none;
+        }
 
         /* Navigation */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--border); position: fixed; width: 100%; top: 0; z-index: 10000; backdrop-filter: blur(20px); }
-        .logo { font-family: 'Orbitron'; font-size: 2.2rem; font-weight: 900; }
-        .logo span { color: var(--fire-orange); } .logo i { color: var(--royal-purple); font-style: normal; }
+        nav { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 25px 5%; background: rgba(0,0,0,0.9); border-bottom: 1px solid rgba(255,69,0,0.2);
+            position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(20px);
+        }
 
-        /* Hero & Presale Engine */
-        .hero { min-height: 120vh; display: flex; align-items: center; padding: 150px 5% 100px; background: radial-gradient(circle at top right, rgba(120,81,169,0.1), transparent); }
-        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; width: 100%; }
-        
-        h1 { font-size: 6.5rem; line-height: 0.85; font-weight: 800; letter-spacing: -5px; margin-bottom: 30px; }
-        h1 span { color: var(--fire-orange); }
+        /* Hero Engine (The Masterpiece) */
+        .hero { 
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 150px 5%; position: relative; z-index: 2;
+        }
+        .hero-content { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 100px; width: 100%; max-width: 1500px; }
 
-        .presale-engine { background: var(--card-bg); border: 1px solid var(--border); border-top: 5px solid var(--fire-orange); padding: 50px; border-radius: 40px; position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
-        .stage-tag { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: var(--fire-orange); padding: 8px 30px; border-radius: 50px; font-family: 'Orbitron'; font-weight: 900; font-size: 0.9rem; }
+        .glitch-title { 
+            font-size: 8rem; line-height: 0.8; font-weight: 900; 
+            text-transform: uppercase; letter-spacing: -10px; position: relative;
+        }
+        .glitch-title span { color: var(--orange); text-shadow: 0 0 50px rgba(255,69,0,0.5); }
 
-        /* Interactive 15 Stages Section */
-        .stages-section { padding: 150px 5%; background: #050505; }
-        .stages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 60px; }
-        .stage-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 30px; border-radius: 20px; transition: 0.4s; position: relative; }
-        .stage-box.active { border-color: var(--fire-orange); background: rgba(255,69,0,0.05); transform: scale(1.05); }
-        .stage-box h4 { font-family: 'Orbitron'; color: var(--fire-orange); margin-bottom: 10px; }
-        .stage-box .p-val { font-size: 1.4rem; font-weight: 800; }
+        /* The Advanced Buy Card */
+        .buy-card { 
+            background: rgba(10,10,10,0.8); border: 1px solid rgba(255,255,255,0.1);
+            padding: 60px; border-radius: 40px; backdrop-filter: blur(50px);
+            position: relative; border-top: 5px solid var(--orange);
+            box-shadow: 0 0 100px rgba(0,0,0,1);
+        }
+        .buy-card::before {
+            content: ''; position: absolute; inset: 0; border-radius: 40px;
+            padding: 2px; background: linear-gradient(45deg, var(--orange), var(--purple));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude; pointer-events: none;
+        }
 
-        /* Leaderboard Titan 30 */
-        .leaderboard { padding: 150px 10%; }
-        .titan-30-table { width: 100%; border-collapse: collapse; margin-top: 50px; background: rgba(255,255,255,0.01); border-radius: 30px; overflow: hidden; }
-        .titan-30-table th { background: rgba(120,81,169,0.1); padding: 25px; text-align: left; font-family: 'Orbitron'; color: var(--royal-purple); }
-        .titan-30-table td { padding: 25px; border-bottom: 1px solid var(--border); }
-        .gold-highlight { border: 2px solid var(--gold) !important; color: var(--gold); background: rgba(212, 175, 55, 0.08); font-weight: 900; text-shadow: 0 0 15px var(--gold); }
+        /* 15 Stages Section (The Infinity Scroll) */
+        .stages-wrap { padding: 200px 5%; position: relative; z-index: 2; }
+        .stages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .stage-box { 
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
+            padding: 50px; border-radius: 30px; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .stage-box:hover { transform: translateY(-20px); border-color: var(--orange); background: rgba(255,69,0,0.02); }
+        .stage-number { position: absolute; top: -20px; right: -10px; font-size: 8rem; font-weight: 900; opacity: 0.05; }
 
-        /* The Reflection Shield */
-        .shield-section { padding: 150px 5%; text-align: center; }
-        .shield-container { display: flex; justify-content: center; gap: 30px; margin-top: 70px; }
-        .shield-card { width: 320px; padding: 60px 30px; background: rgba(120,81,169,0.03); border: 1px solid var(--royal-purple); border-radius: 35px; transition: 0.5s; }
-        .shield-card:hover { background: rgba(120,81,169,0.1); transform: translateY(-15px); }
-        .shield-card h2 { font-size: 3.5rem; color: var(--fire-orange); font-family: 'Orbitron'; margin-bottom: 20px; }
+        /* Titan 30 Supreme Leaderboard */
+        .titan-sec { padding: 200px 5%; z-index: 2; position: relative; }
+        .titan-header { text-align: center; margin-bottom: 80px; }
+        .titan-table { width: 100%; border-collapse: separate; border-spacing: 0 15px; }
+        .titan-table tr { background: rgba(255,255,255,0.02); transition: 0.3s; }
+        .titan-table td { padding: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .rank-gold { 
+            background: linear-gradient(90deg, rgba(212,175,55,0.2), transparent) !important;
+            border: 2px solid var(--gold) !important; box-shadow: 0 0 50px rgba(212,175,55,0.2);
+            color: var(--gold); font-weight: 900;
+        }
 
-        /* Roadmap Vertical */
-        .roadmap { padding: 150px 10%; position: relative; }
-        .roadmap::before { content: ''; position: absolute; left: 50%; width: 2px; height: 80%; background: var(--border); top: 150px; }
-        .roadmap-item { width: 45%; margin-bottom: 80px; position: relative; padding: 40px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; }
-        .roadmap-item.left { margin-right: auto; }
-        .roadmap-item.right { margin-left: auto; }
+        /* Utility */
+        .input-supreme {
+            width: 100%; padding: 25px; background: #000; border: 1px solid #222;
+            border-radius: 20px; color: #fff; font-size: 1.8rem; font-family: 'Orbitron';
+            margin-top: 15px; text-align: center;
+        }
+        .btn-fire {
+            width: 100%; padding: 30px; background: var(--orange); border: none;
+            color: #fff; font-family: 'Orbitron'; font-weight: 900; font-size: 1.5rem;
+            border-radius: 25px; cursor: pointer; transition: 0.5s;
+            box-shadow: 0 20px 60px rgba(255,69,0,0.4); margin-top: 40px;
+        }
+        .btn-fire:hover { letter-spacing: 5px; background: #ff5e00; transform: scale(1.02); }
 
-        /* Wallet Integration Button */
-        .cta-button { width: 100%; padding: 25px; background: var(--fire-orange); border: none; color: white; font-family: 'Orbitron'; font-weight: 900; font-size: 1.4rem; border-radius: 20px; cursor: pointer; transition: 0.4s; box-shadow: 0 10px 40px rgba(255,69,0,0.3); margin-top: 30px; }
-        .cta-button:hover { transform: scale(1.02); box-shadow: 0 20px 60px rgba(255,69,0,0.5); }
-
-        /* Footer */
-        footer { padding: 100px 5%; border-top: 1px solid var(--border); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
+        footer { padding: 150px 5%; background: #000; border-top: 1px solid #111; text-align: center; position: relative; z-index: 2; }
     </style>
 </head>
 <body>
 
+<div id="particles-js"></div>
+<div class="x-bg">X</div>
+
 <nav>
-    <div class="logo">ARXION <span>X</span></div>
-    <button onclick="connectWallet()" class="cta-button" style="width:auto; margin:0; padding:12px 30px; font-size:0.9rem;">CONNECT WALLET</button>
+    <div class="logo eng">ARXION <span>X</span></div>
+    <div style="display:flex; gap:40px;">
+        <span class="eng" style="color:var(--orange); font-weight:900;">• GENESIS ACTIVE</span>
+        <button class="eng" style="background:transparent; border:1px solid var(--purple); color:white; padding:10px 20px; border-radius:10px; cursor:pointer;">CONNECT SYSTEM</button>
+    </div>
 </nav>
 
 <section class="hero">
-    <div class="hero-grid">
-        <div>
-            <div style="color:var(--fire-orange); font-weight:800; letter-spacing:4px; margin-bottom:20px;">SYSTEM STATUS: EVOLVING</div>
-            <h1>THE <span>SELF-DECODING</span> ASSET</h1>
-            <p style="font-size:1.4rem; color:#666; line-height:1.6; max-width:650px;">Arxion (ARXN) utilizes the Sovereign Neural Treasury to automate liquidity and rewards across 15 stages of growth.</p>
-            
-            <div style="margin-top:50px; background:rgba(255,255,255,0.02); padding:30px; border-radius:20px; border:1px solid var(--border);">
-                <h4 style="font-family:'Orbitron'; color:var(--royal-purple);">PROFIT CALCULATOR</h4>
-                <div style="display:flex; gap:20px; margin-top:20px;">
-                    <input type="number" id="calcInput" placeholder="Amount USDT" style="flex:1; padding:15px; background:#000; border:1px solid #333; color:white; border-radius:10px;">
-                    <div style="flex:1; padding:15px; background:rgba(255,69,0,0.1); border-radius:10px; border:1px solid var(--fire-orange);">
-                        <small>Value at Stage 15</small>
-                        <div id="resultVal" style="font-family:'Orbitron'; font-weight:900; font-size:1.2rem;">$0.00</div>
-                    </div>
-                </div>
-            </div>
+    <div class="hero-content">
+        <div class="hero-main">
+            <div style="color:var(--purple); letter-spacing:10px; font-weight:900; margin-bottom:20px;" class="eng">NEURAL TREASURY PROTOCOL</div>
+            <h1 class="glitch-title">DECODE<br><span>THE X</span><br>FUTURE</h1>
+            <p style="font-size:1.8rem; color:#666; margin-top:40px; line-height:1.4;">نظام Arxion ليس مجرد عملة، بل هو أصل رقمي مشفر جينياً يتطور مع كل كتلة بيانات [cite: 24-12-2024].</p>
         </div>
 
-        <div class="presale-engine">
-            <div class="stage-tag">GENESIS STAGE 01</div>
+        <div class="buy-card">
             <div style="display:flex; justify-content:space-between; margin-bottom:30px;">
-                <span>Price: <b style="color:var(--fire-orange)">$0.0050</b></span>
-                <span>Next: <b style="color:var(--royal-purple)">$0.0065</b></span>
+                <span class="eng">STAGE 01/15</span>
+                <span class="eng" style="color:var(--orange)">PRICE: $0.0050</span>
             </div>
-            
-            <label style="font-size:0.7rem; color:#444;">PAY WITH USDT</label>
-            <input type="number" id="buyAmt" placeholder="0.00" style="width:100%; padding:20px; background:#000; border:1px solid #333; color:white; border-radius:15px; font-size:1.5rem; margin-top:10px;">
-            
-            <label style="font-size:0.7rem; color:#444; margin-top:20px; display:block;">RECEIVE ARXN (X)</label>
-            <input type="number" id="receiveAmt" placeholder="0.00" readonly style="width:100%; padding:20px; background:#050505; border:1px solid #222; color:var(--fire-orange); border-radius:15px; font-size:1.5rem; font-family:'Orbitron'; margin-top:10px;">
-            
-            <button class="cta-button">BUY $ARXN NOW</button>
-            <p style="text-align:center; font-size:0.7rem; color:#444; margin-top:15px;">Audit Verified by SolidProof • 100% Liquidity Locked</p>
+            <div style="height:6px; background:#111; border-radius:10px; margin-bottom:40px;">
+                <div style="width:72%; height:100%; background:var(--orange); box-shadow:0 0 20px var(--orange);"></div>
+            </div>
+            <label class="eng" style="font-size:0.7rem; color:#444;">ENTER USDT AMOUNT</label>
+            <input type="number" class="input-supreme" id="usdtInput" placeholder="0.00">
+            <button class="btn-fire eng">EXECUTE PURCHASE</button>
+            <p style="text-align:center; margin-top:20px; font-size:0.8rem; color:#333;">Security Protocol: Reflection Shield Active [cite: 26-12-2025]</p>
         </div>
     </div>
 </section>
 
-<section class="stages-section">
-    <h2 style="font-family:'Orbitron'; font-size:3rem; text-align:center; margin-bottom:20px;">15 STAGES OF ASCENSION</h2>
-    <p style="text-align:center; color:#555;">The price increases automatically every stage until listing [cite: 25-12-2025].</p>
+<section class="stages-wrap">
+    <h2 class="eng" style="font-size:5rem; text-align:center; margin-bottom:100px;">THE 15 PHASES</h2>
     <div class="stages-grid" id="stagesContainer">
         </div>
 </section>
 
-<section class="leaderboard">
-    <h2 style="font-family:'Orbitron'; font-size:3rem; text-align:center;">TITAN 30 LEADERBOARD</h2>
-    <table class="titan-30-table">
-        <thead>
-            <tr>
-                <th>RANK</th>
-                <th>WALLET ADDRESS</th>
-                <th>X HOLDINGS</th>
-                <th>INVESTOR TIER</th>
-            </tr>
-        </thead>
-        <tbody id="leaderboardBody">
-            <tr class="gold-highlight">
-                <td>#1</td>
-                <td>0x71C94...A2B9</td>
-                <td>12,500,000 ARXN</td>
-                <td>SUPREME TITAN</td>
+<section class="titan-sec">
+    <div class="titan-header">
+        <h2 class="eng" style="font-size:4rem; color:var(--gold);">TITAN 30 PROTOCOL</h2>
+        <p style="color:#444;">مراقبة أكبر 30 محفظة في النظام السيادي [cite: 25-12-2025].</p>
+    </div>
+    <table class="titan-table">
+        <tbody id="titanBody">
+            <tr class="rank-gold">
+                <td class="eng">#01</td>
+                <td class="eng">0x71C9...A2B9</td>
+                <td class="eng">18,400,000 ARXN</td>
+                <td class="eng">SUPREME OVERLORD</td>
             </tr>
             </tbody>
     </table>
 </section>
 
-<section class="shield-section">
-    <h2 style="font-family:'Orbitron'; font-size:3.5rem;">THE REFLECTION SHIELD</h2>
-    <div class="shield-container">
-        <div class="shield-card"><h2>4%</h2><p>HOLDER REWARDS</p></div>
-        <div class="shield-card" style="border-color:var(--fire-orange)"><h2>2%</h2><p>NEURAL BUYBACK</p></div>
-        <div class="shield-card"><h2>2%</h2><p>AUTO LIQUIDITY</p></div>
-    </div>
-</section>
+<footer>
+    <div class="logo eng" style="font-size:4rem;">ARXION <span>X</span></div>
+    <p style="color:#333; margin-top:30px;">© 2025 Arxion Sovereign Systems. Autonomous AI Management.</p>
+</footer>
 
 <script>
-    /* --- LOGIC ENGINE --- */
-    
-    // 1. التوليد التلقائي لـ 15 مرحلة
-    const stagesGrid = document.getElementById('stagesContainer');
-    let basePrice = 0.0050;
+    // 1. Initialize Particles (The Pro Background)
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80 },
+            color: { value: '#7851A9' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.2 },
+            size: { value: 3 },
+            line_linked: { enable: true, distance: 150, color: '#FF4500', opacity: 0.1, width: 1 },
+            move: { enable: true, speed: 2 }
+        },
+        interactivity: { events: { onhover: { enable: true, mode: 'repulse' } } }
+    });
+
+    // 2. Generate 15 Stages (Professional Bulk Generation)
+    const stagesContainer = document.getElementById('stagesContainer');
+    let price = 0.0050;
     for(let i=1; i<=15; i++) {
-        const box = document.createElement('div');
-        box.className = stage-box ${i===1 ? 'active' : ''};
-        box.innerHTML = `
-            <h4>STAGE ${i < 10 ? '0'+i : i}</h4>
-            <div class="p-val">$${basePrice.toFixed(4)}</div>
-            <div style="height:3px; background:#111; margin-top:15px;">
-                <div style="width:${i===1?'65%':'0%'}; height:100%; background:var(--fire-orange);"></div>
-            </div>
-            <p style="font-size:0.6rem; color:#444; margin-top:10px;">${i===1?'ACTIVE':'LOCKED'}</p>
+        const stage = document.createElement('div');
+        stage.className = 'stage-box';
+        stage.innerHTML = `
+            <div class="stage-number eng">${i}</div>
+            <h3 class="eng" style="color:var(--orange)">PHASE ${i < 10 ? '0'+i : i}</h3>
+            <div class="eng" style="font-size:2.5rem; margin:20px 0;">$${price.toFixed(4)}</div>
+            <p style="color:#444;">${i === 1 ? 'CURRENT ACTIVE DECODING' : 'LOCKED BY TREASURY'}</p>
         `;
-        stagesGrid.appendChild(box);
-        basePrice += 0.0012;
+        stagesContainer.appendChild(stage);
+        price += 0.0025;
     }
 
-    // 2. حاسبة الأرباح والمشتريات
-    document.getElementById('buyAmt').oninput = function() {
-        document.getElementById('receiveAmt').value = (this.value / 0.0050).toFixed(2);
-    };
-
-    document.getElementById('calcInput').oninput = function() {
-        let amt = this.value || 0;
-        let finalPrice = 0.0050 + (14 * 0.0012);
-        let profit = (amt / 0.0050) * finalPrice;
-        document.getElementById('resultVal').innerText = '$' + profit.toLocaleString(undefined, {minimumFractionDigits: 2});
-    };
-
-    // 3. محاكاة لوحة المتصدرين Titan 30
-    const lb = document.getElementById('leaderboardBody');
-    for(let j=2; j<=10; j++) {
-        const row = <tr><td>#${j}</td><td>0x${Math.random().toString(16).slice(2,10)}...</td><td>${(10 - j) * 100000} ARXN</td><td>WHALE</td></tr>;
-        lb.innerHTML += row;
+    // 3. Titan 30 Mock Data
+    const tBody = document.getElementById('titanBody');
+    for(let j=2; j<=15; j++) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="eng">#${j < 10 ? '0'+j : j}</td>
+            <td class="eng">0x${Math.random().toString(16).slice(2,10)}...</td>
+            <td class="eng">${(20-j)*120000} ARXN</td>
+            <td class="eng" style="color:#333;">ELITE WHALE</td>
+        `;
+        tBody.appendChild(row);
     }
 
-    // 4. ربط المحفظة (Web3 Integration)
-    async function connectWallet() {
-        if (window.ethereum) {
-            try {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                alert("Wallet Connected: " + accounts[0]);
-            } catch (err) { alert("User denied connection"); }
-        } else { alert("Please install MetaMask!"); }
-    }
+    // 4. GSAP Animations for Scroll
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.stage-box').forEach(box => {
+        gsap.from(box, {
+            scrollTrigger: box,
+            opacity: 0,
+            y: 100,
+            duration: 1
+        });
+    });
 </script>
 
 </body>
