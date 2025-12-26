@@ -3,181 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arxion (ARXN) Official | The Fortress of Finance</title>
+    <title>Arxion (ARXN) | Official Presale</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 2. Visual Themes (Phosphor Green, Gray, Black Text) */
         :root {
-            --orange: #FF4500;
-            --purple: #6A0DAD;
-            --dark: #050505;
-            --card: #0d0d0d;
-            --gold: #FFD700;
-            --green: #00FF00;
+            --phosphor-green: #CCFF00; 
+            --bg-gray: #D1D1D1;
+            --panel-gray: #333333;
+            --text-black: #000000;
+            --text-white: #FFFFFF;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--dark); color: #fff; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; cursor: crosshair; }
-
-        /* 1. Clear Portal Gate */
-        #portal-overlay {
-            position: fixed; inset: 0; background: black; z-index: 10000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
+        body {
+            background-color: var(--bg-gray);
+            color: var(--text-black);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .portal-btn {
-            background: none; border: 4px double var(--purple); width: 200px; height: 200px;
-            border-radius: 50%; font-size: 100px; font-family: 'Orbitron';
-            color: var(--orange); cursor: pointer; transition: 0.5s;
-            box-shadow: 0 0 50px var(--purple); animation: pulse 2s infinite;
+        /* Layout */
+        header {
+            background: var(--panel-gray);
+            color: var(--phosphor-green);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .portal-btn:hover { box-shadow: 0 0 80px var(--orange); transform: scale(1.1); color: #fff; }
 
-        @keyframes pulse { 0% { box-shadow: 0 0 20px var(--purple); } 50% { box-shadow: 0 0 60px var(--orange); } 100% { box-shadow: 0 0 20px var(--purple); } }
-
-        /* General Layout */
-        .main-app { display: none; }
-        header { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; background: #000; }
-        .logo { font-family: 'Orbitron'; font-weight: bold; font-size: 1.8rem; letter-spacing: 5px; }
-        .btn-connect { background: var(--orange); color: #fff; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-
-        /* Presale Card */
-        .hero-section { padding: 60px 5%; text-align: center; }
-        .presale-card {
-            max-width: 500px; margin: 0 auto; background: var(--card); padding: 40px;
-            border: 2px solid var(--purple); border-radius: 20px; box-shadow: 0 0 30px rgba(106,13,173,0.2);
+        /* 3. Whitepaper Link */
+        .nav-links a {
+            color: var(--phosphor-green);
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 20px;
         }
-        .timer { font-size: 3rem; color: var(--gold); font-family: 'Orbitron'; margin: 20px 0; }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* 5 & 14. Timer and Underlined Progress Bar */
+        .timer-box {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 5px solid #ccc; /* Base line */
+            position: relative;
+        }
         
-        .progress-container { background: #222; border-radius: 10px; height: 20px; margin: 20px 0; overflow: hidden; }
-        .progress-bar { background: linear-gradient(to right, var(--orange), var(--purple)); width: 65%; height: 100%; }
+        /* The growing underline */
+        #progress-line {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            height: 5px;
+            background-color: var(--phosphor-green);
+            width: 0%; /* Increases with purchases */
+            transition: width 0.5s;
+        }
 
-        input, select { width: 100%; padding: 15px; margin: 10px 0; background: #1a1a1a; color: #fff; border: 1px solid #333; border-radius: 5px; }
-        .buy-now { width: 100%; padding: 18px; background: var(--orange); border: none; color: #fff; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .countdown {
+            font-size: 3rem;
+            font-weight: bold;
+            font-family: 'Courier New', monospace; /* 14. English Digits Only */
+        }
 
-        /* Tokenomics Table */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 50px 0; }
-        .stat-box { background: #111; padding: 25px; border-radius: 10px; border-top: 4px solid var(--orange); }
+        /* 4. Multi-Currency Purchase & 11. Wealth Tracker */
+        .buy-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-        /* Leaderboard */
-        .leaderboard { width: 100%; margin: 30px 0; border-collapse: collapse; text-align: left; }
-        .leaderboard th { color: var(--purple); padding: 15px; border-bottom: 2px solid #222; }
-        .leaderboard td { padding: 15px; border-bottom: 1px solid #111; }
-        .rank-1 { background: rgba(255, 215, 0, 0.1); border: 1px solid var(--gold); }
+        .input-group {
+            margin-bottom: 15px;
+        }
 
-        /* Footer / Team */
-        .team-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .member { background: #0a0a0a; padding: 20px; border-radius: 10px; width: 150px; border-bottom: 2px solid var(--orange); }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+        }
 
-        .solidproof-badge { border: 2px solid var(--green); color: var(--green); padding: 10px 20px; display: inline-block; margin: 20px 0; font-weight: bold; }
+        .wealth-display {
+            background: var(--panel-gray);
+            color: var(--phosphor-green);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        /* 12. Platform Icons */
+        .trust-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            filter: grayscale(1);
+        }
+        .trust-icons img { width: 50px; height: auto; }
+
+        /* 9. AI Support Chatbot */
+        #ai-bot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--phosphor-green);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 10. Graph */
+        #priceChart { max-height: 300px; }
     </style>
 </head>
 <body>
 
-<div id="portal-overlay">
-    <button class="portal-btn" onclick="enterSite()">X</button>
-    <p style="margin-top: 30px; font-family: 'Orbitron'; letter-spacing: 5px;">CLICK X TO ACCESS ARXION</p>
-</div>
+<header>
+    <div class="logo">ARXION (ARXN)</div>
+    <div class="nav-links">
+        <a href="whitepaper.pdf" target="_blank">Whitepaper</a>
+        <a href="#listing">Listing Plans</a>
+    </div>
+</header>
 
-<div class="main-app" id="app">
-    <header>
-        <div class="logo"><span style="color:var(--orange)">ARX</span><span style="color:var(--purple)">I</span>ON</div>
-        <button class="btn-connect">CONNECT WALLET</button>
-    </header>
+<div class="container">
+    <div class="timer-box">
+        <h2>Next Stage Reset In:</h2>
+        <div id="timer" class="countdown">23:59:59</div>
+        <p>Current Stage Price: <span id="current-stage-price">$0.005</span></p>
+        <div id="progress-line"></div>
+    </div>
 
-    <main class="hero-section">
-        <h1 style="font-family:'Orbitron'; font-size: 3rem; margin-bottom: 10px;">PRE-SALE IS <span style="color:var(--orange)">LIVE</span></h1>
-        <p style="color:#aaa; margin-bottom: 40px;">The most transparent self-deflating asset in the crypto space.</p>
-
-        <div class="presale-card">
-            <h3 style="color:var(--orange)">STAGE 1: $0.010</h3>
-            <div class="timer" id="timer">48:00:00</div>
-            
-            <p style="text-align: left; font-size: 0.9rem;">Stage Progress: 65% Sold</p>
-            <div class="progress-container">
-                <div class="progress-bar"></div>
+    <div class="buy-card">
+        <div>
+            <h3>Purchase ARXN</h3>
+            <div class="input-group">
+                <label>Select Currency:</label>
+                <select id="currency">
+                    <option value="BNB">BNB (Binance)</option>
+                    <option value="ETH">ETH (Ethereum)</option>
+                    <option value="SOL">SOL (Solana)</option>
+                    <option value="USDT">USDT (Tether)</option>
+                    <option value="USDC">USDC (USD Coin)</option>
+                </select>
             </div>
-
-            <select>
-                <option>USDT (ERC20)</option>
-                <option>BNB (BEP20)</option>
-                <option>SOLANA</option>
-            </select>
-            <input type="number" placeholder="Enter Amount" id="amount">
-            <button class="buy-now">BUY ARXN NOW</button>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-box"><h3>1 Billion</h3><p>Total Supply</p></div>
-            <div class="stat-box"><h3>2% Burn</h3><p>Per Transaction</p></div>
-            <div class="stat-box"><h3>15 Stages</h3><p>Pre-sale Growth</p></div>
-            <div class="stat-box"><h3>Liquidity</h3><p>Locked 2 Years</p></div>
-        </div>
-
-        <h2 style="font-family:'Orbitron'; margin: 50px 0 20px;">PRICE PROJECTION</h2>
-        <div style="max-width: 800px; margin: 0 auto;">
-            <canvas id="growthChart"></canvas>
-        </div>
-
-        <h2 style="font-family:'Orbitron'; color:var(--gold); margin: 60px 0 20px;">TITAN 30 LEADERBOARD</h2>
-        <table class="leaderboard">
-            <thead>
-                <tr><th>Rank</th><th>Address</th><th>Investment</th><th>Tier</th></tr>
-            </thead>
-            <tbody>
-                <tr class="rank-1"><td>#1</td><td>0x71...88f2</td><td>$250,500</td><td style="color:var(--gold)">TITAN WHALE</td></tr>
-                <tr><td>#2</td><td>0x44...11a9</td><td>$110,000</td><td>SHARK</td></tr>
-                <tr><td>#3</td><td>0x22...bb3c</td><td>$45,000</td><td>SHARK</td></tr>
-            </tbody>
-        </table>
-
-        <div style="margin-top: 80px;">
-            <div class="solidproof-badge">AUDITED & VERIFIED BY SOLIDPROOF</div>
-            <h2 style="font-family:'Orbitron'; margin: 40px 0 20px;">CORE TEAM</h2>
-            <div class="team-grid">
-                <div class="member"><h4>Aris Thorne</h4><small>Founder</small></div>
-                <div class="member"><h4>Xander Vance</h4><small>Lead Dev</small></div>
-                <div class="member"><h4>Luna Sterling</h4><small>Economics</small></div>
-                <div class="member"><h4>Kael Volt</h4><small>Design</small></div>
-                <div class="member"><h4>Nova Ray</h4><small>Growth</small></div>
+            <div class="input-group">
+                <label>Amount:</label>
+                <input type="number" id="buyAmount" placeholder="0.00" oninput="calculateTokens()">
             </div>
         </div>
-    </main>
+
+        <div class="wealth-display">
+            <h4>Your Investment Status</h4>
+            <p>Tokens to Receive: <span id="tokenCount">0</span> ARXN</p>
+            <p>Estimated Wealth (End of Stages): <span id="wealthValue">$0.00</span></p>
+            <small>* Wealth grows as we reach Stage 15 ($0.025)</small>
+        </div>
+    </div>
+
+    <h3 style="margin-top:40px;">Price Evolution (15 Stages)</h3>
+    <canvas id="priceChart"></canvas>
+
+    <div id="listing" style="margin-top:30px; font-size: 0.8rem; color: #666;">
+        <h4>CEX & DEX Future Listing</h4>
+        <p>Arxion (ARXN) is scheduled for listing on major decentralized and centralized exchanges post-presale. All roadmap activities are subject to market conditions and technical readiness.</p>
+    </div>
+
+    <div class="trust-icons">
+        <img src="https://via.placeholder.com/50?text=SP" alt="SolidProof">
+        <img src="https://via.placeholder.com/50?text=CG" alt="CoinGecko">
+        <img src="https://via.placeholder.com/50?text=CMC" alt="CoinMarketCap">
+    </div>
 </div>
+
+<div id="ai-bot">🤖</div>
 
 <script>
-    function enterSite() {
-        document.getElementById('portal-overlay').style.transform = 'translateY(-100%)';
-        document.getElementById('app').style.display = 'block';
+    // 6. 15 Stages Logic ($0.005 to $0.025)
+    const startPrice = 0.005;
+    const endPrice = 0.025;
+    const stages = 15;
+    let currentStage = 1;
+    let currentPrice = 0.005;
+
+    // 14. 24-Hour Timer (Resets daily)
+    function updateTimer() {
+        const now = new Date();
+        const reset = new Date();
+        reset.setHours(24, 0, 0, 0);
+        let diff = reset - now;
+
+        let h = Math.floor(diff / 3600000).toString().padStart(2, '0');
+        let m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+        let s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+        
+        document.getElementById('timer').innerText = ${h}:${m}:${s};
+    }
+    setInterval(updateTimer, 1000);
+
+    // 11. Wealth Calculation
+    function calculateTokens() {
+        let amount = document.getElementById('buyAmount').value;
+        let tokens = amount / currentPrice; // Simplified logic
+        document.getElementById('tokenCount').innerText = tokens.toFixed(2);
+        
+        // Wealth at Stage 15 ($0.025)
+        let wealth = tokens * 0.025;
+        document.getElementById('wealthValue').innerText = "$" + wealth.toFixed(2);
+        
+        // 14. Increase underline progress (Simulated)
+        let progress = (amount > 100) ? 100 : amount; 
+        document.getElementById('progress-line').style.width = progress + "%";
     }
 
-    // 48h Countdown
-    let time = 172800;
-    setInterval(() => {
-        time--;
-        let h = Math.floor(time / 3600);
-        let m = Math.floor((time % 3600) / 60);
-        let s = time % 60;
-        document.getElementById('timer').innerText = h + ":" + m + ":" + s;
-        if(time <= 0) time = 172800;
-    }, 1000);
+    // 8. Burn Mechanism (Logic Concept)
+    function checkBurn(price) {
+        if (price < 0.01) {
+            console.log("Automatic 2% Burn Initiated to protect floor price.");
+        }
+    }
 
-    // Chart
-    const ctx = document.getElementById('growthChart').getContext('2d');
+    // 10. Chart.js Implementation
+    const ctx = document.getElementById('priceChart').getContext('2d');
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['S1', 'S5', 'S10', 'S15', 'LISTING'],
+            labels: Array.from({length: 15}, (_, i) => "Stage " + (i + 1)),
             datasets: [{
                 label: 'ARXN Price ($)',
-                data: [0.01, 0.15, 0.45, 0.90, 1.50],
-                borderColor: '#FF4500',
-                backgroundColor: 'rgba(106, 13, 173, 0.2)',
+                data: [0.005, 0.0064, 0.0078, 0.0092, 0.0106, 0.012, 0.0134, 0.0148, 0.0162, 0.0176, 0.019, 0.0204, 0.0218, 0.0232, 0.025],
+                borderColor: '#CCFF00',
+                backgroundColor: 'rgba(204, 255, 0, 0.1)',
                 fill: true
             }]
-        },
-        options: { color: '#fff' }
+        }
     });
 </script>
 
