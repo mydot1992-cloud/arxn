@@ -5,81 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arxion (ARXN) | The Self-Decoding Asset</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --orange: #FF4500;
             --purple: #6A0DAD;
-            --dark-bg: #050505;
-            --card-bg: #0d0d0d;
+            --dark: #000000;
+            --card: #0a0a0a;
             --gold: #FFD700;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--dark-bg);
-            color: #ffffff…
-[10:29 am, 26/12/2025] 😤: 🫩🥳🫩🥳
-[10:29 am, 26/12/2025] 😤: <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arxion (ARXN) | Pure English</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --orange: #FF4500; --purple: #6A0DAD; --dark: #000; --gold: #FFD700; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* Fixed Cursor Layer */
+            background-color: var(--dark);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            cursor: none; /* Custom cursor is handled by JS */
+        }
+
+        /* 19. Custom Cursor Effect */
         #cursor-glow {
-            position: fixed; width: 20px; height: 20px; background: var(--orange);
-            border-radius: 50%; pointer-events: none; z-index: 99999;
-            mix-blend-mode: screen; display: flex; align-items: center; justify-content: center;
+            position: fixed; width: 15px; height: 15px; background: var(--orange);
+            border-radius: 50%; pointer-events: none; z-index: 100000;
+            mix-blend-mode: screen; transition: transform 0.1s ease;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Orbitron'; font-weight: bold; font-size: 12px;
         }
 
-        body { background: var(--dark); color: white; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
-
-        /* 1. Improved Portal Gate */
+        /* 1. Portal Entrance Gate */
         #portal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 10000;
-            transition: opacity 1s ease, visibility 1s;
+            position: fixed; inset: 0; background: black;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; z-index: 9999; transition: 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .glow-x {
-            font-size: 150px; font-family: 'Orbitron'; color: var(--purple);
-            text-shadow: 0 0 30px var(--purple), 0 0 60px var(--orange);
-            cursor: pointer; pointer-events: all; /* Force click to work */
-            animation: pulseX 2s infinite; transition: 0.3s;
+        .glow-x-btn {
+            background: none; border: none; font-size: 160px; font-family: 'Orbitron';
+            color: var(--purple); text-shadow: 0 0 30px var(--purple), 0 0 60px var(--orange);
+            cursor: pointer; transition: 0.4s; z-index: 10001;
         }
-        .glow-x:hover { transform: scale(1.2); filter: brightness(1.5); }
 
-        @keyframes pulseX { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .glow-x-btn:hover { transform: scale(1.1); filter: brightness(1.3); }
 
-        /* Main Site Content - Hidden initially */
-        header, main { opacity: 0; transition: 1s; }
-        .site-visible header, .site-visible main { opacity: 1; }
+        .site-content { opacity: 0; filter: blur(10px); transition: 1.5s ease; pointer-events: none; }
+        .active-site .site-content { opacity: 1; filter: blur(0); pointer-events: all; }
+        .active-site #portal-overlay { opacity: 0; visibility: hidden; }
 
-        header { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--purple); background: #050505; }
-        .logo { font-family: 'Orbitron'; font-weight: bold; font-size: 1.8rem; letter-spacing: 3px; }
-        .btn-connect { background: linear-gradient(45deg, var(--orange), var(--purple)); color: white; border: none; padding: 10px 25px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        /* Header */
+        header {
+            padding: 20px 6%; display: flex; justify-content: space-between;
+            align-items: center; border-bottom: 1px solid rgba(106, 13, 173, 0.5);
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100;
+        }
 
-        .presale-card { max-width: 500px; margin: 50px auto; background: #0d0d0d; padding: 40px; border-radius: 15px; border: 1px solid var(--purple); text-align: center; }
-        .timer { font-size: 3rem; color: var(--gold); font-family: 'Orbitron'; margin: 20px 0; }
-        
-        input, select { width: 100%; padding: 12px; margin: 10px 0; background: #1a1a1a; color: white; border: 1px solid #333; border-radius: 5px; }
-        .buy-btn { width: 100%; padding: 15px; background: var(--orange); border: none; color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; margin-top: 10px; }
+        .logo { font-family: 'Orbitron'; font-size: 1.8rem; letter-spacing: 5px; font-weight: bold; }
+        .btn-main {
+            background: linear-gradient(45deg, var(--orange), var(--purple));
+            color: white; border: none; padding: 12px 28px; border-radius: 4px;
+            font-weight: bold; cursor: pointer; font-family: 'Orbitron';
+            transition: 0.3s; box-shadow: 0 0 15px rgba(255, 69, 0, 0.3);
+        }
 
-        .leaderboard { width: 90%; margin: 50px auto; border-collapse: collapse; }
-        .leaderboard th, .leaderboard td { padding: 15px; border-bottom: 1px solid #222; text-align: left; }
-        .gold-row { background: rgba(255, 215, 0, 0.1); border: 1px solid var(--gold); }
+        /* Presale Module */
+        .presale-card {
+            max-width: 520px; margin: 60px auto; background: var(--card);
+            padding: 40px; border-radius: 24px; border: 1px solid var(--purple);
+            box-shadow: 0 0 40px rgba(106, 13, 173, 0.15); text-align: center;
+        }
 
-        .team-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 50px; }
-        .member { background: #111; padding: 20px; border-radius: 10px; border-bottom: 3px solid var(--orange); width: 180px; text-align: center; }
+        .timer { font-size: 3.2rem; color: var(--gold); font-family: 'Orbitron'; margin: 20px 0; letter-spacing: 2px; }
+
+        .input-group { position: relative; margin-bottom: 20px; }
+        input, select {
+            width: 100%; padding: 15px; background: #111; border: 1px solid #333;
+            color: white; border-radius: 8px; font-family: 'Rajdhani'; font-size: 1.1rem;
+        }
+
+        .max-tag {
+            position: absolute; right: 15px; top: 16px; color: var(--orange);
+            font-weight: bold; font-size: 0.8rem; cursor: pointer;
+        }
+
+        .buy-now {
+            width: 100%; padding: 18px; background: var(--orange); color: white;
+            border: none; border-radius: 8px; font-family: 'Orbitron'; font-weight: bold;
+            font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+        }
+
+        /* 14. Leaderboard */
+        .leaderboard { width: 100%; margin-top: 40px; border-collapse: collapse; text-align: left; }
+        .leaderboard th { padding: 12px; border-bottom: 1px solid #333; color: var(--orange); }
+        .leaderboard td { padding: 16px; border-bottom: 1px solid #111; }
+        .titan-row { background: rgba(255, 215, 0, 0.08); border: 1px solid var(--gold); }
+
+        /* Team */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 40px; }
+        .member { background: #0a0a0a; padding: 25px; border-radius: 12px; border-bottom: 3px solid var(--purple); text-align: center; }
+
+        /* Notification */
+        #toast {
+            position: fixed; bottom: 20px; left: 20px; background: #111;
+            padding: 15px 25px; border-radius: 8px; border-left: 4px solid var(--orange);
+            display: none; z-index: 1000; animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
     </style>
 </head>
 <body>
@@ -87,71 +120,108 @@
 <div id="cursor-glow"></div>
 
 <div id="portal-overlay">
-    <div class="glow-x" id="gateButton">X</div>
-    <p style="margin-top: 30px; letter-spacing: 5px; font-family: 'Orbitron';">CLICK X TO ENTER</p>
+    <button class="glow-x-btn" onclick="unlockFortress()">X</button>
+    <p style="margin-top: 20px; letter-spacing: 10px; font-family: 'Orbitron'; font-size: 0.8rem; color: #555;">DECODE TO ENTER</p>
 </div>
 
-<header>
-    <div class="logo"><span style="color:var(--orange)">ARX</span><span style="color:var(--purple)">I</span>ON</div>
-    <button class="btn-connect">CONNECT WALLET</button>
-</header>
+<div class="site-content">
+    <header>
+        <div class="logo"><span style="color:var(--orange)">ARX</span><span style="color:var(--purple)">I</span>ON</div>
+        <button class="btn-main">CONNECT WALLET</button>
+    </header>
 
-<main>
-    <div style="text-align:center; padding-top: 50px;">
-        <h1 style="font-family:'Orbitron'; font-size: 3rem;">ARXION <span style="color:var(--orange)">PRE-SALE</span></h1>
-        
-        <div class="presale-card">
-            <h3 style="color:var(--orange)">STAGE 1 OF 15</h3>
-            <div class="timer" id="timer">48:00:00</div>
-            
-            <select>
-                <option>USDT (ERC20)</option>
-                <option>BNB (Smart Chain)</option>
-                <option>SOLANA</option>
-            </select>
-            <input type="number" placeholder="Enter Amount">
-            <button class="buy-btn">PURCHASE NOW</button>
-        </div>
+    <main style="padding: 0 6%;">
+        <section style="text-align: center; padding: 80px 0;">
+            <h1 style="font-family: 'Orbitron'; font-size: 3.5rem; line-height: 1;">ARXION <span style="color:var(--orange)">PRE-SALE</span></h1>
+            <p style="margin-top: 15px; font-size: 1.3rem; color: #aaa;">Secure your position in the <span style="color:var(--purple)">Reflection Shield</span> protocol.</p>
 
-        <div style="max-width: 800px; margin: 0 auto; padding: 40px;">
-            <h2 style="color:var(--purple); font-family:'Orbitron'">MARKET GROWTH</h2>
-            <canvas id="growthChart"></canvas>
-        </div>
+            <div class="presale-card">
+                <h3 style="color: var(--orange); font-family: 'Orbitron'; font-size: 1.1rem;">STAGE 1 OF 15</h3>
+                <div class="timer" id="countdown">48:00:00</div>
+                
+                <div class="input-group">
+                    <select>
+                        <option>USDT (ERC20)</option>
+                        <option>BNB (BEP20)</option>
+                        <option>SOLANA</option>
+                        <option>ETHEREUM</option>
+                    </select>
+                </div>
 
-        <h2 style="color:var(--gold); font-family:'Orbitron'">TITAN 30 LEADERBOARD</h2>
-        <table class="leaderboard">
-            <tr class="gold-row"><td>#1</td><td>0x71...88a</td><td>$250,000</td><td style="color:var(--gold)">TITAN WHALE</td></tr>
-            <tr><td>#2</td><td>0x32...11b</td><td>$125,000</td><td>SHARK</td></tr>
-        </table>
+                <div class="input-group">
+                    <input type="number" id="buyIn" placeholder="0.00">
+                    <span class="max-tag" onclick="setMax()">MAX</span>
+                </div>
 
-        <div class="team-grid">
-            <div class="member"><h4>Aris Thorne</h4><p>Founder</p></div>
-            <div class="member"><h4>Xander Vance</h4><p>Security</p></div>
-            <div class="member"><h4>Luna Sterling</h4><p>Economist</p></div>
-            <div class="member"><h4>Kael Volt</h4><p>Dev</p></div>
-            <div class="member"><h4>Nova Ray</h4><p>Growth</p></div>
-        </div>
-    </div>
-</main>
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">You receive: <span id="arxOut" style="color:var(--orange); font-weight:bold;">0.00</span> ARXN</p>
+                <button class="buy-now">PURCHASE NOW</button>
+
+                <div style="margin-top: 25px; text-align: left; font-size: 0.9rem; color: #777; border-top: 1px solid #222; padding-top: 20px;">
+                    <p>Wallet Balance: <span style="color:var(--gold)">0.00</span></p>
+                    <p>Current Status: <span style="color:var(--purple)">Pending Connection</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 60px 0;">
+            <h2 style="font-family:'Orbitron'; color:var(--orange); text-align:center; margin-bottom: 40px;">PRICE GROWTH PROJECTION</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section style="padding: 80px 0; border-top: 1px solid #111; text-align: center;">
+            <h2 style="font-family:'Orbitron'; color:var(--purple);">TECHNICAL PROTOCOL</h2>
+            <p style="max-width: 750px; margin: 20px auto; color: #999; line-height: 1.8;">
+                Arxion (ARXN) operates on a self-burning mechanism where 2% of transaction volume is permanently removed from supply. 
+                Our 15-stage sale architecture ensures a price floor increase of 15% per stage. 
+                Full transparency via <strong>SolidProof Audit</strong>.
+            </p>
+            <div style="border: 2px solid #00ff00; color: #00ff00; padding: 10px 30px; display: inline-block; border-radius: 50px; font-weight: bold; margin-top: 20px;">
+                AUDITED BY SOLIDPROOF
+            </div>
+        </section>
+
+        <section style="padding: 60px 0;">
+            <h2 style="font-family:'Orbitron'; color:var(--gold); margin-bottom: 30px;">TITAN 30 LEADERBOARD</h2>
+            <table class="leaderboard">
+                <thead>
+                    <tr><th>Rank</th><th>Wallet ID</th><th>Invested</th><th>Rank</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="titan-row"><td>#1</td><td>0x71...88f2</td><td>$250,500</td><td style="color:var(--gold); font-weight:bold;">TITAN WHALE</td></tr>
+                    <tr><td>#2</td><td>0x44...11a9</td><td>$110,000</td><td>SHARK</td></tr>
+                    <tr><td>#3</td><td>0x22...bb3c</td><td>$45,000</td><td>SHARK</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section style="padding: 80px 0;">
+            <h2 style="font-family:'Orbitron'; color:var(--purple); text-align: center;">THE ARCHITECTS</h2>
+            <div class="team-grid">
+                <div class="member"><h4>Aris Thorne</h4><p style="color:var(--orange); font-size: 0.8rem;">Founder</p></div>
+                <div class="member"><h4>Xander Vance</h4><p style="color:var(--orange); font-size: 0.8rem;">Lead Dev</p></div>
+                <div class="member"><h4>Luna Sterling</h4><p style="color:var(--orange); font-size: 0.8rem;">Economist</p></div>
+                <div class="member"><h4>Kael Volt</h4><p style="color:var(--orange); font-size: 0.8rem;">Design</p></div>
+                <div class="member"><h4>Nova Ray</h4><p style="color:var(--orange); font-size: 0.8rem;">Growth</p></div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div id="toast">🚀 Someone just bought 10,000 ARXN!</div>
 
 <script>
-    // Logic to Enter Site
-    const gate = document.getElementById('gateButton');
-    const overlay = document.getElementById('portal-overlay');
-    
-    gate.onclick = function() {
-        overlay.style.opacity = '0';
-        setTimeout(() => {
-            overlay.style.visibility = 'hidden';
-            document.body.classList.add('site-visible');
-        }, 1000);
-    };
+    // Unlock Logic
+    function unlockFortress() {
+        document.body.classList.add('active-site');
+    }
 
-    // Cursor Effect
+    // Cursor Follower
     const glow = document.getElementById('cursor-glow');
     document.addEventListener('mousemove', (e) => {
-        glow.style.left = e.clientX - 10 + 'px';
-        glow.style.top = e.clientY - 10 + 'px';
+        glow.style.left = e.clientX - 7 + 'px';
+        glow.style.top = e.clientY - 7 + 'px';
         glow.innerHTML = ""; glow.style.background = "var(--orange)";
     });
 
@@ -160,29 +230,57 @@
         clearTimeout(stopTimer);
         stopTimer = setTimeout(() => {
             glow.innerHTML = "X"; glow.style.background = "transparent";
-            glow.style.color = "var(--purple)"; glow.style.fontWeight = "bold";
+            glow.style.color = "var(--purple)";
         }, 800);
     });
 
-    // 48h Timer
-    let t = 172800;
+    // Countdown Timer (48h)
+    let time = 172800;
     setInterval(() => {
-        t--;
-        let h = Math.floor(t/3600);
-        let m = Math.floor((t%3600)/60);
-        let s = t%60;
-        document.getElementById('timer').innerText = h + ":" + m + ":" + s;
+        time--;
+        let h = Math.floor(time / 3600);
+        let m = Math.floor((time % 3600) / 60);
+        let s = time % 60;
+        document.getElementById('countdown').innerText = 
+            ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')};
+        if(time <= 0) time = 172800;
     }, 1000);
 
-    // Chart
-    new Chart(document.getElementById('growthChart'), {
+    // Chart Logic
+    const ctx = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['S1', 'S5', 'S10', 'S15', 'List'],
-            datasets: [{ label: 'ARXN Price', data: [0.01, 0.1, 0.4, 0.9, 1.5], borderColor: '#FF4500', fill: true, backgroundColor: 'rgba(106,13,173,0.2)' }]
+            labels: ['Stage 1', 'Stage 5', 'Stage 10', 'Stage 15', 'LISTING'],
+            datasets: [{
+                label: 'ARXN Price ($)',
+                data: [0.01, 0.12, 0.45, 0.95, 1.55],
+                borderColor: '#FF4500',
+                backgroundColor: 'rgba(106, 13, 173, 0.2)',
+                fill: true,
+                tension: 0.4
+            }]
         },
-        options: { color: '#fff' }
+        options: { responsive: true, plugins: { legend: { labels: { color: "#fff" } } } }
     });
+
+    // Buy Input Logic
+    document.getElementById('buyIn').addEventListener('input', (e) => {
+        let val = e.target.value;
+        document.getElementById('arxOut').innerText = (val * 100).toLocaleString();
+    });
+
+    function setMax() {
+        document.getElementById('buyIn').value = 5000;
+        document.getElementById('arxOut').innerText = "500,000";
+    }
+
+    // Notifications
+    setInterval(() => {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 4000);
+    }, 18000);
 </script>
 
 </body>
