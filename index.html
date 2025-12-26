@@ -3,190 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arxion (ARXN) | The Billion Asset</title>
+    <title>Arxion (ARXN) | The Sovereign Monster</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root {
-            --fire-orange: #FF4500;
-            --royal-purple: #7851A9;
-            --dark-bg: #050505;
-            --gold: #FFD700;
-        }
-
-        body, html {
-            margin: 0; padding: 0; font-family: 'Orbitron', sans-serif;
-            background-color: var(--dark-bg); color: white; overflow-x: hidden; scroll-behavior: smooth;
-        }
-
-        /* 1. X-Portal Gateway (بوابة الدخول) */
-        #portal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--dark-bg); display: flex; justify-content: center;
-            align-items: center; z-index: 10000; transition: 1s ease-in-out;
-        }
-        .portal-x {
-            font-size: 250px; font-weight: bold; color: var(--royal-purple);
-            cursor: pointer; text-shadow: 0 0 60px var(--royal-purple);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-
-        /* Navigation */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5%; background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--royal-purple);
-        }
-        .logo { font-size: 30px; font-weight: 900; color: var(--fire-orange); }
-        .logo span { color: var(--royal-purple); }
-
-        /* Main Section */
-        .container { padding: 40px 5%; }
-        .hero-flex { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+        :root { --fire: #FF4500; --purple: #7851A9; --gold: #FFD700; --bg: #000; }
+        body, html { margin: 0; padding: 0; overflow-x: hidden; background: var(--bg); font-family: 'Orbitron', sans-serif; color: white; scroll-behavior: smooth; }
         
-        .presale-card {
-            background: rgba(255,255,255,0.03); padding: 40px; border-radius: 25px;
-            border: 2px solid var(--royal-purple); width: 450px; backdrop-filter: blur(10px);
-        }
+        /* 1. 3D Background */
+        #canvas-container { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; }
+        .content-layer { position: relative; z-index: 10; pointer-events: none; }
+        .interactive { pointer-events: auto; }
 
-        /* 6. Professional Countdown (48 Hours) */
-        .timer-box {
-            text-align: center; border: 2px solid var(--fire-orange);
-            padding: 20px; border-radius: 15px; margin-bottom: 25px;
-        }
-        #timer { font-size: 28px; font-weight: bold; color: var(--fire-orange); }
+        /* 2. X Portal */
+        #portal { position: fixed; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 10000; transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1); }
+        .x-gate { font-size: 200px; color: var(--purple); cursor: pointer; text-shadow: 0 0 50px var(--purple); font-weight: 900; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
 
-        /* Listing Partners */
-        .exchange-row { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 30px; }
-        .exchange-row span {
-            padding: 10px 15px; border: 1px solid #333; border-radius: 8px; font-size: 11px; font-weight: bold;
-        }
+        /* 3. Navigation & Header */
+        nav { padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(120, 81, 169, 0.3); }
+        .logo { font-size: 32px; font-weight: 900; color: var(--fire); letter-spacing: 3px; }
+        .logo span { color: var(--purple); }
 
-        /* 3. Team (Ali Younis) */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 30px; }
-        .team-member { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #222; }
-        .founder-card { border: 2px solid var(--gold) !important; background: rgba(255, 215, 0, 0.05); }
+        /* 4. 15 Stages Progress */
+        .stages-bar { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid var(--purple); margin: 30px 5%; backdrop-filter: blur(10px); }
+        .track { background: #111; height: 12px; border-radius: 20px; margin: 20px 0; overflow: hidden; border: 1px solid #333; }
+        .fill { width: 6.66%; height: 100%; background: linear-gradient(90deg, var(--purple), var(--fire)); box-shadow: 0 0 20px var(--fire); }
 
-        /* 14. Titan 30 */
-        .titan-table { width: 100%; border-collapse: collapse; margin-top: 50px; }
-        .titan-table th { background: var(--royal-purple); padding: 15px; text-align: left; }
+        /* 5. Buying & Coins Section */
+        .hero-flex { display: flex; flex-wrap: wrap; gap: 40px; padding: 40px 5%; justify-content: space-between; }
+        .buy-card { background: rgba(0,0,0,0.8); border: 2px solid var(--purple); padding: 35px; border-radius: 30px; width: 420px; box-shadow: 0 0 40px rgba(120, 81, 169, 0.2); }
+        .timer-box { font-size: 35px; color: var(--fire); text-align: center; font-weight: bold; border: 1px solid #222; padding: 15px; border-radius: 15px; margin-bottom: 20px; }
+        
+        /* Currency Icons Selector */
+        .coin-selector { display: flex; gap: 10px; margin: 20px 0; }
+        .coin-btn { flex: 1; background: #111; border: 1px solid #333; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .coin-btn img { width: 30px; margin-bottom: 5px; }
+        .coin-btn.active { border-color: var(--fire); background: rgba(255, 69, 0, 0.15); box-shadow: 0 0 15px var(--fire); }
+
+        /* 6. Monastery Box (The Core) */
+        .monastery { text-align: center; padding: 80px 5%; background: radial-gradient(circle, rgba(120,81,169,0.1) 0%, transparent 70%); }
+        .core-x { width: 120px; height: 120px; border: 3px solid var(--gold); border-radius: 50%; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 60px; color: var(--gold); box-shadow: 0 0 30px var(--gold); animation: spin 15s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* 7. Whitepaper Files */
+        .wp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; padding: 50px 5%; }
+        .wp-file { background: rgba(255,255,255,0.02); padding: 30px; border-radius: 15px; border: 1px solid #222; transition: 0.4s; }
+        .wp-file:hover { border-color: var(--fire); transform: translateY(-10px); }
+        .wp-file i { font-size: 40px; color: var(--purple); margin-bottom: 15px; }
+
+        /* 8. Titan 30 Table */
+        .titan-table { width: 100%; border-collapse: collapse; background: rgba(0,0,0,0.6); }
+        .titan-table th { background: var(--purple); padding: 15px; text-align: left; }
         .titan-table td { padding: 15px; border-bottom: 1px solid #222; }
-        .rank-1 { background: rgba(255, 215, 0, 0.1); color: var(--gold); border: 2px solid var(--gold); }
+        .rank-1 { background: rgba(255, 215, 0, 0.1); color: var(--gold); border: 2px solid var(--gold); font-weight: bold; }
 
-        #notif {
-            position: fixed; bottom: 20px; left: 20px; background: #000; border-left: 5px solid var(--fire-orange);
-            padding: 20px; border-radius: 10px; display: none; z-index: 9999;
-        }
+        /* Platform Icons */
+        .partners { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 40px 5%; opacity: 0.6; }
+        .partners img { width: 40px; filter: grayscale(1); transition: 0.3s; }
+        .partners img:hover { filter: grayscale(0); transform: scale(1.2); }
 
-        .buy-btn {
-            width: 100%; padding: 18px; border: none; border-radius: 12px;
-            background: linear-gradient(45deg, var(--fire-orange), var(--royal-purple));
-            color: white; font-weight: bold; font-size: 20px; cursor: pointer; margin-top: 15px;
-        }
+        input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: white; border-radius: 10px; box-sizing: border-box; }
+        .btn-royal { width: 100%; padding: 20px; background: linear-gradient(45deg, var(--fire), var(--purple)); border: none; border-radius: 15px; color: white; font-weight: bold; font-size: 20px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div id="portal-overlay" onclick="this.style.opacity='0'; setTimeout(()=>this.style.display='none', 1000)">
-    <div class="portal-x">X</div>
+<div id="canvas-container"></div>
+
+<div id="portal" class="interactive" onclick="this.style.opacity='0'; setTimeout(()=>this.style.display='none', 1200)">
+    <div class="x-gate">X</div>
 </div>
 
-<nav>
-    <div class="logo">ARX<span>ION</span></div>
-    <button class="buy-btn" style="width:auto; padding: 10px 20px; font-size: 14px; margin:0;">CONNECT WALLET</button>
-</nav>
+<div class="content-layer">
+    <nav class="interactive">
+        <div class="logo">ARX<span>ION</span></div>
+        <div style="color: var(--gold); font-size: 14px;">1,000,000,000 ARXN</div>
+    </nav>
 
-<div class="container">
+    <div class="stages-bar interactive">
+        <div style="display: flex; justify-content: space-between;">
+            <h2 style="margin: 0; color: var(--gold);">PRE-SALE STAGE 1/15</h2>
+            <span style="color: var(--fire); font-weight: bold;">$0.001 → LAUNCH $0.15</span>
+        </div>
+        <div class="track"><div class="fill"></div></div>
+    </div>
+
     <div class="hero-flex">
-        <div style="flex: 1;">
-            <h1 style="font-size: 50px;">Arxion: The <span style="color:var(--fire-orange)">1 Billion</span> Supply</h1>
-            <p style="color: #aaa;">The Reflection Shield. Stage 1/15 is Active.</p>
-            <canvas id="chart" style="max-height: 250px; margin-top: 30px;"></canvas>
-
-            <h3 style="margin-top: 40px; color: var(--gold);">EXCHANGE NEGOTIATIONS</h3>
-            <div class="exchange-row">
-                <span style="color:#ff007a; border-color:#ff007a;">UNISWAP</span>
-                <span style="color:#00DBFF; border-color:#00DBFF;">OKX</span>
-                <span style="color:#1FC7D4; border-color:#1FC7D4;">MEXC</span>
-                <span style="color:#0052FF; border-color:#0052FF;">LBANK</span>
-                <span>BINANCE</span>
-                <span>COINMARKETCAP</span>
+        <div style="flex: 1; min-width: 350px;">
+            <h1 style="font-size: 55px; line-height: 1.1;">The Billion <br><span style="color: var(--fire);">Reflection Shield</span></h1>
+            <p style="color: #888;">Locked by The Shadow Architects: X-PHANTOM, ZERO-KUL, VOX-7, CYPHER-KNIGHT, AETHER-X.</p>
+            
+            <h3 style="margin-top: 40px;">EXCHANGE NEGOTIATIONS</h3>
+            <div class="partners interactive">
+                <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png">
+                <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png">
+                <img src="https://cryptologos.cc/logos/okb-okb-logo.png">
+                <img src="https://www.lbank.com/favicon.ico">
+                <img src="https://cryptologos.cc/logos/coinmarketcap-cmc-logo.png">
             </div>
         </div>
 
-        <div class="presale-card">
-            <div class="timer-box">
-                <small>PRICE INCREASE IN</small>
-                <div id="timer">00d : 00h : 00m : 00s</div>
+        <div class="buy-card interactive">
+            <div class="timer-box" id="timer">48:00:00</div>
+            <p style="font-size: 11px; text-align: center; color: #666; margin-top: -15px;">PRICE INCREASES EVERY 48H</p>
+            
+            <div class="coin-selector">
+                <div class="coin-btn active" onclick="sel(this)"><img src="https://cryptologos.cc/logos/tether-usdt-logo.png"><br><span>USDT</span></div>
+                <div class="coin-btn" onclick="sel(this)"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png"><br><span>ETH</span></div>
+                <div class="coin-btn" onclick="sel(this)"><img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png"><br><span>BNB</span></div>
             </div>
-            <label>Select Currency:</label>
-            <select style="width:100%; margin-bottom:15px;"><option>USDT (Tether)</option><option>BNB</option><option>ETH</option></select>
-            <input type="number" id="amt" placeholder="Amount" style="width:100%; box-sizing:border-box;" oninput="calc()">
-            <button class="buy-btn" onclick="alert('Connecting to Arxion Network...')">BUY ARXN</button>
-            <div id="res" style="margin-top:20px; display:none; padding:15px; background:rgba(0,0,0,0.5); border-radius:10px;">
-                <p>Receiving: <span id="coins" style="color:var(--fire-orange)"></span> ARXN</p>
-                <p>Listing Wealth: <span id="wealth" style="color:var(--gold)"></span></p>
-            </div>
+            
+            <input type="number" placeholder="Enter Amount">
+            <button class="btn-royal" onclick="alert('Securing Gateway...')">BUY ARXN NOW</button>
         </div>
     </div>
 
-    <h2 style="margin-top:80px; text-align:center; color:var(--royal-purple);">CORE TEAM</h2>
-    <div class="team-grid">
-        <div class="team-member founder-card"><h4>Ali Younis</h4><p>Co-Founder</p></div>
-        <div class="team-member"><h4>Alex Thorne</h4><p>Lead Dev</p></div>
-        <div class="team-member"><h4>Elena Vance</h4><p>Security</p></div>
-        <div class="team-member"><h4>Marcus Kross</h4><p>Treasury</p></div>
+    <div class="monastery interactive">
+        <div class="core-x">X</div>
+        <h2 style="letter-spacing: 10px;">THE MONASTERY BOX</h2>
+        <p style="color: #666; max-width: 700px; margin: 0 auto;">The Neural Treasury protecting the 1,000,000,000 assets via Genetic Code Intelligence.</p>
     </div>
 
-    <h2 style="margin-top:100px; color:var(--gold);">TITAN 30 LEADERBOARD</h2>
-    <table class="titan-table">
-        <thead><tr><th>Rank</th><th>Wallet</th><th>Investment</th><th>Tier</th></tr></thead>
-        <tbody id="titan-body"></tbody>
-    </table>
+    <div class="wp-grid interactive">
+        <div class="wp-file"><i class="fas fa-file-invoice"></i><h4>Architecture</h4><p>Reflection Shield Protocol & Security.</p></div>
+        <div class="wp-file"><i class="fas fa-chart-line"></i><h4>Tokenomics</h4><p>15 Stages Breakdown & Price Logic.</p></div>
+        <div class="wp-file"><i class="fas fa-shield-alt"></i><h4>Legal</h4><p>Shadow Architects Compliance.</p></div>
+    </div>
+
+    <div style="padding: 50px 5%;" class="interactive">
+        <h2 style="color: var(--gold); text-align: center; letter-spacing: 5px;">TITAN 30 LEADERBOARD</h2>
+        <table class="titan-table">
+            <thead><tr><th>Rank</th><th>Investor</th><th>Amount</th><th>Tier</th></tr></thead>
+            <tbody id="titan-body"></tbody>
+        </table>
+    </div>
 </div>
-
-<div id="notif"></div>
 
 <script>
-    // 6. Countdown 48h
+    // 3D Engine (Particles)
+    let scene, camera, renderer, system;
+    let mX = 0, mY = 0, tX = 0, tY = 0;
+
+    function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        const geo = new THREE.BufferGeometry();
+        const counts = 3500;
+        const pos = new Float32Array(counts * 3);
+        for(let i=0; i<counts*3; i++) pos[i] = (Math.random() - 0.5) * 15;
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        const mat = new THREE.PointsMaterial({ color: 0x7851A9, size: 0.02, transparent: true });
+        system = new THREE.Points(geo, mat);
+        scene.add(system);
+        camera.position.z = 5;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        mX = (e.clientX - window.innerWidth / 2) / 200;
+        mY = (e.clientY - window.innerHeight / 2) / 200;
+    });
+
+    function anim() {
+        requestAnimationFrame(anim);
+        tX += (mX - tX) * 0.05; tY += (mY - tY) * 0.05;
+        system.rotation.y += 0.001;
+        system.rotation.x = -tY; system.rotation.y = tX;
+        renderer.render(scene, camera);
+    }
+    init(); anim();
+
+    // Timer Logic
     setInterval(() => {
         const cycle = 48 * 3600 * 1000;
         const d = cycle - (new Date().getTime() % cycle);
         const h = Math.floor((d / (1000*3600)) % 48);
         const m = Math.floor((d / (1000*60)) % 60);
         const s = Math.floor((d / 1000) % 60);
-        document.getElementById('timer').innerText = 00d : ${h}h : ${m}m : ${s}s;
+        document.getElementById('timer').innerText = ${h}h : ${m}m : ${s}s;
     }, 1000);
 
-    // Titan 30
+    // Currency Sel
+    function sel(e) {
+        document.querySelectorAll('.coin-btn').forEach(b => b.classList.remove('active'));
+        e.classList.add('active');
+    }
+
+    // Titan 30 List
     const tb = document.getElementById('titan-body');
     for(let i=1; i<=30; i++) {
-        const cl = i === 1 ? 'rank-1' : '';
-        tb.innerHTML += <tr class="${cl}"><td>#${i}</td><td>0x${Math.random().toString(16).slice(2,10)}...</td><td>$${(200000/i).toLocaleString()}</td><td>Whale</td></tr>;
+        const r = i === 1 ? 'rank-1' : '';
+        const tier = i < 5 ? '🐋 King Whale' : (i < 15 ? '🦈 Shark' : '🐟 Dolphin');
+        tb.innerHTML += <tr class="${r}"><td>#${i}</td><td>0x${Math.random().toString(16).slice(2,10)}...</td><td>$${(400000/i).toLocaleString()}</td><td>${tier}</td></tr>;
     }
-
-    function calc() {
-        const v = document.getElementById('amt').value;
-        if(v > 0) {
-            document.getElementById('res').style.display = 'block';
-            document.getElementById('coins').innerText = (v * 1000).toLocaleString();
-            document.getElementById('wealth').innerText = "$" + (v * 1000 * 0.15).toLocaleString();
-        }
-    }
-
-    function showN() {
-        const n = document.getElementById('notif');
-        n.innerHTML = Wallet 0x${Math.random().toString(16).slice(2,6)}... bought <b>${(Math.random()*5000).toFixed(0)} ARXN</b>;
-        n.style.display = 'block';
-        setTimeout(() => n.style.display='none', 4000);
-        setTimeout(showN, 12000);
-    }
-    showN();
-
-    new Chart(document.getElementById('chart'), {
-        type: 'line',
-        data: { labels: ['S1', 'S5', 'S10', 'S15', 'Launch'], datasets: [{ label: 'Price', data: [0.001, 0.01, 0.05, 0.1, 0.15], borderColor: '#FF4500', fill: true, backgroundColor: 'rgba(120,81,169,0.1)' }] }
-    });
 </script>
 </body>
 </html>
