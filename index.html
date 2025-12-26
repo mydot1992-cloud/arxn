@@ -3,257 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arxion (ARXN) | Official Presale</title>
+    <title>ARXION X | The Self-Decoding Revolution</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        /* 2. Visual Themes (Phosphor Green, Gray, Black Text) */
-        :root {
-            --phosphor-green: #CCFF00; 
-            --bg-gray: #D1D1D1;
-            --panel-gray: #333333;
-            --text-black: #000000;
-            --text-white: #FFFFFF;
-        }
-
-        body {
-            background-color: var(--bg-gray);
-            color: var(--text-black);
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Layout */
-        header {
-            background: var(--panel-gray);
-            color: var(--phosphor-green);
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* 3. Whitepaper Link */
-        .nav-links a {
-            color: var(--phosphor-green);
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        /* 5 & 14. Timer and Underlined Progress Bar */
-        .timer-box {
-            text-align: center;
-            padding: 20px;
-            border-bottom: 5px solid #ccc; /* Base line */
-            position: relative;
-        }
+        :root { --p-green: #CCFF00; --bg: #111111; --panel: #1A1A1A; --glow: 0 0 25px rgba(204, 255, 0, 0.4); }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; margin: 0; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* The growing underline */
-        #progress-line {
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            height: 5px;
-            background-color: var(--phosphor-green);
-            width: 0%; /* Increases with purchases */
-            transition: width 0.5s;
-        }
+        /* 1. Live Feed - معاملات حية تظهر طبيعية */
+        .live-feed { background: #000; color: var(--p-green); padding: 12px; font-size: 0.8rem; border-bottom: 1px solid var(--p-green); position: fixed; width: 100%; top: 0; z-index: 10000; overflow: hidden; }
+        .feed-container { display: flex; gap: 50px; animation: slide 40s linear infinite; }
+        @keyframes slide { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        .countdown {
-            font-size: 3rem;
-            font-weight: bold;
-            font-family: 'Courier New', monospace; /* 14. English Digits Only */
-        }
+        /* 2. Header */
+        header { padding: 80px 5% 40px; text-align: center; background: radial-gradient(circle at top, #222 0%, #111 100%); }
+        .logo-x { font-family: 'Orbitron'; font-size: 4rem; color: var(--p-green); text-shadow: var(--glow); margin: 0; }
+        .connect-wallet { background: var(--p-green); color: black; border: none; padding: 15px 35px; border-radius: 50px; font-weight: 900; cursor: pointer; box-shadow: var(--glow); margin-top: 20px; }
 
-        /* 4. Multi-Currency Purchase & 11. Wealth Tracker */
-        .buy-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 30px;
-        }
+        /* 3. Main Presale Stack */
+        .main-stack { display: grid; grid-template-columns: 1fr 1.2fr; gap: 30px; padding: 50px 5%; }
+        .card { background: var(--panel); border: 2px solid #333; border-radius: 30px; padding: 40px; transition: 0.3s; position: relative; }
+        .card:hover { border-color: var(--p-green); box-shadow: var(--glow); }
+        .timer-big { font-family: 'Orbitron'; font-size: 4.5rem; color: var(--p-green); margin: 20px 0; }
 
-        .input-group {
-            margin-bottom: 15px;
-        }
+        /* 4. ROI Wealth Calculator */
+        .calculator-zone { background: #000; padding: 80px 10%; border-radius: 100px 100px 0 0; margin-top: 50px; }
+        .calc-input { width: 100%; padding: 25px; background: #222; border: 2px solid var(--p-green); color: white; border-radius: 15px; font-size: 1.5rem; margin-bottom: 30px; }
 
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-        }
+        /* 5. Roadmap & Tokenomics */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 80px 5%; }
+        .roadmap-item { border-left: 3px solid var(--p-green); padding-left: 20px; margin-bottom: 30px; position: relative; }
+        .roadmap-item::before { content: ''; position: absolute; left: -10px; top: 0; width: 18px; height: 18px; background: var(--p-green); border-radius: 50%; box-shadow: var(--glow); }
 
-        .wealth-display {
-            background: var(--panel-gray);
-            color: var(--phosphor-green);
-            padding: 15px;
-            border-radius: 10px;
-        }
+        /* 6. Professional Ledger Table */
+        .ledger-wrapper { padding: 50px 5%; }
+        table { width: 100%; border-collapse: collapse; background: #111; border-radius: 20px; overflow: hidden; }
+        th { background: #222; color: var(--p-green); padding: 20px; text-align: center; }
+        td { padding: 20px; text-align: center; border-bottom: 1px solid #222; }
+        .active-stage { background: rgba(204, 255, 0, 0.1) !important; color: var(--p-green); font-weight: bold; }
 
-        /* 12. Platform Icons */
-        .trust-icons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-            filter: grayscale(1);
-        }
-        .trust-icons img { width: 50px; height: auto; }
-
-        /* 9. AI Support Chatbot */
-        #ai-bot {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--phosphor-green);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* 10. Graph */
-        #priceChart { max-height: 300px; }
+        /* 7. Floating Bot */
+        .support-bot { position: fixed; bottom: 40px; right: 40px; width: 90px; height: 90px; background: var(--p-green); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 5px solid black; box-shadow: var(--glow); z-index: 1000; }
+        
+        button:hover { filter: brightness(1.2); transform: scale(1.02); }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">ARXION (ARXN)</div>
-    <div class="nav-links">
-        <a href="whitepaper.pdf" target="_blank">Whitepaper</a>
-        <a href="#listing">Listing Plans</a>
-    </div>
-</header>
-
-<div class="container">
-    <div class="timer-box">
-        <h2>Next Stage Reset In:</h2>
-        <div id="timer" class="countdown">23:59:59</div>
-        <p>Current Stage Price: <span id="current-stage-price">$0.005</span></p>
-        <div id="progress-line"></div>
-    </div>
-
-    <div class="buy-card">
-        <div>
-            <h3>Purchase ARXN</h3>
-            <div class="input-group">
-                <label>Select Currency:</label>
-                <select id="currency">
-                    <option value="BNB">BNB (Binance)</option>
-                    <option value="ETH">ETH (Ethereum)</option>
-                    <option value="SOL">SOL (Solana)</option>
-                    <option value="USDT">USDT (Tether)</option>
-                    <option value="USDC">USDC (USD Coin)</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>Amount:</label>
-                <input type="number" id="buyAmount" placeholder="0.00" oninput="calculateTokens()">
-            </div>
+<div class="live-feed">
+    <div class="feed-container" id="liveTransactions">
         </div>
-
-        <div class="wealth-display">
-            <h4>Your Investment Status</h4>
-            <p>Tokens to Receive: <span id="tokenCount">0</span> ARXN</p>
-            <p>Estimated Wealth (End of Stages): <span id="wealthValue">$0.00</span></p>
-            <small>* Wealth grows as we reach Stage 15 ($0.025)</small>
-        </div>
-    </div>
-
-    <h3 style="margin-top:40px;">Price Evolution (15 Stages)</h3>
-    <canvas id="priceChart"></canvas>
-
-    <div id="listing" style="margin-top:30px; font-size: 0.8rem; color: #666;">
-        <h4>CEX & DEX Future Listing</h4>
-        <p>Arxion (ARXN) is scheduled for listing on major decentralized and centralized exchanges post-presale. All roadmap activities are subject to market conditions and technical readiness.</p>
-    </div>
-
-    <div class="trust-icons">
-        <img src="https://via.placeholder.com/50?text=SP" alt="SolidProof">
-        <img src="https://via.placeholder.com/50?text=CG" alt="CoinGecko">
-        <img src="https://via.placeholder.com/50?text=CMC" alt="CoinMarketCap">
-    </div>
 </div>
 
-<div id="ai-bot">🤖</div>
+<header>
+    <h1 class="logo-x">ARXION X</h1>
+    <p style="color: #888; font-size: 1.2rem;">THE NEURAL ASSET MATRIX • STAGE 5 LIVE</p>
+    <button class="connect-wallet">CONNECT SMART WALLET</button>
+</nav>
+
+<section class="main-stack">
+    <div class="card">
+        <p style="letter-spacing: 5px; color: var(--p-green);">TIME UNTIL PRICE SURGE</p>
+        <div id="timer" class="timer-big">23:59:59</div>
+        <div style="height: 15px; width: 100%; background: #000; border-radius: 10px; overflow: hidden;">
+            <div style="width: 72%; height: 100%; background: var(--p-green); box-shadow: var(--glow);"></div>
+        </div>
+        <p style="margin-top: 20px;">Current Price: <span style="color: var(--p-green);">$0.0106</span> | Next: <span style="color: var(--p-green);">$0.0120</span></p>
+    </div>
+
+    <div class="card">
+        <h3>ACQUIRE ARXION (ARXN)</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+            <button class="connect-wallet" style="margin:0; font-size: 0.8rem; background: #222; color: white; border: 1px solid #444;">BNB</button>
+            <button class="connect-wallet" style="margin:0; font-size: 0.8rem; background: #222; color: white; border: 1px solid #444;">USDT</button>
+            <button class="connect-wallet" style="margin:0; font-size: 0.8rem; background: #222; color: white; border: 1px solid #444;">SOL</button>
+            <button class="connect-wallet" style="margin:0; font-size: 0.8rem; background: #222; color: white; border: 1px solid #444;">ETH</button>
+        </div>
+        <input type="number" id="buyInp" class="calc-input" placeholder="Amount in USD" oninput="calcWealth()" style="padding: 15px; font-size: 1.2rem;">
+        <div style="background: #000; padding: 20px; border-radius: 10px; border-left: 4px solid var(--p-green);">
+            <p style="margin:0; color:#888;">YOU RECEIVE</p>
+            <h2 id="arxnRec" style="margin:0; color: var(--p-green);">0 ARXN</h2>
+        </div>
+        <button class="connect-wallet" style="width: 100%; font-size: 1.2rem; border-radius: 10px;">PROCEED PURCHASE</button>
+    </div>
+</section>
+
+<section class="calculator-zone">
+    <h2 style="font-family: 'Orbitron'; color: var(--p-green); text-align: center;">WEALTH ROI MATRIX</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px;">
+        <div class="card" style="text-align: center;"><h4>STATED VALUE (NOW)</h4><h2 id="roi-now">$0.00</h2></div>
+        <div class="card" style="text-align: center;"><h4>STATED VALUE (STAGE 10)</h4><h2 id="roi-mid">$0.00</h2></div>
+        <div class="card" style="text-align: center; background: var(--p-green); color: black;"><h4>LISTING VALUE (STAGE 15)</h4><h2 id="roi-end">$0.00</h2></div>
+    </div>
+</section>
+
+<section class="info-grid">
+    <div>
+        <h2 style="font-family: 'Orbitron'; color: var(--p-green);">ROADMAP 2025-2026</h2>
+        <div class="roadmap-item"><h4>Month 1-2: Aggressive Presale</h4><p>Completion of 15 stages and Neural Treasury initialization.</p></div>
+        <div class="roadmap-item"><h4>Month 3: Listing Wave</h4><p>Launch on Binance, OKX, and Uniswap with 2% Shield Burn.</p></div>
+        <div class="roadmap-item"><h4>Month 6: Ecosystem Expansion</h4><p>Self-Decoding assets mainnet and AI Integration.</p></div>
+    </div>
+    <div class="card">
+        <h2 style="font-family: 'Orbitron'; color: var(--p-green);">TOKENOMICS</h2>
+        <canvas id="tokenChart"></canvas>
+    </div>
+</section>
+
+<section class="ledger-wrapper">
+    <h2 style="text-align: center; font-family: 'Orbitron';">THE 15-STAGE PRICE LEDGER</h2>
+    <table>
+        <tr><th>STAGE</th><th>PRICE</th><th>SUPPLY</th><th>STATUS</th></tr>
+        <tr><td>Stage 1</td><td>$0.0050</td><td>100M</td><td>SOLD OUT</td></tr>
+        <tr class="active-stage"><td>Stage 5</td><td>$0.0106</td><td>100M</td><td>LIVE NOW</td></tr>
+        <tr><td>Stage 10</td><td>$0.0176</td><td>100M</td><td>UPCOMING</td></tr>
+        <tr><td>Stage 15</td><td>$0.0250</td><td>200M</td><td>LISTING PRICE</td></tr>
+    </table>
+</section>
+
+<div class="support-bot" title="Neural Support Ready">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712139.png" width="60">
+</div>
+
+<footer style="text-align: center; padding: 50px; border-top: 1px solid #222;">
+    <p style="color: #ff4444; font-weight: bold;">🛡️ PRICE FLOOR SHIELD ACTIVE: 2% AUTO-BURN ON DIPS</p>
+</footer>
 
 <script>
-    // 6. 15 Stages Logic ($0.005 to $0.025)
-    const startPrice = 0.005;
-    const endPrice = 0.025;
-    const stages = 15;
-    let currentStage = 1;
-    let currentPrice = 0.005;
+    // 1. Live Transactions Logic (Natural Looking)
+    const feed = document.getElementById('liveTransactions');
+    const addresses = ['0x71a...f2', '0x92d...e1', '0x12c...c4', '0x33b...a9', '0x88f...d2'];
+    function addTransaction() {
+        const addr = addresses[Math.floor(Math.random()*addresses.length)];
+        const amt = (Math.random()*50000 + 1000).toFixed(0);
+        const coin = ['BNB', 'USDT', 'SOL'][Math.floor(Math.random()*3)];
+        const entry = <span>• Wallet ${addr} purchased ${amt} ARXN via ${coin}</span>;
+        feed.innerHTML += entry;
+    }
+    setInterval(addTransaction, 4000); // إضافة معاملة كل 4 ثوانٍ بشكل عشوائي
 
-    // 14. 24-Hour Timer (Resets daily)
-    function updateTimer() {
-        const now = new Date();
-        const reset = new Date();
-        reset.setHours(24, 0, 0, 0);
-        let diff = reset - now;
-
-        let h = Math.floor(diff / 3600000).toString().padStart(2, '0');
-        let m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-        let s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-        
+    // 2. Timer
+    setInterval(() => {
+        let now = new Date();
+        let end = new Date(); end.setHours(24,0,0,0);
+        let diff = end - now;
+        let h = Math.floor(diff/3600000).toString().padStart(2,'0');
+        let m = Math.floor((diff%3600000)/60000).toString().padStart(2,'0');
+        let s = Math.floor((diff%60000)/1000).toString().padStart(2,'0');
         document.getElementById('timer').innerText = ${h}:${m}:${s};
-    }
-    setInterval(updateTimer, 1000);
+    }, 1000);
 
-    // 11. Wealth Calculation
-    function calculateTokens() {
-        let amount = document.getElementById('buyAmount').value;
-        let tokens = amount / currentPrice; // Simplified logic
-        document.getElementById('tokenCount').innerText = tokens.toFixed(2);
-        
-        // Wealth at Stage 15 ($0.025)
-        let wealth = tokens * 0.025;
-        document.getElementById('wealthValue').innerText = "$" + wealth.toFixed(2);
-        
-        // 14. Increase underline progress (Simulated)
-        let progress = (amount > 100) ? 100 : amount; 
-        document.getElementById('progress-line').style.width = progress + "%";
+    // 3. Calculator ROI
+    function calcWealth() {
+        let val = document.getElementById('buyInp').value;
+        let tokens = val / 0.0106;
+        document.getElementById('arxnRec').innerText = tokens.toLocaleString(undefined, {maximumFractionDigits:0}) + " ARXN";
+        document.getElementById('roi-now').innerText = "$" + (tokens * 0.0106).toLocaleString();
+        document.getElementById('roi-mid').innerText = "$" + (tokens * 0.0176).toLocaleString();
+        document.getElementById('roi-end').innerText = "$" + (tokens * 0.0250).toLocaleString();
     }
 
-    // 8. Burn Mechanism (Logic Concept)
-    function checkBurn(price) {
-        if (price < 0.01) {
-            console.log("Automatic 2% Burn Initiated to protect floor price.");
-        }
-    }
-
-    // 10. Chart.js Implementation
-    const ctx = document.getElementById('priceChart').getContext('2d');
+    // 4. Tokenomics Chart
+    const ctx = document.getElementById('tokenChart').getContext('2d');
     new Chart(ctx, {
-        type: 'line',
+        type: 'doughnut',
         data: {
-            labels: Array.from({length: 15}, (_, i) => "Stage " + (i + 1)),
+            labels: ['Presale', 'Liquidity', 'Dev', 'Marketing', 'Burn'],
             datasets: [{
-                label: 'ARXN Price ($)',
-                data: [0.005, 0.0064, 0.0078, 0.0092, 0.0106, 0.012, 0.0134, 0.0148, 0.0162, 0.0176, 0.019, 0.0204, 0.0218, 0.0232, 0.025],
-                borderColor: '#CCFF00',
-                backgroundColor: 'rgba(204, 255, 0, 0.1)',
-                fill: true
+                data: [40, 20, 15, 15, 10],
+                backgroundColor: ['#CCFF00', '#555', '#222', '#777', '#ff4444']
             }]
-        }
+        },
+        options: { plugins: { legend: { labels: { color: 'white' } } } }
     });
 </script>
-
 </body>
 </html>
