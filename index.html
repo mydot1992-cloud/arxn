@@ -3,230 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION X | THE SUPREME QUANTUM ENGINE</title>
+    <title>ARXION (ARXN) | THE FINAL PROTOCOL</title>
     
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@200;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        :root { 
-            --orange: #FF4500; --purple: #7851A9; --gold: #D4AF37; 
-            --bg: #000; --glass: rgba(255, 255, 255, 0.03);
+        :root {
+            --phosphor: #CCFF00;
+            --gray-bg: #DCDCDC;
+            --dark-gray: #2B2B2B;
+            --black: #000000;
+            --gold: #D4AF37;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: var(--bg); color: #fff; font-family: 'Cairo', sans-serif; 
-            overflow-x: hidden; cursor: crosshair;
-        }
-        .eng { font-family: 'Orbitron', sans-serif; }
+        * { box-sizing: border-box; transition: 0.3s; }
 
-        /* Particles Background */
-        #particles-js {
-            position: fixed; width: 100%; height: 100%; z-index: 1; top: 0; pointer-events: none;
-        }
-
-        /* --- X-Portal Background --- */
-        .x-bg {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 60vw; font-family: 'Orbitron'; font-weight: 900;
-            color: rgba(120, 81, 169, 0.03); z-index: 0; pointer-events: none;
+        body {
+            background-color: var(--gray-bg);
+            color: var(--black);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0; padding: 0; overflow-x: hidden;
         }
 
         /* Navigation */
-        nav { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 25px 5%; background: rgba(0,0,0,0.9); border-bottom: 1px solid rgba(255,69,0,0.2);
-            position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(20px);
+        nav {
+            background: var(--black); color: var(--phosphor);
+            padding: 15px 5%; display: flex; justify-content: space-between;
+            align-items: center; border-bottom: 5px solid var(--phosphor);
+            position: sticky; top: 0; z-index: 1000;
         }
 
-        /* Hero Engine (The Masterpiece) */
-        .hero { 
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            padding: 150px 5%; position: relative; z-index: 2;
-        }
-        .hero-content { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 100px; width: 100%; max-width: 1500px; }
+        .logo { font-size: 28px; font-weight: 900; }
+        .logo span { color: var(--gold); }
 
-        .glitch-title { 
-            font-size: 8rem; line-height: 0.8; font-weight: 900; 
-            text-transform: uppercase; letter-spacing: -10px; position: relative;
-        }
-        .glitch-title span { color: var(--orange); text-shadow: 0 0 50px rgba(255,69,0,0.5); }
-
-        /* The Advanced Buy Card */
-        .buy-card { 
-            background: rgba(10,10,10,0.8); border: 1px solid rgba(255,255,255,0.1);
-            padding: 60px; border-radius: 40px; backdrop-filter: blur(50px);
-            position: relative; border-top: 5px solid var(--orange);
-            box-shadow: 0 0 100px rgba(0,0,0,1);
-        }
-        .buy-card::before {
-            content: ''; position: absolute; inset: 0; border-radius: 40px;
-            padding: 2px; background: linear-gradient(45deg, var(--orange), var(--purple));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude; pointer-events: none;
+        .btn-main {
+            background: var(--phosphor); color: var(--black);
+            border: 2px solid var(--black); padding: 10px 20px;
+            font-weight: bold; cursor: pointer; text-transform: uppercase;
         }
 
-        /* 15 Stages Section (The Infinity Scroll) */
-        .stages-wrap { padding: 200px 5%; position: relative; z-index: 2; }
-        .stages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-        .stage-box { 
-            background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
-            padding: 50px; border-radius: 30px; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden;
-        }
-        .stage-box:hover { transform: translateY(-20px); border-color: var(--orange); background: rgba(255,69,0,0.02); }
-        .stage-number { position: absolute; top: -20px; right: -10px; font-size: 8rem; font-weight: 900; opacity: 0.05; }
+        .btn-main:hover { background: white; box-shadow: 5px 5px 0px var(--black); }
 
-        /* Titan 30 Supreme Leaderboard */
-        .titan-sec { padding: 200px 5%; z-index: 2; position: relative; }
-        .titan-header { text-align: center; margin-bottom: 80px; }
-        .titan-table { width: 100%; border-collapse: separate; border-spacing: 0 15px; }
-        .titan-table tr { background: rgba(255,255,255,0.02); transition: 0.3s; }
-        .titan-table td { padding: 30px; border: 1px solid rgba(255,255,255,0.05); }
-        .rank-gold { 
-            background: linear-gradient(90deg, rgba(212,175,55,0.2), transparent) !important;
-            border: 2px solid var(--gold) !important; box-shadow: 0 0 50px rgba(212,175,55,0.2);
-            color: var(--gold); font-weight: 900;
+        /* Hero Section */
+        header {
+            text-align: center; padding: 100px 5%;
+            background: radial-gradient(circle, #cecece 0%, var(--gray-bg) 100%);
+            border-bottom: 3px dashed var(--black);
         }
 
-        /* Utility */
-        .input-supreme {
-            width: 100%; padding: 25px; background: #000; border: 1px solid #222;
-            border-radius: 20px; color: #fff; font-size: 1.8rem; font-family: 'Orbitron';
-            margin-top: 15px; text-align: center;
-        }
-        .btn-fire {
-            width: 100%; padding: 30px; background: var(--orange); border: none;
-            color: #fff; font-family: 'Orbitron'; font-weight: 900; font-size: 1.5rem;
-            border-radius: 25px; cursor: pointer; transition: 0.5s;
-            box-shadow: 0 20px 60px rgba(255,69,0,0.4); margin-top: 40px;
-        }
-        .btn-fire:hover { letter-spacing: 5px; background: #ff5e00; transform: scale(1.02); }
+        .glitch-title { font-size: 4rem; margin: 0; text-transform: uppercase; letter-spacing: -3px; }
 
-        footer { padding: 150px 5%; background: #000; border-top: 1px solid #111; text-align: center; position: relative; z-index: 2; }
+        /* Reflection Shield Section */
+        .shield-box {
+            background: var(--black); color: var(--phosphor);
+            margin: 40px 5%; padding: 40px;
+            border: 10px double var(--phosphor);
+            text-align: center;
+        }
+
+        /* Tokenomics & Charts */
+        .grid-layout {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px; padding: 40px 5%;
+        }
+
+        .card {
+            background: white; border: 4px solid var(--black);
+            padding: 20px; position: relative;
+        }
+
+        .card::before {
+            content: "DATA_NODE"; position: absolute; top: -15px; left: 10px;
+            background: var(--black); color: var(--phosphor); padding: 2px 10px; font-size: 0.7rem;
+        }
+
+        /* Roadmap */
+        .roadmap-container { padding: 40px 5%; background: var(--dark-gray); color: white; }
+        .step { border-right: 5px solid var(--phosphor); padding-right: 20px; margin-bottom: 30px; }
+        .step h3 { color: var(--phosphor); margin: 0; }
+
+        /* Titan 30 Table */
+        .titan-table-container { padding: 50px 5%; }
+        table { width: 100%; border-collapse: collapse; background: white; border: 5px solid var(--black); }
+        th { background: var(--black); color: var(--phosphor); padding: 20px; }
+        td { border: 1px solid var(--black); padding: 15px; text-align: center; font-weight: bold; }
+        .rank-1 { background: var(--gold) !important; color: white !important; font-size: 1.5rem; }
+
+        /* Footer */
+        footer { background: var(--black); color: #555; text-align: center; padding: 30px; }
+
     </style>
 </head>
 <body>
 
-<div id="particles-js"></div>
-<div class="x-bg">X</div>
-
 <nav>
-    <div class="logo eng">ARXION <span>X</span></div>
-    <div style="display:flex; gap:40px;">
-        <span class="eng" style="color:var(--orange); font-weight:900;">• GENESIS ACTIVE</span>
-        <button class="eng" style="background:transparent; border:1px solid var(--purple); color:white; padding:10px 20px; border-radius:10px; cursor:pointer;">CONNECT SYSTEM</button>
+    <div class="logo">ARXION <span>[X]</span> SYSTEM</div>
+    <div>
+        <button class="btn-main" onclick="connect()">CONNECT_WALLET</button>
     </div>
 </nav>
 
-<section class="hero">
-    <div class="hero-content">
-        <div class="hero-main">
-            <div style="color:var(--purple); letter-spacing:10px; font-weight:900; margin-bottom:20px;" class="eng">NEURAL TREASURY PROTOCOL</div>
-            <h1 class="glitch-title">DECODE<br><span>THE X</span><br>FUTURE</h1>
-            <p style="font-size:1.8rem; color:#666; margin-top:40px; line-height:1.4;">نظام Arxion ليس مجرد عملة، بل هو أصل رقمي مشفر جينياً يتطور مع كل كتلة بيانات [cite: 24-12-2024].</p>
-        </div>
+<header>
+    <h1 class="glitch-title">ARXION PROTOCOL</h1>
+    <p><b>THE SELF-DECODING ASSET</b> // GENETIC CODE EVOLUTION</p>
+    <div id="countdown" style="font-size: 2rem; background: var(--black); color: var(--phosphor); display: inline-block; padding: 10px 30px; margin-top: 20px;">00:00:00:00</div>
+</header>
 
-        <div class="buy-card">
-            <div style="display:flex; justify-content:space-between; margin-bottom:30px;">
-                <span class="eng">STAGE 01/15</span>
-                <span class="eng" style="color:var(--orange)">PRICE: $0.0050</span>
-            </div>
-            <div style="height:6px; background:#111; border-radius:10px; margin-bottom:40px;">
-                <div style="width:72%; height:100%; background:var(--orange); box-shadow:0 0 20px var(--orange);"></div>
-            </div>
-            <label class="eng" style="font-size:0.7rem; color:#444;">ENTER USDT AMOUNT</label>
-            <input type="number" class="input-supreme" id="usdtInput" placeholder="0.00">
-            <button class="btn-fire eng">EXECUTE PURCHASE</button>
-            <p style="text-align:center; margin-top:20px; font-size:0.8rem; color:#333;">Security Protocol: Reflection Shield Active [cite: 26-12-2025]</p>
-        </div>
+<section class="shield-box">
+    <h2><i class="fas fa-shield-halved"></i> THE REFLECTION SHIELD (نظام الحصن العاكس)</h2>
+    <p>بروتوكول أمان يقوم بعكس الهجمات البرمجية وإعادة توزيع الضريبة للمستثمرين تلقائياً.</p>
+    <div style="font-size: 0.8rem; color: #888;">STATUS: REINFORCED // ENCRYPTION: 512-BIT</div>
+</section>
+
+<div class="grid-layout">
+    <div class="card">
+        <h3 style="text-align:center;">TOKENOMICS</h3>
+        <canvas id="tokenChart"></canvas>
+    </div>
+    <div class="card">
+        <h3 style="text-align:center;">TREASURY GROWTH</h3>
+        <canvas id="growthChart"></canvas>
+    </div>
+</div>
+
+<section class="roadmap-container">
+    <h2 style="text-align:center; margin-bottom: 50px;">PROJECT ROADMAP // المسار التقني</h2>
+    <div class="step">
+        <h3>PHASE 01: THE AWAKENING</h3>
+        <p>إطلاق العقد الذكي، تفعيل الخزانة العصبية، وبدء مرحلة الـ Presale.</p>
+    </div>
+    <div class="step">
+        <h3>PHASE 02: DECODING X</h3>
+        <p>فتح أول ميزة تقنية مبنية على اسم العملة، وإدراجها في المنصات اللامركزية.</p>
+    </div>
+    <div class="step">
+        <h3>PHASE 03: TITAN ASCENSION</h3>
+        <p>تفعيل مكافآت الـ Titan 30 الكبرى وإطلاق تطبيق الـ Holographic Dashboard.</p>
     </div>
 </section>
 
-<section class="stages-wrap">
-    <h2 class="eng" style="font-size:5rem; text-align:center; margin-bottom:100px;">THE 15 PHASES</h2>
-    <div class="stages-grid" id="stagesContainer">
-        </div>
-</section>
-
-<section class="titan-sec">
-    <div class="titan-header">
-        <h2 class="eng" style="font-size:4rem; color:var(--gold);">TITAN 30 PROTOCOL</h2>
-        <p style="color:#444;">مراقبة أكبر 30 محفظة في النظام السيادي [cite: 25-12-2025].</p>
-    </div>
-    <table class="titan-table">
-        <tbody id="titanBody">
-            <tr class="rank-gold">
-                <td class="eng">#01</td>
-                <td class="eng">0x71C9...A2B9</td>
-                <td class="eng">18,400,000 ARXN</td>
-                <td class="eng">SUPREME OVERLORD</td>
+<section class="titan-table-container">
+    <h2 style="text-align: center;">TITAN 30 LEADERBOARD // لوحة الشرف</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>RANK</th>
+                <th>INVESTOR_ID</th>
+                <th>ARXN_BALANCE</th>
             </tr>
-            </tbody>
+        </thead>
+        <tbody>
+            <tr class="rank-1">
+                <td>#1 (PREMIUM)</td>
+                <td>0x71C...892</td>
+                <td>1,500,000</td>
+            </tr>
+            <tr>
+                <td>#2</td>
+                <td>0x45A...210</td>
+                <td>950,000</td>
+            </tr>
+            <tr>
+                <td>#3</td>
+                <td>0x32B...554</td>
+                <td>720,000</td>
+            </tr>
+        </tbody>
     </table>
 </section>
 
 <footer>
-    <div class="logo eng" style="font-size:4rem;">ARXION <span>X</span></div>
-    <p style="color:#333; margin-top:30px;">© 2025 Arxion Sovereign Systems. Autonomous AI Management.</p>
+    ARXION ENCRYPTED SYSTEM // 2025 // NO HUMAN INTERVENTION REQUIRED
 </footer>
 
 <script>
-    // 1. Initialize Particles (The Pro Background)
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 80 },
-            color: { value: '#7851A9' },
-            shape: { type: 'circle' },
-            opacity: { value: 0.2 },
-            size: { value: 3 },
-            line_linked: { enable: true, distance: 150, color: '#FF4500', opacity: 0.1, width: 1 },
-            move: { enable: true, speed: 2 }
-        },
-        interactivity: { events: { onhover: { enable: true, mode: 'repulse' } } }
+    // 1. Wallet Connection
+    async function connect() {
+        if (window.ethereum) {
+            const accs = await ethereum.request({ method: 'eth_requestAccounts' });
+            alert("SECURE CONNECTION ESTABLISHED: " + accs[0]);
+        } else { alert("ERROR: CRYPTO WALLET NOT DETECTED"); }
+    }
+
+    // 2. Countdown Logic
+    const target = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = target - now;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('countdown').innerText = ${d}D:${h}H:${m}M:${s}S;
+    }, 1000);
+
+    // 3. Charts Logic
+    const ctx1 = document.getElementById('tokenChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['SALE', 'LIQUIDITY', 'TITAN', 'TEAM'],
+            datasets: [{
+                data: [50, 25, 15, 10],
+                backgroundColor: ['#000', '#CCFF00', '#D4AF37', '#666']
+            }]
+        }
     });
 
-    // 2. Generate 15 Stages (Professional Bulk Generation)
-    const stagesContainer = document.getElementById('stagesContainer');
-    let price = 0.0050;
-    for(let i=1; i<=15; i++) {
-        const stage = document.createElement('div');
-        stage.className = 'stage-box';
-        stage.innerHTML = `
-            <div class="stage-number eng">${i}</div>
-            <h3 class="eng" style="color:var(--orange)">PHASE ${i < 10 ? '0'+i : i}</h3>
-            <div class="eng" style="font-size:2.5rem; margin:20px 0;">$${price.toFixed(4)}</div>
-            <p style="color:#444;">${i === 1 ? 'CURRENT ACTIVE DECODING' : 'LOCKED BY TREASURY'}</p>
-        `;
-        stagesContainer.appendChild(stage);
-        price += 0.0025;
-    }
-
-    // 3. Titan 30 Mock Data
-    const tBody = document.getElementById('titanBody');
-    for(let j=2; j<=15; j++) {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="eng">#${j < 10 ? '0'+j : j}</td>
-            <td class="eng">0x${Math.random().toString(16).slice(2,10)}...</td>
-            <td class="eng">${(20-j)*120000} ARXN</td>
-            <td class="eng" style="color:#333;">ELITE WHALE</td>
-        `;
-        tBody.appendChild(row);
-    }
-
-    // 4. GSAP Animations for Scroll
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.utils.toArray('.stage-box').forEach(box => {
-        gsap.from(box, {
-            scrollTrigger: box,
-            opacity: 0,
-            y: 100,
-            duration: 1
-        });
+    const ctx2 = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ['P1', 'P2', 'P3', 'P4'],
+            datasets: [{
+                label: 'Treasury Value',
+                data: [0, 40, 70, 100],
+                borderColor: '#CCFF00',
+                fill: false
+            }]
+        }
     });
 </script>
 
