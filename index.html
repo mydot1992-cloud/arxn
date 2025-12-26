@@ -3,6 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARXION (ARXN) - Official Presale</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --p-green: #CCFF00; --bg: #1A1A1A; --panel: #2A2A2A; }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; margin: 0; scroll-behavior: smooth; }
+        
+        /* 1. الهيدر وزر ربط المحفظة */
+        header { display: flex; justify-content: space-between; padding: 20px 5%; background: #000; border-bottom: 2px solid var(--p-green); position: sticky; top: 0; z-index: 1000; }
+        .logo { color: var(--p-green); font-size: 2rem; font-weight: 900; }
+        .connect-btn { background: var(--p-green); border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+        /* 2. العداد وواجهة البيع المسبق */
+        .hero-section { padding: 60px 5%; text-align: center; }
+        .presale-card { background: var(--panel); border: 3px solid var(--p-green); border-radius: 25px; padding: 40px; max-width: 800px; margin: auto; }
+        .timer { font-size: 4.5rem; color: var(--p-green); font-weight: bold; margin: 20px 0; }
+        
+        /* 3. حاسبة الثروة (ROI) */
+        .calculator-section { padding: 60px 5%; background: #111; border-top: 1px solid #444; }
+        .calc-input { width: 100%; max-width: 400px; padding: 15px; font-size: 1.2rem; border-radius: 10px; border: 1px solid var(--p-green); background: #222; color: white; margin-bottom: 30px; }
+        .roi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .roi-box { background: var(--panel); padding: 25px; border-radius: 15px; border-bottom: 4px solid var(--p-green); }
+
+        /* 4. جدول المراحل الـ 15 */
+        .ledger-section { padding: 60px 5%; }
+        table { width: 100%; border-collapse: collapse; background: #222; border-radius: 15px; overflow: hidden; }
+        th, td { padding: 20px; text-align: center; border-bottom: 1px solid #444; }
+        th { background: var(--p-green); color: black; }
+        .active-stage { background: rgba(204, 255, 0, 0.15); font-weight: bold; }
+
+        /* 5. خريطة الطريق (Roadmap) */
+        .roadmap-section { padding: 60px 5%; background: #111; }
+        .roadmap-item { border-left: 3px solid var(--p-green); padding-left: 20px; margin-bottom: 30px; }
+
+        /* 6. توزيع العملات (Tokenomics) */
+        .token-section { padding: 60px 5%; display: flex; align-items: center; gap: 50px; }
+        .chart-container { width: 40%; }
+
+        /* 7. فريق العمل */
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 60px 5%; }
+        .member { background: #222; padding: 30px; border-radius: 15px; text-align: center; border: 1px solid #444; }
+
+        /* 8. الروبوت الداعم */
+        .bot-icon { position: fixed; bottom: 30px; right: 30px; width: 80px; height: 80px; background: var(--p-green); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 4px solid black; }
+        .bot-icon img { width: 50px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">ARXION X</div>
+    <button class="connect-btn">CONNECT WALLET</button>
+</header>
+
+<section class="hero-section">
+    <div class="presale-card">
+        <h3>PRESALE ENDS IN</h3>
+        <div id="timer" class="timer">23:59:59</div>
+        <div style="width:100%; background:#000; height:12px; border-radius:10px; margin-bottom:20px;">
+            <div style="width:65%; height:100%; background:var(--p-green); border-radius:10px;"></div>
+        </div>
+        <p>Current Stage: 5/15 | Price: $0.0106</p>
+        <button class="connect-btn" style="width:100%; margin-top:20px; padding:15px; font-size:1.2rem;">BUY ARXN NOW</button>
+    </div>
+</section>
+
+<section class="calculator-section" id="calc">
+    <h2 style="text-align:center;">WEALTH ROI CALCULATOR</h2>
+    <div style="text-align:center;">
+        <input type="number" id="invest" class="calc-input" placeholder="Enter Amount (USD)" oninput="updateROI()">
+    </div>
+    <div class="roi-grid">
+        <div class="roi-box"><h4>Stage 5</h4><h2 id="r1">$0.00</h2></div>
+        <div class="roi-box"><h4>Stage 10</h4><h2 id="r2">$0.00</h2></div>
+        <div class="roi-box" style="background: var(--p-green); color: black;"><h4>Stage 15 (Listing)</h4><h2 id="r3" style="color: black;">$0.00</h2></div>
+    </div>
+</section>
+
+<section class="ledger-section">
+    <h2 style="text-align:center;">15-STAGE PRICE LEDGER</h2>
+    <table>
+        <thead>
+            <tr><th>Stage</th><th>Price</th><th>Status</th><th>Allocation</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Stage 1</td><td>$0.0050</td><td>Sold Out</td><td>100M</td></tr>
+            <tr class="active-stage"><td>Stage 5</td><td>$0.0106</td><td>LIVE NOW</td><td>100M</td></tr>
+            <tr><td>Stage 10</td><td>$0.0176</td><td>Upcoming</td><td>100M</td></tr>
+            <tr><td>Stage 15</td><td>$0.0250</td><td>Final Listing</td><td>200M</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<section class="roadmap-section">
+    <h2 style="text-align:center;">ROADMAP</h2>
+    <div class="roadmap-item"><h4>Q1: Launch Presale</h4><p>Completing the first 15 stages and community building.</p></div>
+    <div class="roadmap-item"><h4>Q2: Token Listing</h4><p>Primary listing on Tier 1 exchanges like Binance & OKX.</p></div>
+    <div class="roadmap-item"><h4>Q3: Ecosystem Expansion</h4><p>Launching the ARXION mainnet and Neural Shield.</p></div>
+</section>
+
+<section class="token-section">
+    <div class="chart-container"><canvas id="tokenChart"></canvas></div>
+    <div>
+        <h2>TOKENOMICS</h2>
+        <ul>
+            <li>40% Presale</li>
+            <li>20% Liquidity</li>
+            <li>15% Development</li>
+            <li>15% Marketing</li>
+            <li>10% Burn</li>
+        </ul>
+    </div>
+</section>
+
+<section class="team-grid">
+    <div class="member"><h3>Dev Lead</h3><p>AI Architect</p></div>
+    <div class="member"><h3>Security</h3><p>Blockchain Expert</p></div>
+    <div class="member"><h3>Marketing</h3><p>Global Strategy</p></div>
+</section>
+
+<div class="bot-icon">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712139.png" alt="Bot">
+</div>
+
+<script>
+    function updateROI() {
+        let val = document.getElementById('invest').value;
+        let tokens = val / 0.0106;
+        document.getElementById('r1').innerText = "$" + (tokens * 0.0106).toFixed(2);
+        document.getElementById('r2').innerText = "$" + (tokens * 0.0176).toFixed(2);
+        document.getElementById('r3').innerText = "$" + (tokens * 0.0250).toFixed(2);
+    }
+    setInterval(() => {
+        let now = new Date();
+        let end = new Date(); end.setHours(24,0,0,0);
+        let diff = end - now;
+        let h = Math.floor(diff/3600000).toString().padStart(2,'0');
+        let m = Math.floor((diff%3600000)/60000).toString().padStart(2,'0');
+        let s = Math.floor((diff%60000)/1000).toString().padStart(2,'0');
+        document.getElementById('timer').innerText = ${h}:${m}:${s};
+    }, 1000);
+
+    const ctx = document.getElementById('tokenChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Presale', 'Liquidity', 'Dev', 'Marketing', 'Burn'],
+            datasets: [{
+                data: [40, 20, 15, 15, 10],
+                backgroundColor: ['#CCFF00', '#444', '#222', '#666', '#ff4444']
+            }]
+        },
+        options: { plugins: { legend: { labels: { color: 'white' } } } }
+    });
+</script>
+</body>
+</html>!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARXION X | The Self-Decoding Revolution</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;600&display=swap" rel="stylesheet">
