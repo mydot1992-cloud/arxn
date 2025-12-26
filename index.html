@@ -1,231 +1,112 @@
-[7:45 am, 26/12/2025] 😤: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ARXION (ARXN) | THE SOVEREIGN EMPEROR</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARXION | THE SOVEREIGN ASSET</title>
     <style>
-        :root { --fire: #FF4500; --purple: #7851A9; --gold: #FFD700; --bg: #000; }
-        body, html { margin: 0; padding: 0; overflow-x: hidden; background: var(--bg); font-family: 'Orbitron', sans-serif; color: white; scroll-behavior: smooth; }
+        /* Colors: Fire Orange (#FF4500) & Royal Purple (#7851A9) */
+        :root { --fire: #FF4500; --purple: #7851A9; --gold: #FFD700; }
         
-        /* 3D Canvas Background */
-        #canvas-container…
-[7:48 am, 26/12/2025] 😤: sdafsdf
-[7:48 am, 26/12/2025] 😤: <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ARXION (ARXN) | THE SOVEREIGN EMPEROR</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root { --fire: #FF4500; --purple: #7851A9; --gold: #FFD700; --bg: #000; }
-        body, html { margin: 0; padding: 0; overflow-x: hidden; background: var(--bg); font-family: 'Orbitron', sans-serif; color: white; scroll-behavior: smooth; }
-        
-        #canvas-container { position: fixed; top: 0; left: 0…
-[7:53 am, 26/12/2025] 😤: Shhs
-[7:53 am, 26/12/2025] 😤: <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ARXION (ARXN) | THE SOVEREIGN EMPEROR</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --fire: #FF4500; --purple: #7851A9; --gold: #FFD700; --bg: #000; }
-        
-        * { box-sizing: border-box; }
-        body, html { margin: 0; padding: 0; background: var(--bg); font-family: 'Orbitron', sans-serif; color: white; width: 100%; height: 100%; overflow: hidden; }
-        
-        #canvas-container { position: fixed; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; }
+        body { margin: 0; background: #000; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
 
-        /* --- THE PORTAL GATEWAY (FIXED) --- */
-        #portal-gate {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; display: flex; justify-content: center; align-items: center;
-            z-index: 999999; cursor: pointer; transition: opacity 0.8s ease-out;
+        /* Portal Screen */
+        #portal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 100; display: flex;
+            justify-content: center; align-items: center; cursor: pointer;
         }
-        .x-portal-btn {
-            font-size: clamp(120px, 30vw, 280px);
-            color: var(--purple);
-            font-weight: 900;
-            text-shadow: 0 0 50px var(--purple);
-            animation: breathe 2s infinite ease-in-out;
-            user-select: none;
-        }
-        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
+        .x-logo { font-size: 150px; color: var(--purple); font-weight: bold; text-shadow: 0 0 30px var(--purple); }
 
-        /* --- MAIN CONTENT LAYER --- */
-        #main-site-content {
-            position: relative; z-index: 10; width: 100%; height: 100vh;
-            overflow-y: auto; overflow-x: hidden;
-            visibility: hidden; opacity: 0; transition: opacity 1s ease-in;
+        /* Main Website Content */
+        #main-site { display: none; height: 100vh; overflow-y: auto; text-align: center; padding: 20px; }
+        
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid var(--purple); }
+        .logo { color: var(--fire); font-size: 24px; font-weight: bold; letter-spacing: 3px; }
+        
+        .hero { margin-top: 50px; }
+        .hero h1 { font-size: 50px; margin-bottom: 10px; }
+        .hero span { color: var(--fire); }
+
+        .buy-card { 
+            background: #0a0a0a; border: 2px solid var(--purple); 
+            max-width: 400px; margin: 40px auto; padding: 30px; border-radius: 20px;
+        }
+        .timer { font-size: 32px; color: var(--fire); font-weight: bold; margin-bottom: 20px; }
+        .btn-buy { 
+            background: linear-gradient(45deg, var(--fire), var(--purple)); 
+            color: white; border: none; padding: 15px 30px; border-radius: 10px; 
+            font-weight: bold; width: 100%; cursor: pointer; font-size: 18px;
         }
 
-        /* NAVIGATION */
-        nav { padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.85); border-bottom: 1px solid rgba(120, 81, 169, 0.3); backdrop-filter: blur(10px); }
-        .logo { font-size: 28px; font-weight: 900; color: var(--fire); letter-spacing: 5px; }
-        .logo span { color: var(--purple); }
-        .btn-connect { background: linear-gradient(45deg, var(--purple), #5d3fd3); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: bold; font-family: 'Orbitron'; box-shadow: 0 0 15px var(--purple); transition: 0.3s; }
-        .btn-connect:hover { transform: translateY(-2px); box-shadow: 0 0 25px var(--fire); background: var(--fire); }
-
-        /* HERO & BUY CARD */
-        .hero-container { padding: 60px 5%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 40px; }
-        .hero-info { flex: 1; min-width: 320px; }
-        .hero-info h1 { font-size: clamp(40px, 8vw, 75px); line-height: 1; margin: 0; text-transform: uppercase; }
-        .hero-info p { font-family: 'Inter'; color: #888; font-size: 18px; margin-top: 20px; max-width: 500px; }
-
-        .buy-card { background: rgba(5,5,5,0.9); border: 2px solid var(--purple); border-radius: 30px; padding: 40px; width: 100%; max-width: 450px; box-shadow: 0 0 50px rgba(120, 81, 169, 0.2); }
-        .timer-title { font-size: 10px; color: #555; letter-spacing: 3px; text-align: center; margin-bottom: 10px; }
-        .timer-display { font-size: 42px; color: var(--fire); font-weight: bold; text-align: center; margin-bottom: 30px; text-shadow: 0 0 15px rgba(255, 69, 0, 0.3); }
-
-        .currency-selector { display: flex; gap: 15px; margin-bottom: 25px; }
-        .coin-option { flex: 1; background: #111; border: 1px solid #222; border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .coin-option.active { border-color: var(--fire); background: rgba(255, 69, 0, 0.1); }
-        .coin-option img { width: 30px; margin-bottom: 8px; }
-
-        input { width: 100%; padding: 20px; background: #000; border: 1px solid #333; color: white; border-radius: 15px; font-family: 'Orbitron'; font-size: 16px; margin-bottom: 20px; }
-        .btn-purchase { width: 100%; padding: 22px; background: linear-gradient(45deg, var(--fire), var(--purple)); border: none; border-radius: 15px; color: white; font-weight: 900; font-size: 20px; cursor: pointer; transition: 0.4s; }
-        .btn-purchase:hover { letter-spacing: 2px; box-shadow: 0 0 30px var(--fire); }
-
-        /* MONASTERY VAULT */
-        .vault-section { text-align: center; padding: 120px 5%; }
-        .vault-core { width: 150px; height: 150px; border: 6px solid var(--gold); border-radius: 50%; margin: 0 auto 40px; display: flex; align-items: center; justify-content: center; font-size: 80px; color: var(--gold); box-shadow: 0 0 40px var(--gold); animation: vaultSpin 30s linear infinite; }
-        @keyframes vaultSpin { 100% { transform: rotate(360deg); } }
-        .vault-title { font-size: 45px; letter-spacing: 15px; margin: 0; }
-        .vault-tag { color: var(--fire); font-weight: bold; letter-spacing: 5px; margin-top: 10px; font-size: 14px; }
-
-        /* TITAN 30 */
-        .titan-section { padding: 100px 5%; }
-        .titan-table { width: 100%; border-collapse: collapse; background: rgba(10,10,10,0.8); }
-        .titan-table th { background: var(--purple); padding: 20px; text-align: left; font-size: 12px; letter-spacing: 2px; }
-        .titan-table td { padding: 20px; border-bottom: 1px solid #222; font-family: 'Inter'; font-size: 14px; }
-        .rank-1-row { background: rgba(255, 214, 0, 0.05); color: var(--gold); border: 1px solid var(--gold); font-weight: bold; }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 10px; }
+        .titan-section { max-width: 800px; margin: 50px auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 15px; border-bottom: 1px solid #222; text-align: left; }
+        .rank-1 { color: var(--gold); border: 1px solid var(--gold); background: rgba(255, 215, 0, 0.05); }
     </style>
 </head>
 <body>
 
-<div id="canvas-container"></div>
-
-<div id="portal-gate" onclick="unlockEmpire()">
-    <div class="x-portal-btn">X</div>
+<div id="portal" onclick="enterSite()">
+    <div class="x-logo">X</div>
 </div>
 
-<div id="main-site-content">
+<div id="main-site">
     <nav>
-        <div class="logo">ARX<span>ION</span></div>
-        <button class="btn-connect" onclick="alert('Secure Link Initialized.')">CONNECT WALLET</button>
+        <div class="logo">ARXION</div>
+        <button style="background:var(--purple); color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">CONNECT</button>
     </nav>
 
-    <div class="hero-container">
-        <div class="hero-info">
-            <h1>THE <br><span style="color: var(--fire);">REFLECTION</span> <br>SHIELD</h1>
-            <p>The self-decoding cryptographic asset governed by Genetic Code Intelligence. A sovereign treasury for the digital elite.</p>
-            <div style="margin-top: 40px; display: flex; gap: 30px; opacity: 0.6;">
-                <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" width="35">
-                <img src="https://cryptologos.cc/logos/okb-okb-logo.png" width="35">
-                <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png" width="35">
-            </div>
-        </div>
-
-        <div class="buy-card">
-            <div class="timer-title">PRICE ESCALATION IN:</div>
-            <div class="timer-display" id="timer-count">48:00:00</div>
-            <div class="currency-selector">
-                <div class="coin-option active" onclick="setCoin(this)"><img src="https://cryptologos.cc/logos/tether-usdt-logo.png"><br>USDT</div>
-                <div class="coin-option" onclick="setCoin(this)"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png"><br>ETH</div>
-                <div class="coin-option" onclick="setCoin(this)"><img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png"><br>BNB</div>
-            </div>
-            <input type="number" placeholder="Enter Contribution Amount">
-            <button class="btn-purchase">PURCHASE ARXN</button>
-        </div>
+    <div class="hero">
+        <h1>THE <span>REFLECTION</span> SHIELD</h1>
+        <p style="color:#888;">Autonomous Self-Decoding Asset System</p>
     </div>
 
-    <div class="vault-section">
-        <div class="vault-core">X</div>
-        <h2 class="vault-title">THE MONASTERY VAULT</h2>
-        <div class="vault-tag">AUTONOMOUS NEURAL TREASURY</div>
-        <p style="font-family: 'Inter'; color: #666; max-width: 700px; margin: 40px auto; line-height: 1.8;">The sovereign liquidity fortress of Arxion. A self-decoding engine protecting the 1,000,000,000 supply through decentralized burn protocols.</p>
+    <div class="buy-card">
+        <div class="timer" id="timer">48:00:00</div>
+        <p>PRE-SALE STAGE 1 IS ACTIVE</p>
+        <button class="btn-buy">BUY ARXN NOW</button>
     </div>
 
     <div class="titan-section">
-        <h2 style="text-align: center; color: var(--gold); letter-spacing: 10px; margin-bottom: 50px;">TITAN 30 LEADERBOARD</h2>
-        <table class="titan-table">
-            <thead><tr><th>RANK</th><th>INVESTOR ADDRESS</th><th>VALUE (USD)</th><th>TIER</th></tr></thead>
-            <tbody id="titan-data"></tbody>
+        <h2 style="color:var(--gold);">TITAN 30 LEADERBOARD</h2>
+        <table>
+            <thead>
+                <tr><th>Rank</th><th>Elite Wallet</th><th>Investment</th></tr>
+            </thead>
+            <tbody id="leaderboard"></tbody>
         </table>
     </div>
 </div>
 
 <script>
-    // 3D SYSTEM
-    let s, c, r, sys;
-    function init3D() {
-        s = new THREE.Scene();
-        c = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        r = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        r.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('canvas-container').appendChild(r.domElement);
-        const g = new THREE.BufferGeometry();
-        const p = new Float32Array(3000 * 3);
-        for(let i=0; i<3000*3; i++) p[i] = (Math.random() - 0.5) * 15;
-        g.setAttribute('position', new THREE.BufferAttribute(p, 3));
-        sys = new THREE.Points(g, new THREE.PointsMaterial({ color: 0x7851A9, size: 0.025 }));
-        s.add(sys); c.position.z = 5;
-    }
-    function animate() { requestAnimationFrame(animate); sys.rotation.y += 0.002; r.render(s, c); }
-    init3D(); animate();
-
-    // ACCESS FUNCTION (THE FIX)
-    function unlockEmpire() {
-        const portal = document.getElementById('portal-gate');
-        const content = document.getElementById('main-site-content');
-        
-        portal.style.opacity = '0';
-        portal.style.pointerEvents = 'none'; // Disable portal blocking
-        
-        setTimeout(() => {
-            portal.remove(); // Remove portal completely
-            content.style.visibility = 'visible';
-            content.style.opacity = '1';
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
-        }, 800);
+    // Access Function
+    function enterSite() {
+        document.getElementById('portal').style.display = 'none';
+        document.getElementById('main-site').style.display = 'block';
+        document.body.style.overflow = 'auto';
     }
 
-    function setCoin(el) {
-        document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('active'));
-        el.classList.add('active');
-    }
-
-    // 48H COUNTDOWN
+    // Timer Logic
     setInterval(() => {
-        const d = (48*3600*1000) - (new Date().getTime() % (48*3600*1000));
-        const h = Math.floor(d/3600000);
-        const m = Math.floor((d/60000)%60);
-        const s = Math.floor((d/1000)%60);
-        document.getElementById('timer-count').innerText = ${h}h : ${m}m : ${s}s;
+        let now = new Date().getTime();
+        let cycle = 48 * 3600 * 1000;
+        let diff = cycle - (now % cycle);
+        let h = Math.floor(diff / (1000 * 60 * 60));
+        let m = Math.floor((diff / (1000 * 60)) % 60);
+        let s = Math.floor((diff / 1000) % 60);
+        document.getElementById('timer').innerText = ${h}h : ${m}m : ${s}s;
     }, 1000);
 
-    // TITAN GENERATOR
-    const tbody = document.getElementById('titan-data');
+    // Leaderboard Data
+    const table = document.getElementById('leaderboard');
     for(let i=1; i<=30; i++) {
-        const cls = i === 1 ? 'rank-1-row' : '';
-        tbody.innerHTML += `
-            <tr class="${cls}">
-                <td>#${i}</td>
-                <td>0x${Math.random().toString(16).slice(2,10)}...${Math.random().toString(16).slice(2,6)}</td>
-                <td>$${(600000/i).toLocaleString()}</td>
-                <td>${i<5?'KING WHALE':'SHARK'}</td>
-            </tr>`;
+        let row = `<tr class="${i==1?'rank-1':''}">
+            <td>#${i}</td>
+            <td>0x${Math.random().toString(16).slice(2,10)}...</td>
+            <td>$${(500000/i).toLocaleString(undefined, {maximumFractionDigits:0})}</td>
+        </tr>`;
+        table.innerHTML += row;
     }
 </script>
 </body>
