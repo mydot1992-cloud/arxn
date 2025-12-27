@@ -3,207 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ARXN - Synergetic Fire Protocol">
-    <title>ARXN | THE UNIFIED SOVEREIGN</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <meta name="description" content="ARXN - The Sovereign Pre-sale Protocol. Phase 15 Integration.">
+    <title>ARXN | THE INFINITE MONOLITH v44.0</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.1/web3.min.js"></script>
-    <script src="https://unpkg.com/web3modal@1.9.9/dist/index.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
     <style>
+        /* =========================================
+           1. CORE SYSTEM VARIABLES (ARXN DESIGN SYSTEM)
+           ========================================= */
         :root {
-            --fire-orange: #FF4500;  /* Fire Orange for Currency & Action */
-            --phosphor: #ccff00;     /* Phosphor Green for System & Progress */
-            --steel-grey: #1a1a1a;   /* Steel Grey for Framework */
-            --dark-void: #050505;    /* Deep Black for Depth */
-            --gold: #FFD700;         /* Gold for #1 Titan Investor */
+            --fire: #FF4500;
+            --fire-glow: rgba(255, 69, 0, 0.4);
+            --phosphor: #ccff00;
+            --phosphor-glow: rgba(204, 255, 0, 0.4);
+            --steel: #1a1a1a;
+            --dark-steel: #0d0d0d;
+            --void: #020202;
+            --gold: #FFD700;
+            --gold-glow: rgba(255, 215, 0, 0.3);
             --white: #ffffff;
+            --font-main: 'Rajdhani', sans-serif;
+            --font-mono: 'Share Tech Mono', monospace;
+            --font-logo: 'Orbitron', sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
+        /* =========================================
+           2. GLOBAL RESET & SCROLLBAR
+           ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        body { background-color: var(--dark-void); color: var(--white); font-family: 'Rajdhani', sans-serif; overflow: hidden; height: 100vh; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--void); }
+        ::-webkit-scrollbar-thumb { background: var(--fire); border-radius: 10px; }
 
-        /* Neural Pulse Background */
-        #pulse-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; }
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -2; }
-
-        /* Custom Interactive Cursor */
-        #cursor-glow { position: fixed; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255, 69, 0, 0.07) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
-        #cursor-dot { position: fixed; width: 6px; height: 6px; background: var(--phosphor); border-radius: 50%; pointer-events: none; z-index: 10000; box-shadow: 0 0 15px var(--phosphor); transform: translate(-50%, -50%); }
-
-        .container { max-width: 1400px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 60px; position: relative; }
-
-        /* Header & Identity */
-        header { position: absolute; top: 50px; left: 60px; right: 60px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
-        .brand { font-family: 'Orbitron'; font-size: 2.8rem; font-weight: 900; letter-spacing: 15px; }
-        .brand span { color: var(--phosphor); text-shadow: 0 0 20px var(--phosphor); } /* X is Phosphor */
-        .currency { color: var(--fire-orange); text-shadow: 0 0 20px var(--fire-orange); font-size: 1rem; letter-spacing: 5px; }
-
-        .btn-connect {
-            background: transparent; border: 1px solid var(--phosphor); color: var(--phosphor);
-            padding: 12px 30px; font-family: 'Orbitron'; font-weight: 700; cursor: pointer;
-            transition: 0.4s; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        body {
+            background-color: var(--void);
+            color: var(--white);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(255, 69, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 69, 0, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
-        .btn-connect:hover { background: var(--phosphor); color: black; box-shadow: 0 0 30px var(--phosphor); }
 
-        /* Main Engine Hub */
-        .engine-hub {
-            background: rgba(26, 26, 26, 0.95); border: 1px solid #333; padding: 80px;
-            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px;
-            position: relative; box-shadow: 0 0 100px rgba(0,0,0,1);
+        /* =========================================
+           3. BACKGROUND & FX SYSTEMS
+           ========================================= */
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -5; }
+        #pulse-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4; opacity: 0.2; }
+        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, black 100%); z-index: -1; pointer-events: none; }
+        
+        /* Interactive Cursor */
+        #cursor-glow { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, var(--fire-glow) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+        #cursor-dot { position: fixed; width: 6px; height: 6px; background: var(--phosphor); border-radius: 50%; z-index: 10000; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 15px var(--phosphor); }
+
+        /* =========================================
+           4. NAVIGATION UI
+           ========================================= */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.8); border-bottom: 1px solid #222; backdrop-filter: blur(10px);
         }
-        .engine-hub::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--fire-orange), var(--phosphor), transparent); animation: flow 3s infinite; }
-        @keyframes flow { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-
-        .price-display { font-family: 'Orbitron'; font-size: 8rem; font-weight: 900; line-height: 0.9; margin: 20px 0; }
-        .fomo-radar { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--fire-orange); letter-spacing: 6px; }
-
-        .input-group { background: #000; border: 1px solid #222; padding: 25px; margin-top: 30px; display: flex; justify-content: space-between; align-items: center; }
-        .input-group input { background: transparent; border: none; color: white; font-family: 'Orbitron'; font-size: 2rem; outline: none; width: 70%; }
-        .input-group label { color: var(--fire-orange); font-family: 'Orbitron'; font-weight: 900; }
-
-        .btn-strike {
-            background: var(--fire-orange); color: white; border: none; padding: 25px; width: 100%;
-            font-family: 'Orbitron'; font-weight: 900; font-size: 1.6rem; cursor: pointer;
-            margin-top: 30px; transition: 0.5s; clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+        .logo-box { font-family: var(--font-logo); font-size: 2.2rem; font-weight: 900; letter-spacing: 15px; }
+        .logo-box span { color: var(--phosphor); text-shadow: 0 0 15px var(--phosphor); }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { 
+            text-decoration: none; color: var(--white); font-family: var(--font-logo); 
+            font-size: 0.7rem; letter-spacing: 3px; opacity: 0.6; transition: var(--transition-smooth);
         }
-        .btn-strike:hover { background: var(--phosphor); color: black; box-shadow: 0 0 60px var(--phosphor); letter-spacing: 10px; }
+        .nav-links a:hover { opacity: 1; color: var(--fire); text-shadow: 0 0 10px var(--fire); }
 
-        /* Titan 30 Spotlight */
-        .titan-honor {
-            position: absolute; bottom: 50px; left: 60px;
-            border-left: 4px solid var(--gold); padding-left: 20px;
+        /* =========================================
+           5. HERO & PRESALE ENGINE
+           ========================================= */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 100px; }
+        .engine-container {
+            width: 100%; max-width: 1400px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px;
         }
-        .titan-honor h6 { font-family: 'Orbitron'; color: var(--gold); font-size: 0.7rem; letter-spacing: 5px; margin-bottom: 5px; }
-        .titan-honor p { font-family: 'Orbitron'; font-size: 1.5rem; font-weight: 900; }
 
-        /* Global Footer Networks */
-        .networks-footer { position: absolute; bottom: 50px; right: 60px; display: flex; gap: 30px; opacity: 0.3; transition: 0.5s; }
-        .networks-footer:hover { opacity: 0.9; }
-        .networks-footer i { font-size: 2rem; color: white; }
+        .main-display { padding: 40px; position: relative; }
+        .scarcity-tag { font-family: var(--font-mono); color: var(--fire); font-size: 0.8rem; margin-bottom: 10px; display: block; letter-spacing: 5px; }
+        .price-massive { font-family: var(--font-logo); font-size: 8rem; font-weight: 900; margin: 10px 0; letter-spacing: -5px; }
+        
+        .progress-frame { width: 100%; height: 10px; background: #111; border: 1px solid #222; margin: 40px 0; position: relative; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--fire), var(--phosphor)); width: 94.2%; box-shadow: 0 0 20px var(--phosphor); }
 
-        .brotherhood-badge { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); font-family: 'Orbitron'; font-size: 0.5rem; color: #444; letter-spacing: 10px; }
+        /* Buy Panel */
+        .buy-panel {
+            background: rgba(15,15,15,0.95); border: 1px solid #333; padding: 60px;
+            position: relative; border-bottom: 5px solid var(--fire);
+        }
+        .buy-panel h3 { font-family: var(--font-logo); font-size: 1.2rem; margin-bottom: 40px; color: var(--white); letter-spacing: 5px; }
+        
+        .input-group { background: #000; border: 1px solid #222; padding: 25px; margin-bottom: 20px; transition: var(--transition-smooth); }
+        .input-group:focus-within { border-color: var(--fire); box-shadow: 0 0 20px rgba(255,69,0,0.1); }
+        .input-group label { display: block; font-family: var(--font-mono); color: var(--phosphor); font-size: 0.7rem; margin-bottom: 10px; }
+        .input-group input { width: 100%; background: transparent; border: none; color: white; font-family: var(--font-logo); font-size: 2rem; outline: none; }
+
+        .btn-action {
+            width: 100%; padding: 30px; background: var(--fire); border: none; color: white;
+            font-family: var(--font-logo); font-size: 1.5rem; font-weight: 900; cursor: pointer;
+            transition: var(--transition-smooth); clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+        }
+        .btn-action:hover { background: var(--phosphor); color: black; box-shadow: 0 0 50px var(--phosphor); letter-spacing: 10px; }
+
+        /* =========================================
+           6. THE 15-STAGE MATRIX
+           ========================================= */
+        .matrix-section { padding: 100px 0; }
+        .matrix-header { text-align: center; margin-bottom: 60px; }
+        .matrix-header h2 { font-family: var(--font-logo); font-size: 3rem; color: var(--fire); letter-spacing: 20px; }
+
+        .ladder-wrapper { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .stage-box {
+            background: #0a0a0a; border: 1px solid #222; padding: 30px; text-align: center;
+            transition: var(--transition-smooth); position: relative; overflow: hidden;
+        }
+        .stage-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--fire); transform: scaleX(0); transition: 0.5s; }
+        .stage-box:hover::before { transform: scaleX(1); }
+        .stage-box.active { border-color: var(--phosphor); background: rgba(204, 255, 0, 0.05); }
+        .stage-box h4 { font-family: var(--font-logo); font-size: 0.7rem; color: var(--fire); margin-bottom: 10px; }
+        .stage-box p { font-family: var(--font-logo); font-size: 1.4rem; font-weight: 900; }
+
+        /* =========================================
+           7. TITAN 30 GOLD VAULT
+           ========================================= */
+        .titan-section { padding: 150px 0; background: radial-gradient(circle, #1a1600 0%, transparent 70%); }
+        .titan-card {
+            border: 1px solid var(--gold); padding: 80px; text-align: center;
+            background: rgba(0,0,0,0.8); position: relative; box-shadow: 0 0 100px rgba(255, 215, 0, 0.1);
+        }
+        .titan-card h2 { font-family: var(--font-logo); color: var(--gold); font-size: 2.5rem; letter-spacing: 15px; margin-bottom: 40px; }
+        .top-investor { font-family: var(--font-logo); font-size: 3rem; color: var(--white); text-shadow: 0 0 30px var(--gold); }
+
+        /* =========================================
+           8. TOKENOMICS & TECHNICALS
+           ========================================= */
+        .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 100px; }
+        .tech-card { background: var(--steel); padding: 40px; border-top: 4px solid var(--phosphor); }
+        .tech-card h5 { font-family: var(--font-logo); color: var(--phosphor); font-size: 2.5rem; }
+        .tech-card p { opacity: 0.6; margin-top: 10px; font-weight: 700; letter-spacing: 2px; }
+
+        /* =========================================
+           9. FOOTER & TERMINAL
+           ========================================= */
+        footer { padding: 100px 0; border-top: 1px solid #222; text-align: center; }
+        .terminal-text { font-family: var(--font-mono); font-size: 0.8rem; color: var(--fire); opacity: 0.5; margin-top: 40px; }
+
     </style>
 </head>
 <body>
 
-<canvas id="pulse-canvas"></canvas>
 <div id="particles-js"></div>
-<div id="cursor-glow"></div><div id="cursor-dot"></div>
+<canvas id="pulse-canvas"></canvas>
+<div class="vignette"></div>
+<div id="cursor-glow"></div>
+<div id="cursor-dot"></div>
+
+<nav>
+    <div class="logo-box">AR<span>X</span>N</div>
+    <div class="nav-links">
+        <a href="#hero">GATEWAY</a>
+        <a href="#matrix">LADDER</a>
+        <a href="#tokenomics">LOGISTICS</a>
+        <a href="#titan">TITAN_VAULT</a>
+        <a href="#whitepaper">DOCUMENTATION</a>
+        <button id="walletBtn" style="background:transparent; border:1px solid var(--phosphor); color:var(--phosphor); padding:10px 20px; font-family:var(--font-logo); cursor:pointer;">[ CONNECT_INTERFACE ]</button>
+    </div>
+</nav>
 
 <div class="container">
-    <header>
-        <div class="brand">AR<span>X</span>N <span class="currency">COIN</span></div>
-        <div style="display: flex; align-items: center; gap: 40px;">
-            <div style="display: flex; gap: 20px; color: var(--white); opacity: 0.6;">
-                <i class="fa-brands fa-twitter fa-xl"></i>
-                <i class="fa-brands fa-telegram fa-xl"></i>
-                <i class="fa-brands fa-discord fa-xl"></i>
+
+    <section id="hero" class="hero">
+        <div class="engine-container">
+            <div class="main-display" id="tilt-box">
+                <span class="scarcity-tag">RESERVE_STATUS: CRITICAL (94.2%)</span>
+                <div class="price-massive" id="price-decrypt">$0.01</div>
+                <div class="progress-frame"><div class="progress-fill"></div></div>
+                <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); opacity:0.5;">
+                    <span>PHASE_01 // $0.010</span>
+                    <span>PHASE_02 // $0.012</span>
+                </div>
+                <p style="margin-top:60px; max-width:500px; opacity:0.4; letter-spacing:2px;">
+                    THE ARXN PROTOCOL IS A DECENTRALIZED SOVEREIGN ASSET ENGINEERED FOR THE APEX INVESTOR. 
+                    LIQUIDITY IS PERMANENTLY ENCRYPTED.
+                </p>
             </div>
-            <button class="btn-connect" id="connectBtn">CONNECT_WALLET</button>
-        </div>
-    </header>
 
-    <div class="engine-hub" id="tilt-box">
-        <div>
-            <div class="fomo-radar">SCARCITY_RADAR: <span id="burn">842,000</span> ARXN REMAINING</div>
-            <div class="price-display" id="decrypt-price">$0.01</div>
-            <div style="width: 100%; height: 4px; background: #000; margin: 30px 0;">
-                <div style="width: 94.2%; height: 100%; background: var(--phosphor); box-shadow: 0 0 30px var(--phosphor);"></div>
+            <div class="buy-panel">
+                <h3>CORE_INJECTION</h3>
+                <div class="input-group">
+                    <label>INPUT_CAPITAL (USDT)</label>
+                    <input type="number" id="usdt-input" placeholder="0.00">
+                </div>
+                <div id="arxn-output" style="text-align:center; font-family:var(--font-logo); color:var(--phosphor); font-size:1.8rem; margin:30px 0;">0.00 ARXN</div>
+                <button class="btn-action">EXECUTE TRANSACTION</button>
+                <div style="margin-top:30px; display:flex; justify-content:center; gap:20px; opacity:0.3;">
+                    <i class="fa-brands fa-ethereum"></i>
+                    <i class="fa-brands fa-bitcoin"></i>
+                    <i class="fa-solid fa-shield-virus"></i>
+                </div>
             </div>
-            <p style="font-family: 'Orbitron'; font-size: 0.8rem; opacity: 0.4; letter-spacing: 3px;">
-                STATUS: CORE_INJECTION_ACTIVE // NETWORK: MAINNET
-            </p>
         </div>
+    </section>
 
-        <div style="background: rgba(0,0,0,0.5); padding: 40px; border: 1px solid #222;">
-            <div class="input-group">
-                <input type="number" placeholder="0.00" id="usdtInput">
-                <label>USDT</label>
+    <section id="matrix" class="matrix-section">
+        <div class="matrix-header">
+            <h2>THE_LADDER</h2>
+            <p style="letter-spacing:10px; opacity:0.5;">15 STAGES OF ASCENSION</p>
+        </div>
+        <div class="ladder-wrapper" id="ladder-matrix">
             </div>
-            <div id="arxnOutput" style="margin-top: 20px; font-family:'Orbitron'; font-size: 2rem; color: var(--phosphor); text-align: center; font-weight: 900;">0 ARXN</div>
-            <button class="btn-strike">EXECUTE TRANSACTION</button>
+    </section>
+
+    <section id="titan" class="titan-section">
+        <div class="titan-card">
+            <div style="position:absolute; top:20px; left:20px; color:var(--gold); font-family:var(--font-mono);">[ CLASSIFIED_AREA ]</div>
+            <h2>TITAN_30_SUPREME</h2>
+            <p style="opacity:0.5; margin-bottom:20px;">DOMINANT_INVESTOR_RANK_01</p>
+            <div class="top-investor">0x71...A409</div>
+            <div style="font-family:var(--font-logo); color:var(--gold); font-size:2rem; margin-top:20px;">$742,000.00</div>
         </div>
-    </div>
+    </section>
 
-    <div class="titan-honor">
-        <h6>SUPREME TITAN #1</h6>
-        <p>0xBD...F901 // $742,000</p>
-    </div>
+    <section id="tokenomics">
+        <h2 style="font-family:var(--font-logo); text-align:center; letter-spacing:15px; margin-bottom:80px;">LOGISTICS_MATRIX</h2>
+        <div class="tech-grid">
+            <div class="tech-card"><h5>40%</h5><p>PUBLIC_PRE-SALE</p></div>
+            <div class="tech-card"><h5>30%</h5><p>ENCRYPTED_LIQUIDITY</p></div>
+            <div class="tech-card"><h5>15%</h5><p>ECOSYSTEM_GROWTH</p></div>
+            <div class="tech-card"><h5>15%</h5><p>STRATEGIC_RESERVE</p></div>
+        </div>
+    </section>
 
-    <div class="networks-footer">
-        <i class="fa-brands fa-ethereum" title="Ethereum Mainnet"></i>
-        <i class="fa-brands fa-bitcoin" title="Bitcoin Protected"></i>
-        <i class="fa-solid fa-shield-halved" title="Audited Contract"></i>
-    </div>
-
-    <div class="brotherhood-badge">THE NAVIGATOR & THE SOVEREIGN</div>
 </div>
 
-<script>
-    // Particles Configuration
-    particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "color": { "value": "#ccff00" }, "line_linked": { "enable": true, "color": "#ccff00", "opacity": 0.1 }, "move": { "speed": 1 } } });
+<footer>
+    <div style="display:flex; justify-content:center; gap:50px; font-size:2rem; margin-bottom:50px;">
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-telegram"></i>
+        <i class="fa-brands fa-discord"></i>
+        <i class="fa-brands fa-github"></i>
+    </div>
+    <p style="font-family:var(--font-logo); font-size:0.7rem; letter-spacing:10px;">ARXN | THE SOVEREIGN PROTOCOL v44.0</p>
+    <div class="terminal-text">
+        [SYSTEM] ... ALL PROTOCOLS OPERATIONAL <br>
+        [SYSTEM] ... NAVIGATOR & SOVEREIGN SYNCED <br>
+        [SYSTEM] ... ENCRYPTION: AES-256-GCM
+    </div>
+</footer>
 
-    // Living Pulse Line
+<script>
+    /* =========================================
+       10. CORE JAVASCRIPT ENGINE (THE BRAIN)
+       ========================================= */
+
+    // Initialize Particles.js (The Nebula)
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#FF4500" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.2, "random": true },
+            "size": { "value": 2, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#ccff00", "opacity": 0.05, "width": 1 },
+            "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+        }
+    });
+
+    // Generate 15 Stages (Scaling the code)
+    const ladder = document.getElementById('ladder-matrix');
+    const prices = [0.010, 0.012, 0.015, 0.018, 0.022, 0.026, 0.031, 0.037, 0.044, 0.052, 0.062, 0.074, 0.088, 0.100, 0.120];
+    
+    prices.forEach((price, index) => {
+        const stage = document.createElement('div');
+        stage.className = stage-box ${index === 0 ? 'active' : ''};
+        stage.innerHTML = `
+            <h4>STAGE_${String(index+1).padStart(2, '0')}</h4>
+            <p>$${price.toFixed(3)}</p>
+            <div style="font-size:0.5rem; opacity:0.3; margin-top:10px;">SUPPLY: 10M ARXN</div>
+        `;
+        ladder.appendChild(stage);
+    });
+
+    // Interactive Cursor Engine
+    const glow = document.getElementById('cursor-glow');
+    const dot = document.getElementById('cursor-dot');
+    
+    document.addEventListener('mousemove', (e) => {
+        gsap.to(glow, { duration: 0.8, x: e.clientX, y: e.clientY, ease: "power2.out" });
+        gsap.to(dot, { duration: 0.1, x: e.clientX, y: e.clientY });
+
+        // Hero Tilt Physics
+        const xAxis = (window.innerWidth / 2 - e.clientX) / 70;
+        const yAxis = (window.innerHeight / 2 - e.clientY) / 70;
+        gsap.to("#tilt-box", { duration: 1, rotateY: xAxis, rotateX: yAxis, ease: "power2.out" });
+    });
+
+    // Price Decryption Effect (Cyberpunk Feel)
+    const priceEl = document.getElementById('price-decrypt');
+    priceEl.addEventListener('mouseenter', () => {
+        const original = "$0.01";
+        const chars = "0123456789X$!@#";
+        let iter = 0;
+        const interval = setInterval(() => {
+            priceEl.innerText = original.split("").map((l, i) => i < iter ? original[i] : chars[Math.floor(Math.random()*chars.length)]).join("");
+            if(iter >= original.length) clearInterval(interval);
+            iter += 1/3;
+        }, 30);
+    });
+
+    // Calc System
+    document.getElementById('usdt-input').addEventListener('input', (e) => {
+        const val = e.target.value;
+        document.getElementById('arxn-output').innerText = (val / 0.01).toLocaleString() + " ARXN";
+    });
+
+    // Neural Pulse Visualizer
     const canvas = document.getElementById('pulse-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     let x = 0;
-    function drawPulse() {
-        ctx.strokeStyle = '#ccff00'; ctx.lineWidth = 0.5;
+    function animate() {
+        ctx.strokeStyle = '#ccff00'; ctx.lineWidth = 0.2;
         ctx.beginPath(); ctx.moveTo(x, canvas.height/2);
-        x += 2.5; if (x > canvas.width) { x = 0; ctx.clearRect(0,0,canvas.width,canvas.height); }
-        let y = canvas.height/2 + (Math.random() > 0.96 ? (Math.random()-0.5)*200 : (Math.random()-0.5)*15);
+        x += 2; if(x > canvas.width) { x = 0; ctx.clearRect(0,0,canvas.width,canvas.height); }
+        let y = canvas.height/2 + (Math.random() > 0.98 ? (Math.random()-0.5)*400 : (Math.random()-0.5)*20);
         ctx.lineTo(x, y); ctx.stroke();
-        requestAnimationFrame(drawPulse);
+        requestAnimationFrame(animate);
     }
-    drawPulse();
+    animate();
 
-    // Interaction & Tilt
-    document.addEventListener('mousemove', (e) => {
-        const glow = document.getElementById('cursor-glow');
-        const dot = document.getElementById('cursor-dot');
-        glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
-        dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
-
-        const xAxis = (window.innerWidth / 2 - e.clientX) / 80;
-        const yAxis = (window.innerHeight / 2 - e.clientY) / 80;
-        document.getElementById('tilt-box').style.transform = rotateY(${xAxis}deg) rotateX(${yAxis}deg);
-    });
-
-    // Scarcity Burn Counter
-    setInterval(() => {
-        let burn = document.getElementById('burn');
-        let current = parseInt(burn.innerText.replace(/,/g, ''));
-        burn.innerText = (current - Math.floor(Math.random()*3)).toLocaleString();
-    }, 2000);
-
-    // Decrypt Effect
-    const price = document.getElementById('decrypt-price');
-    price.addEventListener('mouseenter', () => {
-        let orig = "$0.01"; let chars = "0123456789X$"; let iter = 0;
-        const interval = setInterval(() => {
-            price.innerText = orig.split("").map((l, i) => i < iter ? orig[i] : chars[Math.floor(Math.random()*12)]).join("");
-            if(iter >= orig.length) clearInterval(interval);
-            iter += 1/3;
-        }, 40);
-    });
-
-    // Wallet Connect Logic Placeholder
-    const connectBtn = document.getElementById('connectBtn');
-    connectBtn.onclick = async () => {
-        connectBtn.innerText = "CONNECTING...";
-        setTimeout(() => { connectBtn.innerText = "0x71...A402"; connectBtn.style.color = "#FFD700"; }, 1500);
-    };
-
-    // Calculation
-    document.getElementById('usdtInput').addEventListener('input', (e) => {
-        document.getElementById('arxnOutput').innerText = (e.target.value * 100).toLocaleString() + " ARXN";
-    });
+    console.log("ARXN SYSTEM v44.0 : INITIALIZED");
 </script>
+
 </body>
 </html>
