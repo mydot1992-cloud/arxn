@@ -1,171 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION | The Ultimate Neural Empire</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>ARXION | The Global Sovereign Masterpiece</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --fire-orange: #FF4500;
-            --royal-purple: #8A2BE2;
-            --neon-green: #39FF14;
-            --deep-slate: #0A0A0A;
-            --light-gray: #d1d5db; /* For progress bar text */
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--deep-slate);
-            color: #ffffff;
-            scroll-behavior: smooth;
-        }
-        .logo-x {
-            color: var(--royal-purple);
-            text-shadow: 0 0 15px var(--royal-purple), 0 0 25px rgba(138,43,226,0.6);
-            transition: transform 0.3s ease-in-out;
-        }
-        .logo-x:hover { transform: scale(1.1); }
-
-        .orange-text { color: var(--fire-orange); }
-        .purple-text { color: var(--royal-purple); }
-        .neon-text { color: var(--neon-green); }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 2rem; /* Consistent large radius */
-            transition: all 0.3s ease-in-out;
-        }
-        .glass-card:hover { border-color: rgba(255, 255, 255, 0.2); }
-
-        .btn-main {
-            background-color: var(--fire-orange);
-            box-shadow: 0 0 25px rgba(255, 69, 0, 0.5), 0 0 40px rgba(255, 69, 0, 0.3);
-            transition: all 0.4s ease-in-out;
-        }
-        .btn-main:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 0 35px rgba(255, 69, 0, 0.7), 0 0 60px rgba(255, 69, 0, 0.5);
+            --royal-purple: #7851A9;
+            --gold: #FFD700;
+            --neon-blue: #00f3ff;
+            --dark-bg: #020204;
         }
 
-        .btn-secondary {
-            border: 2px solid var(--royal-purple);
-            color: var(--royal-purple);
-            transition: all 0.3s ease-in-out;
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background: var(--dark-bg); color: white; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Floating AI Assistant */
+        .ai-assistant {
+            position: fixed; top: 20px; right: 20px; background: rgba(120, 81, 169, 0.15);
+            backdrop-filter: blur(10px); border: 1px solid var(--royal-purple);
+            padding: 10px 20px; border-radius: 50px; display: flex; align-items: center; z-index: 1000;
         }
-        .btn-secondary:hover {
-            background-color: var(--royal-purple);
-            color: white;
-            box-shadow: 0 0 20px rgba(138,43,226,0.4);
+        .ai-head { font-size: 1.8rem; position: relative; margin-right: 10px; }
+        .ai-head::after { content: '🎧'; position: absolute; top: -5px; left: -5px; font-size: 0.8rem; }
+
+        /* Pulsing X Logo */
+        header { text-align: center; padding: 80px 0 40px; }
+        .brand { font-family: 'Orbitron'; font-size: 4.5rem; font-weight: 900; color: var(--fire-orange); letter-spacing: 8px; }
+        .brand span { color: var(--royal-purple); display: inline-block; animation: x-glow 3s infinite alternate; }
+        @keyframes x-glow { to { text-shadow: 0 0 35px var(--royal-purple); transform: scale(1.1); } }
+
+        /* Main Presale Card */
+        .main-card {
+            background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(120, 81, 169, 0.3);
+            border-radius: 40px; padding: 60px; text-align: center; position: relative;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.8); transition: 0.4s;
+        }
+        .main-card:hover { border-color: var(--fire-orange); }
+
+        .price-big { font-family: 'Orbitron'; font-size: 8rem; font-weight: 900; color: var(--fire-orange); line-height: 1; margin: 20px 0; }
+
+        /* 24-Hour Countdown */
+        .timer-grid { display: flex; justify-content: center; gap: 15px; margin: 25px 0; font-family: 'Orbitron'; }
+        .t-unit { background: rgba(255, 69, 0, 0.1); padding: 12px 25px; border-radius: 12px; border: 1px solid var(--fire-orange); color: var(--gold); }
+
+        /* Currency Icons */
+        .currency-bar { display: flex; justify-content: center; gap: 20px; margin: 40px 0; flex-wrap: wrap; }
+        .coin-tag { background: rgba(255,255,255,0.05); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; font-weight: bold; }
+        .coin-tag span { color: var(--neon-blue); }
+
+        /* Action Button */
+        .btn-mega {
+            background: linear-gradient(45deg, var(--fire-orange), #ff6a00);
+            color: white; border: none; padding: 25px 90px; border-radius: 60px;
+            font-size: 1.6rem; font-weight: 900; font-family: 'Orbitron'; cursor: pointer;
+            box-shadow: 0 20px 50px rgba(255, 69, 0, 0.5); transition: 0.3s;
+        }
+        .btn-mega:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 25px 70px var(--fire-orange); }
+
+        /* Tokenomics & Info Grid */
+        .grid-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
+        .info-card { background: rgba(255,255,255,0.02); padding: 35px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .info-card:hover { background: rgba(255,255,255,0.04); }
+        .titan-gold { border: 2px solid var(--gold) !important; background: rgba(255, 215, 0, 0.05) !important; box-shadow: 0 0 30px rgba(255, 215, 0, 0.1); }
+
+        /* Live Transaction Feed */
+        .live-feed {
+            position: fixed; bottom: 0; left: 0; width: 100%; background: linear-gradient(90deg, var(--royal-purple), #000);
+            color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 0.85rem; z-index: 1000; border-top: 1px solid var(--fire-orange);
         }
 
-        /* Titan 30 Specific Styles */
-        .titan-gold-rank {
-            background: linear-gradient(90deg, rgba(255,215,0,0.15) 0%, transparent 100%);
-            border-left: 5px solid gold;
-        }
-        .titan-entry {
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 1.5rem 2rem;
-            transition: background-color 0.2s;
-        }
-        .titan-entry:hover { background-color: rgba(255,255,255,0.03); }
-
-
-        /* Countdown specific glow */
-        .countdown-glow {
-            text-shadow: 0 0 15px rgba(255,255,255,0.3);
-        }
-        .timer-unit-active {
-             border: 2px solid var(--neon-green);
-             box-shadow: 0 0 25px rgba(57,255,20,0.4);
-        }
-
-        /* Progress Bar Animation */
-        .progress-bar {
-            height: 100%;
-            border-radius: 9999px;
-            background: linear-gradient(90deg, var(--neon-green), var(--royal-purple));
-            box-shadow: 0 0 15px var(--neon-green);
-        }
-
-        /* Team member hover effect */
-        .team-member:hover .member-name { color: var(--fire-orange); }
-        .team-member:hover .member-title { color: var(--neon-green); }
-
-        /* Roadmap dot animation */
-        .roadmap-dot {
-            animation: pulse-dot 1.5s infinite ease-in-out;
-        }
-        @keyframes pulse-dot {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.7; }
-        }
-
-        /* Animated background elements for depth */
-        .animated-bg-element {
-            position: absolute;
-            background: radial-gradient(circle, var(--royal-purple) 0%, transparent 70%);
-            opacity: 0.07;
-            border-radius: 50%;
-            animation: move-bg 20s infinite alternate ease-in-out;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .animated-bg-element.one { top: 10%; left: 5%; width: 400px; height: 400px; animation-duration: 25s; }
-        .animated-bg-element.two { bottom: 20%; right: 10%; width: 500px; height: 500px; animation-duration: 30s; }
-        .animated-bg-element.three { top: 50%; left: 30%; width: 300px; height: 300px; animation-duration: 20s; animation-delay: 5s; }
-
-        @keyframes move-bg {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(50px, 80px) scale(1.1); }
-        }
-
-        /* Global Padding for Sections */
-        section { padding: 6rem 1.5rem; max-width: 80rem; margin-left: auto; margin-right: auto; }
+        .audit-badge { display: inline-block; background: white; color: black; padding: 8px 25px; border-radius: 8px; font-weight: 900; font-size: 0.8rem; margin-top: 30px; text-transform: uppercase; }
 
     </style>
 </head>
 <body>
 
-    <div class="animated-bg-element one"></div>
-    <div class="animated-bg-element two"></div>
-    <div class="animated-bg-element three"></div>
+<div class="ai-assistant">
+    <div class="ai-head">🤖</div>
+    <div style="font-size: 0.8rem; font-family: 'Orbitron';">SYSTEM: <span style="color: var(--neon-blue);">ACTIVE</span><br><span style="color: #fff;">Hello, Eyad</span></div>
+</div>
 
-    <nav class="fixed w-full z-50 glass-card px-8 py-4 flex justify-between items-center bg-transparent">
-        <a href="#hero" class="text-3xl font-black italic tracking-tighter hover:scale-105 transition-transform">
-            AR<span class="logo-x">X</span>ION
-        </a>
-        <div class="hidden md:flex space-x-10 font-bold text-[10px] uppercase tracking-[0.2em]">
-            <a href="#hero" class="hover:text-orange-500 transition-colors">Presale</a>
-            <a href="#titan" class="hover:text-purple-500 transition-colors">Titan 30</a>
-            <a href="#tokenomics" class="hover:text-green-500 transition-colors">Economy</a>
-            <a href="#roadmap" class="hover:text-fire-orange transition-colors">Roadmap</a>
-            <a href="#team" class="hover:text-royal-purple transition-colors">Team</a>
-        </div>
-        <button class="bg-white text-black px-6 py-2 rounded-full font-black text-xs hover:bg-neon-green hover:text-white transition-colors">
-            CONNECT WALLET
-        </button>
-    </nav>
+<div class="container">
+    <header>
+        <div class="brand">AR<span>X</span>ION</div>
+        <p style="letter-spacing: 8px; opacity: 0.5; font-size: 0.8rem;">THE GLOBAL NEURAL ASSET</p>
+    </header>
 
-    <section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center pt-24 relative z-10">
-        <div class="inline-flex items-center space-x-3 px-6 py-2 bg-black/40 border border-neon-green/50 rounded-full mb-8 shadow-lg">
-            <span class="relative flex h-3 w-3">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-green opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-neon-green"></span>
-            </span>
-            <span class="neon-text text-xs font-black tracking-[0.3em] uppercase">Stage 1: Detonation Sequence Initiated</span>
+    <div class="main-card">
+        <h4 style="font-family: 'Orbitron'; color: var(--gold); letter-spacing: 3px;">PHASE 01 // ENDS IN:</h4>
+        <div class="timer-grid">
+            <div class="t-unit" id="hr">23h</div>
+            <div class="t-unit" id="mn">59m</div>
+            <div class="t-unit" id="sc">59s</div>
         </div>
 
-        <h1 class="text-6xl md:text-8xl font-black text-center mb-8 leading-tight italic uppercase tracking-tighter gradient-text">
-            Ignite Your <span class="orange-text">Neural Future</span>
-        </h1>
-        <p class="text-gray-400 text-lg max-w-3xl mx-auto mb-12 font-medium">
-            Join the AR<span class="logo-x">X</span>ION revolution. This is your final window to acquire at the genesis price before the market explosion.
+        <div class="price-big">$0.01</div>
+
+        <div class="currency-bar">
+            <div class="coin-tag">💵 <span>USDT</span></div>
+            <div class="coin-tag">🪙 <span>USDC</span></div>
+            <div class="coin-tag">💎 <span>ETH</span></div>
+            <div class="coin-tag">☀️ <span>SOL</span></div>
+            <div class="coin-tag">🟡 <span>BNB</span></div>
+        </div>
+
+        <button class="btn-mega">INVEST IN ARXION</button>
+        <br>
+        <div class="audit-badge">Audited by Solid Proof ✔️</div>
+    </div>
+
+    <div class="grid-sections">
+        <div class="info-card titan-gold">
+            <h3 style="color: var(--gold); font-family: 'Orbitron';">👑 TITAN #1</h3>
+            <p style="font-size: 0.8rem; margin: 15px 0; opacity: 0.7;">Wallet: 0x71...f3E2</p>
+            <div style="font-size: 2.2rem; color: var(--gold); font-family: 'Orbitron';">$45,000</div>
+        </div>
+
+        <div class="info-card">
+            <h3 style="font-family: 'Orbitron'; color: var(--fire-orange);">TOKENOMICS</h3>
+            <div style="margin-top: 15px; font-size: 0.9rem; line-height: 1.8;">
+                <p>• 40% Presale (14 Stages)</p>
+                <p>• 25% Locked Liquidity</p>
+                <p>• 15% AI Development</p>
+                <p>• 20% Marketing & Rewards</p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3 style="font-family: 'Orbitron'; color: var(--neon-blue);">INNOVATION</h3>
+            <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.8;">
+                Integrating Neural Scarcity Burn & AR Vision tracking for absolute asset transparency.
+            </p>
+        </div>
+    </div>
+
+    <div class="info-card" style="margin: 60px 0; text-align: center;">
+        <h3 style="font-family: 'Orbitron'; margin-bottom: 25px;">FREQUENTLY ASKED QUESTIONS</h3>
+        <p style="font-size: 1rem; color: var(--gold);">Listing Price: $0.15 (15X ROI Expected)</p>
+        <p style="font-size: 0.85rem; opacity: 0.6; margin-top: 15px;">
+            "Why do programmers prefer dark mode? Because light attracts bugs! 🤖"
         </p>
+    </div>
 
-        <div class="grid grid-cols-4 gap-4 md:gap-8 max-w-4xl w-full mx-auto mb-16">
-            <div class="glass-card p-6 md:p-10 text-center timer-unit-active">
-                <span id="h" class="text-5xl md:text-8xl font-black countdown-glow">2
+    <footer style="text-align: center; padding-bottom: 80px; opacity: 0.3; font-size: 0.8rem; letter-spacing: 3px;">
+        ARXION NEURAL NETWORK © 2025 // DECODE YOUR WEALTH
+    </footer>
+</div>
+
+<div class="live-feed" id="ticker">Synchronizing with Mainnet...</div>
+
+<script>
+    // Live 24-Hour Countdown Logic
+    function updateTimer() {
+        let now = new Date();
+        document.getElementById('hr').innerText = (23 - now.getHours()).toString().padStart(2, '0') + "h";
+        document.getElementById('mn').innerText = (59 - now.getMinutes()).toString().padStart(2, '0') + "m";
+        document.getElementById('sc').innerText = (59 - now.getSeconds()).toString().padStart(2, '0') + "s";
+    }
+    setInterval(updateTimer, 1000);
+
+    // Live Wallet Transaction Ticker
+    const txs = [
+        "TX CONFIRMED: Wallet 0x82...f312 bought 10,000 $ARX",
+        "TX CONFIRMED: Wallet 0x14...a9e0 bought 55,000 $ARX",
+        "TX CONFIRMED: Wallet 0x99...c2b1 bought 2,500 $ARX",
+        "TX CONFIRMED: Wallet 0xbc...77af bought 100,000 $ARX"
+    ];
+    let i = 0;
+    setInterval(() => {
+        document.getElementById('ticker').innerText = txs[i];
+        i = (i + 1) % txs.length;
+    }, 4000);
+</script>
+
+</body>
+</html>
