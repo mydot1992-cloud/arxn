@@ -3,345 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ARXN - The Sovereign Pre-sale Protocol. Phase 15 Integration.">
-    <title>ARXN | THE INFINITE MONOLITH v44.0</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>ARXN | IRONCLAD PROTOCOL v52.0</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=JetBrains+Mono:wght@300;800&family=Orbitron:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.1/web3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
     <style>
-        /* =========================================
-           1. CORE SYSTEM VARIABLES (ARXN DESIGN SYSTEM)
-           ========================================= */
         :root {
             --fire: #FF4500;
-            --fire-glow: rgba(255, 69, 0, 0.4);
             --phosphor: #ccff00;
-            --phosphor-glow: rgba(204, 255, 0, 0.4);
+            --void: #050505;
             --steel: #1a1a1a;
-            --dark-steel: #0d0d0d;
-            --void: #020202;
             --gold: #FFD700;
-            --gold-glow: rgba(255, 215, 0, 0.3);
-            --white: #ffffff;
-            --font-main: 'Rajdhani', sans-serif;
-            --font-mono: 'Share Tech Mono', monospace;
-            --font-logo: 'Orbitron', sans-serif;
-            --transition-smooth: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            --glitch-speed: 0.2s;
         }
 
-        /* =========================================
-           2. GLOBAL RESET & SCROLLBAR
-           ========================================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--void); }
-        ::-webkit-scrollbar-thumb { background: var(--fire); border-radius: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        body { background: var(--void); color: #fff; font-family: 'JetBrains Mono', monospace; overflow-x: hidden; }
 
-        body {
-            background-color: var(--void);
-            color: var(--white);
-            font-family: var(--font-main);
-            overflow-x: hidden;
+        /* Background Hud System */
+        .hud-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                linear-gradient(rgba(255, 69, 0, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 69, 0, 0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(255, 69, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 69, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: -1;
         }
 
-        /* =========================================
-           3. BACKGROUND & FX SYSTEMS
-           ========================================= */
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -5; }
-        #pulse-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4; opacity: 0.2; }
-        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, black 100%); z-index: -1; pointer-events: none; }
-        
-        /* Interactive Cursor */
-        #cursor-glow { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, var(--fire-glow) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
-        #cursor-dot { position: fixed; width: 6px; height: 6px; background: var(--phosphor); border-radius: 50%; z-index: 10000; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 15px var(--phosphor); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
 
-        /* =========================================
-           4. NAVIGATION UI
-           ========================================= */
+        /* --- NAVIGATION: THE COMMAND BAR --- */
         nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0,0,0,0.8); border-bottom: 1px solid #222; backdrop-filter: blur(10px);
+            padding: 40px 60px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--steel); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
         }
-        .logo-box { font-family: var(--font-logo); font-size: 2.2rem; font-weight: 900; letter-spacing: 15px; }
-        .logo-box span { color: var(--phosphor); text-shadow: 0 0 15px var(--phosphor); }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { 
-            text-decoration: none; color: var(--white); font-family: var(--font-logo); 
-            font-size: 0.7rem; letter-spacing: 3px; opacity: 0.6; transition: var(--transition-smooth);
+        .logo { font-family: 'Orbitron'; font-size: 3rem; font-weight: 900; letter-spacing: 10px; }
+        .logo span { color: var(--phosphor); text-shadow: 0 0 15px var(--phosphor); }
+
+        /* --- HERO: THE DEPLOYMENT ZONE --- */
+        .deployment-zone { min-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+
+        .title-block h1 {
+            font-family: 'Syncopate', sans-serif; font-size: 6rem; line-height: 0.9;
+            text-transform: uppercase; margin-bottom: 20px;
         }
-        .nav-links a:hover { opacity: 1; color: var(--fire); text-shadow: 0 0 10px var(--fire); }
+        .title-block .fire-text { color: var(--fire); text-shadow: 10px 10px 0px rgba(255, 69, 0, 0.1); }
 
-        /* =========================================
-           5. HERO & PRESALE ENGINE
-           ========================================= */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 100px; }
-        .engine-container {
-            width: 100%; max-width: 1400px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px;
+        /* --- INJECTION CORE (NON-RAKIK) --- */
+        .core-panel {
+            background: #000; border: 4px solid var(--steel); padding: 50px;
+            position: relative; box-shadow: 20px 20px 0px var(--steel);
+        }
+        .core-panel::before {
+            content: "SECURITY_LEVEL: ALPHA"; position: absolute; top: -15px; left: 20px;
+            background: var(--fire); color: #000; font-size: 0.6rem; padding: 2px 10px; font-weight: 800;
         }
 
-        .main-display { padding: 40px; position: relative; }
-        .scarcity-tag { font-family: var(--font-mono); color: var(--fire); font-size: 0.8rem; margin-bottom: 10px; display: block; letter-spacing: 5px; }
-        .price-massive { font-family: var(--font-logo); font-size: 8rem; font-weight: 900; margin: 10px 0; letter-spacing: -5px; }
-        
-        .progress-frame { width: 100%; height: 10px; background: #111; border: 1px solid #222; margin: 40px 0; position: relative; overflow: hidden; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--fire), var(--phosphor)); width: 94.2%; box-shadow: 0 0 20px var(--phosphor); }
-
-        /* Buy Panel */
-        .buy-panel {
-            background: rgba(15,15,15,0.95); border: 1px solid #333; padding: 60px;
-            position: relative; border-bottom: 5px solid var(--fire);
+        .input-group { margin-bottom: 40px; border-left: 5px solid var(--fire); padding-left: 20px; }
+        .input-group label { font-size: 0.7rem; color: var(--phosphor); letter-spacing: 3px; display: block; margin-bottom: 10px; }
+        .input-group input {
+            width: 100%; background: transparent; border: none; color: #fff;
+            font-family: 'Syncopate'; font-size: 3.5rem; outline: none;
         }
-        .buy-panel h3 { font-family: var(--font-logo); font-size: 1.2rem; margin-bottom: 40px; color: var(--white); letter-spacing: 5px; }
-        
-        .input-group { background: #000; border: 1px solid #222; padding: 25px; margin-bottom: 20px; transition: var(--transition-smooth); }
-        .input-group:focus-within { border-color: var(--fire); box-shadow: 0 0 20px rgba(255,69,0,0.1); }
-        .input-group label { display: block; font-family: var(--font-mono); color: var(--phosphor); font-size: 0.7rem; margin-bottom: 10px; }
-        .input-group input { width: 100%; background: transparent; border: none; color: white; font-family: var(--font-logo); font-size: 2rem; outline: none; }
 
-        .btn-action {
-            width: 100%; padding: 30px; background: var(--fire); border: none; color: white;
-            font-family: var(--font-logo); font-size: 1.5rem; font-weight: 900; cursor: pointer;
-            transition: var(--transition-smooth); clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+        .currency-wrap { display: flex; gap: 15px; margin-bottom: 40px; }
+        .coin-sel {
+            flex: 1; border: 1px solid #333; padding: 15px; text-align: center;
+            cursor: pointer; transition: 0.2s;
         }
-        .btn-action:hover { background: var(--phosphor); color: black; box-shadow: 0 0 50px var(--phosphor); letter-spacing: 10px; }
+        .coin-sel.active { background: var(--fire); border-color: var(--fire); color: #000; font-weight: 800; }
 
-        /* =========================================
-           6. THE 15-STAGE MATRIX
-           ========================================= */
-        .matrix-section { padding: 100px 0; }
-        .matrix-header { text-align: center; margin-bottom: 60px; }
-        .matrix-header h2 { font-family: var(--font-logo); font-size: 3rem; color: var(--fire); letter-spacing: 20px; }
-
-        .ladder-wrapper { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-        .stage-box {
-            background: #0a0a0a; border: 1px solid #222; padding: 30px; text-align: center;
-            transition: var(--transition-smooth); position: relative; overflow: hidden;
+        .arxn-display {
+            background: var(--steel); padding: 30px; text-align: center;
+            border: 1px solid var(--phosphor); margin-bottom: 30px;
         }
-        .stage-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--fire); transform: scaleX(0); transition: 0.5s; }
-        .stage-box:hover::before { transform: scaleX(1); }
-        .stage-box.active { border-color: var(--phosphor); background: rgba(204, 255, 0, 0.05); }
-        .stage-box h4 { font-family: var(--font-logo); font-size: 0.7rem; color: var(--fire); margin-bottom: 10px; }
-        .stage-box p { font-family: var(--font-logo); font-size: 1.4rem; font-weight: 900; }
+        .arxn-display span { color: var(--fire); font-family: 'Syncopate'; font-size: 2.5rem; }
 
-        /* =========================================
-           7. TITAN 30 GOLD VAULT
-           ========================================= */
-        .titan-section { padding: 150px 0; background: radial-gradient(circle, #1a1600 0%, transparent 70%); }
-        .titan-card {
-            border: 1px solid var(--gold); padding: 80px; text-align: center;
-            background: rgba(0,0,0,0.8); position: relative; box-shadow: 0 0 100px rgba(255, 215, 0, 0.1);
+        .btn-strike {
+            width: 100%; padding: 30px; background: var(--phosphor); color: #000;
+            font-family: 'Syncopate'; font-weight: 700; font-size: 1.5rem; border: none;
+            cursor: pointer; position: relative; transition: 0.3s;
         }
-        .titan-card h2 { font-family: var(--font-logo); color: var(--gold); font-size: 2.5rem; letter-spacing: 15px; margin-bottom: 40px; }
-        .top-investor { font-family: var(--font-logo); font-size: 3rem; color: var(--white); text-shadow: 0 0 30px var(--gold); }
+        .btn-strike:hover { background: var(--fire); color: #fff; transform: translate(-5px, -5px); box-shadow: 10px 10px 0px #fff; }
 
-        /* =========================================
-           8. TOKENOMICS & TECHNICALS
-           ========================================= */
-        .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 100px; }
-        .tech-card { background: var(--steel); padding: 40px; border-top: 4px solid var(--phosphor); }
-        .tech-card h5 { font-family: var(--font-logo); color: var(--phosphor); font-size: 2.5rem; }
-        .tech-card p { opacity: 0.6; margin-top: 10px; font-weight: 700; letter-spacing: 2px; }
+        /* --- TITAN SUPREME (THE GOLD STANDARD) --- */
+        .titan-vault {
+            margin-top: 100px; border: 2px solid var(--gold); padding: 60px;
+            background: linear-gradient(to right, rgba(255,215,0,0.05), transparent);
+            text-align: center;
+        }
+        .titan-vault h2 { font-family: 'Syncopate'; color: var(--gold); font-size: 2.5rem; margin-bottom: 20px; }
+        .gold-address { font-size: 3.5rem; font-weight: 800; color: #fff; text-shadow: 0 0 20px var(--gold); }
 
-        /* =========================================
-           9. FOOTER & TERMINAL
-           ========================================= */
-        footer { padding: 100px 0; border-top: 1px solid #222; text-align: center; }
-        .terminal-text { font-family: var(--font-mono); font-size: 0.8rem; color: var(--fire); opacity: 0.5; margin-top: 40px; }
+        /* --- THE 15 STEPS (INDUSTRIAL GRID) --- */
+        .steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 100px 0; }
+        .step-box { border: 1px solid #222; padding: 20px; text-align: center; background: #080808; }
+        .step-box.current { border-color: var(--fire); background: rgba(255,69,0,0.05); }
+        .step-box h5 { font-size: 0.6rem; color: var(--phosphor); }
+        .step-box p { font-family: 'Syncopate'; font-size: 1rem; margin-top: 5px; }
 
     </style>
 </head>
 <body>
 
-<div id="particles-js"></div>
-<canvas id="pulse-canvas"></canvas>
-<div class="vignette"></div>
-<div id="cursor-glow"></div>
-<div id="cursor-dot"></div>
+<div class="hud-bg"></div>
 
 <nav>
-    <div class="logo-box">AR<span>X</span>N</div>
-    <div class="nav-links">
-        <a href="#hero">GATEWAY</a>
-        <a href="#matrix">LADDER</a>
-        <a href="#tokenomics">LOGISTICS</a>
-        <a href="#titan">TITAN_VAULT</a>
-        <a href="#whitepaper">DOCUMENTATION</a>
-        <button id="walletBtn" style="background:transparent; border:1px solid var(--phosphor); color:var(--phosphor); padding:10px 20px; font-family:var(--font-logo); cursor:pointer;">[ CONNECT_INTERFACE ]</button>
+    <div class="logo">AR<span>X</span>N</div>
+    <div style="font-family: 'JetBrains Mono'; color: var(--fire); font-size: 0.8rem; letter-spacing: 5px;">
+        STATUS: SYSTEM_LIVE // PHASE: 01
     </div>
 </nav>
 
 <div class="container">
+    <section class="deployment-zone">
+        <div class="title-block">
+            <p style="color: var(--phosphor); margin-bottom: 10px;">> INITIALIZING_SOVEREIGN_TAKEOVER</p>
+            <h1>OWN THE<br><span class="fire-text">ENGINE</span></h1>
+            <p style="opacity: 0.5; max-width: 450px; font-size: 0.9rem;">
+                لا نعد بالثراء، نحن نبني السيادة. ARXN هو البروتوكول المالي الأكثر خشونة في سوق الكريبتو.
+            </p>
+        </div>
 
-    <section id="hero" class="hero">
-        <div class="engine-container">
-            <div class="main-display" id="tilt-box">
-                <span class="scarcity-tag">RESERVE_STATUS: CRITICAL (94.2%)</span>
-                <div class="price-massive" id="price-decrypt">$0.01</div>
-                <div class="progress-frame"><div class="progress-fill"></div></div>
-                <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); opacity:0.5;">
-                    <span>PHASE_01 // $0.010</span>
-                    <span>PHASE_02 // $0.012</span>
-                </div>
-                <p style="margin-top:60px; max-width:500px; opacity:0.4; letter-spacing:2px;">
-                    THE ARXN PROTOCOL IS A DECENTRALIZED SOVEREIGN ASSET ENGINEERED FOR THE APEX INVESTOR. 
-                    LIQUIDITY IS PERMANENTLY ENCRYPTED.
-                </p>
+        <div class="core-panel">
+            <div class="currency-wrap">
+                <div class="coin-sel active" onclick="setCoin('USDT')">USDT</div>
+                <div class="coin-sel" onclick="setCoin('ETH')">ETH</div>
+                <div class="coin-sel" onclick="setCoin('BNB')">BNB</div>
             </div>
 
-            <div class="buy-panel">
-                <h3>CORE_INJECTION</h3>
-                <div class="input-group">
-                    <label>INPUT_CAPITAL (USDT)</label>
-                    <input type="number" id="usdt-input" placeholder="0.00">
-                </div>
-                <div id="arxn-output" style="text-align:center; font-family:var(--font-logo); color:var(--phosphor); font-size:1.8rem; margin:30px 0;">0.00 ARXN</div>
-                <button class="btn-action">EXECUTE TRANSACTION</button>
-                <div style="margin-top:30px; display:flex; justify-content:center; gap:20px; opacity:0.3;">
-                    <i class="fa-brands fa-ethereum"></i>
-                    <i class="fa-brands fa-bitcoin"></i>
-                    <i class="fa-solid fa-shield-virus"></i>
-                </div>
+            <div class="input-group">
+                <label id="input-label">INJECT_AMOUNT (USDT)</label>
+                <input type="number" id="pay-in" placeholder="0.00">
             </div>
-        </div>
-    </section>
 
-    <section id="matrix" class="matrix-section">
-        <div class="matrix-header">
-            <h2>THE_LADDER</h2>
-            <p style="letter-spacing:10px; opacity:0.5;">15 STAGES OF ASCENSION</p>
-        </div>
-        <div class="ladder-wrapper" id="ladder-matrix">
+            <div class="arxn-display">
+                <p style="font-size: 0.7rem; opacity: 0.5; margin-bottom: 10px;">ESTIMATED_ALLOCATION</p>
+                <span id="arxn-out">0.00 ARXN</span>
             </div>
-    </section>
 
-    <section id="titan" class="titan-section">
-        <div class="titan-card">
-            <div style="position:absolute; top:20px; left:20px; color:var(--gold); font-family:var(--font-mono);">[ CLASSIFIED_AREA ]</div>
-            <h2>TITAN_30_SUPREME</h2>
-            <p style="opacity:0.5; margin-bottom:20px;">DOMINANT_INVESTOR_RANK_01</p>
-            <div class="top-investor">0x71...A409</div>
-            <div style="font-family:var(--font-logo); color:var(--gold); font-size:2rem; margin-top:20px;">$742,000.00</div>
+            <button class="btn-strike">EXECUTE_STRIKE</button>
         </div>
     </section>
 
-    <section id="tokenomics">
-        <h2 style="font-family:var(--font-logo); text-align:center; letter-spacing:15px; margin-bottom:80px;">LOGISTICS_MATRIX</h2>
-        <div class="tech-grid">
-            <div class="tech-card"><h5>40%</h5><p>PUBLIC_PRE-SALE</p></div>
-            <div class="tech-card"><h5>30%</h5><p>ENCRYPTED_LIQUIDITY</p></div>
-            <div class="tech-card"><h5>15%</h5><p>ECOSYSTEM_GROWTH</p></div>
-            <div class="tech-card"><h5>15%</h5><p>STRATEGIC_RESERVE</p></div>
-        </div>
+    <section class="titan-vault">
+        <h2>TITAN_01_DOMINANCE</h2>
+        <div class="gold-address">0x71...F21A</div>
+        <div style="color: var(--gold); font-family: 'Syncopate'; font-size: 2rem; margin-top: 20px;">$742,500.00</div>
     </section>
 
+    <div class="steps-grid" id="steps-container">
+        </div>
 </div>
 
-<footer>
-    <div style="display:flex; justify-content:center; gap:50px; font-size:2rem; margin-bottom:50px;">
-        <i class="fa-brands fa-twitter"></i>
-        <i class="fa-brands fa-telegram"></i>
-        <i class="fa-brands fa-discord"></i>
-        <i class="fa-brands fa-github"></i>
-    </div>
-    <p style="font-family:var(--font-logo); font-size:0.7rem; letter-spacing:10px;">ARXN | THE SOVEREIGN PROTOCOL v44.0</p>
-    <div class="terminal-text">
-        [SYSTEM] ... ALL PROTOCOLS OPERATIONAL <br>
-        [SYSTEM] ... NAVIGATOR & SOVEREIGN SYNCED <br>
-        [SYSTEM] ... ENCRYPTION: AES-256-GCM
-    </div>
-</footer>
-
 <script>
-    /* =========================================
-       10. CORE JAVASCRIPT ENGINE (THE BRAIN)
-       ========================================= */
+    // Logic for Calculations
+    const input = document.getElementById('pay-in');
+    const output = document.getElementById('arxn-out');
+    let currentCoin = 'USDT';
 
-    // Initialize Particles.js (The Nebula)
-    particlesJS("particles-js", {
-        "particles": {
-            "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
-            "color": { "value": "#FF4500" },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.2, "random": true },
-            "size": { "value": 2, "random": true },
-            "line_linked": { "enable": true, "distance": 150, "color": "#ccff00", "opacity": 0.05, "width": 1 },
-            "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-        }
-    });
+    function setCoin(coin) {
+        currentCoin = coin;
+        document.querySelectorAll('.coin-sel').forEach(el => el.classList.remove('active'));
+        event.target.classList.add('active');
+        document.getElementById('input-label').innerText = INJECT_AMOUNT (${coin});
+        update();
+    }
 
-    // Generate 15 Stages (Scaling the code)
-    const ladder = document.getElementById('ladder-matrix');
+    function update() {
+        let val = input.value || 0;
+        let rate = 0.01;
+        let mult = currentCoin === 'ETH' ? 2600 : (currentCoin === 'BNB' ? 620 : 1);
+        output.innerText = ((val * mult) / rate).toLocaleString() + " ARXN";
+    }
+
+    input.addEventListener('input', update);
+
+    // Generate 15 Industrial Steps
+    const stepsCont = document.getElementById('steps-container');
     const prices = [0.010, 0.012, 0.015, 0.018, 0.022, 0.026, 0.031, 0.037, 0.044, 0.052, 0.062, 0.074, 0.088, 0.100, 0.120];
     
-    prices.forEach((price, index) => {
-        const stage = document.createElement('div');
-        stage.className = stage-box ${index === 0 ? 'active' : ''};
-        stage.innerHTML = `
-            <h4>STAGE_${String(index+1).padStart(2, '0')}</h4>
-            <p>$${price.toFixed(3)}</p>
-            <div style="font-size:0.5rem; opacity:0.3; margin-top:10px;">SUPPLY: 10M ARXN</div>
-        `;
-        ladder.appendChild(stage);
+    prices.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = step-box ${i===0 ? 'current' : ''};
+        div.innerHTML = <h5>PHASE_${i+1}</h5><p>$${p.toFixed(3)}</p>;
+        stepsCont.appendChild(div);
     });
 
-    // Interactive Cursor Engine
-    const glow = document.getElementById('cursor-glow');
-    const dot = document.getElementById('cursor-dot');
+    // Simple GSAP for non-rakik entry
+    gsap.from(".core-panel", { duration: 1, y: 100, opacity: 0, ease: "expo.out" });
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARXN | IRONCLAD PROTOCOL v52.0</title>
     
-    document.addEventListener('mousemove', (e) => {
-        gsap.to(glow, { duration: 0.8, x: e.clientX, y: e.clientY, ease: "power2.out" });
-        gsap.to(dot, { duration: 0.1, x: e.clientX, y: e.clientY });
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=JetBrains+Mono:wght@300;800&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-        // Hero Tilt Physics
-        const xAxis = (window.innerWidth / 2 - e.clientX) / 70;
-        const yAxis = (window.innerHeight / 2 - e.clientY) / 70;
-        gsap.to("#tilt-box", { duration: 1, rotateY: xAxis, rotateX: yAxis, ease: "power2.out" });
-    });
+    <style>
+        :root {
+            --fire: #FF4500;
+            --phosphor: #ccff00;
+            --void: #050505;
+            --steel: #1a1a1a;
+            --gold: #FFD700;
+            --glitch-speed: 0.2s;
+        }
 
-    // Price Decryption Effect (Cyberpunk Feel)
-    const priceEl = document.getElementById('price-decrypt');
-    priceEl.addEventListener('mouseenter', () => {
-        const original = "$0.01";
-        const chars = "0123456789X$!@#";
-        let iter = 0;
-        const interval = setInterval(() => {
-            priceEl.innerText = original.split("").map((l, i) => i < iter ? original[i] : chars[Math.floor(Math.random()*chars.length)]).join("");
-            if(iter >= original.length) clearInterval(interval);
-            iter += 1/3;
-        }, 30);
-    });
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        body { background: var(--void); color: #fff; font-family: 'JetBrains Mono', monospace; overflow-x: hidden; }
 
-    // Calc System
-    document.getElementById('usdt-input').addEventListener('input', (e) => {
-        const val = e.target.value;
-        document.getElementById('arxn-output').innerText = (val / 0.01).toLocaleString() + " ARXN";
-    });
+        /* Background Hud System */
+        .hud-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 69, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 69, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: -1;
+        }
 
-    // Neural Pulse Visualizer
-    const canvas = document.getElementById('pulse-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    let x = 0;
-    function animate() {
-        ctx.strokeStyle = '#ccff00'; ctx.lineWidth = 0.2;
-        ctx.beginPath(); ctx.moveTo(x, canvas.height/2);
-        x += 2; if(x > canvas.width) { x = 0; ctx.clearRect(0,0,canvas.width,canvas.height); }
-        let y = canvas.height/2 + (Math.random() > 0.98 ? (Math.random()-0.5)*400 : (Math.random()-0.5)*20);
-        ctx.lineTo(x, y); ctx.stroke();
-        requestAnimationFrame(animate);
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+        /* --- NAVIGATION: THE COMMAND BAR --- */
+        nav {
+            padding: 40px 60px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--steel); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+        }
+        .logo { font-family: 'Orbitron'; font-size: 3rem; font-weight: 900; letter-spacing: 10px; }
+        .logo span { color: var(--phosphor); text-shadow: 0 0 15px var(--phosphor); }
+
+        /* --- HERO: THE DEPLOYMENT ZONE --- */
+        .deployment-zone { min-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+
+        .title-block h1 {
+            font-family: 'Syncopate', sans-serif; font-size: 6rem; line-height: 0.9;
+            text-transform: uppercase; margin-bottom: 20px;
+        }
+        .title-block .fire-text { color: var(--fire); text-shadow: 10px 10px 0px rgba(255, 69, 0, 0.1); }
+
+        /* --- INJECTION CORE (NON-RAKIK) --- */
+        .core-panel {
+            background: #000; border: 4px solid var(--steel); padding: 50px;
+            position: relative; box-shadow: 20px 20px 0px var(--steel);
+        }
+        .core-panel::before {
+            content: "SECURITY_LEVEL: ALPHA"; position: absolute; top: -15px; left: 20px;
+            background: var(--fire); color: #000; font-size: 0.6rem; padding: 2px 10px; font-weight: 800;
+        }
+
+        .input-group { margin-bottom: 40px; border-left: 5px solid var(--fire); padding-left: 20px; }
+        .input-group label { font-size: 0.7rem; color: var(--phosphor); letter-spacing: 3px; display: block; margin-bottom: 10px; }
+        .input-group input {
+            width: 100%; background: transparent; border: none; color: #fff;
+            font-family: 'Syncopate'; font-size: 3.5rem; outline: none;
+        }
+
+        .currency-wrap { display: flex; gap: 15px; margin-bottom: 40px; }
+        .coin-sel {
+            flex: 1; border: 1px solid #333; padding: 15px; text-align: center;
+            cursor: pointer; transition: 0.2s;
+        }
+        .coin-sel.active { background: var(--fire); border-color: var(--fire); color: #000; font-weight: 800; }
+
+        .arxn-display {
+            background: var(--steel); padding: 30px; text-align: center;
+            border: 1px solid var(--phosphor); margin-bottom: 30px;
+        }
+        .arxn-display span { color: var(--fire); font-family: 'Syncopate'; font-size: 2.5rem; }
+
+        .btn-strike {
+            width: 100%; padding: 30px; background: var(--phosphor); color: #000;
+            font-family: 'Syncopate'; font-weight: 700; font-size: 1.5rem; border: none;
+            cursor: pointer; position: relative; transition: 0.3s;
+        }
+        .btn-strike:hover { background: var(--fire); color: #fff; transform: translate(-5px, -5px); box-shadow: 10px 10px 0px #fff; }
+
+        /* --- TITAN SUPREME (THE GOLD STANDARD) --- */
+        .titan-vault {
+            margin-top: 100px; border: 2px solid var(--gold); padding: 60px;
+            background: linear-gradient(to right, rgba(255,215,0,0.05), transparent);
+            text-align: center;
+        }
+        .titan-vault h2 { font-family: 'Syncopate'; color: var(--gold); font-size: 2.5rem; margin-bottom: 20px; }
+        .gold-address { font-size: 3.5rem; font-weight: 800; color: #fff; text-shadow: 0 0 20px var(--gold); }
+
+        /* --- THE 15 STEPS (INDUSTRIAL GRID) --- */
+        .steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 100px 0; }
+        .step-box { border: 1px solid #222; padding: 20px; text-align: center; background: #080808; }
+        .step-box.current { border-color: var(--fire); background: rgba(255,69,0,0.05); }
+        .step-box h5 { font-size: 0.6rem; color: var(--phosphor); }
+        .step-box p { font-family: 'Syncopate'; font-size: 1rem; margin-top: 5px; }
+
+    </style>
+</head>
+<body>
+
+<div class="hud-bg"></div>
+
+<nav>
+    <div class="logo">AR<span>X</span>N</div>
+    <div style="font-family: 'JetBrains Mono'; color: var(--fire); font-size: 0.8rem; letter-spacing: 5px;">
+        STATUS: SYSTEM_LIVE // PHASE: 01
+    </div>
+</nav>
+
+<div class="container">
+    <section class="deployment-zone">
+        <div class="title-block">
+            <p style="color: var(--phosphor); margin-bottom: 10px;">> INITIALIZING_SOVEREIGN_TAKEOVER</p>
+            <h1>OWN THE<br><span class="fire-text">ENGINE</span></h1>
+            <p style="opacity: 0.5; max-width: 450px; font-size: 0.9rem;">
+                لا نعد بالثراء، نحن نبني السيادة. ARXN هو البروتوكول المالي الأكثر خشونة في سوق الكريبتو.
+            </p>
+        </div>
+
+        <div class="core-panel">
+            <div class="currency-wrap">
+                <div class="coin-sel active" onclick="setCoin('USDT')">USDT</div>
+                <div class="coin-sel" onclick="setCoin('ETH')">ETH</div>
+                <div class="coin-sel" onclick="setCoin('BNB')">BNB</div>
+            </div>
+
+            <div class="input-group">
+                <label id="input-label">INJECT_AMOUNT (USDT)</label>
+                <input type="number" id="pay-in" placeholder="0.00">
+            </div>
+
+            <div class="arxn-display">
+                <p style="font-size: 0.7rem; opacity: 0.5; margin-bottom: 10px;">ESTIMATED_ALLOCATION</p>
+                <span id="arxn-out">0.00 ARXN</span>
+            </div>
+
+            <button class="btn-strike">EXECUTE_STRIKE</button>
+        </div>
+    </section>
+
+    <section class="titan-vault">
+        <h2>TITAN_01_DOMINANCE</h2>
+        <div class="gold-address">0x71...F21A</div>
+        <div style="color: var(--gold); font-family: 'Syncopate'; font-size: 2rem; margin-top: 20px;">$742,500.00</div>
+    </section>
+
+    <div class="steps-grid" id="steps-container">
+        </div>
+</div>
+
+<script>
+    // Logic for Calculations
+    const input = document.getElementById('pay-in');
+    const output = document.getElementById('arxn-out');
+    let currentCoin = 'USDT';
+
+    function setCoin(coin) {
+        currentCoin = coin;
+        document.querySelectorAll('.coin-sel').forEach(el => el.classList.remove('active'));
+        event.target.classList.add('active');
+        document.getElementById('input-label').innerText = INJECT_AMOUNT (${coin});
+        update();
     }
-    animate();
 
-    console.log("ARXN SYSTEM v44.0 : INITIALIZED");
+    function update() {
+        let val = input.value || 0;
+        let rate = 0.01;
+        let mult = currentCoin === 'ETH' ? 2600 : (currentCoin === 'BNB' ? 620 : 1);
+        output.innerText = ((val * mult) / rate).toLocaleString() + " ARXN";
+    }
+
+    input.addEventListener('input', update);
+
+    // Generate 15 Industrial Steps
+    const stepsCont = document.getElementById('steps-container');
+    const prices = [0.010, 0.012, 0.015, 0.018, 0.022, 0.026, 0.031, 0.037, 0.044, 0.052, 0.062, 0.074, 0.088, 0.100, 0.120];
+    
+    prices.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = step-box ${i===0 ? 'current' : ''};
+        div.innerHTML = <h5>PHASE_${i+1}</h5><p>$${p.toFixed(3)}</p>;
+        stepsCont.appendChild(div);
+    });
+
+    // Simple GSAP for non-rakik entry
+    gsap.from(".core-panel", { duration: 1, y: 100, opacity: 0, ease: "expo.out" });
 </script>
 
 </body>
