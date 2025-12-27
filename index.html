@@ -3,111 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arxion | Detonation Stage</title>
+    <title>ARXION | The Ultimate Neural Empire</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --fire-orange: #FF4500;
             --royal-purple: #8A2BE2;
-            --neon-phosphor: #39FF14;
+            --neon-green: #39FF14;
+            --deep-slate: #0A0A0A;
+            --light-gray: #d1d5db; /* For progress bar text */
         }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0A0A0A;
-            color: #FFFFFF;
-            margin: 0;
-            overflow-x: hidden;
+            background-color: var(--deep-slate);
+            color: #ffffff;
+            scroll-behavior: smooth;
         }
-        .logo-x { color: var(--royal-purple); text-shadow: 0 0 15px var(--royal-purple); }
-        .currency-name { color: var(--fire-orange); font-weight: 900; }
+        .logo-x {
+            color: var(--royal-purple);
+            text-shadow: 0 0 15px var(--royal-purple), 0 0 25px rgba(138,43,226,0.6);
+            transition: transform 0.3s ease-in-out;
+        }
+        .logo-x:hover { transform: scale(1.1); }
+
+        .orange-text { color: var(--fire-orange); }
+        .purple-text { color: var(--royal-purple); }
+        .neon-text { color: var(--neon-green); }
+
         .glass-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2rem; /* Consistent large radius */
+            transition: all 0.3s ease-in-out;
         }
-        .btn-bomb {
-            background: var(--fire-orange);
-            box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
-            transition: 0.3s;
+        .glass-card:hover { border-color: rgba(255, 255, 255, 0.2); }
+
+        .btn-main {
+            background-color: var(--fire-orange);
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.5), 0 0 40px rgba(255, 69, 0, 0.3);
+            transition: all 0.4s ease-in-out;
         }
-        .btn-bomb:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255, 69, 0, 0.6);
+        .btn-main:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 35px rgba(255, 69, 0, 0.7), 0 0 60px rgba(255, 69, 0, 0.5);
         }
+
+        .btn-secondary {
+            border: 2px solid var(--royal-purple);
+            color: var(--royal-purple);
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-secondary:hover {
+            background-color: var(--royal-purple);
+            color: white;
+            box-shadow: 0 0 20px rgba(138,43,226,0.4);
+        }
+
+        /* Titan 30 Specific Styles */
+        .titan-gold-rank {
+            background: linear-gradient(90deg, rgba(255,215,0,0.15) 0%, transparent 100%);
+            border-left: 5px solid gold;
+        }
+        .titan-entry {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 1.5rem 2rem;
+            transition: background-color 0.2s;
+        }
+        .titan-entry:hover { background-color: rgba(255,255,255,0.03); }
+
+
+        /* Countdown specific glow */
+        .countdown-glow {
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+        .timer-unit-active {
+             border: 2px solid var(--neon-green);
+             box-shadow: 0 0 25px rgba(57,255,20,0.4);
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar {
+            height: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, var(--neon-green), var(--royal-purple));
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* Team member hover effect */
+        .team-member:hover .member-name { color: var(--fire-orange); }
+        .team-member:hover .member-title { color: var(--neon-green); }
+
+        /* Roadmap dot animation */
+        .roadmap-dot {
+            animation: pulse-dot 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        /* Animated background elements for depth */
+        .animated-bg-element {
+            position: absolute;
+            background: radial-gradient(circle, var(--royal-purple) 0%, transparent 70%);
+            opacity: 0.07;
+            border-radius: 50%;
+            animation: move-bg 20s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .animated-bg-element.one { top: 10%; left: 5%; width: 400px; height: 400px; animation-duration: 25s; }
+        .animated-bg-element.two { bottom: 20%; right: 10%; width: 500px; height: 500px; animation-duration: 30s; }
+        .animated-bg-element.three { top: 50%; left: 30%; width: 300px; height: 300px; animation-duration: 20s; animation-delay: 5s; }
+
+        @keyframes move-bg {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(50px, 80px) scale(1.1); }
+        }
+
+        /* Global Padding for Sections */
+        section { padding: 6rem 1.5rem; max-width: 80rem; margin-left: auto; margin-right: auto; }
+
     </style>
 </head>
 <body>
 
-    <div class="min-h-screen flex flex-col items-center justify-center relative px-4">
-        
-        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600/20 blur-[120px] rounded-full"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-600/20 blur-[120px] rounded-full"></div>
+    <div class="animated-bg-element one"></div>
+    <div class="animated-bg-element two"></div>
+    <div class="animated-bg-element three"></div>
 
-        <div class="z-10 text-center max-w-4xl">
-            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tighter">
-                AR<span class="logo-x">X</span>ION <span class="text-white/20">|</span> <span class="currency-name">PRE-SALE</span>
-            </h1>
-
-            <div class="inline-flex items-center space-x-2 mb-12 bg-white/5 border border-white/10 px-4 py-1 rounded-full">
-                <span class="w-2 h-2 bg-[#39FF14] rounded-full animate-pulse"></span>
-                <span class="text-[10px] uppercase tracking-[0.4em] font-bold">System Online: Stage 1</span>
-            </div>
-
-            <div class="grid grid-cols-4 gap-2 md:gap-6 mb-16">
-                <div class="glass-card p-4 md:p-8 rounded-2xl md:rounded-[2rem]">
-                    <div id="days" class="text-4xl md:text-7xl font-black">00</div>
-                    <div class="text-[9px] uppercase tracking-widest text-gray-500 mt-2">Days</div>
-                </div>
-                <div class="glass-card p-4 md:p-8 rounded-2xl md:rounded-[2rem]">
-                    <div id="hours" class="text-4xl md:text-7xl font-black">00</div>
-                    <div class="text-[9px] uppercase tracking-widest text-gray-500 mt-2">Hours</div>
-                </div>
-                <div class="glass-card p-4 md:p-8 rounded-2xl md:rounded-[2rem]">
-                    <div id="minutes" class="text-4xl md:text-7xl font-black">00</div>
-                    <div class="text-[9px] uppercase tracking-widest text-gray-500 mt-2">Mins</div>
-                </div>
-                <div class="glass-card p-4 md:p-8 rounded-2xl md:rounded-[2rem] border-b-4 border-[#39FF14]">
-                    <div id="seconds" class="text-4xl md:text-7xl font-black text-[#39FF14]">00</div>
-                    <div class="text-[9px] uppercase tracking-widest text-gray-500 mt-2 italic">Secs</div>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <button class="btn-bomb w-full md:w-auto px-16 py-6 rounded-2xl text-2xl font-black uppercase italic tracking-tighter">
-                    Secure Stage 1 Price - $0.01
-                </button>
-                <p class="text-gray-400 text-sm font-bold uppercase tracking-widest">
-                    Next Price Jump: <span class="text-white">$0.02</span>
-                </p>
-            </div>
+    <nav class="fixed w-full z-50 glass-card px-8 py-4 flex justify-between items-center bg-transparent">
+        <a href="#hero" class="text-3xl font-black italic tracking-tighter hover:scale-105 transition-transform">
+            AR<span class="logo-x">X</span>ION
+        </a>
+        <div class="hidden md:flex space-x-10 font-bold text-[10px] uppercase tracking-[0.2em]">
+            <a href="#hero" class="hover:text-orange-500 transition-colors">Presale</a>
+            <a href="#titan" class="hover:text-purple-500 transition-colors">Titan 30</a>
+            <a href="#tokenomics" class="hover:text-green-500 transition-colors">Economy</a>
+            <a href="#roadmap" class="hover:text-fire-orange transition-colors">Roadmap</a>
+            <a href="#team" class="hover:text-royal-purple transition-colors">Team</a>
         </div>
-    </div>
+        <button class="bg-white text-black px-6 py-2 rounded-full font-black text-xs hover:bg-neon-green hover:text-white transition-colors">
+            CONNECT WALLET
+        </button>
+    </nav>
 
-    <script>
-        // ضبط القنبلة الموقوتة (3 أيام من الآن)
-        const countdownDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);
+    <section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center pt-24 relative z-10">
+        <div class="inline-flex items-center space-x-3 px-6 py-2 bg-black/40 border border-neon-green/50 rounded-full mb-8 shadow-lg">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-green opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-neon-green"></span>
+            </span>
+            <span class="neon-text text-xs font-black tracking-[0.3em] uppercase">Stage 1: Detonation Sequence Initiated</span>
+        </div>
 
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
+        <h1 class="text-6xl md:text-8xl font-black text-center mb-8 leading-tight italic uppercase tracking-tighter gradient-text">
+            Ignite Your <span class="orange-text">Neural Future</span>
+        </h1>
+        <p class="text-gray-400 text-lg max-w-3xl mx-auto mb-12 font-medium">
+            Join the AR<span class="logo-x">X</span>ION revolution. This is your final window to acquire at the genesis price before the market explosion.
+        </p>
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
-            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
-
-            if (distance < 0) {
-                clearInterval(x);
-                document.body.innerHTML = "<h1 style='color:white; text-align:center; margin-top:20%; font-size:50px;'>EXPLOSION! STAGE 2 STARTED</h1>";
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+        <div class="grid grid-cols-4 gap-4 md:gap-8 max-w-4xl w-full mx-auto mb-16">
+            <div class="glass-card p-6 md:p-10 text-center timer-unit-active">
+                <span id="h" class="text-5xl md:text-8xl font-black countdown-glow">2
