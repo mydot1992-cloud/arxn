@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arxion (ARXN) - Real World Assets Protocol | Pre-Sale</title>
+    <title>Arxion (ARXN) - Real World Assets Protocol | Pre-Sale 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.min.js"></script>
@@ -13,12 +12,12 @@
     <style>
         :root {
             --primary-orange: #FF6B35;
-            --primary-purple: #6A11CB;
+            --primary-purple: #7B2CBF;
             --orange-gradient: linear-gradient(135deg, #FF6B35, #FF8E53);
-            --purple-gradient: linear-gradient(135deg, #6A11CB, #2575FC);
-            --orange-purple-gradient: linear-gradient(90deg, #FF6B35, #6A11CB);
+            --purple-gradient: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            --orange-purple-gradient: linear-gradient(90deg, #FF6B35, #7B2CBF);
             --orange-glow: rgba(255, 107, 53, 0.5);
-            --purple-glow: rgba(106, 17, 203, 0.5);
+            --purple-glow: rgba(123, 44, 191, 0.5);
             --light-bg: #f8f9fa;
             --medium-gray: #e1e5eb;
             --dark-bg: #0f0f1a;
@@ -28,6 +27,7 @@
             --success: #00C851;
             --warning: #ffbb33;
             --danger: #ff4444;
+            --chat-bot: #5A189A;
         }
         
         * {
@@ -218,12 +218,59 @@
             font-size: 1.5rem;
         }
         
+        /* Updated Countdown Timer */
+        .countdown-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 2px solid var(--primary-orange);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+            min-width: 400px;
+            margin: 0 auto 2rem;
+        }
+        
+        .countdown-title {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 90px;
+        }
+        
+        .countdown-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.7);
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            color: white;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
         /* Pre-Sale Box */
         .pre-sale-container {
             background: rgba(20, 20, 35, 0.9);
             border-radius: 20px;
             padding: 2.5rem;
-            max-width: 900px;
+            max-width: 1200px;
             width: 100%;
             margin-top: 2rem;
             border: 1px solid rgba(255, 107, 53, 0.2);
@@ -244,44 +291,6 @@
             color: white;
         }
         
-        .countdown-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid var(--primary-orange);
-        }
-        
-        .countdown-title {
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-        
-        .countdown-timer {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .countdown-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .countdown-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-orange);
-        }
-        
-        .countdown-label {
-            font-size: 0.8rem;
-            color: var(--medium-gray);
-        }
-        
         .purchase-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -292,7 +301,7 @@
             background: rgba(30, 30, 45, 0.7);
             padding: 1.5rem;
             border-radius: 15px;
-            border: 1px solid rgba(106, 17, 203, 0.3);
+            border: 1px solid rgba(123, 44, 191, 0.3);
         }
         
         .calculator-title {
@@ -380,7 +389,7 @@
             width: 100%;
             padding: 15px;
             background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(106, 17, 203, 0.5);
+            border: 1px solid rgba(123, 44, 191, 0.5);
             border-radius: 10px;
             color: white;
             font-size: 1.1rem;
@@ -465,7 +474,7 @@
             height: 100%;
             background: var(--orange-purple-gradient);
             border-radius: 10px;
-            width: 25%;
+            width: 6.67%;
             transition: width 2s ease;
         }
         
@@ -489,6 +498,59 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary-orange);
+        }
+        
+        /* Updated Chat Bot */
+        .chat-bot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chat-bot-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--chat-bot);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(90, 24, 154, 0.4);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-bot-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-bot-icon {
+            font-size: 2.5rem;
+            color: white;
+            position: relative;
+        }
+        
+        .online-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            border: 3px solid var(--dark-bg);
+            animation: pulse 2s infinite;
+        }
+        
+        .chat-bot-headset {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: white;
         }
         
         /* Token Distribution Pie Chart */
@@ -772,9 +834,9 @@
         }
         
         .exchange-logo {
-            width: 150px;
-            height: 150px;
-            background: rgba(30, 30, 45, 0.7);
+            width: 180px;
+            height: 180px;
+            background: rgba(30, 30, 45, 0.9);
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -783,30 +845,35 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            filter: blur(8px);
+            cursor: pointer;
         }
         
         .exchange-logo:hover {
+            filter: blur(4px);
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(255, 107, 53, 0.2);
         }
         
         .exchange-logo::before {
-            content: 'COMING SOON';
+            content: 'UNDER NDA';
             position: absolute;
-            bottom: 10px;
+            bottom: 15px;
             color: var(--primary-orange);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 3px 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 5px 15px;
             border-radius: 10px;
+            z-index: 2;
         }
         
         .exchange-logo img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            opacity: 0.3;
         }
         
         /* Whitepaper */
@@ -911,53 +978,6 @@
             margin-bottom: 1rem;
         }
         
-        /* Chat Bot */
-        .chat-bot {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-        }
-        
-        .chat-bot-button {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: var(--orange-purple-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
-            position: relative;
-        }
-        
-        .chat-bot-button::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: rgba(255, 107, 53, 0.2);
-            animation: pulse 2s infinite;
-        }
-        
-        .chat-bot-icon {
-            font-size: 1.8rem;
-            color: white;
-        }
-        
-        .online-indicator {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            width: 15px;
-            height: 15px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            border: 2px solid var(--dark-bg);
-        }
-        
         /* Ministry Box */
         .ministry-box {
             position: fixed;
@@ -1027,7 +1047,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            max-width: 300px;
+            max-width: 350px;
         }
         
         .notification {
@@ -1050,6 +1070,12 @@
         .notification-user {
             color: var(--primary-orange);
             font-weight: 600;
+        }
+        
+        .notification-details {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 5px;
         }
         
         /* Wallet Modal */
@@ -1240,6 +1266,14 @@
                 font-size: 2.5rem;
             }
             
+            .countdown-box {
+                min-width: 350px;
+            }
+            
+            .countdown-value {
+                font-size: 2.8rem;
+            }
+            
             .distribution-container {
                 flex-direction: column;
                 gap: 2rem;
@@ -1259,6 +1293,11 @@
             .stage-point {
                 width: 22%;
             }
+            
+            .exchange-logo {
+                width: 150px;
+                height: 150px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -1268,6 +1307,23 @@
             
             .wallet-container {
                 display: none;
+            }
+            
+            .countdown-box {
+                min-width: 300px;
+                padding: 15px 25px;
+            }
+            
+            .countdown-timer {
+                gap: 15px;
+            }
+            
+            .countdown-unit {
+                min-width: 70px;
+            }
+            
+            .countdown-value {
+                font-size: 2.2rem;
             }
             
             .phase-marker {
@@ -1292,6 +1348,11 @@
             .whitepaper-dropdown {
                 width: 100%;
             }
+            
+            .exchange-logo {
+                width: 130px;
+                height: 130px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1303,12 +1364,12 @@
                 padding: 1.5rem;
             }
             
-            .countdown-timer {
-                gap: 10px;
+            .countdown-box {
+                min-width: 280px;
             }
             
             .countdown-value {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             
             .payment-method {
@@ -1387,7 +1448,7 @@
                 
                 <div class="wallet-option" data-wallet="walletconnect">
                     <div class="wallet-option-icon wallet-connect">
-                        <i class="fas fa-wallet"></i>
+                        <i class="fas fa-plug"></i>
                     </div>
                     <div class="wallet-option-info">
                         <div class="wallet-option-name">WalletConnect</div>
@@ -1456,26 +1517,31 @@
             Instead of buying an entire property, investors can purchase fractions using $ARXN and earn automated rental yields.
         </p>
         
+        <!-- Updated Countdown Timer -->
+        <div class="countdown-box">
+            <div class="countdown-title">STAGE 1 ENDS IN</div>
+            <div class="countdown-timer">
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="countdown-days">02</div>
+                    <div class="countdown-label">DAYS</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="countdown-hours">23</div>
+                    <div class="countdown-label">HOURS</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="countdown-minutes">45</div>
+                    <div class="countdown-label">MINUTES</div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Pre-Sale Box -->
         <div class="pre-sale-container" id="pre-sale">
             <div class="pre-sale-header">
-                <h2 class="pre-sale-title">ARXN Pre-Sale is Live</h2>
-                <div class="countdown-box">
-                    <div class="countdown-title">Next Stage Starts In</div>
-                    <div class="countdown-timer">
-                        <div class="countdown-unit">
-                            <div class="countdown-value" id="countdown-days">01</div>
-                            <div class="countdown-label">Days</div>
-                        </div>
-                        <div class="countdown-unit">
-                            <div class="countdown-value" id="countdown-hours">23</div>
-                            <div class="countdown-label">Hours</div>
-                        </div>
-                        <div class="countdown-unit">
-                            <div class="countdown-value" id="countdown-minutes">45</div>
-                            <div class="countdown-label">Minutes</div>
-                        </div>
-                    </div>
+                <h2 class="pre-sale-title">ARXN Pre-Sale is Live - Stage 1</h2>
+                <div style="color: var(--primary-orange); font-weight: 600; font-size: 1.1rem;">
+                    Early Bird Price: $0.025
                 </div>
             </div>
             
@@ -1542,8 +1608,8 @@
                     
                     <div class="progress-bar-container">
                         <div class="progress-info">
-                            <span>Stage 4 of 15</span>
-                            <span>25% Complete</span>
+                            <span>Stage 1 of 15</span>
+                            <span>6.67% Complete</span>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-fill" id="progressFill"></div>
@@ -1553,11 +1619,11 @@
                     <div class="current-stage">
                         <div class="stage-info">
                             <h4>Current Stage Price</h4>
-                            <div class="stage-price">$0.040</div>
-                            <p>Next Stage: $0.045</p>
+                            <div class="stage-price">$0.025</div>
+                            <p>Next Stage: $0.030</p>
                         </div>
                         <div class="stage-number">
-                            <div style="font-size: 2rem; color: var(--primary-orange); font-weight: 800;">4</div>
+                            <div style="font-size: 2rem; color: var(--primary-orange); font-weight: 800;">1</div>
                             <div style="color: var(--medium-gray);">/15</div>
                         </div>
                     </div>
@@ -1566,7 +1632,7 @@
                         <div class="stage-info">
                             <h4>Your Investment Value at Listing</h4>
                             <div class="stage-price" id="futureValue">$0.00</div>
-                            <p>Based on listing price: $0.20</p>
+                            <p>Based on listing price: $0.30</p>
                         </div>
                         <div style="color: var(--primary-orange); font-size: 2rem;">
                             <i class="fas fa-chart-line"></i>
@@ -1599,8 +1665,8 @@
                     </div>
                 </div>
                 
-                <div class="distribution-item" style="border-left-color: #6A11CB;">
-                    <div class="distribution-color" style="background-color: #6A11CB;"></div>
+                <div class="distribution-item" style="border-left-color: #7B2CBF;">
+                    <div class="distribution-color" style="background-color: #7B2CBF;"></div>
                     <div class="distribution-info">
                         <div class="distribution-name">Liquidity & Exchange Listings</div>
                         <div class="distribution-value">25%</div>
@@ -1615,8 +1681,8 @@
                     </div>
                 </div>
                 
-                <div class="distribution-item" style="border-left-color: #2575FC;">
-                    <div class="distribution-color" style="background-color: #2575FC;"></div>
+                <div class="distribution-item" style="border-left-color: #9D4EDD;">
+                    <div class="distribution-color" style="background-color: #9D4EDD;"></div>
                     <div class="distribution-info">
                         <div class="distribution-name">Ecosystem & Development</div>
                         <div class="distribution-value">10%</div>
@@ -1636,7 +1702,7 @@
     
     <!-- Roadmap -->
     <section class="roadmap-section" id="roadmap">
-        <h2 class="section-title">Project Roadmap</h2>
+        <h2 class="section-title">Project Roadmap 2026</h2>
         <p class="section-subtitle">
             Our strategic 4-phase development plan to revolutionize real world asset tokenization.
         </p>
@@ -1644,7 +1710,7 @@
         <div class="roadmap-container">
             <div class="roadmap-phase">
                 <div class="phase-marker">
-                    <div class="phase-circle completed">Q1 2023</div>
+                    <div class="phase-circle completed">Q1 2026</div>
                     <div class="phase-line"></div>
                 </div>
                 <div class="phase-content completed">
@@ -1663,7 +1729,7 @@
             
             <div class="roadmap-phase">
                 <div class="phase-marker">
-                    <div class="phase-circle pending">Q3 2024</div>
+                    <div class="phase-circle pending">Q3 2026</div>
                     <div class="phase-line"></div>
                 </div>
                 <div class="phase-content pending">
@@ -1682,7 +1748,7 @@
             
             <div class="roadmap-phase">
                 <div class="phase-marker">
-                    <div class="phase-circle pending">Q1 2025</div>
+                    <div class="phase-circle pending">Q1 2027</div>
                     <div class="phase-line"></div>
                 </div>
                 <div class="phase-content pending">
@@ -1701,7 +1767,7 @@
             
             <div class="roadmap-phase">
                 <div class="phase-marker">
-                    <div class="phase-circle pending">Q3 2025</div>
+                    <div class="phase-circle pending">Q3 2027</div>
                 </div>
                 <div class="phase-content pending">
                     <h3 class="phase-title">Phase 4: Ecosystem Maturity & Global Adoption</h3>
@@ -1721,9 +1787,9 @@
     
     <!-- Price Stages Chart -->
     <section class="price-stages">
-        <h2 class="section-title">Pre-Sale Price Stages</h2>
+        <h2 class="section-title">Pre-Sale Price Stages 2026</h2>
         <p class="section-subtitle">
-            15 progressive stages with increasing token prices. Early investors get the best rates before listing at $0.20.
+            15 progressive stages with increasing token prices. Early investors get the best rates before listing at $0.30.
         </p>
         
         <div class="stages-chart-container">
@@ -1760,7 +1826,7 @@
                 <div class="stage-point">
                     <div class="stage-point-circle"></div>
                     <div class="stage-point-name">Listing</div>
-                    <div class="stage-point-price">$0.200</div>
+                    <div class="stage-point-price">$0.300</div>
                 </div>
             </div>
         </div>
@@ -1768,9 +1834,10 @@
     
     <!-- Exchange Listings -->
     <section class="exchange-listings" id="exchanges">
-        <h2 class="section-title">Planned Exchange Listings</h2>
+        <h2 class="section-title">Exchange Listings Under NDA</h2>
         <p class="section-subtitle">
             We are in advanced negotiations with top-tier centralized and decentralized exchanges.
+            All discussions are under Non-Disclosure Agreements (NDA) until official announcements.
         </p>
         
         <div class="exchange-container">
@@ -1794,7 +1861,7 @@
     
     <!-- Whitepaper -->
     <section class="whitepaper-section" id="whitepaper">
-        <h2 class="section-title">Arxion Whitepaper</h2>
+        <h2 class="section-title">Arxion Whitepaper 2026</h2>
         <p class="section-subtitle">
             Explore our comprehensive technical documentation and project vision.
         </p>
@@ -1824,7 +1891,7 @@
                             <i class="fas fa-briefcase"></i> Use Cases
                         </div>
                         <div class="whitepaper-item" data-section="roadmap">
-                            <i class="fas fa-map"></i> Roadmap
+                            <i class="fas fa-map"></i> Roadmap 2026
                         </div>
                         <div class="whitepaper-item" data-section="team">
                             <i class="fas fa-users"></i> Team & Advisors
@@ -1843,7 +1910,7 @@
             </div>
             
             <div class="whitepaper-content" id="whitepaperContent">
-                <h3>Executive Summary</h3>
+                <h3>Executive Summary 2026</h3>
                 <p>Arxion Protocol bridges traditional finance with decentralized technology by tokenizing real-world assets (RWA) like real estate, commodities, and infrastructure. Our mission is to democratize access to high-value tangible assets through blockchain technology, allowing fractional ownership and automated yield distribution.</p>
                 
                 <p>The protocol leverages smart contracts to ensure transparency, security, and compliance throughout the asset tokenization lifecycle. By converting physical assets into digital tokens, we unlock liquidity, reduce barriers to entry, and create new investment opportunities for both retail and institutional investors.</p>
@@ -1853,10 +1920,11 @@
         </div>
     </section>
     
-    <!-- Chat Bot -->
+    <!-- Updated Chat Bot with Headset -->
     <div class="chat-bot">
         <div class="chat-bot-button" id="chatBotButton">
-            <div class="chat-bot-icon">🤖</div>
+            <div class="chat-bot-icon">💬</div>
+            <div class="chat-bot-headset">🎧</div>
             <div class="online-indicator"></div>
         </div>
     </div>
@@ -1883,15 +1951,13 @@
     <footer>
         <div class="footer-content">
             <div class="footer-column">
-                <h4 class="footer-title">Arxion Protocol</h4>
+                <h4 class="footer-title">Arxion Protocol 2026</h4>
                 <p style="color: var(--medium-gray); margin-bottom: 1.5rem; line-height: 1.6;">
                     The future of real world asset tokenization. Democratizing access to tangible investments through blockchain technology.
                 </p>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
                 </div>
             </div>
             
@@ -1918,7 +1984,7 @@
             </div>
             
             <div class="footer-column">
-                <h4 class="footer-title">Legal</h4>
+                <h4 class="footer-title">Legal 2026</h4>
                 <ul class="footer-links">
                     <li><a href="#">Terms of Service</a></li>
                     <li><a href="#">Privacy Policy</a></li>
@@ -1936,14 +2002,23 @@
     
     <script>
         // Global Variables
-        let currentStage = 4;
+        let currentStage = 1; // Changed to Stage 1
         const stagePrices = [0.025, 0.030, 0.035, 0.040, 0.045, 0.052, 0.060, 0.070, 0.080, 0.090, 0.100, 0.110, 0.125, 0.140, 0.150];
-        const listingPrice = 0.20;
+        const listingPrice = 0.30; // Updated listing price
         let currentCurrency = "BNB";
         let walletConnected = false;
         let walletBalance = 0;
         let userTokens = 0;
         let purchaseHistory = [];
+        
+        // Live cryptocurrency prices (simulated)
+        let cryptoPrices = {
+            "BNB": 320.50,
+            "ETH": 1850.25,
+            "SOL": 95.75,
+            "USDT": 1.00,
+            "USDC": 1.00
+        };
         
         // Simulated wallet addresses for live purchases
         const walletAddresses = [
@@ -1965,6 +2040,15 @@
             "alpha_seeker", "diamond_hands", "crypto_og"
         ];
         
+        // Currency names for display
+        const currencyNames = {
+            "BNB": "BNB",
+            "ETH": "ETH", 
+            "SOL": "SOL",
+            "USDT": "USDT",
+            "USDC": "USDC"
+        };
+        
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
             initializeCountdown();
@@ -1972,8 +2056,10 @@
             initializePriceChart();
             setupEventListeners();
             generateLivePurchases();
+            simulatePriceChanges();
             showMinistryBox();
             updateProgressBar();
+            updateTokenCalculation();
         });
         
         // Initialize Countdown Timer
@@ -1997,11 +2083,38 @@
                 // If the countdown is over, reset to 2 days
                 if (distance < 0) {
                     countdownDate.setDate(countdownDate.getDate() + 2);
+                    // Move to next stage
+                    if (currentStage < 15) {
+                        currentStage++;
+                        updateProgressBar();
+                        updateTokenCalculation();
+                        showNotification(`Stage ${currentStage} started! New price: $${stagePrices[currentStage-1]}`, 'info');
+                    }
                 }
             }
             
             updateCountdown();
             setInterval(updateCountdown, 60000);
+        }
+        
+        // Simulate cryptocurrency price changes
+        function simulatePriceChanges() {
+            setInterval(() => {
+                // Simulate small price fluctuations
+                Object.keys(cryptoPrices).forEach(currency => {
+                    if (!['USDT', 'USDC'].includes(currency)) {
+                        const change = (Math.random() - 0.5) * 0.02; // ±1%
+                        cryptoPrices[currency] *= (1 + change);
+                        cryptoPrices[currency] = parseFloat(cryptoPrices[currency].toFixed(2));
+                    }
+                });
+                
+                // Update token calculation if input has value
+                const spendAmount = parseFloat(document.getElementById('spendAmount').value);
+                if (spendAmount > 0) {
+                    updateTokenCalculation();
+                }
+            }, 30000); // Update every 30 seconds
         }
         
         // Initialize Token Distribution Pie Chart
@@ -2014,9 +2127,9 @@
                     data: [40, 25, 15, 10, 10],
                     backgroundColor: [
                         '#FF6B35',
-                        '#6A11CB',
+                        '#7B2CBF',
                         '#FF8E53',
-                        '#2575FC',
+                        '#9D4EDD',
                         '#00C851'
                     ],
                     borderColor: 'rgba(255, 255, 255, 0.2)',
@@ -2082,7 +2195,7 @@
                     pointBackgroundColor: function(context) {
                         const index = context.dataIndex;
                         if (index < 15) return '#FF6B35';
-                        if (index === 15) return '#6A11CB';
+                        if (index === 15) return '#7B2CBF';
                         return '#00C851';
                     },
                     pointRadius: function(context) {
@@ -2197,9 +2310,19 @@
                 });
             });
             
-            // Chat Bot Button
+            // Updated Chat Bot Button with Headset
             document.getElementById('chatBotButton').addEventListener('click', function() {
-                alert("Hello! I'm the Arxion assistant. I'm here to answer your questions about the project. Feel free to ask about tokenomics, roadmap, or how to participate in the pre-sale.");
+                const responses = [
+                    "Hello! I'm the Arxion assistant. How can I help you with our RWA tokenization project?",
+                    "Interested in investing? The pre-sale is live at Stage 1 with the best price of $0.025!",
+                    "ARXN tokens provide fractional ownership of real-world assets like real estate and gold.",
+                    "Our platform automates rental yield distribution directly to token holders.",
+                    "Early investors get the best rates before we move to Stage 2 in 2 days.",
+                    "We're in advanced negotiations with top exchanges - announcements coming soon!"
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                alert(randomResponse);
             });
             
             // Close dropdown when clicking outside
@@ -2229,16 +2352,19 @@
             const randomAddress = walletAddresses[Math.floor(Math.random() * walletAddresses.length)];
             const shortAddress = randomAddress.substring(0, 6) + '...' + randomAddress.substring(randomAddress.length - 4);
             
-            // Set random balance based on currency
-            const balances = {
-                'BNB': (Math.random() * 5 + 0.5).toFixed(2),
-                'ETH': (Math.random() * 0.5 + 0.05).toFixed(3),
-                'SOL': (Math.random() * 2 + 0.5).toFixed(2),
-                'USDT': (Math.random() * 500 + 10).toFixed(0),
-                'USDC': (Math.random() * 500 + 10).toFixed(0)
+            // Set random balance based on currency and current price
+            const baseBalances = {
+                'BNB': 2.5,
+                'ETH': 0.25,
+                'SOL': 10,
+                'USDT': 500,
+                'USDC': 500
             };
             
-            walletBalance = parseFloat(balances[currentCurrency]);
+            // Add some randomness to balance
+            const randomFactor = 0.7 + Math.random() * 0.6; // 0.7 to 1.3
+            const baseBalance = baseBalances[currentCurrency] * randomFactor;
+            walletBalance = parseFloat(baseBalance.toFixed(2));
             
             // Update UI
             document.getElementById('connectWalletBtn').style.display = 'none';
@@ -2279,26 +2405,37 @@
         // Update Wallet Balance Display
         function updateWalletBalanceDisplay() {
             if (walletConnected) {
-                // Update balance for current currency (simulated)
-                const balances = {
-                    'BNB': (Math.random() * 5 + 0.5).toFixed(2),
-                    'ETH': (Math.random() * 0.5 + 0.05).toFixed(3),
-                    'SOL': (Math.random() * 2 + 0.5).toFixed(2),
-                    'USDT': (Math.random() * 500 + 10).toFixed(0),
-                    'USDC': (Math.random() * 500 + 10).toFixed(0)
+                // Update balance for current currency (simulated with price changes)
+                const baseBalances = {
+                    'BNB': 2.5,
+                    'ETH': 0.25,
+                    'SOL': 10,
+                    'USDT': 500,
+                    'USDC': 500
                 };
                 
-                walletBalance = parseFloat(balances[currentCurrency]);
+                const randomFactor = 0.7 + Math.random() * 0.6;
+                const baseBalance = baseBalances[currentCurrency] * randomFactor;
+                walletBalance = parseFloat(baseBalance.toFixed(2));
+                
                 document.getElementById('walletBalanceDisplay').textContent = walletBalance + ' ' + currentCurrency;
                 document.getElementById('walletBalance').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
             }
         }
         
-        // Update Token Calculation
+        // Update Token Calculation with Live Prices
         function updateTokenCalculation() {
             const spendAmount = parseFloat(document.getElementById('spendAmount').value) || 0;
             const currentPrice = stagePrices[currentStage - 1];
-            const tokens = spendAmount / currentPrice;
+            
+            // Convert spend amount to USD based on selected currency
+            let usdAmount = spendAmount;
+            if (currentCurrency !== "USDT" && currentCurrency !== "USDC") {
+                usdAmount = spendAmount * cryptoPrices[currentCurrency];
+            }
+            
+            // Calculate tokens based on USD amount and ARXN price
+            const tokens = usdAmount / currentPrice;
             
             document.getElementById('tokensToReceive').textContent = tokens.toFixed(2);
             
@@ -2332,7 +2469,14 @@
             
             // Simulate transaction
             const currentPrice = stagePrices[currentStage - 1];
-            const tokens = spendAmount / currentPrice;
+            
+            // Convert to USD
+            let usdAmount = spendAmount;
+            if (currentCurrency !== "USDT" && currentCurrency !== "USDC") {
+                usdAmount = spendAmount * cryptoPrices[currentCurrency];
+            }
+            
+            const tokens = usdAmount / currentPrice;
             
             // Show success message with animation
             const buyBtn = document.getElementById('buyTokensBtn');
@@ -2364,7 +2508,7 @@
                 
                 // Show purchase notification for current user
                 const userName = userNames[Math.floor(Math.random() * userNames.length)];
-                showPurchaseNotification(userName, spendAmount.toFixed(2), currentCurrency);
+                showPurchaseNotification(userName, spendAmount.toFixed(2), currentCurrency, tokens.toFixed(2));
                 
                 // Reset button after 3 seconds
                 setTimeout(() => {
@@ -2388,9 +2532,9 @@
                 }, i * 5000);
             }
             
-            // Continue generating purchases at random intervals (1-10 minutes)
+            // Continue generating purchases at random intervals (1-5 minutes)
             function scheduleNextPurchase() {
-                const delay = Math.floor(Math.random() * 9 + 1) * 60000; // 1-10 minutes in milliseconds
+                const delay = Math.floor(Math.random() * 4 + 1) * 60000; // 1-5 minutes in milliseconds
                 setTimeout(() => {
                     generateRandomPurchase();
                     scheduleNextPurchase();
@@ -2400,7 +2544,7 @@
             scheduleNextPurchase();
         }
         
-        // Generate Random Purchase
+        // Generate Random Purchase with Token Amount
         function generateRandomPurchase() {
             // Weighted random selection (70% BNB, 20% USDT, 10% others)
             const rand = Math.random();
@@ -2420,20 +2564,36 @@
                 amount = (Math.random() * 1.5 + 0.5).toFixed(2); // 0.5 - 2 SOL
             }
             
+            // Calculate tokens based on current price
+            const usdAmount = currency === "USDT" || currency === "USDC" ? 
+                parseFloat(amount) : parseFloat(amount) * cryptoPrices[currency];
+            const tokens = usdAmount / stagePrices[currentStage - 1];
+            
             const userName = userNames[Math.floor(Math.random() * userNames.length)];
-            showPurchaseNotification(userName, amount, currency);
+            const walletAddr = walletAddresses[Math.floor(Math.random() * walletAddresses.length)];
+            const shortAddr = walletAddr.substring(0, 6) + '...' + walletAddr.substring(walletAddr.length - 4);
+            
+            showPurchaseNotification(userName, amount, currency, tokens.toFixed(2), shortAddr);
         }
         
-        // Show Purchase Notification
-        function showPurchaseNotification(user, amount, currency) {
+        // Show Purchase Notification with Token Amount
+        function showPurchaseNotification(user, amount, currency, tokens, wallet = null) {
             const container = document.getElementById('notificationContainer');
             
             const notification = document.createElement('div');
             notification.className = 'notification';
-            notification.innerHTML = `
-                <div><span class="notification-user">${user}</span> just purchased <strong>${amount} ${currency}</strong> worth of ARXN tokens!</div>
-                <div style="font-size: 0.8rem; margin-top: 5px; color: #aaa;">${getRandomTimeAgo()} ago</div>
-            `;
+            
+            let notificationHTML = `<div><span class="notification-user">${user}</span> purchased <strong>${amount} ${currency}</strong></div>`;
+            notificationHTML += `<div class="notification-details">Received: <strong>${tokens} ARXN</strong> at $${stagePrices[currentStage - 1]} each`;
+            
+            if (wallet) {
+                notificationHTML += ` | Wallet: ${wallet}`;
+            }
+            
+            notificationHTML += `</div>`;
+            notificationHTML += `<div style="font-size: 0.8rem; margin-top: 5px; color: #aaa;">${getRandomTimeAgo()} ago</div>`;
+            
+            notification.innerHTML = notificationHTML;
             
             container.appendChild(notification);
             
@@ -2505,6 +2665,15 @@
         function updateProgressBar() {
             const progress = (currentStage / 15) * 100;
             document.getElementById('progressFill').style.width = `${progress}%`;
+            document.querySelector('.progress-info span:first-child').textContent = `Stage ${currentStage} of 15`;
+            document.querySelector('.progress-info span:last-child').textContent = `${progress.toFixed(2)}% Complete`;
+            document.querySelector('.stage-number div:first-child').textContent = currentStage;
+            document.querySelector('.stage-price').textContent = `$${stagePrices[currentStage-1]}`;
+            if (currentStage < 15) {
+                document.querySelector('.stage-info p').textContent = `Next Stage: $${stagePrices[currentStage]}`;
+            } else {
+                document.querySelector('.stage-info p').textContent = `Final Stage - Listing Next`;
+            }
         }
         
         // Update Whitepaper Content
@@ -2515,7 +2684,7 @@
             switch(section) {
                 case 'executive':
                     newContent = `
-                        <h3>Executive Summary</h3>
+                        <h3>Executive Summary 2026</h3>
                         <p>Arxion Protocol bridges traditional finance with decentralized technology by tokenizing real-world assets (RWA) like real estate, commodities, and infrastructure. Our mission is to democratize access to high-value tangible assets through blockchain technology, allowing fractional ownership and automated yield distribution.</p>
                         <p>The protocol leverages smart contracts to ensure transparency, security, and compliance throughout the asset tokenization lifecycle. By converting physical assets into digital tokens, we unlock liquidity, reduce barriers to entry, and create new investment opportunities for both retail and institutional investors.</p>
                         <p>Arxion's native utility token, ARXN, serves as the primary medium of exchange within the ecosystem, facilitating transactions, governance, and staking rewards. The tokenomics model is designed for sustainable growth, with careful allocation to ensure long-term project development and community alignment.</p>
@@ -2523,7 +2692,7 @@
                     break;
                 case 'market':
                     newContent = `
-                        <h3>Market Opportunity</h3>
+                        <h3>Market Opportunity 2026</h3>
                         <p>The global real estate market alone is valued at over $300 trillion, while the total value of real-world assets suitable for tokenization exceeds $500 trillion. Current blockchain-based RWA tokenization represents less than 0.01% of this potential, indicating massive growth opportunities.</p>
                         <p>Key market drivers include:</p>
                         <ul>
@@ -2538,7 +2707,7 @@
                     break;
                 case 'technical':
                     newContent = `
-                        <h3>Technical Architecture</h3>
+                        <h3>Technical Architecture 2026</h3>
                         <p>Arxion Protocol is built on a multi-chain architecture to ensure maximum accessibility and interoperability. The core components include:</p>
                         <ul>
                             <li><strong>Smart Contract Layer:</strong> Ethereum-based smart contracts for asset tokenization, governance, and yield distribution</li>
@@ -2552,7 +2721,7 @@
                     break;
                 case 'tokenomics':
                     newContent = `
-                        <h3>Tokenomics</h3>
+                        <h3>Tokenomics 2026</h3>
                         <p>ARXN serves as the utility token within the Arxion ecosystem with the following functions:</p>
                         <ul>
                             <li><strong>Transaction Medium:</strong> Used for purchasing tokenized assets and paying platform fees</li>
@@ -2572,7 +2741,7 @@
                     break;
                 case 'usecases':
                     newContent = `
-                        <h3>Use Cases</h3>
+                        <h3>Use Cases 2026</h3>
                         <p>Arxion Protocol enables several innovative use cases for real-world asset tokenization:</p>
                         <ul>
                             <li><strong>Fractional Real Estate Ownership:</strong> Investors can purchase tokens representing shares in commercial or residential properties, receiving proportional rental income and appreciation</li>
@@ -2586,30 +2755,30 @@
                     break;
                 case 'roadmap':
                     newContent = `
-                        <h3>Roadmap</h3>
+                        <h3>Roadmap 2026</h3>
                         <p>Arxion's development follows a clear 4-phase roadmap:</p>
-                        <p><strong>Phase 1: Foundation & Pre-Sale (Q1 2023 - COMPLETED)</strong></p>
+                        <p><strong>Phase 1: Foundation & Pre-Sale (Q1 2026 - COMPLETED)</strong></p>
                         <ul>
                             <li>Smart contract development and audit completion</li>
                             <li>Website and platform UI/UX design</li>
                             <li>Pre-sale launch with multi-chain support</li>
                             <li>Community building and social media setup</li>
                         </ul>
-                        <p><strong>Phase 2: Platform Development & First Listings (Q3 2024)</strong></p>
+                        <p><strong>Phase 2: Platform Development & First Listings (Q3 2026)</strong></p>
                         <ul>
                             <li>MVP platform launch with basic tokenization</li>
                             <li>First real estate asset tokenization</li>
                             <li>Integration with major DeFi protocols</li>
                             <li>CEX listings on 2 major exchanges</li>
                         </ul>
-                        <p><strong>Phase 3: Expansion & Scaling (Q1 2025)</strong></p>
+                        <p><strong>Phase 3: Expansion & Scaling (Q1 2027)</strong></p>
                         <ul>
                             <li>Gold and commodity tokenization launch</li>
                             <li>Advanced RWA marketplace development</li>
                             <li>Mobile app release for iOS and Android</li>
                             <li>Global expansion to 3 new regions</li>
                         </ul>
-                        <p><strong>Phase 4: Ecosystem Maturity (Q3 2025)</strong></p>
+                        <p><strong>Phase 4: Ecosystem Maturity (Q3 2027)</strong></p>
                         <ul>
                             <li>Full-scale RWA ecosystem with 50+ assets</li>
                             <li>Institutional investment portal launch</li>
@@ -2620,7 +2789,7 @@
                     break;
                 case 'team':
                     newContent = `
-                        <h3>Team & Advisors</h3>
+                        <h3>Team & Advisors 2026</h3>
                         <p>Arxion is backed by a team of experienced professionals from blockchain, finance, real estate, and technology sectors:</p>
                         <ul>
                             <li><strong>Alex Morgan - CEO:</strong> Former blockchain lead at Fortune 500 financial institution with 15+ years in fintech</li>
@@ -2640,7 +2809,7 @@
                     break;
                 case 'risk':
                     newContent = `
-                        <h3>Risk Assessment</h3>
+                        <h3>Risk Assessment 2026</h3>
                         <p>Investing in Arxion carries certain risks that should be carefully considered:</p>
                         <ul>
                             <li><strong>Regulatory Risk:</strong> Evolving regulations could impact token classification and platform operations</li>
@@ -2662,7 +2831,7 @@
                     break;
                 case 'legal':
                     newContent = `
-                        <h3>Legal & Compliance</h3>
+                        <h3>Legal & Compliance 2026</h3>
                         <p>Arxion is committed to operating within established legal frameworks and maintaining the highest compliance standards:</p>
                         <ul>
                             <li><strong>Regulatory Compliance:</strong> Working with legal experts across multiple jurisdictions to ensure compliance with securities laws, AML/KYC regulations, and tax requirements</li>
@@ -2676,7 +2845,7 @@
                     break;
                 case 'future':
                     newContent = `
-                        <h3>Future Vision</h3>
+                        <h3>Future Vision 2026</h3>
                         <p>Arxion aims to become the leading global platform for real-world asset tokenization, with a vision that extends beyond current capabilities:</p>
                         <ul>
                             <li><strong>Global Asset Marketplace:</strong> Creating a seamless global marketplace where any tangible asset can be tokenized and traded 24/7</li>
