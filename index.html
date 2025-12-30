@@ -1,1 +1,2708 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arxion (ARXN) - Real World Assets Protocol | Pre-Sale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4-rc.1/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --primary-purple: #6A11CB;
+            --orange-gradient: linear-gradient(135deg, #FF6B35, #FF8E53);
+            --purple-gradient: linear-gradient(135deg, #6A11CB, #2575FC);
+            --orange-purple-gradient: linear-gradient(90deg, #FF6B35, #6A11CB);
+            --orange-glow: rgba(255, 107, 53, 0.5);
+            --purple-glow: rgba(106, 17, 203, 0.5);
+            --light-bg: #f8f9fa;
+            --medium-gray: #e1e5eb;
+            --dark-bg: #0f0f1a;
+            --text-dark: #1a202c;
+            --text-light: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --success: #00C851;
+            --warning: #ffbb33;
+            --danger: #ff4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, var(--orange-glow) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, var(--purple-glow) 0%, transparent 20%);
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background-color: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--orange-purple-gradient);
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            background: var(--orange-purple-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-text p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-orange);
+        }
+        
+        .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-orange);
+            box-shadow: 0 0 10px var(--orange-glow);
+        }
+        
+        .wallet-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .wallet-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 15px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .wallet-address {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+        
+        .wallet-balance {
+            font-weight: 600;
+            color: var(--primary-orange);
+        }
+        
+        .connect-wallet-btn {
+            background: var(--orange-purple-gradient);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .connect-wallet-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* Main Hero Section */
+        .hero-section {
+            padding: 5rem 5% 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--orange-purple-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+            max-width: 800px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 53, 0.1);
+        }
+        
+        .trust-badge i {
+            color: var(--primary-orange);
+            font-size: 1.5rem;
+        }
+        
+        /* Pre-Sale Box */
+        .pre-sale-container {
+            background: rgba(20, 20, 35, 0.9);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 900px;
+            width: 100%;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pre-sale-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pre-sale-title {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .countdown-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-orange);
+        }
+        
+        .countdown-title {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            color: var(--medium-gray);
+        }
+        
+        .purchase-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .token-calculator {
+            background: rgba(30, 30, 45, 0.7);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(106, 17, 203, 0.3);
+        }
+        
+        .calculator-title {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .wallet-balance-display {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .balance-label {
+            color: var(--medium-gray);
+        }
+        
+        .balance-amount {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .payment-method.active {
+            border-color: var(--primary-orange);
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        .payment-method-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .payment-method-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .bnb-bg { background-color: #F0B90B; }
+        .eth-bg { background-color: #627EEA; }
+        .sol-bg { background-color: #00FFA3; }
+        .usdt-bg { background-color: #26A17B; }
+        .usdc-bg { background-color: #2775CA; }
+        
+        .amount-input-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .amount-input-label {
+            display: block;
+            color: var(--medium-gray);
+            margin-bottom: 8px;
+        }
+        
+        .amount-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(106, 17, 203, 0.5);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        .tokens-to-receive {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .tokens-label {
+            color: var(--medium-gray);
+            margin-bottom: 10px;
+        }
+        
+        .tokens-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 5px;
+        }
+        
+        .tokens-value {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        .buy-button {
+            width: 100%;
+            padding: 18px;
+            background: var(--orange-purple-gradient);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+        
+        .buy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .sale-progress {
+            background: rgba(30, 30, 45, 0.7);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .progress-title {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .progress-bar-container {
+            margin-bottom: 2rem;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--medium-gray);
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--orange-purple-gradient);
+            border-radius: 10px;
+            width: 25%;
+            transition: width 2s ease;
+        }
+        
+        .current-stage {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-orange);
+        }
+        
+        .stage-info h4 {
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .stage-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+        }
+        
+        /* Token Distribution Pie Chart */
+        .token-distribution {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: var(--medium-gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+        
+        .distribution-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        
+        .chart-container {
+            width: 500px;
+            height: 500px;
+            position: relative;
+        }
+        
+        .distribution-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 400px;
+        }
+        
+        .distribution-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(30, 30, 45, 0.7);
+            border-radius: 10px;
+            border-left: 5px solid;
+        }
+        
+        .distribution-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .distribution-info {
+            flex-grow: 1;
+            text-align: left;
+        }
+        
+        .distribution-name {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .distribution-value {
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+        
+        /* Roadmap */
+        .roadmap-section {
+            padding: 5rem 5%;
+            background: rgba(15, 15, 26, 0.9);
+        }
+        
+        .roadmap-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .roadmap-phase {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        
+        .phase-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .phase-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .phase-circle.completed {
+            background: var(--orange-gradient);
+        }
+        
+        .phase-circle.pending {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .phase-circle::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 107, 53, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+        }
+        
+        .phase-line {
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-orange), var(--primary-purple));
+            position: relative;
+            top: 70px;
+        }
+        
+        .phase-content {
+            background: rgba(30, 30, 45, 0.7);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid;
+            flex-grow: 1;
+        }
+        
+        .phase-content.completed {
+            border-color: var(--primary-orange);
+        }
+        
+        .phase-content.pending {
+            border-color: rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+        
+        .phase-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .phase-list {
+            list-style-type: none;
+        }
+        
+        .phase-list li {
+            color: var(--medium-gray);
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .phase-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-orange);
+            font-weight: bold;
+        }
+        
+        .phase-content.pending .phase-list li:before {
+            content: '○';
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Price Stages Chart */
+        .price-stages {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .stages-chart-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            position: relative;
+        }
+        
+        .stages-chart {
+            height: 300px;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .stage-points {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 2rem;
+        }
+        
+        .stage-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            width: 100px;
+        }
+        
+        .stage-point-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--dark-bg);
+            border: 3px solid var(--primary-orange);
+            margin-bottom: 10px;
+        }
+        
+        .stage-point:nth-child(8) .stage-point-circle {
+            border-color: var(--primary-purple);
+        }
+        
+        .stage-point:nth-child(15) .stage-point-circle {
+            border-color: var(--success);
+        }
+        
+        .stage-point:nth-child(16) .stage-point-circle {
+            border-color: var(--warning);
+            border-width: 4px;
+        }
+        
+        .stage-point-name {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .stage-point-price {
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        /* Exchange Listings */
+        .exchange-listings {
+            padding: 5rem 5%;
+            text-align: center;
+            background: rgba(15, 15, 26, 0.9);
+        }
+        
+        .exchange-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .exchange-logo {
+            width: 150px;
+            height: 150px;
+            background: rgba(30, 30, 45, 0.7);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exchange-logo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.2);
+        }
+        
+        .exchange-logo::before {
+            content: 'COMING SOON';
+            position: absolute;
+            bottom: 10px;
+            color: var(--primary-orange);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        
+        .exchange-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        /* Whitepaper */
+        .whitepaper-section {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .whitepaper-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(30, 30, 45, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+        
+        .whitepaper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .whitepaper-title {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .whitepaper-dropdown {
+            position: relative;
+            width: 300px;
+        }
+        
+        .whitepaper-dropdown-btn {
+            background: var(--orange-purple-gradient);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .whitepaper-dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(30, 30, 45, 0.95);
+            border-radius: 10px;
+            margin-top: 5px;
+            overflow: hidden;
+            display: none;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .whitepaper-dropdown-content.show {
+            display: block;
+        }
+        
+        .whitepaper-item {
+            padding: 15px;
+            color: var(--medium-gray);
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .whitepaper-item:hover {
+            background: rgba(255, 107, 53, 0.1);
+            color: white;
+        }
+        
+        .whitepaper-item i {
+            margin-right: 10px;
+            color: var(--primary-orange);
+        }
+        
+        .whitepaper-content {
+            text-align: left;
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+        
+        .whitepaper-content h3 {
+            color: white;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .whitepaper-content p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Chat Bot */
+        .chat-bot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chat-bot-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--orange-purple-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+            position: relative;
+        }
+        
+        .chat-bot-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(255, 107, 53, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .chat-bot-icon {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .online-indicator {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 15px;
+            height: 15px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            border: 2px solid var(--dark-bg);
+        }
+        
+        /* Ministry Box */
+        .ministry-box {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            background: var(--orange-purple-gradient);
+            padding: 1.5rem;
+            border-radius: 15px;
+            width: 300px;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease;
+            display: none;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .ministry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .ministry-title {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .ministry-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .ministry-content {
+            color: white;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .ministry-prize {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin: 1rem 0;
+        }
+        
+        .ministry-timer {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 1rem;
+        }
+        
+        /* Notifications */
+        .notification-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+        }
+        
+        .notification {
+            background: rgba(30, 30, 45, 0.95);
+            border-left: 5px solid var(--primary-orange);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeInOut 8s ease;
+            color: white;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-100%); }
+            10% { opacity: 1; transform: translateX(0); }
+            90% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(-100%); }
+        }
+        
+        .notification-user {
+            color: var(--primary-orange);
+            font-weight: 600;
+        }
+        
+        /* Wallet Modal */
+        .wallet-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            display: none;
+        }
+        
+        .wallet-modal-content {
+            background: rgba(30, 30, 45, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .wallet-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .wallet-modal-title {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .wallet-modal-close {
+            background: none;
+            border: none;
+            color: var(--medium-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .wallet-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .wallet-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .wallet-option:hover {
+            border-color: var(--primary-orange);
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        .wallet-option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .meta-mask { background-color: #F6851B; }
+        .wallet-connect { background-color: #3B99FC; }
+        .trust-wallet { background-color: #3375BB; }
+        .coinbase { background-color: #0052FF; }
+        .phantom { background-color: #AB9FF2; }
+        
+        .wallet-option-info {
+            flex-grow: 1;
+        }
+        
+        .wallet-option-name {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .wallet-option-desc {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            background: rgba(15, 15, 26, 0.95);
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-title {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style-type: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-orange);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(30, 30, 45, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary-orange);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .purchase-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .distribution-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .chart-container {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .stage-points {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .stage-point {
+                width: 22%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .wallet-container {
+                display: none;
+            }
+            
+            .phase-marker {
+                display: none;
+            }
+            
+            .phase-line {
+                display: none;
+            }
+            
+            .stage-point {
+                width: 30%;
+                margin-bottom: 1.5rem;
+            }
+            
+            .whitepaper-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .whitepaper-dropdown {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .pre-sale-container {
+                padding: 1.5rem;
+            }
+            
+            .countdown-timer {
+                gap: 10px;
+            }
+            
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+            
+            .payment-method {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .stage-point {
+                width: 45%;
+            }
+            
+            .exchange-logo {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Connect Wallet Button -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">ARX</div>
+            <div class="logo-text">
+                <h1>Arxion</h1>
+                <p>Real World Assets Protocol</p>
+            </div>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="#pre-sale">Pre-Sale</a>
+            <a href="#distribution">Tokenomics</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#whitepaper">Whitepaper</a>
+            <a href="#exchanges">Exchanges</a>
+        </nav>
+        
+        <div class="wallet-container" id="walletContainer" style="display: none;">
+            <div class="wallet-info">
+                <i class="fas fa-wallet" style="color: var(--primary-orange);"></i>
+                <div>
+                    <div class="wallet-address" id="walletAddress">0x1a2b...3c4d</div>
+                    <div class="wallet-balance" id="walletBalanceDisplay">0.00 BNB</div>
+                </div>
+            </div>
+            <button class="connect-wallet-btn" id="disconnectWalletBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                Disconnect
+            </button>
+        </div>
+        
+        <button class="connect-wallet-btn" id="connectWalletBtn">
+            <i class="fas fa-wallet"></i>
+            Connect Wallet
+        </button>
+    </header>
+    
+    <!-- Wallet Connection Modal -->
+    <div class="wallet-modal" id="walletModal">
+        <div class="wallet-modal-content">
+            <div class="wallet-modal-header">
+                <h3 class="wallet-modal-title">Connect Wallet</h3>
+                <button class="wallet-modal-close" id="walletModalClose">&times;</button>
+            </div>
+            <div class="wallet-options">
+                <div class="wallet-option" data-wallet="metamask">
+                    <div class="wallet-option-icon meta-mask">
+                        <i class="fab fa-ethereum"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">MetaMask</div>
+                        <div class="wallet-option-desc">Connect to your MetaMask Wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="wallet-option" data-wallet="walletconnect">
+                    <div class="wallet-option-icon wallet-connect">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">WalletConnect</div>
+                        <div class="wallet-option-desc">Connect with WalletConnect</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="wallet-option" data-wallet="trustwallet">
+                    <div class="wallet-option-icon trust-wallet">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Trust Wallet</div>
+                        <div class="wallet-option-desc">Connect to Trust Wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="wallet-option" data-wallet="coinbase">
+                    <div class="wallet-option-icon coinbase">
+                        <i class="fab fa-bitcoin"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Coinbase Wallet</div>
+                        <div class="wallet-option-desc">Connect to Coinbase Wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="wallet-option" data-wallet="phantom">
+                    <div class="wallet-option-icon phantom">
+                        <i class="fas fa-ghost"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Phantom</div>
+                        <div class="wallet-option-desc">Connect to Phantom Wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="trust-badges">
+            <div class="trust-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>SoldProof Audited</span>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-chart-line"></i>
+                <span>CoinMarketCap Listed</span>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-lock"></i>
+                <span>Liquidity Locked</span>
+            </div>
+        </div>
+        
+        <h1 class="hero-title">Tokenizing Real World Assets with <span style="color: var(--primary-orange);">Arxion Protocol</span></h1>
+        <p class="hero-subtitle">
+            Arxion (ARXN) is a revolutionary cryptocurrency built on the "Real World Assets Protocol" (RWA). 
+            We enable fractional ownership of tangible assets like real estate, gold, and data centers through blockchain tokens. 
+            Instead of buying an entire property, investors can purchase fractions using $ARXN and earn automated rental yields.
+        </p>
+        
+        <!-- Pre-Sale Box -->
+        <div class="pre-sale-container" id="pre-sale">
+            <div class="pre-sale-header">
+                <h2 class="pre-sale-title">ARXN Pre-Sale is Live</h2>
+                <div class="countdown-box">
+                    <div class="countdown-title">Next Stage Starts In</div>
+                    <div class="countdown-timer">
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="countdown-days">01</div>
+                            <div class="countdown-label">Days</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="countdown-hours">23</div>
+                            <div class="countdown-label">Hours</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="countdown-minutes">45</div>
+                            <div class="countdown-label">Minutes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="purchase-container">
+                <div class="token-calculator">
+                    <h3 class="calculator-title">Purchase ARXN Tokens</h3>
+                    
+                    <div class="wallet-balance-display">
+                        <span class="balance-label">Connected Wallet Balance:</span>
+                        <span class="balance-amount" id="walletBalance">0.00 BNB</span>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method active" data-currency="BNB">
+                            <div class="payment-method-logo bnb-bg">
+                                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB">
+                            </div>
+                            <span>BNB</span>
+                        </div>
+                        <div class="payment-method" data-currency="ETH">
+                            <div class="payment-method-logo eth-bg">
+                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH">
+                            </div>
+                            <span>ETH</span>
+                        </div>
+                        <div class="payment-method" data-currency="SOL">
+                            <div class="payment-method-logo sol-bg">
+                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL">
+                            </div>
+                            <span>SOL</span>
+                        </div>
+                        <div class="payment-method" data-currency="USDT">
+                            <div class="payment-method-logo usdt-bg">
+                                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT">
+                            </div>
+                            <span>USDT</span>
+                        </div>
+                        <div class="payment-method" data-currency="USDC">
+                            <div class="payment-method-logo usdc-bg">
+                                <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" alt="USDC">
+                            </div>
+                            <span>USDC</span>
+                        </div>
+                    </div>
+                    
+                    <div class="amount-input-container">
+                        <label class="amount-input-label">Amount to Spend</label>
+                        <input type="number" class="amount-input" id="spendAmount" min="0.01" step="0.01" value="0.1" placeholder="0.00">
+                    </div>
+                    
+                    <div class="tokens-to-receive">
+                        <div class="tokens-label">You Will Receive</div>
+                        <div class="tokens-amount" id="tokensToReceive">400.00</div>
+                        <div class="tokens-value">ARXN Tokens</div>
+                    </div>
+                    
+                    <button class="buy-button" id="buyTokensBtn">
+                        <i class="fas fa-shopping-cart"></i> Buy ARXN Tokens Now
+                    </button>
+                </div>
+                
+                <div class="sale-progress">
+                    <h3 class="progress-title">Pre-Sale Progress</h3>
+                    
+                    <div class="progress-bar-container">
+                        <div class="progress-info">
+                            <span>Stage 4 of 15</span>
+                            <span>25% Complete</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="current-stage">
+                        <div class="stage-info">
+                            <h4>Current Stage Price</h4>
+                            <div class="stage-price">$0.040</div>
+                            <p>Next Stage: $0.045</p>
+                        </div>
+                        <div class="stage-number">
+                            <div style="font-size: 2rem; color: var(--primary-orange); font-weight: 800;">4</div>
+                            <div style="color: var(--medium-gray);">/15</div>
+                        </div>
+                    </div>
+                    
+                    <div class="current-stage" style="margin-top: 2rem;">
+                        <div class="stage-info">
+                            <h4>Your Investment Value at Listing</h4>
+                            <div class="stage-price" id="futureValue">$0.00</div>
+                            <p>Based on listing price: $0.20</p>
+                        </div>
+                        <div style="color: var(--primary-orange); font-size: 2rem;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Token Distribution Pie Chart -->
+    <section class="token-distribution" id="distribution">
+        <h2 class="section-title">ARXN Token Distribution</h2>
+        <p class="section-subtitle">
+            A carefully planned tokenomics model designed for sustainable growth and community alignment.
+            The distribution ensures long-term project development and fair allocation to all stakeholders.
+        </p>
+        
+        <div class="distribution-container">
+            <div class="chart-container">
+                <canvas id="tokenChart"></canvas>
+            </div>
+            
+            <div class="distribution-list">
+                <div class="distribution-item" style="border-left-color: #FF6B35;">
+                    <div class="distribution-color" style="background-color: #FF6B35;"></div>
+                    <div class="distribution-info">
+                        <div class="distribution-name">Pre-Sale & Public Sale</div>
+                        <div class="distribution-value">40%</div>
+                    </div>
+                </div>
+                
+                <div class="distribution-item" style="border-left-color: #6A11CB;">
+                    <div class="distribution-color" style="background-color: #6A11CB;"></div>
+                    <div class="distribution-info">
+                        <div class="distribution-name">Liquidity & Exchange Listings</div>
+                        <div class="distribution-value">25%</div>
+                    </div>
+                </div>
+                
+                <div class="distribution-item" style="border-left-color: #FF8E53;">
+                    <div class="distribution-color" style="background-color: #FF8E53;"></div>
+                    <div class="distribution-info">
+                        <div class="distribution-name">Team & Advisors (3-year vesting)</div>
+                        <div class="distribution-value">15%</div>
+                    </div>
+                </div>
+                
+                <div class="distribution-item" style="border-left-color: #2575FC;">
+                    <div class="distribution-color" style="background-color: #2575FC;"></div>
+                    <div class="distribution-info">
+                        <div class="distribution-name">Ecosystem & Development</div>
+                        <div class="distribution-value">10%</div>
+                    </div>
+                </div>
+                
+                <div class="distribution-item" style="border-left-color: #00C851;">
+                    <div class="distribution-color" style="background-color: #00C851;"></div>
+                    <div class="distribution-info">
+                        <div class="distribution-name">Marketing & Partnerships</div>
+                        <div class="distribution-value">10%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Roadmap -->
+    <section class="roadmap-section" id="roadmap">
+        <h2 class="section-title">Project Roadmap</h2>
+        <p class="section-subtitle">
+            Our strategic 4-phase development plan to revolutionize real world asset tokenization.
+        </p>
+        
+        <div class="roadmap-container">
+            <div class="roadmap-phase">
+                <div class="phase-marker">
+                    <div class="phase-circle completed">Q1 2023</div>
+                    <div class="phase-line"></div>
+                </div>
+                <div class="phase-content completed">
+                    <h3 class="phase-title">Phase 1: Foundation & Pre-Sale Launch (COMPLETED)</h3>
+                    <ul class="phase-list">
+                        <li>Smart contract development and audit completion</li>
+                        <li>Website and platform UI/UX design</li>
+                        <li>Pre-sale launch with multi-chain support</li>
+                        <li>Community building and social media setup</li>
+                        <li>Partnerships with RWA providers initiation</li>
+                        <li>Legal framework establishment</li>
+                        <li>Whitepaper V1 release</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="roadmap-phase">
+                <div class="phase-marker">
+                    <div class="phase-circle pending">Q3 2024</div>
+                    <div class="phase-line"></div>
+                </div>
+                <div class="phase-content pending">
+                    <h3 class="phase-title">Phase 2: Platform Development & First Listings</h3>
+                    <ul class="phase-list">
+                        <li>MVP platform launch with basic tokenization</li>
+                        <li>First real estate asset tokenization</li>
+                        <li>Integration with major DeFi protocols</li>
+                        <li>Mobile application development start</li>
+                        <li>Cross-chain bridge implementation</li>
+                        <li>CEX listings on 2 major exchanges</li>
+                        <li>Community governance system launch</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="roadmap-phase">
+                <div class="phase-marker">
+                    <div class="phase-circle pending">Q1 2025</div>
+                    <div class="phase-line"></div>
+                </div>
+                <div class="phase-content pending">
+                    <h3 class="phase-title">Phase 3: Expansion & Scaling</h3>
+                    <ul class="phase-list">
+                        <li>Gold and commodity tokenization launch</li>
+                        <li>Advanced RWA marketplace development</li>
+                        <li>Yield distribution automation system</li>
+                        <li>Partnerships with institutional investors</li>
+                        <li>Additional CEX listings (top 10 exchanges)</li>
+                        <li>Mobile app release for iOS and Android</li>
+                        <li>Global expansion to 3 new regions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="roadmap-phase">
+                <div class="phase-marker">
+                    <div class="phase-circle pending">Q3 2025</div>
+                </div>
+                <div class="phase-content pending">
+                    <h3 class="phase-title">Phase 4: Ecosystem Maturity & Global Adoption</h3>
+                    <ul class="phase-list">
+                        <li>Full-scale RWA ecosystem with 50+ assets</li>
+                        <li>Institutional investment portal launch</li>
+                        <li>DAO implementation for asset management</li>
+                        <li>ARXN debit card and payment integration</li>
+                        <li>Advanced analytics and reporting tools</li>
+                        <li>Global compliance framework completion</li>
+                        <li>Target of 100,000+ active users</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Price Stages Chart -->
+    <section class="price-stages">
+        <h2 class="section-title">Pre-Sale Price Stages</h2>
+        <p class="section-subtitle">
+            15 progressive stages with increasing token prices. Early investors get the best rates before listing at $0.20.
+        </p>
+        
+        <div class="stages-chart-container">
+            <div class="stages-chart">
+                <canvas id="priceChart"></canvas>
+            </div>
+            
+            <div class="stage-points">
+                <div class="stage-point">
+                    <div class="stage-point-circle"></div>
+                    <div class="stage-point-name">Stage 1</div>
+                    <div class="stage-point-price">$0.025</div>
+                </div>
+                <div class="stage-point">
+                    <div class="stage-point-circle"></div>
+                    <div class="stage-point-name">Stage 4</div>
+                    <div class="stage-point-price">$0.040</div>
+                </div>
+                <div class="stage-point">
+                    <div class="stage-point-circle"></div>
+                    <div class="stage-point-name">Stage 8</div>
+                    <div class="stage-point-price">$0.070</div>
+                </div>
+                <div class="stage-point">
+                    <div class="stage-point-circle"></div>
+                    <div class="stage-point-name">Stage 12</div>
+                    <div class="stage-point-price">$0.110</div>
+                </div>
+                <div class="stage-point">
+                    <div class="stage-point-circle"></div>
+                    <div class="stage-point-name">Stage 15</div>
+                    <div class="stage-point-price">$0.150</div>
+                </div>
+                <div class="stage-point">
+                    <div class="stage-point-circle"></div>
+                    <div class="stage-point-name">Listing</div>
+                    <div class="stage-point-price">$0.200</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Exchange Listings -->
+    <section class="exchange-listings" id="exchanges">
+        <h2 class="section-title">Planned Exchange Listings</h2>
+        <p class="section-subtitle">
+            We are in advanced negotiations with top-tier centralized and decentralized exchanges.
+        </p>
+        
+        <div class="exchange-container">
+            <div class="exchange-logo">
+                <img src="https://cryptologos.cc/logos/okx-okx-logo.png" alt="OKX">
+            </div>
+            <div class="exchange-logo">
+                <img src="https://cryptologos.cc/logos/mexc-mexc-logo.png" alt="MEXC">
+            </div>
+            <div class="exchange-logo">
+                <img src="https://cryptologos.cc/logos/kucoin-kucoin-logo.png" alt="KuCoin">
+            </div>
+            <div class="exchange-logo">
+                <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png" alt="Uniswap">
+            </div>
+            <div class="exchange-logo">
+                <img src="https://cryptologos.cc/logos/pancakeswap-cake-logo.png" alt="PancakeSwap">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Whitepaper -->
+    <section class="whitepaper-section" id="whitepaper">
+        <h2 class="section-title">Arxion Whitepaper</h2>
+        <p class="section-subtitle">
+            Explore our comprehensive technical documentation and project vision.
+        </p>
+        
+        <div class="whitepaper-container">
+            <div class="whitepaper-header">
+                <h3 class="whitepaper-title">Arxion Protocol: Tokenizing Real World Assets</h3>
+                <div class="whitepaper-dropdown">
+                    <button class="whitepaper-dropdown-btn" id="whitepaperDropdownBtn">
+                        <span>Select Whitepaper Section</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="whitepaper-dropdown-content" id="whitepaperDropdown">
+                        <div class="whitepaper-item" data-section="executive">
+                            <i class="fas fa-file-alt"></i> Executive Summary
+                        </div>
+                        <div class="whitepaper-item" data-section="market">
+                            <i class="fas fa-chart-line"></i> Market Opportunity
+                        </div>
+                        <div class="whitepaper-item" data-section="technical">
+                            <i class="fas fa-cogs"></i> Technical Architecture
+                        </div>
+                        <div class="whitepaper-item" data-section="tokenomics">
+                            <i class="fas fa-coins"></i> Tokenomics
+                        </div>
+                        <div class="whitepaper-item" data-section="usecases">
+                            <i class="fas fa-briefcase"></i> Use Cases
+                        </div>
+                        <div class="whitepaper-item" data-section="roadmap">
+                            <i class="fas fa-map"></i> Roadmap
+                        </div>
+                        <div class="whitepaper-item" data-section="team">
+                            <i class="fas fa-users"></i> Team & Advisors
+                        </div>
+                        <div class="whitepaper-item" data-section="risk">
+                            <i class="fas fa-exclamation-triangle"></i> Risk Assessment
+                        </div>
+                        <div class="whitepaper-item" data-section="legal">
+                            <i class="fas fa-gavel"></i> Legal & Compliance
+                        </div>
+                        <div class="whitepaper-item" data-section="future">
+                            <i class="fas fa-rocket"></i> Future Vision
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="whitepaper-content" id="whitepaperContent">
+                <h3>Executive Summary</h3>
+                <p>Arxion Protocol bridges traditional finance with decentralized technology by tokenizing real-world assets (RWA) like real estate, commodities, and infrastructure. Our mission is to democratize access to high-value tangible assets through blockchain technology, allowing fractional ownership and automated yield distribution.</p>
+                
+                <p>The protocol leverages smart contracts to ensure transparency, security, and compliance throughout the asset tokenization lifecycle. By converting physical assets into digital tokens, we unlock liquidity, reduce barriers to entry, and create new investment opportunities for both retail and institutional investors.</p>
+                
+                <p>Arxion's native utility token, ARXN, serves as the primary medium of exchange within the ecosystem, facilitating transactions, governance, and staking rewards. The tokenomics model is designed for sustainable growth, with careful allocation to ensure long-term project development and community alignment.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Chat Bot -->
+    <div class="chat-bot">
+        <div class="chat-bot-button" id="chatBotButton">
+            <div class="chat-bot-icon">🤖</div>
+            <div class="online-indicator"></div>
+        </div>
+    </div>
+    
+    <!-- Ministry Box -->
+    <div class="ministry-box" id="ministryBox">
+        <div class="ministry-header">
+            <div class="ministry-title">🎁 Daily Ministry Box</div>
+            <button class="ministry-close" id="ministryClose">×</button>
+        </div>
+        <div class="ministry-content">
+            Congratulations! You've won a daily reward for being an active ARXN investor.
+        </div>
+        <div class="ministry-prize" id="ministryPrize">+25 ARXN</div>
+        <div class="ministry-timer">Next reward in: <span id="ministryTimer">23:59:59</span></div>
+    </div>
+    
+    <!-- Notifications -->
+    <div class="notification-container" id="notificationContainer">
+        <!-- Notifications will be added dynamically -->
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4 class="footer-title">Arxion Protocol</h4>
+                <p style="color: var(--medium-gray); margin-bottom: 1.5rem; line-height: 1.6;">
+                    The future of real world asset tokenization. Democratizing access to tangible investments through blockchain technology.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#pre-sale">Pre-Sale</a></li>
+                    <li><a href="#distribution">Tokenomics</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
+                    <li><a href="#whitepaper">Whitepaper</a></li>
+                    <li><a href="#exchanges">Exchanges</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="footer-title">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="footer-title">Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Risk Disclosure</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 Arxion Protocol. All rights reserved. ARXN is a utility token for the Arxion RWA Protocol.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">This is a demonstration website. Cryptocurrency investments carry significant risk.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Global Variables
+        let currentStage = 4;
+        const stagePrices = [0.025, 0.030, 0.035, 0.040, 0.045, 0.052, 0.060, 0.070, 0.080, 0.090, 0.100, 0.110, 0.125, 0.140, 0.150];
+        const listingPrice = 0.20;
+        let currentCurrency = "BNB";
+        let walletConnected = false;
+        let walletBalance = 0;
+        let userTokens = 0;
+        let purchaseHistory = [];
+        
+        // Simulated wallet addresses for live purchases
+        const walletAddresses = [
+            "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b",
+            "0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c",
+            "0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d",
+            "0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e",
+            "0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f",
+            "0x6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a",
+            "0x7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b",
+            "0x8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c"
+        ];
+        
+        const userNames = [
+            "crypto_whale_22", "investor_pro", "blockchain_guru", 
+            "defi_enthusiast", "crypto_trader_99", "web3_builder",
+            "hodl_forever", "smart_investor", "early_adopter",
+            "bull_market_rider", "crypto_ninja", "token_king",
+            "alpha_seeker", "diamond_hands", "crypto_og"
+        ];
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCountdown();
+            initializeTokenChart();
+            initializePriceChart();
+            setupEventListeners();
+            generateLivePurchases();
+            showMinistryBox();
+            updateProgressBar();
+        });
+        
+        // Initialize Countdown Timer
+        function initializeCountdown() {
+            // Set countdown to 2 days from now
+            const countdownDate = new Date();
+            countdownDate.setDate(countdownDate.getDate() + 2);
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+                
+                // If the countdown is over, reset to 2 days
+                if (distance < 0) {
+                    countdownDate.setDate(countdownDate.getDate() + 2);
+                }
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 60000);
+        }
+        
+        // Initialize Token Distribution Pie Chart
+        function initializeTokenChart() {
+            const ctx = document.getElementById('tokenChart').getContext('2d');
+            
+            const data = {
+                labels: ['Pre-Sale & Public Sale', 'Liquidity & Exchange Listings', 'Team & Advisors', 'Ecosystem & Development', 'Marketing & Partnerships'],
+                datasets: [{
+                    data: [40, 25, 15, 10, 10],
+                    backgroundColor: [
+                        '#FF6B35',
+                        '#6A11CB',
+                        '#FF8E53',
+                        '#2575FC',
+                        '#00C851'
+                    ],
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                    borderWidth: 2,
+                    hoverOffset: 15
+                }]
+            };
+            
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed}%`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            };
+            
+            new Chart(ctx, config);
+        }
+        
+        // Initialize Price Chart
+        function initializePriceChart() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            
+            // Generate price data for 15 stages + listing
+            const labels = [];
+            const prices = [];
+            
+            for (let i = 1; i <= 15; i++) {
+                labels.push(`Stage ${i}`);
+                prices.push(stagePrices[i-1]);
+            }
+            
+            labels.push('Listing');
+            prices.push(listingPrice);
+            
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'ARXN Price ($)',
+                    data: prices,
+                    borderColor: '#FF6B35',
+                    backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: function(context) {
+                        const index = context.dataIndex;
+                        if (index < 15) return '#FF6B35';
+                        if (index === 15) return '#6A11CB';
+                        return '#00C851';
+                    },
+                    pointRadius: function(context) {
+                        const index = context.dataIndex;
+                        if (index === 0 || index === 4 || index === 8 || index === 12 || index === 14 || index === 15) {
+                            return 6;
+                        }
+                        return 0;
+                    }
+                }]
+            };
+            
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Price: $${context.parsed.y}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                callback: function(value) {
+                                    return '$' + value;
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                maxTicksLimit: 8
+                            }
+                        }
+                    }
+                }
+            };
+            
+            new Chart(ctx, config);
+        }
+        
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Connect Wallet Button
+            document.getElementById('connectWalletBtn').addEventListener('click', showWalletModal);
+            
+            // Disconnect Wallet Button
+            document.getElementById('disconnectWalletBtn').addEventListener('click', disconnectWallet);
+            
+            // Wallet Modal Close
+            document.getElementById('walletModalClose').addEventListener('click', hideWalletModal);
+            
+            // Wallet Options
+            document.querySelectorAll('.wallet-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const walletType = this.getAttribute('data-wallet');
+                    connectToWallet(walletType);
+                });
+            });
+            
+            // Payment Method Selection
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCurrency = this.getAttribute('data-currency');
+                    updateTokenCalculation();
+                    updateWalletBalanceDisplay();
+                });
+            });
+            
+            // Buy Tokens Button
+            document.getElementById('buyTokensBtn').addEventListener('click', buyTokens);
+            
+            // Spend Amount Input
+            document.getElementById('spendAmount').addEventListener('input', updateTokenCalculation);
+            
+            // Ministry Box Close
+            document.getElementById('ministryClose').addEventListener('click', function() {
+                document.getElementById('ministryBox').style.display = 'none';
+            });
+            
+            // Whitepaper Dropdown
+            document.getElementById('whitepaperDropdownBtn').addEventListener('click', function() {
+                document.getElementById('whitepaperDropdown').classList.toggle('show');
+            });
+            
+            // Whitepaper Items
+            document.querySelectorAll('.whitepaper-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+                    updateWhitepaperContent(section);
+                    document.getElementById('whitepaperDropdown').classList.remove('show');
+                });
+            });
+            
+            // Chat Bot Button
+            document.getElementById('chatBotButton').addEventListener('click', function() {
+                alert("Hello! I'm the Arxion assistant. I'm here to answer your questions about the project. Feel free to ask about tokenomics, roadmap, or how to participate in the pre-sale.");
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.whitepaper-dropdown')) {
+                    document.getElementById('whitepaperDropdown').classList.remove('show');
+                }
+            });
+        }
+        
+        // Show Wallet Modal
+        function showWalletModal() {
+            document.getElementById('walletModal').style.display = 'flex';
+        }
+        
+        // Hide Wallet Modal
+        function hideWalletModal() {
+            document.getElementById('walletModal').style.display = 'none';
+        }
+        
+        // Connect to Wallet
+        function connectToWallet(walletType) {
+            // Simulate wallet connection
+            walletConnected = true;
+            
+            // Generate random wallet address and balance
+            const randomAddress = walletAddresses[Math.floor(Math.random() * walletAddresses.length)];
+            const shortAddress = randomAddress.substring(0, 6) + '...' + randomAddress.substring(randomAddress.length - 4);
+            
+            // Set random balance based on currency
+            const balances = {
+                'BNB': (Math.random() * 5 + 0.5).toFixed(2),
+                'ETH': (Math.random() * 0.5 + 0.05).toFixed(3),
+                'SOL': (Math.random() * 2 + 0.5).toFixed(2),
+                'USDT': (Math.random() * 500 + 10).toFixed(0),
+                'USDC': (Math.random() * 500 + 10).toFixed(0)
+            };
+            
+            walletBalance = parseFloat(balances[currentCurrency]);
+            
+            // Update UI
+            document.getElementById('connectWalletBtn').style.display = 'none';
+            document.getElementById('walletContainer').style.display = 'flex';
+            document.getElementById('walletAddress').textContent = shortAddress;
+            document.getElementById('walletBalanceDisplay').textContent = walletBalance + ' ' + currentCurrency;
+            document.getElementById('walletBalance').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
+            
+            // Hide modal
+            hideWalletModal();
+            
+            // Show success notification
+            showNotification(`Successfully connected to ${walletType} wallet!`, 'success');
+            
+            // Enable buy button
+            document.getElementById('buyTokensBtn').disabled = false;
+        }
+        
+        // Disconnect Wallet
+        function disconnectWallet() {
+            walletConnected = false;
+            walletBalance = 0;
+            userTokens = 0;
+            
+            // Update UI
+            document.getElementById('connectWalletBtn').style.display = 'block';
+            document.getElementById('walletContainer').style.display = 'none';
+            document.getElementById('walletBalance').textContent = '0.00 ' + currentCurrency;
+            
+            // Reset input
+            document.getElementById('spendAmount').value = '0.1';
+            updateTokenCalculation();
+            
+            // Show notification
+            showNotification('Wallet disconnected successfully.', 'info');
+        }
+        
+        // Update Wallet Balance Display
+        function updateWalletBalanceDisplay() {
+            if (walletConnected) {
+                // Update balance for current currency (simulated)
+                const balances = {
+                    'BNB': (Math.random() * 5 + 0.5).toFixed(2),
+                    'ETH': (Math.random() * 0.5 + 0.05).toFixed(3),
+                    'SOL': (Math.random() * 2 + 0.5).toFixed(2),
+                    'USDT': (Math.random() * 500 + 10).toFixed(0),
+                    'USDC': (Math.random() * 500 + 10).toFixed(0)
+                };
+                
+                walletBalance = parseFloat(balances[currentCurrency]);
+                document.getElementById('walletBalanceDisplay').textContent = walletBalance + ' ' + currentCurrency;
+                document.getElementById('walletBalance').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
+            }
+        }
+        
+        // Update Token Calculation
+        function updateTokenCalculation() {
+            const spendAmount = parseFloat(document.getElementById('spendAmount').value) || 0;
+            const currentPrice = stagePrices[currentStage - 1];
+            const tokens = spendAmount / currentPrice;
+            
+            document.getElementById('tokensToReceive').textContent = tokens.toFixed(2);
+            
+            // Update future value
+            if (spendAmount > 0) {
+                const futureValue = tokens * listingPrice;
+                document.getElementById('futureValue').textContent = '$' + futureValue.toFixed(2);
+            } else {
+                document.getElementById('futureValue').textContent = '$0.00';
+            }
+        }
+        
+        // Buy Tokens Function
+        function buyTokens() {
+            if (!walletConnected) {
+                alert("Please connect your wallet first!");
+                return;
+            }
+            
+            const spendAmount = parseFloat(document.getElementById('spendAmount').value) || 0;
+            
+            if (spendAmount <= 0) {
+                alert("Please enter a valid amount!");
+                return;
+            }
+            
+            if (spendAmount > walletBalance) {
+                alert("Insufficient balance in your wallet!");
+                return;
+            }
+            
+            // Simulate transaction
+            const currentPrice = stagePrices[currentStage - 1];
+            const tokens = spendAmount / currentPrice;
+            
+            // Show success message with animation
+            const buyBtn = document.getElementById('buyTokensBtn');
+            const originalText = buyBtn.innerHTML;
+            
+            buyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            buyBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Update user tokens
+                userTokens += tokens;
+                
+                // Update wallet balance
+                walletBalance -= spendAmount;
+                document.getElementById('walletBalance').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
+                document.getElementById('walletBalanceDisplay').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
+                
+                // Record purchase
+                purchaseHistory.push({
+                    amount: spendAmount,
+                    currency: currentCurrency,
+                    tokens: tokens,
+                    price: currentPrice,
+                    timestamp: new Date()
+                });
+                
+                buyBtn.innerHTML = '<i class="fas fa-check"></i> Purchase Successful!';
+                buyBtn.style.background = 'linear-gradient(90deg, #00C851, #007E33)';
+                
+                // Show purchase notification for current user
+                const userName = userNames[Math.floor(Math.random() * userNames.length)];
+                showPurchaseNotification(userName, spendAmount.toFixed(2), currentCurrency);
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    buyBtn.innerHTML = originalText;
+                    buyBtn.disabled = false;
+                    buyBtn.style.background = 'var(--orange-purple-gradient)';
+                    
+                    // Reset input
+                    document.getElementById('spendAmount').value = '';
+                    updateTokenCalculation();
+                }, 3000);
+            }, 2000);
+        }
+        
+        // Generate Live Purchase Notifications
+        function generateLivePurchases() {
+            // Initial purchases
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    generateRandomPurchase();
+                }, i * 5000);
+            }
+            
+            // Continue generating purchases at random intervals (1-10 minutes)
+            function scheduleNextPurchase() {
+                const delay = Math.floor(Math.random() * 9 + 1) * 60000; // 1-10 minutes in milliseconds
+                setTimeout(() => {
+                    generateRandomPurchase();
+                    scheduleNextPurchase();
+                }, delay);
+            }
+            
+            scheduleNextPurchase();
+        }
+        
+        // Generate Random Purchase
+        function generateRandomPurchase() {
+            // Weighted random selection (70% BNB, 20% USDT, 10% others)
+            const rand = Math.random();
+            let currency, amount;
+            
+            if (rand < 0.7) {
+                currency = "BNB";
+                amount = (Math.random() * 0.25 + 0.1).toFixed(2); // 0.1 - 0.35 BNB
+            } else if (rand < 0.9) {
+                currency = "USDT";
+                amount = (Math.random() * 460 + 10).toFixed(0); // 10 - 470 USDT
+            } else if (rand < 0.95) {
+                currency = "ETH";
+                amount = (Math.random() * 0.45 + 0.05).toFixed(3); // 0.05 - 0.5 ETH
+            } else {
+                currency = "SOL";
+                amount = (Math.random() * 1.5 + 0.5).toFixed(2); // 0.5 - 2 SOL
+            }
+            
+            const userName = userNames[Math.floor(Math.random() * userNames.length)];
+            showPurchaseNotification(userName, amount, currency);
+        }
+        
+        // Show Purchase Notification
+        function showPurchaseNotification(user, amount, currency) {
+            const container = document.getElementById('notificationContainer');
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div><span class="notification-user">${user}</span> just purchased <strong>${amount} ${currency}</strong> worth of ARXN tokens!</div>
+                <div style="font-size: 0.8rem; margin-top: 5px; color: #aaa;">${getRandomTimeAgo()} ago</div>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Remove notification after animation completes
+            setTimeout(() => {
+                notification.remove();
+            }, 8000);
+        }
+        
+        // Show Generic Notification
+        function showNotification(message, type = 'info') {
+            const container = document.getElementById('notificationContainer');
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div>${message}</div>
+            `;
+            
+            if (type === 'success') {
+                notification.style.borderLeftColor = '#00C851';
+            } else if (type === 'warning') {
+                notification.style.borderLeftColor = '#ffbb33';
+            } else if (type === 'danger') {
+                notification.style.borderLeftColor = '#ff4444';
+            }
+            
+            container.appendChild(notification);
+            
+            // Remove notification after animation completes
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // Show Ministry Box
+        function showMinistryBox() {
+            // Show after 30 seconds
+            setTimeout(() => {
+                const ministryBox = document.getElementById('ministryBox');
+                ministryBox.style.display = 'block';
+                
+                // Set random prize (max 200 ARXN)
+                const prize = Math.floor(Math.random() * 200) + 1;
+                document.getElementById('ministryPrize').textContent = `+${prize} ARXN`;
+                
+                // Hide after 5 minutes
+                setTimeout(() => {
+                    ministryBox.style.display = 'none';
+                }, 300000); // 5 minutes
+            }, 30000); // 30 seconds
+            
+            // Update timer
+            function updateMinistryTimer() {
+                // Show random times between 23-24 hours
+                const hours = Math.floor(Math.random() * 2) + 23;
+                const minutes = Math.floor(Math.random() * 60);
+                const seconds = Math.floor(Math.random() * 60);
+                
+                document.getElementById('ministryTimer').textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            updateMinistryTimer();
+            setInterval(updateMinistryTimer, 1000);
+        }
+        
+        // Update Progress Bar
+        function updateProgressBar() {
+            const progress = (currentStage / 15) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+        
+        // Update Whitepaper Content
+        function updateWhitepaperContent(section) {
+            const content = document.getElementById('whitepaperContent');
+            let newContent = '';
+            
+            switch(section) {
+                case 'executive':
+                    newContent = `
+                        <h3>Executive Summary</h3>
+                        <p>Arxion Protocol bridges traditional finance with decentralized technology by tokenizing real-world assets (RWA) like real estate, commodities, and infrastructure. Our mission is to democratize access to high-value tangible assets through blockchain technology, allowing fractional ownership and automated yield distribution.</p>
+                        <p>The protocol leverages smart contracts to ensure transparency, security, and compliance throughout the asset tokenization lifecycle. By converting physical assets into digital tokens, we unlock liquidity, reduce barriers to entry, and create new investment opportunities for both retail and institutional investors.</p>
+                        <p>Arxion's native utility token, ARXN, serves as the primary medium of exchange within the ecosystem, facilitating transactions, governance, and staking rewards. The tokenomics model is designed for sustainable growth, with careful allocation to ensure long-term project development and community alignment.</p>
+                    `;
+                    break;
+                case 'market':
+                    newContent = `
+                        <h3>Market Opportunity</h3>
+                        <p>The global real estate market alone is valued at over $300 trillion, while the total value of real-world assets suitable for tokenization exceeds $500 trillion. Current blockchain-based RWA tokenization represents less than 0.01% of this potential, indicating massive growth opportunities.</p>
+                        <p>Key market drivers include:</p>
+                        <ul>
+                            <li>Growing demand for alternative investments among millennials and Gen Z</li>
+                            <li>Increased institutional interest in blockchain-based asset management</li>
+                            <li>Regulatory frameworks evolving to support digital assets</li>
+                            <li>Technological advancements in blockchain scalability and interoperability</li>
+                            <li>Global push for financial inclusion and democratized investment access</li>
+                        </ul>
+                        <p>Arxion aims to capture a significant portion of this emerging market by offering a comprehensive, user-friendly platform for RWA tokenization and trading.</p>
+                    `;
+                    break;
+                case 'technical':
+                    newContent = `
+                        <h3>Technical Architecture</h3>
+                        <p>Arxion Protocol is built on a multi-chain architecture to ensure maximum accessibility and interoperability. The core components include:</p>
+                        <ul>
+                            <li><strong>Smart Contract Layer:</strong> Ethereum-based smart contracts for asset tokenization, governance, and yield distribution</li>
+                            <li><strong>Cross-Chain Bridge:</strong> Secure bridges connecting Ethereum, Binance Smart Chain, Solana, and Polygon</li>
+                            <li><strong>Oracle Network:</strong> Decentralized oracles for real-time asset valuation and data feeds</li>
+                            <li><strong>IPFS Storage:</strong> Distributed file storage for legal documents, asset proofs, and transaction records</li>
+                            <li><strong>ZK-SNARKs:</strong> Privacy-preserving technology for confidential transactions</li>
+                        </ul>
+                        <p>The platform employs a modular architecture that allows for easy integration of new asset classes, regulatory frameworks, and blockchain networks as the ecosystem evolves.</p>
+                    `;
+                    break;
+                case 'tokenomics':
+                    newContent = `
+                        <h3>Tokenomics</h3>
+                        <p>ARXN serves as the utility token within the Arxion ecosystem with the following functions:</p>
+                        <ul>
+                            <li><strong>Transaction Medium:</strong> Used for purchasing tokenized assets and paying platform fees</li>
+                            <li><strong>Governance:</strong> Token holders can vote on platform upgrades, asset listings, and treasury management</li>
+                            <li><strong>Staking:</strong> Users can stake ARXN to earn platform revenue shares and governance power</li>
+                            <li><strong>Fee Discounts:</strong> Reduced transaction fees for users holding minimum ARXN balances</li>
+                        </ul>
+                        <p><strong>Token Distribution:</strong></p>
+                        <ul>
+                            <li>Pre-Sale & Public Sale: 40% (with 6-month linear vesting for pre-sale)</li>
+                            <li>Liquidity & Exchange Listings: 25% (locked for 12 months)</li>
+                            <li>Team & Advisors: 15% (3-year vesting with 1-year cliff)</li>
+                            <li>Ecosystem & Development: 10% (released quarterly over 4 years)</li>
+                            <li>Marketing & Partnerships: 10% (released based on milestone achievements)</li>
+                        </ul>
+                    `;
+                    break;
+                case 'usecases':
+                    newContent = `
+                        <h3>Use Cases</h3>
+                        <p>Arxion Protocol enables several innovative use cases for real-world asset tokenization:</p>
+                        <ul>
+                            <li><strong>Fractional Real Estate Ownership:</strong> Investors can purchase tokens representing shares in commercial or residential properties, receiving proportional rental income and appreciation</li>
+                            <li><strong>Commodity Tokenization:</strong> Gold, silver, and other commodities can be tokenized, allowing for easy trading and ownership transfer</li>
+                            <li><strong>Infrastructure Investment:</strong> Tokenization of revenue-generating infrastructure like data centers, solar farms, and telecommunications towers</li>
+                            <li><strong>Art & Collectibles:</strong> High-value art pieces and collectibles can be tokenized, enabling shared ownership and liquidity</li>
+                            <li><strong>Private Equity:</strong> Traditional private equity investments can be tokenized to increase liquidity and accessibility</li>
+                            <li><strong>Automated Yield Distribution:</strong> Smart contracts automatically distribute rental income, dividends, or interest payments to token holders</li>
+                        </ul>
+                    `;
+                    break;
+                case 'roadmap':
+                    newContent = `
+                        <h3>Roadmap</h3>
+                        <p>Arxion's development follows a clear 4-phase roadmap:</p>
+                        <p><strong>Phase 1: Foundation & Pre-Sale (Q1 2023 - COMPLETED)</strong></p>
+                        <ul>
+                            <li>Smart contract development and audit completion</li>
+                            <li>Website and platform UI/UX design</li>
+                            <li>Pre-sale launch with multi-chain support</li>
+                            <li>Community building and social media setup</li>
+                        </ul>
+                        <p><strong>Phase 2: Platform Development & First Listings (Q3 2024)</strong></p>
+                        <ul>
+                            <li>MVP platform launch with basic tokenization</li>
+                            <li>First real estate asset tokenization</li>
+                            <li>Integration with major DeFi protocols</li>
+                            <li>CEX listings on 2 major exchanges</li>
+                        </ul>
+                        <p><strong>Phase 3: Expansion & Scaling (Q1 2025)</strong></p>
+                        <ul>
+                            <li>Gold and commodity tokenization launch</li>
+                            <li>Advanced RWA marketplace development</li>
+                            <li>Mobile app release for iOS and Android</li>
+                            <li>Global expansion to 3 new regions</li>
+                        </ul>
+                        <p><strong>Phase 4: Ecosystem Maturity (Q3 2025)</strong></p>
+                        <ul>
+                            <li>Full-scale RWA ecosystem with 50+ assets</li>
+                            <li>Institutional investment portal launch</li>
+                            <li>DAO implementation for asset management</li>
+                            <li>Target of 100,000+ active users</li>
+                        </ul>
+                    `;
+                    break;
+                case 'team':
+                    newContent = `
+                        <h3>Team & Advisors</h3>
+                        <p>Arxion is backed by a team of experienced professionals from blockchain, finance, real estate, and technology sectors:</p>
+                        <ul>
+                            <li><strong>Alex Morgan - CEO:</strong> Former blockchain lead at Fortune 500 financial institution with 15+ years in fintech</li>
+                            <li><strong>Dr. Sarah Chen - CTO:</strong> PhD in Computer Science from MIT, previously lead engineer at major blockchain protocol</li>
+                            <li><strong>Michael Rodriguez - CFO:</strong> 20+ years in investment banking and asset management</li>
+                            <li><strong>James Wilson - Head of Legal:</strong> Specialist in blockchain regulation and securities law</li>
+                            <li><strong>Emma Thompson - Head of Business Development:</strong> Former partnerships lead at leading DeFi protocol</li>
+                        </ul>
+                        <p><strong>Advisory Board:</strong></p>
+                        <ul>
+                            <li><strong>Dr. Robert Kim:</strong> Professor of Blockchain Economics at Stanford University</li>
+                            <li><strong>Lisa Park:</strong> Former SEC regulator specializing in digital assets</li>
+                            <li><strong>David Zhang:</strong> Real estate mogul with $2B+ in property assets</li>
+                            <li><strong>Marcus Johnson:</strong> Early investor in 5 unicorn blockchain startups</li>
+                        </ul>
+                    `;
+                    break;
+                case 'risk':
+                    newContent = `
+                        <h3>Risk Assessment</h3>
+                        <p>Investing in Arxion carries certain risks that should be carefully considered:</p>
+                        <ul>
+                            <li><strong>Regulatory Risk:</strong> Evolving regulations could impact token classification and platform operations</li>
+                            <li><strong>Market Risk:</strong> Cryptocurrency markets are highly volatile and subject to significant price fluctuations</li>
+                            <li><strong>Technology Risk:</strong> Smart contract vulnerabilities, blockchain network issues, or security breaches</li>
+                            <li><strong>Liquidity Risk:</strong> Limited trading volume or market depth could impact token liquidity</li>
+                            <li><strong>Competition Risk:</strong> Emerging competitors in the RWA tokenization space</li>
+                            <li><strong>Adoption Risk:</strong> Slower-than-expected user adoption or asset onboarding</li>
+                        </ul>
+                        <p><strong>Risk Mitigation Strategies:</strong></p>
+                        <ul>
+                            <li>Regular smart contract audits by multiple reputable security firms</li>
+                            <li>Engagement with regulatory bodies for compliance guidance</li>
+                            <li>Diversification across multiple blockchain networks</li>
+                            <li>Gradual, phased platform rollout with extensive testing</li>
+                            <li>Comprehensive insurance coverage for digital assets</li>
+                        </ul>
+                    `;
+                    break;
+                case 'legal':
+                    newContent = `
+                        <h3>Legal & Compliance</h3>
+                        <p>Arxion is committed to operating within established legal frameworks and maintaining the highest compliance standards:</p>
+                        <ul>
+                            <li><strong>Regulatory Compliance:</strong> Working with legal experts across multiple jurisdictions to ensure compliance with securities laws, AML/KYC regulations, and tax requirements</li>
+                            <li><strong>Token Classification:</strong> ARXN is structured as a utility token, not a security, in jurisdictions where applicable</li>
+                            <li><strong>AML/KYC Procedures:</strong> Comprehensive identity verification for all users participating in tokenized asset transactions</li>
+                            <li><strong>Data Privacy:</strong> GDPR-compliant data handling procedures with user consent mechanisms</li>
+                            <li><strong>Dispute Resolution:</strong> Clear terms of service and smart contract-based arbitration mechanisms</li>
+                        </ul>
+                        <p>The platform will implement jurisdiction-specific adaptations to comply with local regulations while maintaining global accessibility through carefully designed legal structures.</p>
+                    `;
+                    break;
+                case 'future':
+                    newContent = `
+                        <h3>Future Vision</h3>
+                        <p>Arxion aims to become the leading global platform for real-world asset tokenization, with a vision that extends beyond current capabilities:</p>
+                        <ul>
+                            <li><strong>Global Asset Marketplace:</strong> Creating a seamless global marketplace where any tangible asset can be tokenized and traded 24/7</li>
+                            <li><strong>Institutional Integration:</strong> Becoming the preferred RWA tokenization platform for traditional financial institutions and asset managers</li>
+                            <li><strong>Regulatory Leadership:</strong> Helping shape global regulatory standards for digital asset tokenization</li>
+                            <li><strong>Financial Inclusion:</strong> Democratizing access to investment opportunities for individuals worldwide, regardless of wealth or location</li>
+                            <li><strong>Ecosystem Expansion:</strong> Building complementary services including lending against tokenized assets, insurance products, and advanced derivatives</li>
+                            <li><strong>Sustainability Focus:</strong> Prioritizing tokenization of green assets and sustainable infrastructure projects</li>
+                        </ul>
+                        <p>The long-term goal is to bridge the $500+ trillion traditional asset market with the efficiency, transparency, and accessibility of blockchain technology, creating a new paradigm for global finance.</p>
+                    `;
+                    break;
+            }
+            
+            content.innerHTML = newContent;
+        }
+        
+        // Helper Functions
+        function getRandomTimeAgo() {
+            const times = [
+                "a few seconds", "a minute", "2 minutes", "5 minutes",
+                "10 minutes", "15 minutes", "20 minutes", "half an hour",
+                "an hour", "2 hours", "3 hours", "5 hours"
+            ];
+            return times[Math.floor(Math.random() * times.length)];
+        }
+    </script>
+</body>
+</html>
