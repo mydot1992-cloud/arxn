@@ -1145,6 +1145,7 @@
             background: rgba(255, 107, 53, 0.1);
         }
         
+        /* Updated Wallet Icons with Popular Wallet Brands */
         .wallet-option-icon {
             width: 40px;
             height: 40px;
@@ -1156,11 +1157,88 @@
             color: white;
         }
         
-        .meta-mask { background-color: #F6851B; }
-        .wallet-connect { background-color: #3B99FC; }
-        .trust-wallet { background-color: #3375BB; }
-        .coinbase { background-color: #0052FF; }
-        .phantom { background-color: #AB9FF2; }
+        /* MetaMask - Orange Fox */
+        .meta-mask { 
+            background-color: #F6851B; 
+        }
+        .meta-mask i {
+            font-size: 1.8rem;
+        }
+        
+        /* WalletConnect - Blue */
+        .wallet-connect { 
+            background-color: #3B99FC; 
+        }
+        .wallet-connect i {
+            font-size: 1.8rem;
+        }
+        
+        /* Trust Wallet - Dark Blue */
+        .trust-wallet { 
+            background-color: #3375BB; 
+        }
+        .trust-wallet i {
+            font-size: 1.8rem;
+        }
+        
+        /* Coinbase Wallet - Blue Gradient */
+        .coinbase { 
+            background: linear-gradient(135deg, #0052FF, #00D4FF); 
+        }
+        .coinbase i {
+            font-size: 1.8rem;
+        }
+        
+        /* Phantom - Purple */
+        .phantom { 
+            background-color: #AB9FF2; 
+        }
+        .phantom i {
+            font-size: 1.8rem;
+        }
+        
+        /* Additional Popular Wallets */
+        .ledger { 
+            background-color: #000000; 
+        }
+        .ledger i {
+            font-size: 1.8rem;
+        }
+        
+        .trezor { 
+            background-color: #CC2F2F; 
+        }
+        .trezor i {
+            font-size: 1.8rem;
+        }
+        
+        .argent { 
+            background: linear-gradient(135deg, #FF875B, #FF5B5B); 
+        }
+        .argent i {
+            font-size: 1.8rem;
+        }
+        
+        .rabby { 
+            background-color: #1E6EFF; 
+        }
+        .rabby i {
+            font-size: 1.8rem;
+        }
+        
+        .coin98 { 
+            background: linear-gradient(135deg, #FF6B35, #FF8E53); 
+        }
+        .coin98 i {
+            font-size: 1.8rem;
+        }
+        
+        .bitget { 
+            background: linear-gradient(135deg, #0093E9, #80D0C7); 
+        }
+        .bitget i {
+            font-size: 1.8rem;
+        }
         
         .wallet-option-info {
             flex-grow: 1;
@@ -1435,57 +1513,134 @@
                 <button class="wallet-modal-close" id="walletModalClose">&times;</button>
             </div>
             <div class="wallet-options">
+                <!-- MetaMask - Most Popular -->
                 <div class="wallet-option" data-wallet="metamask">
                     <div class="wallet-option-icon meta-mask">
                         <i class="fab fa-ethereum"></i>
                     </div>
                     <div class="wallet-option-info">
                         <div class="wallet-option-name">MetaMask</div>
-                        <div class="wallet-option-desc">Connect to your MetaMask Wallet</div>
+                        <div class="wallet-option-desc">The most popular Web3 wallet</div>
                     </div>
                     <i class="fas fa-chevron-right"></i>
                 </div>
                 
+                <!-- WalletConnect -->
                 <div class="wallet-option" data-wallet="walletconnect">
                     <div class="wallet-option-icon wallet-connect">
                         <i class="fas fa-plug"></i>
                     </div>
                     <div class="wallet-option-info">
                         <div class="wallet-option-name">WalletConnect</div>
-                        <div class="wallet-option-desc">Connect with WalletConnect</div>
+                        <div class="wallet-option-desc">Connect with multiple wallets</div>
                     </div>
                     <i class="fas fa-chevron-right"></i>
                 </div>
                 
+                <!-- Trust Wallet -->
                 <div class="wallet-option" data-wallet="trustwallet">
                     <div class="wallet-option-icon trust-wallet">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="wallet-option-info">
                         <div class="wallet-option-name">Trust Wallet</div>
-                        <div class="wallet-option-desc">Connect to Trust Wallet</div>
+                        <div class="wallet-option-desc">Binance's official wallet</div>
                     </div>
                     <i class="fas fa-chevron-right"></i>
                 </div>
                 
+                <!-- Coinbase Wallet -->
                 <div class="wallet-option" data-wallet="coinbase">
                     <div class="wallet-option-icon coinbase">
                         <i class="fab fa-bitcoin"></i>
                     </div>
                     <div class="wallet-option-info">
                         <div class="wallet-option-name">Coinbase Wallet</div>
-                        <div class="wallet-option-desc">Connect to Coinbase Wallet</div>
+                        <div class="wallet-option-desc">Coinbase's Web3 wallet</div>
                     </div>
                     <i class="fas fa-chevron-right"></i>
                 </div>
                 
+                <!-- Phantom (Solana) -->
                 <div class="wallet-option" data-wallet="phantom">
                     <div class="wallet-option-icon phantom">
                         <i class="fas fa-ghost"></i>
                     </div>
                     <div class="wallet-option-info">
                         <div class="wallet-option-name">Phantom</div>
-                        <div class="wallet-option-desc">Connect to Phantom Wallet</div>
+                        <div class="wallet-option-desc">Popular Solana wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <!-- Ledger (Hardware) -->
+                <div class="wallet-option" data-wallet="ledger">
+                    <div class="wallet-option-icon ledger">
+                        <i class="fas fa-usb"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Ledger</div>
+                        <div class="wallet-option-desc">Hardware wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <!-- Trezor (Hardware) -->
+                <div class="wallet-option" data-wallet="trezor">
+                    <div class="wallet-option-icon trezor">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Trezor</div>
+                        <div class="wallet-option-desc">Hardware wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <!-- Argent -->
+                <div class="wallet-option" data-wallet="argent">
+                    <div class="wallet-option-icon argent">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Argent</div>
+                        <div class="wallet-option-desc">Smart contract wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <!-- Rabby -->
+                <div class="wallet-option" data-wallet="rabby">
+                    <div class="wallet-option-icon rabby">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Rabby</div>
+                        <div class="wallet-option-desc">DeFi focused wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <!-- Coin98 -->
+                <div class="wallet-option" data-wallet="coin98">
+                    <div class="wallet-option-icon coin98">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Coin98</div>
+                        <div class="wallet-option-desc">Multi-chain wallet</div>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <!-- Bitget Wallet -->
+                <div class="wallet-option" data-wallet="bitget">
+                    <div class="wallet-option-icon bitget">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="wallet-option-info">
+                        <div class="wallet-option-name">Bitget Wallet</div>
+                        <div class="wallet-option-desc">Multi-chain wallet</div>
                     </div>
                     <i class="fas fa-chevron-right"></i>
                 </div>
@@ -1557,31 +1712,31 @@
                     <div class="payment-methods">
                         <div class="payment-method active" data-currency="BNB">
                             <div class="payment-method-logo bnb-bg">
-                                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB">
+                                <i class="fab fa-btc"></i>
                             </div>
                             <span>BNB</span>
                         </div>
                         <div class="payment-method" data-currency="ETH">
                             <div class="payment-method-logo eth-bg">
-                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH">
+                                <i class="fab fa-ethereum"></i>
                             </div>
                             <span>ETH</span>
                         </div>
                         <div class="payment-method" data-currency="SOL">
                             <div class="payment-method-logo sol-bg">
-                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL">
+                                <i class="fas fa-sun"></i>
                             </div>
                             <span>SOL</span>
                         </div>
                         <div class="payment-method" data-currency="USDT">
                             <div class="payment-method-logo usdt-bg">
-                                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT">
+                                <i class="fas fa-dollar-sign"></i>
                             </div>
                             <span>USDT</span>
                         </div>
                         <div class="payment-method" data-currency="USDC">
                             <div class="payment-method-logo usdc-bg">
-                                <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" alt="USDC">
+                                <i class="fas fa-coins"></i>
                             </div>
                             <span>USDC</span>
                         </div>
@@ -1842,19 +1997,19 @@
         
         <div class="exchange-container">
             <div class="exchange-logo">
-                <img src="https://cryptologos.cc/logos/okx-okx-logo.png" alt="OKX">
+                <i class="fab fa-bitcoin" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
             </div>
             <div class="exchange-logo">
-                <img src="https://cryptologos.cc/logos/mexc-mexc-logo.png" alt="MEXC">
+                <i class="fas fa-exchange-alt" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
             </div>
             <div class="exchange-logo">
-                <img src="https://cryptologos.cc/logos/kucoin-kucoin-logo.png" alt="KuCoin">
+                <i class="fas fa-chart-line" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
             </div>
             <div class="exchange-logo">
-                <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png" alt="Uniswap">
+                <i class="fas fa-university" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
             </div>
             <div class="exchange-logo">
-                <img src="https://cryptologos.cc/logos/pancakeswap-cake-logo.png" alt="PancakeSwap">
+                <i class="fas fa-coins" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
             </div>
         </div>
     </section>
