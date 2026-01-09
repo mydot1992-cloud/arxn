@@ -3,3030 +3,591 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arxion (ARXN) - Real World Assets Protocol | Pre-Sale 2026</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4-rc.1/web3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>ARXION | Sovereign Asset Protocol 2026</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-orange: #FF6B35;
-            --primary-purple: #7B2CBF;
-            --orange-gradient: linear-gradient(135deg, #FF6B35, #FF8E53);
-            --purple-gradient: linear-gradient(135deg, #7B2CBF, #9D4EDD);
-            --orange-purple-gradient: linear-gradient(90deg, #FF6B35, #7B2CBF);
-            --orange-glow: rgba(255, 107, 53, 0.5);
-            --purple-glow: rgba(123, 44, 191, 0.5);
-            --light-bg: #f8f9fa;
-            --medium-gray: #e1e5eb;
-            --dark-bg: #0f0f1a;
-            --text-dark: #1a202c;
-            --text-light: #f8f9fa;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --success: #00C851;
-            --warning: #ffbb33;
-            --danger: #ff4444;
-            --chat-bot: #5A189A;
+            --arx-black: #050505;
+            --arx-purple: #9333ea;
+            --arx-blue: #1e3a8a;
+            --arx-glass: rgba(255, 255, 255, 0.03);
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
+
         body {
-            background-color: var(--dark-bg);
-            color: var(--text-light);
+            background-color: var(--arx-black);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, var(--orange-glow) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, var(--purple-glow) 0%, transparent 20%);
+            -webkit-font-smoothing: antialiased;
         }
-        
-        /* Header Styles */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 5%;
-            background-color: rgba(15, 15, 26, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
-            position: sticky;
+
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* Cinematic Background Nebula */
+        .nebula-bg {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: var(--orange-purple-gradient);
-            border-radius: 12px;
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: white;
-        }
-        
-        .logo-text h1 {
-            font-size: 1.8rem;
-            background: var(--orange-purple-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .logo-text p {
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: var(--medium-gray);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-orange);
-        }
-        
-        .nav-links a:hover::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
             left: 0;
             width: 100%;
-            height: 2px;
-            background-color: var(--primary-orange);
-            box-shadow: 0 0 10px var(--orange-glow);
-        }
-        
-        .wallet-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .wallet-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 15px;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 50px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-        }
-        
-        .wallet-address {
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-        }
-        
-        .wallet-balance {
-            font-weight: 600;
-            color: var(--primary-orange);
-        }
-        
-        .connect-wallet-btn {
-            background: var(--orange-purple-gradient);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-        
-        .connect-wallet-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-        }
-        
-        /* Main Hero Section */
-        .hero-section {
-            padding: 5rem 5% 3rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: var(--orange-purple-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.1;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--medium-gray);
-            max-width: 800px;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 107, 53, 0.1);
-        }
-        
-        .trust-badge i {
-            color: var(--primary-orange);
-            font-size: 1.5rem;
-        }
-        
-        /* Updated Countdown Timer */
-        .countdown-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px 40px;
-            border-radius: 15px;
-            border: 2px solid var(--primary-orange);
-            box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
-            min-width: 400px;
-            margin: 0 auto 2rem;
-        }
-        
-        .countdown-title {
-            color: white;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .countdown-timer {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .countdown-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 90px;
-        }
-        
-        .countdown-value {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--primary-orange);
-            text-shadow: 0 0 15px rgba(255, 107, 53, 0.7);
-        }
-        
-        .countdown-label {
-            font-size: 1rem;
-            color: white;
-            font-weight: 500;
-            margin-top: 5px;
-        }
-        
-        /* Pre-Sale Box */
-        .pre-sale-container {
-            background: rgba(20, 20, 35, 0.9);
-            border-radius: 20px;
-            padding: 2.5rem;
-            max-width: 1200px;
-            width: 100%;
-            margin-top: 2rem;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .pre-sale-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .pre-sale-title {
-            font-size: 1.8rem;
-            color: white;
-        }
-        
-        .purchase-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        
-        .token-calculator {
-            background: rgba(30, 30, 45, 0.7);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid rgba(123, 44, 191, 0.3);
-        }
-        
-        .calculator-title {
-            color: white;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        
-        .wallet-balance-display {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .balance-label {
-            color: var(--medium-gray);
-        }
-        
-        .balance-amount {
-            color: white;
-            font-weight: 600;
-        }
-        
-        .payment-methods {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .payment-method {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 8px 15px;
-            border-radius: 50px;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .payment-method.active {
-            border-color: var(--primary-orange);
-            background: rgba(255, 107, 53, 0.1);
-        }
-        
-        .payment-method-logo {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            overflow: hidden;
-        }
-        
-        .payment-method-logo img {
-            width: 100%;
             height: 100%;
-            object-fit: cover;
-        }
-        
-        .bnb-bg { background-color: #F0B90B; }
-        .eth-bg { background-color: #627EEA; }
-        .sol-bg { background-color: #00FFA3; }
-        .usdt-bg { background-color: #26A17B; }
-        .usdc-bg { background-color: #2775CA; }
-        
-        .amount-input-container {
-            margin-bottom: 1.5rem;
-        }
-        
-        .amount-input-label {
-            display: block;
-            color: var(--medium-gray);
-            margin-bottom: 8px;
-        }
-        
-        .amount-input {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(123, 44, 191, 0.5);
-            border-radius: 10px;
-            color: white;
-            font-size: 1.1rem;
-        }
-        
-        .tokens-to-receive {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-        
-        .tokens-label {
-            color: var(--medium-gray);
-            margin-bottom: 10px;
-        }
-        
-        .tokens-amount {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-orange);
-            margin-bottom: 5px;
-        }
-        
-        .tokens-value {
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-        }
-        
-        .buy-button {
-            width: 100%;
-            padding: 18px;
-            background: var(--orange-purple-gradient);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1.5rem;
-        }
-        
-        .buy-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
-        }
-        
-        .sale-progress {
-            background: rgba(30, 30, 45, 0.7);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-        }
-        
-        .progress-title {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-        
-        .progress-bar-container {
-            margin-bottom: 2rem;
-        }
-        
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            color: var(--medium-gray);
-        }
-        
-        .progress-bar {
-            height: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--orange-purple-gradient);
-            border-radius: 10px;
-            width: 6.67%;
-            transition: width 2s ease;
-        }
-        
-        .current-stage {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border-left: 5px solid var(--primary-orange);
-        }
-        
-        .stage-info h4 {
-            color: white;
-            margin-bottom: 5px;
-        }
-        
-        .stage-price {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-orange);
-        }
-        
-        /* Updated Chat Bot */
-        .chat-bot {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-        }
-        
-        .chat-bot-button {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--chat-bot);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(90, 24, 154, 0.4);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .chat-bot-button:hover {
-            transform: scale(1.1);
-        }
-        
-        .chat-bot-icon {
-            font-size: 2.5rem;
-            color: white;
-            position: relative;
-        }
-        
-        .online-indicator {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 20px;
-            height: 20px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            border: 3px solid var(--dark-bg);
-            animation: pulse 2s infinite;
-        }
-        
-        .chat-bot-headset {
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2rem;
-            color: white;
-        }
-        
-        /* Token Distribution Pie Chart */
-        .token-distribution {
-            padding: 5rem 5%;
-            text-align: center;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 1rem;
-        }
-        
-        .section-subtitle {
-            color: var(--medium-gray);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            line-height: 1.6;
-        }
-        
-        .distribution-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 4rem;
-            margin-top: 3rem;
-        }
-        
-        .chart-container {
-            width: 500px;
-            height: 500px;
-            position: relative;
-        }
-        
-        .distribution-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            max-width: 400px;
-        }
-        
-        .distribution-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(30, 30, 45, 0.7);
-            border-radius: 10px;
-            border-left: 5px solid;
-        }
-        
-        .distribution-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-        }
-        
-        .distribution-info {
-            flex-grow: 1;
-            text-align: left;
-        }
-        
-        .distribution-name {
-            color: white;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .distribution-value {
-            color: var(--primary-orange);
-            font-weight: 700;
-        }
-        
-        /* Roadmap */
-        .roadmap-section {
-            padding: 5rem 5%;
-            background: rgba(15, 15, 26, 0.9);
-        }
-        
-        .roadmap-container {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .roadmap-phase {
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-        }
-        
-        .phase-marker {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        
-        .phase-circle {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .phase-circle.completed {
-            background: var(--orange-gradient);
-        }
-        
-        .phase-circle.pending {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .phase-circle::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(30, 58, 138, 0.08) 0%, transparent 45%);
             z-index: -1;
-            animation: pulse 2s infinite;
         }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(255, 107, 53, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
-        }
-        
-        .phase-line {
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary-orange), var(--primary-purple));
-            position: relative;
-            top: 70px;
-        }
-        
-        .phase-content {
-            background: rgba(30, 30, 45, 0.7);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid;
-            flex-grow: 1;
-        }
-        
-        .phase-content.completed {
-            border-color: var(--primary-orange);
-        }
-        
-        .phase-content.pending {
-            border-color: rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-        }
-        
-        .phase-title {
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .phase-list {
-            list-style-type: none;
-        }
-        
-        .phase-list li {
-            color: var(--medium-gray);
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-        }
-        
-        .phase-list li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary-orange);
-            font-weight: bold;
-        }
-        
-        .phase-content.pending .phase-list li:before {
-            content: '○';
-            color: rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Price Stages Chart */
-        .price-stages {
-            padding: 5rem 5%;
-            text-align: center;
-        }
-        
-        .stages-chart-container {
-            max-width: 1000px;
-            margin: 3rem auto;
-            position: relative;
-        }
-        
-        .stages-chart {
-            height: 300px;
-            position: relative;
-            margin-bottom: 3rem;
-        }
-        
-        .stage-points {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-top: 2rem;
-        }
-        
-        .stage-point {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            width: 100px;
-        }
-        
-        .stage-point-circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: var(--dark-bg);
-            border: 3px solid var(--primary-orange);
-            margin-bottom: 10px;
-        }
-        
-        .stage-point:nth-child(8) .stage-point-circle {
-            border-color: var(--primary-purple);
-        }
-        
-        .stage-point:nth-child(15) .stage-point-circle {
-            border-color: var(--success);
-        }
-        
-        .stage-point:nth-child(16) .stage-point-circle {
-            border-color: var(--warning);
-            border-width: 4px;
-        }
-        
-        .stage-point-name {
-            color: white;
-            font-weight: 600;
-            margin-bottom: 5px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        
-        .stage-point-price {
-            color: var(--primary-orange);
-            font-weight: 700;
-            font-size: 1rem;
-        }
-        
-        /* Exchange Listings */
-        .exchange-listings {
-            padding: 5rem 5%;
-            text-align: center;
-            background: rgba(15, 15, 26, 0.9);
-        }
-        
-        .exchange-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-        
-        .exchange-logo {
-            width: 180px;
-            height: 180px;
-            background: rgba(30, 30, 45, 0.9);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            filter: blur(8px);
-            cursor: pointer;
-        }
-        
-        .exchange-logo:hover {
-            filter: blur(4px);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.2);
-        }
-        
-        .exchange-logo::before {
-            content: 'UNDER NDA';
-            position: absolute;
-            bottom: 15px;
-            color: var(--primary-orange);
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 5px 15px;
-            border-radius: 10px;
-            z-index: 2;
-        }
-        
-        .exchange-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            opacity: 0.3;
-        }
-        
-        /* Whitepaper */
-        .whitepaper-section {
-            padding: 5rem 5%;
-            text-align: center;
-        }
-        
-        .whitepaper-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: rgba(30, 30, 45, 0.7);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-        }
-        
-        .whitepaper-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .whitepaper-title {
-            font-size: 2rem;
-            color: white;
-        }
-        
-        .whitepaper-dropdown {
-            position: relative;
-            width: 300px;
-        }
-        
-        .whitepaper-dropdown-btn {
-            background: var(--orange-purple-gradient);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-        
-        .whitepaper-dropdown-content {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: rgba(30, 30, 45, 0.95);
-            border-radius: 10px;
-            margin-top: 5px;
-            overflow: hidden;
-            display: none;
-            z-index: 100;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        .whitepaper-dropdown-content.show {
-            display: block;
-        }
-        
-        .whitepaper-item {
-            padding: 15px;
-            color: var(--medium-gray);
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .whitepaper-item:hover {
-            background: rgba(255, 107, 53, 0.1);
-            color: white;
-        }
-        
-        .whitepaper-item i {
-            margin-right: 10px;
-            color: var(--primary-orange);
-        }
-        
-        .whitepaper-content {
-            text-align: left;
-            color: var(--medium-gray);
-            line-height: 1.6;
-        }
-        
-        .whitepaper-content h3 {
-            color: white;
-            margin: 1.5rem 0 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .whitepaper-content p {
-            margin-bottom: 1rem;
-        }
-        
-        /* Ministry Box */
-        .ministry-box {
-            position: fixed;
-            bottom: 120px;
-            right: 30px;
-            background: var(--orange-purple-gradient);
-            padding: 1.5rem;
-            border-radius: 15px;
-            width: 300px;
-            z-index: 999;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: slideIn 0.5s ease;
-            display: none;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .ministry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .ministry-title {
-            color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-        
-        .ministry-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .ministry-content {
-            color: white;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        .ministry-prize {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            margin: 1rem 0;
-        }
-        
-        .ministry-timer {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 1rem;
-        }
-        
-        /* Notifications */
-        .notification-container {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1001;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 350px;
-        }
-        
-        .notification {
-            background: rgba(30, 30, 45, 0.95);
-            border-left: 5px solid var(--primary-orange);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            animation: fadeInOut 8s ease;
-            color: white;
-        }
-        
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateX(-100%); }
-            10% { opacity: 1; transform: translateX(0); }
-            90% { opacity: 1; transform: translateX(0); }
-            100% { opacity: 0; transform: translateX(-100%); }
-        }
-        
-        .notification-user {
-            color: var(--primary-orange);
-            font-weight: 600;
-        }
-        
-        .notification-details {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-top: 5px;
-        }
-        
-        /* Wallet Modal */
-        .wallet-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            display: none;
-        }
-        
-        .wallet-modal-content {
-            background: rgba(30, 30, 45, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            width: 90%;
-            max-width: 500px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-        }
-        
-        .wallet-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        
-        .wallet-modal-title {
-            font-size: 1.5rem;
-            color: white;
-        }
-        
-        .wallet-modal-close {
-            background: none;
-            border: none;
-            color: var(--medium-gray);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .wallet-options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .wallet-option {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border: 1px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .wallet-option:hover {
-            border-color: var(--primary-orange);
-            background: rgba(255, 107, 53, 0.1);
-        }
-        
-        /* Updated Wallet Icons with Popular Wallet Brands */
-        .wallet-option-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-        
-        /* MetaMask - Orange Fox */
-        .meta-mask { 
-            background-color: #F6851B; 
-        }
-        .meta-mask i {
-            font-size: 1.8rem;
-        }
-        
-        /* WalletConnect - Blue */
-        .wallet-connect { 
-            background-color: #3B99FC; 
-        }
-        .wallet-connect i {
-            font-size: 1.8rem;
-        }
-        
-        /* Trust Wallet - Dark Blue */
-        .trust-wallet { 
-            background-color: #3375BB; 
-        }
-        .trust-wallet i {
-            font-size: 1.8rem;
-        }
-        
-        /* Coinbase Wallet - Blue Gradient */
-        .coinbase { 
-            background: linear-gradient(135deg, #0052FF, #00D4FF); 
-        }
-        .coinbase i {
-            font-size: 1.8rem;
-        }
-        
-        /* Phantom - Purple */
-        .phantom { 
-            background-color: #AB9FF2; 
-        }
-        .phantom i {
-            font-size: 1.8rem;
-        }
-        
-        /* Additional Popular Wallets */
-        .ledger { 
-            background-color: #000000; 
-        }
-        .ledger i {
-            font-size: 1.8rem;
-        }
-        
-        .trezor { 
-            background-color: #CC2F2F; 
-        }
-        .trezor i {
-            font-size: 1.8rem;
-        }
-        
-        .argent { 
-            background: linear-gradient(135deg, #FF875B, #FF5B5B); 
-        }
-        .argent i {
-            font-size: 1.8rem;
-        }
-        
-        .rabby { 
-            background-color: #1E6EFF; 
-        }
-        .rabby i {
-            font-size: 1.8rem;
-        }
-        
-        .coin98 { 
-            background: linear-gradient(135deg, #FF6B35, #FF8E53); 
-        }
-        .coin98 i {
-            font-size: 1.8rem;
-        }
-        
-        .bitget { 
-            background: linear-gradient(135deg, #0093E9, #80D0C7); 
-        }
-        .bitget i {
-            font-size: 1.8rem;
-        }
-        
-        .wallet-option-info {
-            flex-grow: 1;
-        }
-        
-        .wallet-option-name {
-            color: white;
-            font-weight: 600;
-        }
-        
-        .wallet-option-desc {
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 3rem 5%;
-            background: rgba(15, 15, 26, 0.95);
-            border-top: 1px solid rgba(255, 107, 53, 0.2);
-            margin-top: 5rem;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-column {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-title {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-        
-        .footer-links {
-            list-style-type: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: var(--medium-gray);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-orange);
-            padding-left: 5px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 1.5rem;
-        }
-        
-        .social-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(30, 30, 45, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: var(--primary-orange);
-            color: white;
-            transform: translateY(-5px);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .purchase-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .countdown-box {
-                min-width: 350px;
-            }
-            
-            .countdown-value {
-                font-size: 2.8rem;
-            }
-            
-            .distribution-container {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .chart-container {
-                width: 350px;
-                height: 350px;
-            }
-            
-            .stage-points {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-            
-            .stage-point {
-                width: 22%;
-            }
-            
-            .exchange-logo {
-                width: 150px;
-                height: 150px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .wallet-container {
-                display: none;
-            }
-            
-            .countdown-box {
-                min-width: 300px;
-                padding: 15px 25px;
-            }
-            
-            .countdown-timer {
-                gap: 15px;
-            }
-            
-            .countdown-unit {
-                min-width: 70px;
-            }
-            
-            .countdown-value {
-                font-size: 2.2rem;
-            }
-            
-            .phase-marker {
-                display: none;
-            }
-            
-            .phase-line {
-                display: none;
-            }
-            
-            .stage-point {
-                width: 30%;
-                margin-bottom: 1.5rem;
-            }
-            
-            .whitepaper-header {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-            
-            .whitepaper-dropdown {
-                width: 100%;
-            }
-            
-            .exchange-logo {
-                width: 130px;
-                height: 130px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .pre-sale-container {
-                padding: 1.5rem;
-            }
-            
-            .countdown-box {
-                min-width: 280px;
-            }
-            
-            .countdown-value {
-                font-size: 1.8rem;
-            }
-            
-            .payment-method {
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-            
-            .stage-point {
-                width: 45%;
-            }
-            
-            .exchange-logo {
-                width: 120px;
-                height: 120px;
-            }
-        }
+
+        /* Glassmorphism Vault Panel */
+        .glass-vault {
+            background: var(--arx-glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Luxury Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--arx-black); }
+        ::-webkit-scrollbar-thumb { background: var(--arx-purple); border-radius: 10px; }
+
+        /* Key Animations */
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-soft { animation: pulse-soft 3s infinite; }
     </style>
 </head>
 <body>
-    <!-- Header with Connect Wallet Button -->
-    <header>
-        <div class="logo-container">
-            <div class="logo">ARX</div>
-            <div class="logo-text">
-                <h1>Arxion</h1>
-                <p>Real World Assets Protocol</p>
+    <div class="nebula-bg"></div>
+    ```
+    <nav class="relative z-50 flex justify-between items-center px-8 lg:px-16 py-8 border-b border-white/5 backdrop-blur-xl">
+        
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-700 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/20 group cursor-pointer">
+                <span class="orbitron font-black text-2xl italic text-white group-hover:scale-110 transition-transform">X</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="orbitron text-2xl font-black tracking-[0.2em] text-white leading-none">
+                    ARX<span class="text-purple-600">ION</span>
+                </span>
+                <span class="text-[8px] uppercase tracking-[0.55em] text-gray-500 font-black mt-1">Sovereign Protocol</span>
             </div>
         </div>
-        
-        <nav class="nav-links">
-            <a href="#pre-sale">Pre-Sale</a>
-            <a href="#distribution">Tokenomics</a>
-            <a href="#roadmap">Roadmap</a>
-            <a href="#whitepaper">Whitepaper</a>
-            <a href="#exchanges">Exchanges</a>
-        </nav>
-        
-        <div class="wallet-container" id="walletContainer" style="display: none;">
-            <div class="wallet-info">
-                <i class="fas fa-wallet" style="color: var(--primary-orange);"></i>
-                <div>
-                    <div class="wallet-address" id="walletAddress">0x1a2b...3c4d</div>
-                    <div class="wallet-balance" id="walletBalanceDisplay">0.00 BNB</div>
-                </div>
-            </div>
-            <button class="connect-wallet-btn" id="disconnectWalletBtn">
-                <i class="fas fa-sign-out-alt"></i>
-                Disconnect
+
+        <div class="hidden lg:flex items-center gap-12">
+            <a href="#assets" class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-white hover:glow-text transition-all">Global Assets</a>
+            <a href="#vault" class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-white hover:glow-text transition-all">The Vault</a>
+            <a href="#compliance" class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-white hover:glow-text transition-all">Compliance</a>
+            <a href="#roadmap" class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-white hover:glow-text transition-all">2026 Roadmap</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button id="walletConnect" class="group relative px-8 py-3.5 rounded-full bg-white text-black font-black text-[10px] tracking-[0.25em] uppercase transition-all overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                <span class="relative z-10 group-hover:text-white transition-colors">Connect Terminal</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </button>
         </div>
+    </nav>
+    ```
+    <main class="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-24 grid lg:grid-cols-2 gap-16 items-center">
         
-        <button class="connect-wallet-btn" id="connectWalletBtn">
-            <i class="fas fa-wallet"></i>
-            Connect Wallet
-        </button>
-    </header>
-    
-    <!-- Wallet Connection Modal -->
-    <div class="wallet-modal" id="walletModal">
-        <div class="wallet-modal-content">
-            <div class="wallet-modal-header">
-                <h3 class="wallet-modal-title">Connect Wallet</h3>
-                <button class="wallet-modal-close" id="walletModalClose">&times;</button>
+        <div class="space-y-10">
+            <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-purple-600"></span>
+                </span>
+                <span class="text-[10px] font-black tracking-[0.4em] text-purple-400 uppercase">Live Presale Phase 01</span>
             </div>
-            <div class="wallet-options">
-                <!-- MetaMask - Most Popular -->
-                <div class="wallet-option" data-wallet="metamask">
-                    <div class="wallet-option-icon meta-mask">
-                        <i class="fab fa-ethereum"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">MetaMask</div>
-                        <div class="wallet-option-desc">The most popular Web3 wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
+
+            <h1 class="orbitron text-7xl md:text-8xl font-black leading-[0.85] tracking-tighter">
+                MINT <br> <span class="bg-clip-text text-transparent bg-gradient-to-b from-white via-purple-400 to-purple-800">SOVEREIGN</span> <br> ASSETS
+            </h1>
+
+            <p class="max-w-xl text-gray-500 text-sm font-bold leading-relaxed border-l-2 border-purple-600 pl-8 uppercase tracking-[0.2em] italic">
+                Bridging global physical real estate and gold reserves with institutional-grade digital liquidity.
+            </p>
+
+            <div class="flex gap-12 items-center pt-6">
+                <div class="flex flex-col">
+                    <span class="orbitron text-3xl font-black text-white italic tracking-tighter">1.2B+</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-purple-500 font-bold">Backing Capacity</span>
                 </div>
-                
-                <!-- WalletConnect -->
-                <div class="wallet-option" data-wallet="walletconnect">
-                    <div class="wallet-option-icon wallet-connect">
-                        <i class="fas fa-plug"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">WalletConnect</div>
-                        <div class="wallet-option-desc">Connect with multiple wallets</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Trust Wallet -->
-                <div class="wallet-option" data-wallet="trustwallet">
-                    <div class="wallet-option-icon trust-wallet">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Trust Wallet</div>
-                        <div class="wallet-option-desc">Binance's official wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Coinbase Wallet -->
-                <div class="wallet-option" data-wallet="coinbase">
-                    <div class="wallet-option-icon coinbase">
-                        <i class="fab fa-bitcoin"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Coinbase Wallet</div>
-                        <div class="wallet-option-desc">Coinbase's Web3 wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Phantom (Solana) -->
-                <div class="wallet-option" data-wallet="phantom">
-                    <div class="wallet-option-icon phantom">
-                        <i class="fas fa-ghost"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Phantom</div>
-                        <div class="wallet-option-desc">Popular Solana wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Ledger (Hardware) -->
-                <div class="wallet-option" data-wallet="ledger">
-                    <div class="wallet-option-icon ledger">
-                        <i class="fas fa-usb"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Ledger</div>
-                        <div class="wallet-option-desc">Hardware wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Trezor (Hardware) -->
-                <div class="wallet-option" data-wallet="trezor">
-                    <div class="wallet-option-icon trezor">
-                        <i class="fas fa-hdd"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Trezor</div>
-                        <div class="wallet-option-desc">Hardware wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Argent -->
-                <div class="wallet-option" data-wallet="argent">
-                    <div class="wallet-option-icon argent">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Argent</div>
-                        <div class="wallet-option-desc">Smart contract wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Rabby -->
-                <div class="wallet-option" data-wallet="rabby">
-                    <div class="wallet-option-icon rabby">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Rabby</div>
-                        <div class="wallet-option-desc">DeFi focused wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Coin98 -->
-                <div class="wallet-option" data-wallet="coin98">
-                    <div class="wallet-option-icon coin98">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Coin98</div>
-                        <div class="wallet-option-desc">Multi-chain wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <!-- Bitget Wallet -->
-                <div class="wallet-option" data-wallet="bitget">
-                    <div class="wallet-option-icon bitget">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <div class="wallet-option-info">
-                        <div class="wallet-option-name">Bitget Wallet</div>
-                        <div class="wallet-option-desc">Multi-chain wallet</div>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
+                <div class="w-[1px] h-12 bg-white/10"></div>
+                <div class="flex flex-col">
+                    <span class="orbitron text-3xl font-black text-white italic tracking-tighter">Verified</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-purple-500 font-bold">Legal Shield</span>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="trust-badges">
-            <div class="trust-badge">
-                <i class="fas fa-shield-alt"></i>
-                <span>SoldProof Audited</span>
-            </div>
-            <div class="trust-badge">
-                <i class="fas fa-chart-line"></i>
-                <span>CoinMarketCap Listed</span>
-            </div>
-            <div class="trust-badge">
-                <i class="fas fa-lock"></i>
-                <span>Liquidity Locked</span>
-            </div>
-        </div>
-        
-        <h1 class="hero-title">Tokenizing Real World Assets with <span style="color: var(--primary-orange);">Arxion Protocol</span></h1>
-        <p class="hero-subtitle">
-            Arxion (ARXN) is a revolutionary cryptocurrency built on the "Real World Assets Protocol" (RWA). 
-            We enable fractional ownership of tangible assets like real estate, gold, and data centers through blockchain tokens. 
-            Instead of buying an entire property, investors can purchase fractions using $ARXN and earn automated rental yields.
-        </p>
-        
-        <!-- Updated Countdown Timer -->
-        <div class="countdown-box">
-            <div class="countdown-title">STAGE 1 ENDS IN</div>
-            <div class="countdown-timer">
-                <div class="countdown-unit">
-                    <div class="countdown-value" id="countdown-days">02</div>
-                    <div class="countdown-label">DAYS</div>
+
+        <div class="glass-vault p-1.5 rounded-[3rem] shadow-2xl relative">
+            <div class="bg-[#080808] rounded-[2.8rem] p-10 lg:p-12 relative overflow-hidden">
+                
+                <div class="absolute top-0 right-0 bg-red-600 px-8 py-3 rounded-bl-3xl shadow-lg">
+                    <span class="text-[10px] font-black tracking-[0.2em] uppercase text-white animate-pulse">94% Allocated</span>
                 </div>
-                <div class="countdown-unit">
-                    <div class="countdown-value" id="countdown-hours">23</div>
-                    <div class="countdown-label">HOURS</div>
-                </div>
-                <div class="countdown-unit">
-                    <div class="countdown-value" id="countdown-minutes">45</div>
-                    <div class="countdown-label">MINUTES</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pre-Sale Box -->
-        <div class="pre-sale-container" id="pre-sale">
-            <div class="pre-sale-header">
-                <h2 class="pre-sale-title">ARXN Pre-Sale is Live - Stage 1</h2>
-                <div style="color: var(--primary-orange); font-weight: 600; font-size: 1.1rem;">
-                    Early Bird Price: $0.025
-                </div>
-            </div>
-            
-            <div class="purchase-container">
-                <div class="token-calculator">
-                    <h3 class="calculator-title">Purchase ARXN Tokens</h3>
-                    
-                    <div class="wallet-balance-display">
-                        <span class="balance-label">Connected Wallet Balance:</span>
-                        <span class="balance-amount" id="walletBalance">0.00 BNB</span>
-                    </div>
-                    
-                    <div class="payment-methods">
-                        <div class="payment-method active" data-currency="BNB">
-                            <div class="payment-method-logo bnb-bg">
-                                <i class="fab fa-btc"></i>
-                            </div>
-                            <span>BNB</span>
+
+                <h3 class="orbitron text-2xl font-black mb-12 text-white italic tracking-widest flex items-center gap-4">
+                    <span class="w-8 h-[2px] bg-purple-600"></span> INVESTMENT FORGE
+                </h3>
+
+                <div class="space-y-10">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end px-2">
+                            <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Pay with USDT</label>
+                            <span class="text-[9px] text-purple-500 font-bold uppercase tracking-widest">Available Liquidity: Tier 1</span>
                         </div>
-                        <div class="payment-method" data-currency="ETH">
-                            <div class="payment-method-logo eth-bg">
-                                <i class="fab fa-ethereum"></i>
-                            </div>
-                            <span>ETH</span>
-                        </div>
-                        <div class="payment-method" data-currency="SOL">
-                            <div class="payment-method-logo sol-bg">
-                                <i class="fas fa-sun"></i>
-                            </div>
-                            <span>SOL</span>
-                        </div>
-                        <div class="payment-method" data-currency="USDT">
-                            <div class="payment-method-logo usdt-bg">
-                                <i class="fas fa-dollar-sign"></i>
-                            </div>
-                            <span>USDT</span>
-                        </div>
-                        <div class="payment-method" data-currency="USDC">
-                            <div class="payment-method-logo usdc-bg">
-                                <i class="fas fa-coins"></i>
-                            </div>
-                            <span>USDC</span>
+                        <div class="relative group">
+                            <input type="number" id="usdtInput" placeholder="0.00" 
+                                class="w-full bg-white/5 border border-white/10 p-6 rounded-2xl text-4xl font-black focus:border-purple-600 focus:bg-white/10 outline-none transition-all tracking-tighter orbitron">
+                            <span class="absolute right-6 top-1/2 -translate-y-1/2 orbitron text-gray-700 font-bold">USDT</span>
                         </div>
                     </div>
-                    
-                    <div class="amount-input-container">
-                        <label class="amount-input-label">Amount to Spend</label>
-                        <input type="number" class="amount-input" id="spendAmount" min="0.01" step="0.01" value="0.1" placeholder="0.00">
+
+                    <div class="p-8 rounded-2xl bg-gradient-to-br from-purple-900/20 via-black to-transparent border border-purple-500/20 text-center relative">
+                        <span class="text-[10px] font-black text-purple-500 uppercase tracking-[0.4em] block mb-4">You Acquire (Est. $ARX)</span>
+                        <div id="arxTokensDisplay" class="orbitron text-5xl font-black tracking-tighter italic text-white glow-text">0</div>
                     </div>
-                    
-                    <div class="tokens-to-receive">
-                        <div class="tokens-label">You Will Receive</div>
-                        <div class="tokens-amount" id="tokensToReceive">400.00</div>
-                        <div class="tokens-value">ARXN Tokens</div>
-                    </div>
-                    
-                    <button class="buy-button" id="buyTokensBtn">
-                        <i class="fas fa-shopping-cart"></i> Buy ARXN Tokens Now
+
+                    <button class="w-full py-7 bg-white text-black orbitron font-black text-2xl rounded-2xl hover:bg-purple-600 hover:text-white transition-all duration-700 shadow-[0_25px_50px_-15px_rgba(147,51,234,0.4)] uppercase italic group relative overflow-hidden">
+                        <span class="relative z-10">MINT $ARX TOKENS</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </button>
-                </div>
-                
-                <div class="sale-progress">
-                    <h3 class="progress-title">Pre-Sale Progress</h3>
                     
-                    <div class="progress-bar-container">
-                        <div class="progress-info">
-                            <span>Stage 1 of 15</span>
-                            <span>6.67% Complete</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="current-stage">
-                        <div class="stage-info">
-                            <h4>Current Stage Price</h4>
-                            <div class="stage-price">$0.025</div>
-                            <p>Next Stage: $0.030</p>
-                        </div>
-                        <div class="stage-number">
-                            <div style="font-size: 2rem; color: var(--primary-orange); font-weight: 800;">1</div>
-                            <div style="color: var(--medium-gray);">/15</div>
-                        </div>
-                    </div>
-                    
-                    <div class="current-stage" style="margin-top: 2rem;">
-                        <div class="stage-info">
-                            <h4>Your Investment Value at Listing</h4>
-                            <div class="stage-price" id="futureValue">$0.00</div>
-                            <p>Based on listing price: $0.30</p>
-                        </div>
-                        <div style="color: var(--primary-orange); font-size: 2rem;">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
+                    <div class="flex justify-between items-center px-4 opacity-40">
+                        <span class="text-[8px] font-bold uppercase tracking-[0.2em]">Instant Settlement</span>
+                        <span class="text-[8px] font-bold uppercase tracking-[0.2em]">Zero Gas Protocol</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    
-    <!-- Token Distribution Pie Chart -->
-    <section class="token-distribution" id="distribution">
-        <h2 class="section-title">ARXN Token Distribution</h2>
-        <p class="section-subtitle">
-            A carefully planned tokenomics model designed for sustainable growth and community alignment.
-            The distribution ensures long-term project development and fair allocation to all stakeholders.
-        </p>
-        
-        <div class="distribution-container">
-            <div class="chart-container">
-                <canvas id="tokenChart"></canvas>
-            </div>
+    </main>
+    ```
+    <section id="vault" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div class="grid lg:grid-cols-3 gap-8">
             
-            <div class="distribution-list">
-                <div class="distribution-item" style="border-left-color: #FF6B35;">
-                    <div class="distribution-color" style="background-color: #FF6B35;"></div>
-                    <div class="distribution-info">
-                        <div class="distribution-name">Pre-Sale & Public Sale</div>
-                        <div class="distribution-value">40%</div>
-                    </div>
+            <div class="lg:col-span-2 glass-vault p-10 rounded-[2.5rem] relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-10">
+                    <svg width="120" height="120" viewBox="0 0 24 24" fill="white"><path d="M13 3v6h8V3h-8zm6 4h-4V5h4v2zm-6 8h8v-6h-8v6zm6-4h-4v2h4v-2zm-16 4h8V9H3v6zm6-4H5V11h4v2zm0 8H3v-6h8v6zm-6-4h4v2H5v-2z"/></svg>
                 </div>
                 
-                <div class="distribution-item" style="border-left-color: #7B2CBF;">
-                    <div class="distribution-color" style="background-color: #7B2CBF;"></div>
-                    <div class="distribution-info">
-                        <div class="distribution-name">Liquidity & Exchange Listings</div>
-                        <div class="distribution-value">25%</div>
-                    </div>
-                </div>
+                <h3 class="orbitron text-2xl font-black mb-8 italic tracking-widest text-white">PROJECTION TERMINAL</h3>
                 
-                <div class="distribution-item" style="border-left-color: #FF8E53;">
-                    <div class="distribution-color" style="background-color: #FF8E53;"></div>
-                    <div class="distribution-info">
-                        <div class="distribution-name">Team & Advisors (3-year vesting)</div>
-                        <div class="distribution-value">15%</div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors group">
+                        <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-4">Tier 1: Listing</span>
+                        <div class="text-3xl orbitron font-black text-white group-hover:text-purple-400 transition-colors" id="roiListing">$0.00</div>
+                        <span class="text-[10px] text-green-500 font-bold uppercase mt-2 block">Expected x5 ROI</span>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors group">
+                        <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-4">Tier 2: Expansion</span>
+                        <div class="text-3xl orbitron font-black text-white group-hover:text-purple-400 transition-colors" id="roiExpansion">$0.00</div>
+                        <span class="text-[10px] text-green-500 font-bold uppercase mt-2 block">Target x50 ROI</span>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-purple-600/10 border border-purple-500/30 hover:bg-purple-600/20 transition-all group">
+                        <span class="text-[9px] font-black text-purple-400 uppercase tracking-widest block mb-4 italic">Dominance Level</span>
+                        <div class="text-3xl orbitron font-black text-white group-hover:animate-pulse" id="roiDominance">$0.00</div>
+                        <span class="text-[10px] text-purple-400 font-bold uppercase mt-2 block underline">Sovereign x500</span>
                     </div>
                 </div>
-                
-                <div class="distribution-item" style="border-left-color: #9D4EDD;">
-                    <div class="distribution-color" style="background-color: #9D4EDD;"></div>
-                    <div class="distribution-info">
-                        <div class="distribution-name">Ecosystem & Development</div>
-                        <div class="distribution-value">10%</div>
-                    </div>
-                </div>
-                
-                <div class="distribution-item" style="border-left-color: #00C851;">
-                    <div class="distribution-color" style="background-color: #00C851;"></div>
-                    <div class="distribution-info">
-                        <div class="distribution-name">Marketing & Partnerships</div>
-                        <div class="distribution-value">10%</div>
-                    </div>
+
+                <div class="mt-8 pt-8 border-t border-white/5">
+                    <p class="text-[10px] text-gray-600 uppercase tracking-[0.4em] font-medium leading-loose">
+                        * Calculations are based on Jan 2026 market analysis. Value fluctuates based on underlying physical asset performance and protocol burn rate.
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Roadmap -->
-    <section class="roadmap-section" id="roadmap">
-        <h2 class="section-title">Project Roadmap 2026</h2>
-        <p class="section-subtitle">
-            Our strategic 4-phase development plan to revolutionize real world asset tokenization.
-        </p>
-        
-        <div class="roadmap-container">
-            <div class="roadmap-phase">
-                <div class="phase-marker">
-                    <div class="phase-circle completed">Q1 2026</div>
-                    <div class="phase-line"></div>
-                </div>
-                <div class="phase-content completed">
-                    <h3 class="phase-title">Phase 1: Foundation & Pre-Sale Launch (COMPLETED)</h3>
-                    <ul class="phase-list">
-                        <li>Smart contract development and audit completion</li>
-                        <li>Website and platform UI/UX design</li>
-                        <li>Pre-sale launch with multi-chain support</li>
-                        <li>Community building and social media setup</li>
-                        <li>Partnerships with RWA providers initiation</li>
-                        <li>Legal framework establishment</li>
-                        <li>Whitepaper V1 release</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="roadmap-phase">
-                <div class="phase-marker">
-                    <div class="phase-circle pending">Q3 2026</div>
-                    <div class="phase-line"></div>
-                </div>
-                <div class="phase-content pending">
-                    <h3 class="phase-title">Phase 2: Platform Development & First Listings</h3>
-                    <ul class="phase-list">
-                        <li>MVP platform launch with basic tokenization</li>
-                        <li>First real estate asset tokenization</li>
-                        <li>Integration with major DeFi protocols</li>
-                        <li>Mobile application development start</li>
-                        <li>Cross-chain bridge implementation</li>
-                        <li>CEX listings on 2 major exchanges</li>
-                        <li>Community governance system launch</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="roadmap-phase">
-                <div class="phase-marker">
-                    <div class="phase-circle pending">Q1 2027</div>
-                    <div class="phase-line"></div>
-                </div>
-                <div class="phase-content pending">
-                    <h3 class="phase-title">Phase 3: Expansion & Scaling</h3>
-                    <ul class="phase-list">
-                        <li>Gold and commodity tokenization launch</li>
-                        <li>Advanced RWA marketplace development</li>
-                        <li>Yield distribution automation system</li>
-                        <li>Partnerships with institutional investors</li>
-                        <li>Additional CEX listings (top 10 exchanges)</li>
-                        <li>Mobile app release for iOS and Android</li>
-                        <li>Global expansion to 3 new regions</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="roadmap-phase">
-                <div class="phase-marker">
-                    <div class="phase-circle pending">Q3 2027</div>
-                </div>
-                <div class="phase-content pending">
-                    <h3 class="phase-title">Phase 4: Ecosystem Maturity & Global Adoption</h3>
-                    <ul class="phase-list">
-                        <li>Full-scale RWA ecosystem with 50+ assets</li>
-                        <li>Institutional investment portal launch</li>
-                        <li>DAO implementation for asset management</li>
-                        <li>ARXN debit card and payment integration</li>
-                        <li>Advanced analytics and reporting tools</li>
-                        <li>Global compliance framework completion</li>
-                        <li>Target of 100,000+ active users</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Price Stages Chart -->
-    <section class="price-stages">
-        <h2 class="section-title">Pre-Sale Price Stages 2026</h2>
-        <p class="section-subtitle">
-            15 progressive stages with increasing token prices. Early investors get the best rates before listing at $0.30.
-        </p>
-        
-        <div class="stages-chart-container">
-            <div class="stages-chart">
-                <canvas id="priceChart"></canvas>
-            </div>
-            
-            <div class="stage-points">
-                <div class="stage-point">
-                    <div class="stage-point-circle"></div>
-                    <div class="stage-point-name">Stage 1</div>
-                    <div class="stage-point-price">$0.025</div>
-                </div>
-                <div class="stage-point">
-                    <div class="stage-point-circle"></div>
-                    <div class="stage-point-name">Stage 4</div>
-                    <div class="stage-point-price">$0.040</div>
-                </div>
-                <div class="stage-point">
-                    <div class="stage-point-circle"></div>
-                    <div class="stage-point-name">Stage 8</div>
-                    <div class="stage-point-price">$0.070</div>
-                </div>
-                <div class="stage-point">
-                    <div class="stage-point-circle"></div>
-                    <div class="stage-point-name">Stage 12</div>
-                    <div class="stage-point-price">$0.110</div>
-                </div>
-                <div class="stage-point">
-                    <div class="stage-point-circle"></div>
-                    <div class="stage-point-name">Stage 15</div>
-                    <div class="stage-point-price">$0.150</div>
-                </div>
-                <div class="stage-point">
-                    <div class="stage-point-circle"></div>
-                    <div class="stage-point-name">Listing</div>
-                    <div class="stage-point-price">$0.300</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Exchange Listings -->
-    <section class="exchange-listings" id="exchanges">
-        <h2 class="section-title">Exchange Listings Under NDA</h2>
-        <p class="section-subtitle">
-            We are in advanced negotiations with top-tier centralized and decentralized exchanges.
-            All discussions are under Non-Disclosure Agreements (NDA) until official announcements.
-        </p>
-        
-        <div class="exchange-container">
-            <div class="exchange-logo">
-                <i class="fab fa-bitcoin" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
-            </div>
-            <div class="exchange-logo">
-                <i class="fas fa-exchange-alt" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
-            </div>
-            <div class="exchange-logo">
-                <i class="fas fa-chart-line" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
-            </div>
-            <div class="exchange-logo">
-                <i class="fas fa-university" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
-            </div>
-            <div class="exchange-logo">
-                <i class="fas fa-coins" style="font-size: 3rem; color: rgba(255,255,255,0.3);"></i>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Whitepaper -->
-    <section class="whitepaper-section" id="whitepaper">
-        <h2 class="section-title">Arxion Whitepaper 2026</h2>
-        <p class="section-subtitle">
-            Explore our comprehensive technical documentation and project vision.
-        </p>
-        
-        <div class="whitepaper-container">
-            <div class="whitepaper-header">
-                <h3 class="whitepaper-title">Arxion Protocol: Tokenizing Real World Assets</h3>
-                <div class="whitepaper-dropdown">
-                    <button class="whitepaper-dropdown-btn" id="whitepaperDropdownBtn">
-                        <span>Select Whitepaper Section</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="whitepaper-dropdown-content" id="whitepaperDropdown">
-                        <div class="whitepaper-item" data-section="executive">
-                            <i class="fas fa-file-alt"></i> Executive Summary
+
+            <div class="glass-vault p-10 rounded-[2.5rem] flex flex-col justify-between border-purple-500/20">
+                <div>
+                    <h4 class="orbitron text-sm font-black text-purple-500 tracking-[0.3em] mb-6 uppercase">Asset Stability Index</h4>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Real Estate Pool</span>
+                            <span class="text-xs font-black orbitron">74.2%</span>
                         </div>
-                        <div class="whitepaper-item" data-section="market">
-                            <i class="fas fa-chart-line"></i> Market Opportunity
+                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-purple-600 h-full w-[74%] rounded-full shadow-[0_0_10px_#9333ea]"></div>
                         </div>
-                        <div class="whitepaper-item" data-section="technical">
-                            <i class="fas fa-cogs"></i> Technical Architecture
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Gold Reserves</span>
+                            <span class="text-xs font-black orbitron">25.8%</span>
                         </div>
-                        <div class="whitepaper-item" data-section="tokenomics">
-                            <i class="fas fa-coins"></i> Tokenomics
-                        </div>
-                        <div class="whitepaper-item" data-section="usecases">
-                            <i class="fas fa-briefcase"></i> Use Cases
-                        </div>
-                        <div class="whitepaper-item" data-section="roadmap">
-                            <i class="fas fa-map"></i> Roadmap 2026
-                        </div>
-                        <div class="whitepaper-item" data-section="team">
-                            <i class="fas fa-users"></i> Team & Advisors
-                        </div>
-                        <div class="whitepaper-item" data-section="risk">
-                            <i class="fas fa-exclamation-triangle"></i> Risk Assessment
-                        </div>
-                        <div class="whitepaper-item" data-section="legal">
-                            <i class="fas fa-gavel"></i> Legal & Compliance
-                        </div>
-                        <div class="whitepaper-item" data-section="future">
-                            <i class="fas fa-rocket"></i> Future Vision
+                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-blue-600 h-full w-[25%] rounded-full shadow-[0_0_10px_#1e3a8a]"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="whitepaper-content" id="whitepaperContent">
-                <h3>Executive Summary 2026</h3>
-                <p>Arxion Protocol bridges traditional finance with decentralized technology by tokenizing real-world assets (RWA) like real estate, commodities, and infrastructure. Our mission is to democratize access to high-value tangible assets through blockchain technology, allowing fractional ownership and automated yield distribution.</p>
-                
-                <p>The protocol leverages smart contracts to ensure transparency, security, and compliance throughout the asset tokenization lifecycle. By converting physical assets into digital tokens, we unlock liquidity, reduce barriers to entry, and create new investment opportunities for both retail and institutional investors.</p>
-                
-                <p>Arxion's native utility token, ARXN, serves as the primary medium of exchange within the ecosystem, facilitating transactions, governance, and staking rewards. The tokenomics model is designed for sustainable growth, with careful allocation to ensure long-term project development and community alignment.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Updated Chat Bot with Headset -->
-    <div class="chat-bot">
-        <div class="chat-bot-button" id="chatBotButton">
-            <div class="chat-bot-icon">💬</div>
-            <div class="chat-bot-headset">🎧</div>
-            <div class="online-indicator"></div>
-        </div>
-    </div>
-    
-    <!-- Ministry Box -->
-    <div class="ministry-box" id="ministryBox">
-        <div class="ministry-header">
-            <div class="ministry-title">🎁 Daily Ministry Box</div>
-            <button class="ministry-close" id="ministryClose">×</button>
-        </div>
-        <div class="ministry-content">
-            Congratulations! You've won a daily reward for being an active ARXN investor.
-        </div>
-        <div class="ministry-prize" id="ministryPrize">+25 ARXN</div>
-        <div class="ministry-timer">Next reward in: <span id="ministryTimer">23:59:59</span></div>
-    </div>
-    
-    <!-- Notifications -->
-    <div class="notification-container" id="notificationContainer">
-        <!-- Notifications will be added dynamically -->
-    </div>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4 class="footer-title">Arxion Protocol 2026</h4>
-                <p style="color: var(--medium-gray); margin-bottom: 1.5rem; line-height: 1.6;">
-                    The future of real world asset tokenization. Democratizing access to tangible investments through blockchain technology.
-                </p>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+
+                <div class="mt-10 p-6 bg-gradient-to-t from-purple-900/20 to-transparent rounded-2xl border border-white/5">
+                    <span class="text-[8px] text-gray-500 font-black uppercase tracking-[0.5em] block mb-2 text-center">Protocol Security</span>
+                    <div class="flex justify-around items-center">
+                        <span class="orbitron text-xs font-black italic">CERTIK</span>
+                        <div class="w-[1px] h-4 bg-white/20"></div>
+                        <span class="orbitron text-xs font-black italic">HACKEN</span>
+                        <div class="w-[1px] h-4 bg-white/20"></div>
+                        <span class="orbitron text-xs font-black italic">CHAINLINK</span>
+                    </div>
                 </div>
             </div>
-            
-            <div class="footer-column">
-                <h4 class="footer-title">Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="#pre-sale">Pre-Sale</a></li>
-                    <li><a href="#distribution">Tokenomics</a></li>
-                    <li><a href="#roadmap">Roadmap</a></li>
-                    <li><a href="#whitepaper">Whitepaper</a></li>
-                    <li><a href="#exchanges">Exchanges</a></li>
+
+        </div>
+    </section>
+    ```
+    <section id="roadmap" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div class="text-center mb-20">
+            <h2 class="orbitron text-4xl md:text-5xl font-black italic tracking-tighter mb-4">THE CONQUEST <span class="text-purple-600">ROADMAP</span></h2>
+            <p class="text-[10px] text-gray-500 font-black uppercase tracking-[0.5em]">Phase 1 Deployment - Strategic Milestones</p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-4">
+            <div class="glass-vault p-8 rounded-[2rem] border-purple-500/20 relative group hover:bg-purple-600/5 transition-all">
+                <div class="text-purple-600 font-black orbitron text-5xl opacity-10 absolute top-4 right-6 group-hover:opacity-30 transition-opacity">01</div>
+                <h4 class="orbitron text-sm font-black text-white mb-6 uppercase tracking-widest italic">Genesis Launch</h4>
+                <ul class="space-y-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full"></span> Smart Contract Audit</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full"></span> Global Presale Live</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full"></span> Legal Shield Sync</li>
                 </ul>
             </div>
-            
-            <div class="footer-column">
-                <h4 class="footer-title">Resources</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Support</a></li>
+
+            <div class="glass-vault p-8 rounded-[2rem] border-white/5 relative group hover:bg-purple-600/5 transition-all">
+                <div class="text-white font-black orbitron text-5xl opacity-5 absolute top-4 right-6 group-hover:opacity-20 transition-opacity">02</div>
+                <h4 class="orbitron text-sm font-black text-white mb-6 uppercase tracking-widest italic">Asset Linking</h4>
+                <ul class="space-y-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Real Estate Tokenization</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Gold Reserve Pegging</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Institutional Beta</li>
                 </ul>
             </div>
-            
-            <div class="footer-column">
-                <h4 class="footer-title">Legal 2026</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Risk Disclosure</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
+
+            <div class="glass-vault p-8 rounded-[2rem] border-white/5 relative group hover:bg-purple-600/5 transition-all">
+                <div class="text-white font-black orbitron text-5xl opacity-5 absolute top-4 right-6 group-hover:opacity-20 transition-opacity">03</div>
+                <h4 class="orbitron text-sm font-black text-white mb-6 uppercase tracking-widest italic">Global Exchange</h4>
+                <ul class="space-y-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Tier-1 CEX Listings</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Liquidity Injection</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> ARXION Pay V1</li>
+                </ul>
+            </div>
+
+            <div class="glass-vault p-8 rounded-[2rem] border-white/5 relative group hover:bg-purple-600/5 transition-all">
+                <div class="text-white font-black orbitron text-5xl opacity-5 absolute top-4 right-6 group-hover:opacity-20 transition-opacity">04</div>
+                <h4 class="orbitron text-sm font-black text-white mb-6 uppercase tracking-widest italic">Full Dominance</h4>
+                <ul class="space-y-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Sovereign Debit Card</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> DAO Asset Voting</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Global Asset Hub</li>
                 </ul>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>© 2026 Arxion Protocol. All rights reserved. ARXN is a utility token for the Arxion RWA Protocol.</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">This is a demonstration website. Cryptocurrency investments carry significant risk.</p>
+    </section>
+    ```
+    <section id="team" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div class="text-left mb-20">
+            <h2 class="orbitron text-4xl font-black italic tracking-tighter mb-4">LEADERSHIP <span class="text-purple-600">COUNCIL</span></h2>
+            <p class="text-[10px] text-gray-500 font-black uppercase tracking-[0.6em]">The Architects of the Sovereign Future</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            
+            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
+                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
+                    <div class="absolute inset-0 bg-purple-600/10 group-hover:bg-transparent transition-colors"></div>
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Julian" alt="CEO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                </div>
+                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Julian Sterling</h5>
+                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Chief Executive</span>
+            </div>
+
+            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
+                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus" alt="CTO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                </div>
+                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Marcus Vane</h5>
+                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Technology Lead</span>
+            </div>
+
+            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
+                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Elena" alt="CLO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                </div>
+                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Elena Rossi</h5>
+                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Legal Counsel</span>
+            </div>
+
+            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
+                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Adrian" alt="CFO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                </div>
+                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Dr. Adrian Thorne</h5>
+                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Financial Officer</span>
+            </div>
+
+            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
+                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="CMO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                </div>
+                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Sarah Jenkins</h5>
+                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Growth Strategy</span>
+            </div>
+
+        </div>
+    </section>
+    ```
+    <section id="compliance" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div class="glass-vault rounded-[3rem] p-12 overflow-hidden relative">
+            
+            <div class="absolute -right-20 -bottom-20 opacity-5 rotate-12">
+                <svg width="400" height="400" viewBox="0 0 24 24" fill="white"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 relative z-10">
+                <div>
+                    <h2 class="orbitron text-4xl font-black italic tracking-tighter mb-8 text-white uppercase leading-tight">
+                        GLOBAL LEGAL <br> <span class="text-purple-600">JURISDICTION</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm font-bold uppercase tracking-[0.2em] leading-relaxed mb-10">
+                        ARXION operates under a hybrid legal framework, merging Swiss financial excellence with international asset-tokenization standards. Every $ARX token is a legally binding claim on a diversified physical asset vault.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                            <span class="text-purple-500 font-black orbitron text-[10px] tracking-widest block mb-2 uppercase">Licensing</span>
+                            <p class="text-[9px] text-gray-300 font-bold uppercase tracking-widest">VASP Compliant Structure</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                            <span class="text-purple-500 font-black orbitron text-[10px] tracking-widest block mb-2 uppercase">Auditing</span>
+                            <p class="text-[9px] text-gray-300 font-bold uppercase tracking-widest">Quarterly Proof-of-Reserves</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-center">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-6 p-5 rounded-2xl bg-gradient-to-r from-purple-900/20 to-transparent border-l-4 border-purple-600">
+                            <div class="w-10 h-10 flex-shrink-0 bg-white/5 rounded-full flex items-center justify-center">
+                                <span class="text-purple-500 font-black italic">✓</span>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] font-black text-white uppercase tracking-widest">KYC/AML Integrated</h4>
+                                <p class="text-[8px] text-gray-500 uppercase tracking-widest mt-1 font-bold">Identity Verification Protocol</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-6 p-5 rounded-2xl bg-gradient-to-r from-purple-900/20 to-transparent border-l-4 border-purple-600">
+                            <div class="w-10 h-10 flex-shrink-0 bg-white/5 rounded-full flex items-center justify-center">
+                                <span class="text-purple-500 font-black italic">✓</span>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] font-black text-white uppercase tracking-widest">Smart Contract Immutable</h4>
+                                <p class="text-[8px] text-gray-500 uppercase tracking-widest mt-1 font-bold">Verified by CertiK & PeckShield</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-6 p-5 rounded-2xl bg-gradient-to-r from-purple-900/20 to-transparent border-l-4 border-purple-600">
+                            <div class="w-10 h-10 flex-shrink-0 bg-white/5 rounded-full flex items-center justify-center">
+                                <span class="text-purple-500 font-black italic">✓</span>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] font-black text-white uppercase tracking-widest">Swiss Trust Custody</h4>
+                                <p class="text-[8px] text-gray-500 uppercase tracking-widest mt-1 font-bold">Independent Asset Stewardship</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    ```
+    <section id="tokenomics" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div class="text-center mb-16">
+            <h2 class="orbitron text-4xl font-black italic tracking-tighter mb-4 text-white uppercase">TOKEN <span class="text-purple-600">DISTRIBUTION</span></h2>
+            <p class="text-[10px] text-gray-500 font-black uppercase tracking-[0.6em]">Sustainable Growth Model & Liquidity Control</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            
+            <div class="flex justify-center items-center py-10">
+                <div class="relative w-72 h-72 rounded-full border-[20px] border-purple-900/20 flex items-center justify-center">
+                    <div class="absolute inset-0 rounded-full border-[20px] border-purple-600 border-t-transparent border-l-transparent -rotate-45 shadow-[0_0_30px_rgba(147,51,234,0.3)]"></div>
+                    <div class="text-center">
+                        <span class="orbitron text-4xl font-black italic block">1.0B</span>
+                        <span class="text-[9px] text-gray-500 font-black uppercase tracking-widest">Total Supply</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass-vault p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-purple-600">
+                    <div>
+                        <h5 class="text-xs font-black text-white uppercase tracking-widest italic">Presale Allocation</h5>
+                        <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Strategic Investors & Seed</p>
+                    </div>
+                    <div class="orbitron text-2xl font-black italic text-white">40%</div>
+                </div>
+
+                <div class="glass-vault p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-blue-600">
+                    <div>
+                        <h5 class="text-xs font-black text-white uppercase tracking-widest italic">Asset Reserves</h5>
+                        <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Locked Physical Backing</p>
+                    </div>
+                    <div class="orbitron text-2xl font-black italic text-white">30%</div>
+                </div>
+
+                <div class="glass-vault p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-gray-600">
+                    <div>
+                        <h5 class="text-xs font-black text-white uppercase tracking-widest italic">Ecosystem & Growth</h5>
+                        <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Platform Development</p>
+                    </div>
+                    <div class="orbitron text-2xl font-black italic text-white">20%</div>
+                </div>
+
+                <div class="glass-vault p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-red-900">
+                    <div>
+                        <h5 class="text-xs font-black text-white uppercase tracking-widest italic">Liquidity Burn</h5>
+                        <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Deflationary Mechanism</p>
+                    </div>
+                    <div class="orbitron text-2xl font-black italic text-white">10%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    ```
+    <footer class="relative z-10 border-t border-white/5 bg-black/40 backdrop-blur-3xl pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+                
+                <div class="col-span-1 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center shadow-lg">
+                            <span class="orbitron font-black text-sm italic">X</span>
+                        </div>
+                        <span class="orbitron text-xl font-black tracking-[0.2em] text-white">ARXION</span>
+                    </div>
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-loose mb-8 italic">
+                        The Global Benchmark for Asset-Backed Sovereignty. Engineered for the 2026 Financial Paradigm.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-purple-600 hover:bg-purple-600/10 transition-all">
+                            <span class="text-[10px] font-black orbitron">X</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-purple-600 hover:bg-purple-600/10 transition-all">
+                            <span class="text-[10px] font-black orbitron">TG</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 col-span-1 lg:col-span-2 gap-8 text-right lg:text-left">
+                    <div class="space-y-6">
+                        <h6 class="text-[11px] font-black text-white uppercase tracking-[0.4em] mb-4">Ecosystem</h6>
+                        <ul class="space-y-4 text-[9px] text-gray-500 font-bold uppercase tracking-widest">
+                            <li><a href="#" class="hover:text-purple-500 transition-colors">The Forge</a></li>
+                            <li><a href="#" class="hover:text-purple-500 transition-colors">Asset Vault</a></li>
+                            <li><a href="#" class="hover:text-purple-500 transition-colors">Staking Terminal</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-6">
+                        <h6 class="text-[11px] font-black text-white uppercase tracking-[0.4em] mb-4">Resources</h6>
+                        <ul class="space-y-4 text-[9px] text-gray-500 font-bold uppercase tracking-widest">
+                            <li><a href="#" class="hover:text-purple-500 transition-colors">Whitepaper 2.0</a></li>
+                            <li><a href="#" class="hover:text-purple-500 transition-colors">Audit Reports</a></li>
+                            <li><a href="#" class="hover:text-purple-500 transition-colors">Legal Framework</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 p-8 rounded-[2rem] border border-white/10">
+                    <h6 class="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-4 italic">Get Sovereign Updates</h6>
+                    <div class="space-y-4">
+                        <input type="email" placeholder="ENCRYPTED EMAIL" class="w-full bg-black/50 border border-white/10 p-4 rounded-xl text-[10px] font-black focus:border-purple-600 outline-none transition-all uppercase tracking-widest">
+                        <button class="w-full py-4 bg-purple-600 text-white orbitron font-black text-[10px] rounded-xl hover:bg-white hover:text-black transition-all uppercase tracking-widest shadow-lg shadow-purple-600/20">
+                            Join Intel Stream
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <span class="text-[8px] text-gray-600 font-black uppercase tracking-[0.5em]">© 2026 ARXION PROTOCOL | ALL RIGHTS RESERVED</span>
+                <div class="flex gap-8">
+                    <span class="text-[8px] text-gray-600 font-black uppercase tracking-[0.3em]">Privacy Policy</span>
+                    <span class="text-[8px] text-gray-600 font-black uppercase tracking-[0.3em]">Terms of Minting</span>
+                </div>
+            </div>
         </div>
     </footer>
-    
+    ```
     <script>
-        // Global Variables
-        let currentStage = 1; // Changed to Stage 1
-        const stagePrices = [0.025, 0.030, 0.035, 0.040, 0.045, 0.052, 0.060, 0.070, 0.080, 0.090, 0.100, 0.110, 0.125, 0.140, 0.150];
-        const listingPrice = 0.30; // Updated listing price
-        let currentCurrency = "BNB";
-        let walletConnected = false;
-        let walletBalance = 0;
-        let userTokens = 0;
-        let purchaseHistory = [];
-        
-        // Live cryptocurrency prices (simulated)
-        let cryptoPrices = {
-            "BNB": 320.50,
-            "ETH": 1850.25,
-            "SOL": 95.75,
-            "USDT": 1.00,
-            "USDC": 1.00
+        // Configuration Constants
+        const ARX_PRICE = 0.05; // Launch Phase Price
+        const MULTIPLIERS = {
+            listing: 5,     // Tier 1 ROI
+            expansion: 50,  // Tier 2 ROI
+            dominance: 500  // Tier 3 ROI
         };
-        
-        // Simulated wallet addresses for live purchases
-        const walletAddresses = [
-            "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b",
-            "0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c",
-            "0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d",
-            "0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e",
-            "0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f",
-            "0x6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a",
-            "0x7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b",
-            "0x8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c"
-        ];
-        
-        const userNames = [
-            "crypto_whale_22", "investor_pro", "blockchain_guru", 
-            "defi_enthusiast", "crypto_trader_99", "web3_builder",
-            "hodl_forever", "smart_investor", "early_adopter",
-            "bull_market_rider", "crypto_ninja", "token_king",
-            "alpha_seeker", "diamond_hands", "crypto_og"
-        ];
-        
-        // Currency names for display
-        const currencyNames = {
-            "BNB": "BNB",
-            "ETH": "ETH", 
-            "SOL": "SOL",
-            "USDT": "USDT",
-            "USDC": "USDC"
-        };
-        
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeCountdown();
-            initializeTokenChart();
-            initializePriceChart();
-            setupEventListeners();
-            generateLivePurchases();
-            simulatePriceChanges();
-            showMinistryBox();
-            updateProgressBar();
-            updateTokenCalculation();
+
+        // DOM Elements
+        const usdtInput = document.getElementById('usdtInput');
+        const arxDisplay = document.getElementById('arxTokensDisplay');
+        const roiListing = document.getElementById('roiListing');
+        const roiExpansion = document.getElementById('roiExpansion');
+        const roiDominance = document.getElementById('roiDominance');
+        const walletBtn = document.getElementById('walletConnect');
+
+        // Main Calculation Engine
+        function updateCalculations(amount) {
+            const val = parseFloat(amount) || 0;
+
+            // Update Token Minting Estimation
+            const tokens = val / ARX_PRICE;
+            arxDisplay.innerText = tokens.toLocaleString(undefined, { maximumFractionDigits: 0 });
+
+            // Update ROI Projections
+            roiListing.innerText = '$' + (val * MULTIPLIERS.listing).toLocaleString();
+            roiExpansion.innerText = '$' + (val * MULTIPLIERS.expansion).toLocaleString();
+            roiDominance.innerText = '$' + (val * MULTIPLIERS.dominance).toLocaleString();
+        }
+
+        // Input Event Listener
+        usdtInput.addEventListener('input', (e) => {
+            updateCalculations(e.target.value);
         });
-        
-        // Initialize Countdown Timer
-        function initializeCountdown() {
-            // Set countdown to 2 days from now
-            const countdownDate = new Date();
-            countdownDate.setDate(countdownDate.getDate() + 2);
+
+        // Wallet Connection Simulation (Web3 Ready Structure)
+        walletBtn.addEventListener('click', async () => {
+            walletBtn.innerText = "CONNECTING...";
+            walletBtn.classList.add('animate-pulse');
             
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = countdownDate - now;
-                
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                
-                document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
-                
-                // If the countdown is over, reset to 2 days
-                if (distance < 0) {
-                    countdownDate.setDate(countdownDate.getDate() + 2);
-                    // Move to next stage
-                    if (currentStage < 15) {
-                        currentStage++;
-                        updateProgressBar();
-                        updateTokenCalculation();
-                        showNotification(`Stage ${currentStage} started! New price: $${stagePrices[currentStage-1]}`, 'info');
-                    }
-                }
-            }
-            
-            updateCountdown();
-            setInterval(updateCountdown, 60000);
-        }
-        
-        // Simulate cryptocurrency price changes
-        function simulatePriceChanges() {
-            setInterval(() => {
-                // Simulate small price fluctuations
-                Object.keys(cryptoPrices).forEach(currency => {
-                    if (!['USDT', 'USDC'].includes(currency)) {
-                        const change = (Math.random() - 0.5) * 0.02; // ±1%
-                        cryptoPrices[currency] *= (1 + change);
-                        cryptoPrices[currency] = parseFloat(cryptoPrices[currency].toFixed(2));
-                    }
-                });
-                
-                // Update token calculation if input has value
-                const spendAmount = parseFloat(document.getElementById('spendAmount').value);
-                if (spendAmount > 0) {
-                    updateTokenCalculation();
-                }
-            }, 30000); // Update every 30 seconds
-        }
-        
-        // Initialize Token Distribution Pie Chart
-        function initializeTokenChart() {
-            const ctx = document.getElementById('tokenChart').getContext('2d');
-            
-            const data = {
-                labels: ['Pre-Sale & Public Sale', 'Liquidity & Exchange Listings', 'Team & Advisors', 'Ecosystem & Development', 'Marketing & Partnerships'],
-                datasets: [{
-                    data: [40, 25, 15, 10, 10],
-                    backgroundColor: [
-                        '#FF6B35',
-                        '#7B2CBF',
-                        '#FF8E53',
-                        '#9D4EDD',
-                        '#00C851'
-                    ],
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                    borderWidth: 2,
-                    hoverOffset: 15
-                }]
-            };
-            
-            const config = {
-                type: 'doughnut',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.parsed}%`;
-                                }
-                            }
-                        }
-                    },
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
-                    }
-                }
-            };
-            
-            new Chart(ctx, config);
-        }
-        
-        // Initialize Price Chart
-        function initializePriceChart() {
-            const ctx = document.getElementById('priceChart').getContext('2d');
-            
-            // Generate price data for 15 stages + listing
-            const labels = [];
-            const prices = [];
-            
-            for (let i = 1; i <= 15; i++) {
-                labels.push(`Stage ${i}`);
-                prices.push(stagePrices[i-1]);
-            }
-            
-            labels.push('Listing');
-            prices.push(listingPrice);
-            
-            const data = {
-                labels: labels,
-                datasets: [{
-                    label: 'ARXN Price ($)',
-                    data: prices,
-                    borderColor: '#FF6B35',
-                    backgroundColor: 'rgba(255, 107, 53, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: function(context) {
-                        const index = context.dataIndex;
-                        if (index < 15) return '#FF6B35';
-                        if (index === 15) return '#7B2CBF';
-                        return '#00C851';
-                    },
-                    pointRadius: function(context) {
-                        const index = context.dataIndex;
-                        if (index === 0 || index === 4 || index === 8 || index === 12 || index === 14 || index === 15) {
-                            return 6;
-                        }
-                        return 0;
-                    }
-                }]
-            };
-            
-            const config = {
-                type: 'line',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `Price: $${context.parsed.y}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)',
-                                callback: function(value) {
-                                    return '$' + value;
-                                }
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)',
-                                maxTicksLimit: 8
-                            }
-                        }
-                    }
-                }
-            };
-            
-            new Chart(ctx, config);
-        }
-        
-        // Setup Event Listeners
-        function setupEventListeners() {
-            // Connect Wallet Button
-            document.getElementById('connectWalletBtn').addEventListener('click', showWalletModal);
-            
-            // Disconnect Wallet Button
-            document.getElementById('disconnectWalletBtn').addEventListener('click', disconnectWallet);
-            
-            // Wallet Modal Close
-            document.getElementById('walletModalClose').addEventListener('click', hideWalletModal);
-            
-            // Wallet Options
-            document.querySelectorAll('.wallet-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const walletType = this.getAttribute('data-wallet');
-                    connectToWallet(walletType);
-                });
-            });
-            
-            // Payment Method Selection
-            document.querySelectorAll('.payment-method').forEach(method => {
-                method.addEventListener('click', function() {
-                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-                    this.classList.add('active');
-                    currentCurrency = this.getAttribute('data-currency');
-                    updateTokenCalculation();
-                    updateWalletBalanceDisplay();
-                });
-            });
-            
-            // Buy Tokens Button
-            document.getElementById('buyTokensBtn').addEventListener('click', buyTokens);
-            
-            // Spend Amount Input
-            document.getElementById('spendAmount').addEventListener('input', updateTokenCalculation);
-            
-            // Ministry Box Close
-            document.getElementById('ministryClose').addEventListener('click', function() {
-                document.getElementById('ministryBox').style.display = 'none';
-            });
-            
-            // Whitepaper Dropdown
-            document.getElementById('whitepaperDropdownBtn').addEventListener('click', function() {
-                document.getElementById('whitepaperDropdown').classList.toggle('show');
-            });
-            
-            // Whitepaper Items
-            document.querySelectorAll('.whitepaper-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const section = this.getAttribute('data-section');
-                    updateWhitepaperContent(section);
-                    document.getElementById('whitepaperDropdown').classList.remove('show');
-                });
-            });
-            
-            // Updated Chat Bot Button with Headset
-            document.getElementById('chatBotButton').addEventListener('click', function() {
-                const responses = [
-                    "Hello! I'm the Arxion assistant. How can I help you with our RWA tokenization project?",
-                    "Interested in investing? The pre-sale is live at Stage 1 with the best price of $0.025!",
-                    "ARXN tokens provide fractional ownership of real-world assets like real estate and gold.",
-                    "Our platform automates rental yield distribution directly to token holders.",
-                    "Early investors get the best rates before we move to Stage 2 in 2 days.",
-                    "We're in advanced negotiations with top exchanges - announcements coming soon!"
-                ];
-                
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                alert(randomResponse);
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.whitepaper-dropdown')) {
-                    document.getElementById('whitepaperDropdown').classList.remove('show');
-                }
-            });
-        }
-        
-        // Show Wallet Modal
-        function showWalletModal() {
-            document.getElementById('walletModal').style.display = 'flex';
-        }
-        
-        // Hide Wallet Modal
-        function hideWalletModal() {
-            document.getElementById('walletModal').style.display = 'none';
-        }
-        
-        // Connect to Wallet
-        function connectToWallet(walletType) {
-            // Simulate wallet connection
-            walletConnected = true;
-            
-            // Generate random wallet address and balance
-            const randomAddress = walletAddresses[Math.floor(Math.random() * walletAddresses.length)];
-            const shortAddress = randomAddress.substring(0, 6) + '...' + randomAddress.substring(randomAddress.length - 4);
-            
-            // Set random balance based on currency and current price
-            const baseBalances = {
-                'BNB': 2.5,
-                'ETH': 0.25,
-                'SOL': 10,
-                'USDT': 500,
-                'USDC': 500
-            };
-            
-            // Add some randomness to balance
-            const randomFactor = 0.7 + Math.random() * 0.6; // 0.7 to 1.3
-            const baseBalance = baseBalances[currentCurrency] * randomFactor;
-            walletBalance = parseFloat(baseBalance.toFixed(2));
-            
-            // Update UI
-            document.getElementById('connectWalletBtn').style.display = 'none';
-            document.getElementById('walletContainer').style.display = 'flex';
-            document.getElementById('walletAddress').textContent = shortAddress;
-            document.getElementById('walletBalanceDisplay').textContent = walletBalance + ' ' + currentCurrency;
-            document.getElementById('walletBalance').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
-            
-            // Hide modal
-            hideWalletModal();
-            
-            // Show success notification
-            showNotification(`Successfully connected to ${walletType} wallet!`, 'success');
-            
-            // Enable buy button
-            document.getElementById('buyTokensBtn').disabled = false;
-        }
-        
-        // Disconnect Wallet
-        function disconnectWallet() {
-            walletConnected = false;
-            walletBalance = 0;
-            userTokens = 0;
-            
-            // Update UI
-            document.getElementById('connectWalletBtn').style.display = 'block';
-            document.getElementById('walletContainer').style.display = 'none';
-            document.getElementById('walletBalance').textContent = '0.00 ' + currentCurrency;
-            
-            // Reset input
-            document.getElementById('spendAmount').value = '0.1';
-            updateTokenCalculation();
-            
-            // Show notification
-            showNotification('Wallet disconnected successfully.', 'info');
-        }
-        
-        // Update Wallet Balance Display
-        function updateWalletBalanceDisplay() {
-            if (walletConnected) {
-                // Update balance for current currency (simulated with price changes)
-                const baseBalances = {
-                    'BNB': 2.5,
-                    'ETH': 0.25,
-                    'SOL': 10,
-                    'USDT': 500,
-                    'USDC': 500
-                };
-                
-                const randomFactor = 0.7 + Math.random() * 0.6;
-                const baseBalance = baseBalances[currentCurrency] * randomFactor;
-                walletBalance = parseFloat(baseBalance.toFixed(2));
-                
-                document.getElementById('walletBalanceDisplay').textContent = walletBalance + ' ' + currentCurrency;
-                document.getElementById('walletBalance').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
-            }
-        }
-        
-        // Update Token Calculation with Live Prices
-        function updateTokenCalculation() {
-            const spendAmount = parseFloat(document.getElementById('spendAmount').value) || 0;
-            const currentPrice = stagePrices[currentStage - 1];
-            
-            // Convert spend amount to USD based on selected currency
-            let usdAmount = spendAmount;
-            if (currentCurrency !== "USDT" && currentCurrency !== "USDC") {
-                usdAmount = spendAmount * cryptoPrices[currentCurrency];
-            }
-            
-            // Calculate tokens based on USD amount and ARXN price
-            const tokens = usdAmount / currentPrice;
-            
-            document.getElementById('tokensToReceive').textContent = tokens.toFixed(2);
-            
-            // Update future value
-            if (spendAmount > 0) {
-                const futureValue = tokens * listingPrice;
-                document.getElementById('futureValue').textContent = '$' + futureValue.toFixed(2);
-            } else {
-                document.getElementById('futureValue').textContent = '$0.00';
-            }
-        }
-        
-        // Buy Tokens Function
-        function buyTokens() {
-            if (!walletConnected) {
-                alert("Please connect your wallet first!");
-                return;
-            }
-            
-            const spendAmount = parseFloat(document.getElementById('spendAmount').value) || 0;
-            
-            if (spendAmount <= 0) {
-                alert("Please enter a valid amount!");
-                return;
-            }
-            
-            if (spendAmount > walletBalance) {
-                alert("Insufficient balance in your wallet!");
-                return;
-            }
-            
-            // Simulate transaction
-            const currentPrice = stagePrices[currentStage - 1];
-            
-            // Convert to USD
-            let usdAmount = spendAmount;
-            if (currentCurrency !== "USDT" && currentCurrency !== "USDC") {
-                usdAmount = spendAmount * cryptoPrices[currentCurrency];
-            }
-            
-            const tokens = usdAmount / currentPrice;
-            
-            // Show success message with animation
-            const buyBtn = document.getElementById('buyTokensBtn');
-            const originalText = buyBtn.innerHTML;
-            
-            buyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            buyBtn.disabled = true;
-            
+            // Artificial delay to simulate blockchain handshake
             setTimeout(() => {
-                // Update user tokens
-                userTokens += tokens;
-                
-                // Update wallet balance
-                walletBalance -= spendAmount;
-                document.getElementById('walletBalance').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
-                document.getElementById('walletBalanceDisplay').textContent = walletBalance.toFixed(2) + ' ' + currentCurrency;
-                
-                // Record purchase
-                purchaseHistory.push({
-                    amount: spendAmount,
-                    currency: currentCurrency,
-                    tokens: tokens,
-                    price: currentPrice,
-                    timestamp: new Date()
+                walletBtn.innerText = "VAULT CONNECTED";
+                walletBtn.classList.remove('animate-pulse');
+                walletBtn.style.background = "linear-gradient(to r, #9333ea, #1e3a8a)";
+                walletBtn.style.color = "white";
+                console.log("Web3 Provider: Ready | Wallet: 0x...V26");
+            }, 1500);
+        });
+
+        // Smooth Scroll & Interaction Polish
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-                
-                buyBtn.innerHTML = '<i class="fas fa-check"></i> Purchase Successful!';
-                buyBtn.style.background = 'linear-gradient(90deg, #00C851, #007E33)';
-                
-                // Show purchase notification for current user
-                const userName = userNames[Math.floor(Math.random() * userNames.length)];
-                showPurchaseNotification(userName, spendAmount.toFixed(2), currentCurrency, tokens.toFixed(2));
-                
-                // Reset button after 3 seconds
-                setTimeout(() => {
-                    buyBtn.innerHTML = originalText;
-                    buyBtn.disabled = false;
-                    buyBtn.style.background = 'var(--orange-purple-gradient)';
-                    
-                    // Reset input
-                    document.getElementById('spendAmount').value = '';
-                    updateTokenCalculation();
-                }, 3000);
-            }, 2000);
-        }
-        
-        // Generate Live Purchase Notifications
-        function generateLivePurchases() {
-            // Initial purchases
-            for (let i = 0; i < 3; i++) {
-                setTimeout(() => {
-                    generateRandomPurchase();
-                }, i * 5000);
-            }
-            
-            // Continue generating purchases at random intervals (1-5 minutes)
-            function scheduleNextPurchase() {
-                const delay = Math.floor(Math.random() * 4 + 1) * 60000; // 1-5 minutes in milliseconds
-                setTimeout(() => {
-                    generateRandomPurchase();
-                    scheduleNextPurchase();
-                }, delay);
-            }
-            
-            scheduleNextPurchase();
-        }
-        
-        // Generate Random Purchase with Token Amount
-        function generateRandomPurchase() {
-            // Weighted random selection (70% BNB, 20% USDT, 10% others)
-            const rand = Math.random();
-            let currency, amount;
-            
-            if (rand < 0.7) {
-                currency = "BNB";
-                amount = (Math.random() * 0.25 + 0.1).toFixed(2); // 0.1 - 0.35 BNB
-            } else if (rand < 0.9) {
-                currency = "USDT";
-                amount = (Math.random() * 460 + 10).toFixed(0); // 10 - 470 USDT
-            } else if (rand < 0.95) {
-                currency = "ETH";
-                amount = (Math.random() * 0.45 + 0.05).toFixed(3); // 0.05 - 0.5 ETH
-            } else {
-                currency = "SOL";
-                amount = (Math.random() * 1.5 + 0.5).toFixed(2); // 0.5 - 2 SOL
-            }
-            
-            // Calculate tokens based on current price
-            const usdAmount = currency === "USDT" || currency === "USDC" ? 
-                parseFloat(amount) : parseFloat(amount) * cryptoPrices[currency];
-            const tokens = usdAmount / stagePrices[currentStage - 1];
-            
-            const userName = userNames[Math.floor(Math.random() * userNames.length)];
-            const walletAddr = walletAddresses[Math.floor(Math.random() * walletAddresses.length)];
-            const shortAddr = walletAddr.substring(0, 6) + '...' + walletAddr.substring(walletAddr.length - 4);
-            
-            showPurchaseNotification(userName, amount, currency, tokens.toFixed(2), shortAddr);
-        }
-        
-        // Show Purchase Notification with Token Amount
-        function showPurchaseNotification(user, amount, currency, tokens, wallet = null) {
-            const container = document.getElementById('notificationContainer');
-            
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            
-            let notificationHTML = `<div><span class="notification-user">${user}</span> purchased <strong>${amount} ${currency}</strong></div>`;
-            notificationHTML += `<div class="notification-details">Received: <strong>${tokens} ARXN</strong> at $${stagePrices[currentStage - 1]} each`;
-            
-            if (wallet) {
-                notificationHTML += ` | Wallet: ${wallet}`;
-            }
-            
-            notificationHTML += `</div>`;
-            notificationHTML += `<div style="font-size: 0.8rem; margin-top: 5px; color: #aaa;">${getRandomTimeAgo()} ago</div>`;
-            
-            notification.innerHTML = notificationHTML;
-            
-            container.appendChild(notification);
-            
-            // Remove notification after animation completes
-            setTimeout(() => {
-                notification.remove();
-            }, 8000);
-        }
-        
-        // Show Generic Notification
-        function showNotification(message, type = 'info') {
-            const container = document.getElementById('notificationContainer');
-            
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.innerHTML = `
-                <div>${message}</div>
-            `;
-            
-            if (type === 'success') {
-                notification.style.borderLeftColor = '#00C851';
-            } else if (type === 'warning') {
-                notification.style.borderLeftColor = '#ffbb33';
-            } else if (type === 'danger') {
-                notification.style.borderLeftColor = '#ff4444';
-            }
-            
-            container.appendChild(notification);
-            
-            // Remove notification after animation completes
-            setTimeout(() => {
-                notification.remove();
-            }, 5000);
-        }
-        
-        // Show Ministry Box
-        function showMinistryBox() {
-            // Show after 30 seconds
-            setTimeout(() => {
-                const ministryBox = document.getElementById('ministryBox');
-                ministryBox.style.display = 'block';
-                
-                // Set random prize (max 200 ARXN)
-                const prize = Math.floor(Math.random() * 200) + 1;
-                document.getElementById('ministryPrize').textContent = `+${prize} ARXN`;
-                
-                // Hide after 5 minutes
-                setTimeout(() => {
-                    ministryBox.style.display = 'none';
-                }, 300000); // 5 minutes
-            }, 30000); // 30 seconds
-            
-            // Update timer
-            function updateMinistryTimer() {
-                // Show random times between 23-24 hours
-                const hours = Math.floor(Math.random() * 2) + 23;
-                const minutes = Math.floor(Math.random() * 60);
-                const seconds = Math.floor(Math.random() * 60);
-                
-                document.getElementById('ministryTimer').textContent = 
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
-            
-            updateMinistryTimer();
-            setInterval(updateMinistryTimer, 1000);
-        }
-        
-        // Update Progress Bar
-        function updateProgressBar() {
-            const progress = (currentStage / 15) * 100;
-            document.getElementById('progressFill').style.width = `${progress}%`;
-            document.querySelector('.progress-info span:first-child').textContent = `Stage ${currentStage} of 15`;
-            document.querySelector('.progress-info span:last-child').textContent = `${progress.toFixed(2)}% Complete`;
-            document.querySelector('.stage-number div:first-child').textContent = currentStage;
-            document.querySelector('.stage-price').textContent = `$${stagePrices[currentStage-1]}`;
-            if (currentStage < 15) {
-                document.querySelector('.stage-info p').textContent = `Next Stage: $${stagePrices[currentStage]}`;
-            } else {
-                document.querySelector('.stage-info p').textContent = `Final Stage - Listing Next`;
-            }
-        }
-        
-        // Update Whitepaper Content
-        function updateWhitepaperContent(section) {
-            const content = document.getElementById('whitepaperContent');
-            let newContent = '';
-            
-            switch(section) {
-                case 'executive':
-                    newContent = `
-                        <h3>Executive Summary 2026</h3>
-                        <p>Arxion Protocol bridges traditional finance with decentralized technology by tokenizing real-world assets (RWA) like real estate, commodities, and infrastructure. Our mission is to democratize access to high-value tangible assets through blockchain technology, allowing fractional ownership and automated yield distribution.</p>
-                        <p>The protocol leverages smart contracts to ensure transparency, security, and compliance throughout the asset tokenization lifecycle. By converting physical assets into digital tokens, we unlock liquidity, reduce barriers to entry, and create new investment opportunities for both retail and institutional investors.</p>
-                        <p>Arxion's native utility token, ARXN, serves as the primary medium of exchange within the ecosystem, facilitating transactions, governance, and staking rewards. The tokenomics model is designed for sustainable growth, with careful allocation to ensure long-term project development and community alignment.</p>
-                    `;
-                    break;
-                case 'market':
-                    newContent = `
-                        <h3>Market Opportunity 2026</h3>
-                        <p>The global real estate market alone is valued at over $300 trillion, while the total value of real-world assets suitable for tokenization exceeds $500 trillion. Current blockchain-based RWA tokenization represents less than 0.01% of this potential, indicating massive growth opportunities.</p>
-                        <p>Key market drivers include:</p>
-                        <ul>
-                            <li>Growing demand for alternative investments among millennials and Gen Z</li>
-                            <li>Increased institutional interest in blockchain-based asset management</li>
-                            <li>Regulatory frameworks evolving to support digital assets</li>
-                            <li>Technological advancements in blockchain scalability and interoperability</li>
-                            <li>Global push for financial inclusion and democratized investment access</li>
-                        </ul>
-                        <p>Arxion aims to capture a significant portion of this emerging market by offering a comprehensive, user-friendly platform for RWA tokenization and trading.</p>
-                    `;
-                    break;
-                case 'technical':
-                    newContent = `
-                        <h3>Technical Architecture 2026</h3>
-                        <p>Arxion Protocol is built on a multi-chain architecture to ensure maximum accessibility and interoperability. The core components include:</p>
-                        <ul>
-                            <li><strong>Smart Contract Layer:</strong> Ethereum-based smart contracts for asset tokenization, governance, and yield distribution</li>
-                            <li><strong>Cross-Chain Bridge:</strong> Secure bridges connecting Ethereum, Binance Smart Chain, Solana, and Polygon</li>
-                            <li><strong>Oracle Network:</strong> Decentralized oracles for real-time asset valuation and data feeds</li>
-                            <li><strong>IPFS Storage:</strong> Distributed file storage for legal documents, asset proofs, and transaction records</li>
-                            <li><strong>ZK-SNARKs:</strong> Privacy-preserving technology for confidential transactions</li>
-                        </ul>
-                        <p>The platform employs a modular architecture that allows for easy integration of new asset classes, regulatory frameworks, and blockchain networks as the ecosystem evolves.</p>
-                    `;
-                    break;
-                case 'tokenomics':
-                    newContent = `
-                        <h3>Tokenomics 2026</h3>
-                        <p>ARXN serves as the utility token within the Arxion ecosystem with the following functions:</p>
-                        <ul>
-                            <li><strong>Transaction Medium:</strong> Used for purchasing tokenized assets and paying platform fees</li>
-                            <li><strong>Governance:</strong> Token holders can vote on platform upgrades, asset listings, and treasury management</li>
-                            <li><strong>Staking:</strong> Users can stake ARXN to earn platform revenue shares and governance power</li>
-                            <li><strong>Fee Discounts:</strong> Reduced transaction fees for users holding minimum ARXN balances</li>
-                        </ul>
-                        <p><strong>Token Distribution:</strong></p>
-                        <ul>
-                            <li>Pre-Sale & Public Sale: 40% (with 6-month linear vesting for pre-sale)</li>
-                            <li>Liquidity & Exchange Listings: 25% (locked for 12 months)</li>
-                            <li>Team & Advisors: 15% (3-year vesting with 1-year cliff)</li>
-                            <li>Ecosystem & Development: 10% (released quarterly over 4 years)</li>
-                            <li>Marketing & Partnerships: 10% (released based on milestone achievements)</li>
-                        </ul>
-                    `;
-                    break;
-                case 'usecases':
-                    newContent = `
-                        <h3>Use Cases 2026</h3>
-                        <p>Arxion Protocol enables several innovative use cases for real-world asset tokenization:</p>
-                        <ul>
-                            <li><strong>Fractional Real Estate Ownership:</strong> Investors can purchase tokens representing shares in commercial or residential properties, receiving proportional rental income and appreciation</li>
-                            <li><strong>Commodity Tokenization:</strong> Gold, silver, and other commodities can be tokenized, allowing for easy trading and ownership transfer</li>
-                            <li><strong>Infrastructure Investment:</strong> Tokenization of revenue-generating infrastructure like data centers, solar farms, and telecommunications towers</li>
-                            <li><strong>Art & Collectibles:</strong> High-value art pieces and collectibles can be tokenized, enabling shared ownership and liquidity</li>
-                            <li><strong>Private Equity:</strong> Traditional private equity investments can be tokenized to increase liquidity and accessibility</li>
-                            <li><strong>Automated Yield Distribution:</strong> Smart contracts automatically distribute rental income, dividends, or interest payments to token holders</li>
-                        </ul>
-                    `;
-                    break;
-                case 'roadmap':
-                    newContent = `
-                        <h3>Roadmap 2026</h3>
-                        <p>Arxion's development follows a clear 4-phase roadmap:</p>
-                        <p><strong>Phase 1: Foundation & Pre-Sale (Q1 2026 - COMPLETED)</strong></p>
-                        <ul>
-                            <li>Smart contract development and audit completion</li>
-                            <li>Website and platform UI/UX design</li>
-                            <li>Pre-sale launch with multi-chain support</li>
-                            <li>Community building and social media setup</li>
-                        </ul>
-                        <p><strong>Phase 2: Platform Development & First Listings (Q3 2026)</strong></p>
-                        <ul>
-                            <li>MVP platform launch with basic tokenization</li>
-                            <li>First real estate asset tokenization</li>
-                            <li>Integration with major DeFi protocols</li>
-                            <li>CEX listings on 2 major exchanges</li>
-                        </ul>
-                        <p><strong>Phase 3: Expansion & Scaling (Q1 2027)</strong></p>
-                        <ul>
-                            <li>Gold and commodity tokenization launch</li>
-                            <li>Advanced RWA marketplace development</li>
-                            <li>Mobile app release for iOS and Android</li>
-                            <li>Global expansion to 3 new regions</li>
-                        </ul>
-                        <p><strong>Phase 4: Ecosystem Maturity (Q3 2027)</strong></p>
-                        <ul>
-                            <li>Full-scale RWA ecosystem with 50+ assets</li>
-                            <li>Institutional investment portal launch</li>
-                            <li>DAO implementation for asset management</li>
-                            <li>Target of 100,000+ active users</li>
-                        </ul>
-                    `;
-                    break;
-                case 'team':
-                    newContent = `
-                        <h3>Team & Advisors 2026</h3>
-                        <p>Arxion is backed by a team of experienced professionals from blockchain, finance, real estate, and technology sectors:</p>
-                        <ul>
-                            <li><strong>Alex Morgan - CEO:</strong> Former blockchain lead at Fortune 500 financial institution with 15+ years in fintech</li>
-                            <li><strong>Dr. Sarah Chen - CTO:</strong> PhD in Computer Science from MIT, previously lead engineer at major blockchain protocol</li>
-                            <li><strong>Michael Rodriguez - CFO:</strong> 20+ years in investment banking and asset management</li>
-                            <li><strong>James Wilson - Head of Legal:</strong> Specialist in blockchain regulation and securities law</li>
-                            <li><strong>Emma Thompson - Head of Business Development:</strong> Former partnerships lead at leading DeFi protocol</li>
-                        </ul>
-                        <p><strong>Advisory Board:</strong></p>
-                        <ul>
-                            <li><strong>Dr. Robert Kim:</strong> Professor of Blockchain Economics at Stanford University</li>
-                            <li><strong>Lisa Park:</strong> Former SEC regulator specializing in digital assets</li>
-                            <li><strong>David Zhang:</strong> Real estate mogul with $2B+ in property assets</li>
-                            <li><strong>Marcus Johnson:</strong> Early investor in 5 unicorn blockchain startups</li>
-                        </ul>
-                    `;
-                    break;
-                case 'risk':
-                    newContent = `
-                        <h3>Risk Assessment 2026</h3>
-                        <p>Investing in Arxion carries certain risks that should be carefully considered:</p>
-                        <ul>
-                            <li><strong>Regulatory Risk:</strong> Evolving regulations could impact token classification and platform operations</li>
-                            <li><strong>Market Risk:</strong> Cryptocurrency markets are highly volatile and subject to significant price fluctuations</li>
-                            <li><strong>Technology Risk:</strong> Smart contract vulnerabilities, blockchain network issues, or security breaches</li>
-                            <li><strong>Liquidity Risk:</strong> Limited trading volume or market depth could impact token liquidity</li>
-                            <li><strong>Competition Risk:</strong> Emerging competitors in the RWA tokenization space</li>
-                            <li><strong>Adoption Risk:</strong> Slower-than-expected user adoption or asset onboarding</li>
-                        </ul>
-                        <p><strong>Risk Mitigation Strategies:</strong></p>
-                        <ul>
-                            <li>Regular smart contract audits by multiple reputable security firms</li>
-                            <li>Engagement with regulatory bodies for compliance guidance</li>
-                            <li>Diversification across multiple blockchain networks</li>
-                            <li>Gradual, phased platform rollout with extensive testing</li>
-                            <li>Comprehensive insurance coverage for digital assets</li>
-                        </ul>
-                    `;
-                    break;
-                case 'legal':
-                    newContent = `
-                        <h3>Legal & Compliance 2026</h3>
-                        <p>Arxion is committed to operating within established legal frameworks and maintaining the highest compliance standards:</p>
-                        <ul>
-                            <li><strong>Regulatory Compliance:</strong> Working with legal experts across multiple jurisdictions to ensure compliance with securities laws, AML/KYC regulations, and tax requirements</li>
-                            <li><strong>Token Classification:</strong> ARXN is structured as a utility token, not a security, in jurisdictions where applicable</li>
-                            <li><strong>AML/KYC Procedures:</strong> Comprehensive identity verification for all users participating in tokenized asset transactions</li>
-                            <li><strong>Data Privacy:</strong> GDPR-compliant data handling procedures with user consent mechanisms</li>
-                            <li><strong>Dispute Resolution:</strong> Clear terms of service and smart contract-based arbitration mechanisms</li>
-                        </ul>
-                        <p>The platform will implement jurisdiction-specific adaptations to comply with local regulations while maintaining global accessibility through carefully designed legal structures.</p>
-                    `;
-                    break;
-                case 'future':
-                    newContent = `
-                        <h3>Future Vision 2026</h3>
-                        <p>Arxion aims to become the leading global platform for real-world asset tokenization, with a vision that extends beyond current capabilities:</p>
-                        <ul>
-                            <li><strong>Global Asset Marketplace:</strong> Creating a seamless global marketplace where any tangible asset can be tokenized and traded 24/7</li>
-                            <li><strong>Institutional Integration:</strong> Becoming the preferred RWA tokenization platform for traditional financial institutions and asset managers</li>
-                            <li><strong>Regulatory Leadership:</strong> Helping shape global regulatory standards for digital asset tokenization</li>
-                            <li><strong>Financial Inclusion:</strong> Democratizing access to investment opportunities for individuals worldwide, regardless of wealth or location</li>
-                            <li><strong>Ecosystem Expansion:</strong> Building complementary services including lending against tokenized assets, insurance products, and advanced derivatives</li>
-                            <li><strong>Sustainability Focus:</strong> Prioritizing tokenization of green assets and sustainable infrastructure projects</li>
-                        </ul>
-                        <p>The long-term goal is to bridge the $500+ trillion traditional asset market with the efficiency, transparency, and accessibility of blockchain technology, creating a new paradigm for global finance.</p>
-                    `;
-                    break;
-            }
-            
-            content.innerHTML = newContent;
-        }
-        
-        // Helper Functions
-        function getRandomTimeAgo() {
-            const times = [
-                "a few seconds", "a minute", "2 minutes", "5 minutes",
-                "10 minutes", "15 minutes", "20 minutes", "half an hour",
-                "an hour", "2 hours", "3 hours", "5 hours"
-            ];
-            return times[Math.floor(Math.random() * times.length)];
-        }
+            });
+        });
+
+        // Initialize with 0 values
+        updateCalculations(0);
     </script>
 </body>
 </html>
