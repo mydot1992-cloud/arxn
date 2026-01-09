@@ -3,591 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARXION | Sovereign Asset Protocol 2026</title>
-    
+    <title>ARXION | Global Sovereign Protocol</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --arx-black: #050505;
-            --arx-purple: #9333ea;
-            --arx-blue: #1e3a8a;
-            --arx-glass: rgba(255, 255, 255, 0.03);
+        :root { --p: #9333ea; --b: #020202; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
+        
+        body { 
+            background: var(--b); 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
         }
 
-        body {
-            background-color: var(--arx-black);
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+        /* 3D Animated Nebula Background */
+        .bg-3d {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020202 100%);
+            z-index: -2;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            z-index: -1;
+            animation: moveStars 100s linear infinite;
+        }
+
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 10000px 5000px; }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Navigation Settings */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* سنقوم ببرمجة القائمة المتنقلة لاحقاً */
+            .hero-text { font-size: 3rem !important; }
         }
 
         .orbitron { font-family: 'Orbitron', sans-serif; }
-
-        /* Cinematic Background Nebula */
-        .nebula-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 90% 80%, rgba(30, 58, 138, 0.08) 0%, transparent 45%);
-            z-index: -1;
-        }
-
-        /* Glassmorphism Vault Panel */
-        .glass-vault {
-            background: var(--arx-glass);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Luxury Scrollbar */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: var(--arx-black); }
-        ::-webkit-scrollbar-thumb { background: var(--arx-purple); border-radius: 10px; }
-
-        /* Key Animations */
-        @keyframes pulse-soft {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        .animate-pulse-soft { animation: pulse-soft 3s infinite; }
     </style>
 </head>
 <body>
-    <div class="nebula-bg"></div>
-    ```
-    <nav class="relative z-50 flex justify-between items-center px-8 lg:px-16 py-8 border-b border-white/5 backdrop-blur-xl">
-        
-        <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-700 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/20 group cursor-pointer">
-                <span class="orbitron font-black text-2xl italic text-white group-hover:scale-110 transition-transform">X</span>
-            </div>
-            <div class="flex flex-col">
-                <span class="orbitron text-2xl font-black tracking-[0.2em] text-white leading-none">
-                    ARX<span class="text-purple-600">ION</span>
-                </span>
-                <span class="text-[8px] uppercase tracking-[0.55em] text-gray-500 font-black mt-1">Sovereign Protocol</span>
-            </div>
+    <div class="bg-3d"></div>
+    <div class="stars"></div>
+
+    <nav class="fixed top-0 w-full z-50 glass px-6 md:px-12 py-5 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center orbitron font-black text-xl italic shadow-lg shadow-purple-500/50">X</div>
+            <span class="orbitron text-xl md:text-2xl font-black tracking-widest uppercase">ARXION</span>
         </div>
 
-        <div class="hidden lg:flex items-center gap-12">
-            <a href="#assets" class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-white hover:glow-text transition-all">Global Assets</a>
-            <a href="#vault" class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-white hover:glow-text transition-all">The Vault</a>
-            <a href="#compliance" class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-white hover:glow-text transition-all">Compliance</a>
-            <a href="#roadmap" class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 hover:text-white hover:glow-text transition-all">2026 Roadmap</a>
+        <div class="nav-links flex items-center gap-10">
+            <a href="#forge" class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition">Forge</a>
+            <a href="#vault" class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition">Vault</a>
+            <a href="#roadmap" class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition">Map</a>
+            <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-purple-500 border-b border-purple-500/50">Whitepaper</a>
         </div>
 
-        <div class="flex items-center gap-4">
-            <button id="walletConnect" class="group relative px-8 py-3.5 rounded-full bg-white text-black font-black text-[10px] tracking-[0.25em] uppercase transition-all overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                <span class="relative z-10 group-hover:text-white transition-colors">Connect Terminal</span>
-                <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-            </button>
-        </div>
+        <button class="px-6 py-2 rounded-full bg-white text-black font-black text-[10px] uppercase tracking-widest hover:bg-purple-600 hover:text-white transition-all">Connect</button>
     </nav>
-    ```
-    <main class="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-24 grid lg:grid-cols-2 gap-16 items-center">
+
+    <div class="pt-32 text-center px-6">
+        <h1 class="orbitron hero-text text-6xl md:text-9xl font-black leading-none mb-6 glow-text italic">
+            SOVEREIGN <br> <span class="text-purple-600">FUTURE</span>
+        </h1>
+        <p class="text-gray-500 text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase max-w-2xl mx-auto italic">
+            The world's first protocol bridging elite real-world assets with digital sovereignty.
+        </p>
+    </div>
+    <section id="forge" class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-start">
         
-        <div class="space-y-10">
-            <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-purple-600"></span>
-                </span>
-                <span class="text-[10px] font-black tracking-[0.4em] text-purple-400 uppercase">Live Presale Phase 01</span>
-            </div>
-
-            <h1 class="orbitron text-7xl md:text-8xl font-black leading-[0.85] tracking-tighter">
-                MINT <br> <span class="bg-clip-text text-transparent bg-gradient-to-b from-white via-purple-400 to-purple-800">SOVEREIGN</span> <br> ASSETS
-            </h1>
-
-            <p class="max-w-xl text-gray-500 text-sm font-bold leading-relaxed border-l-2 border-purple-600 pl-8 uppercase tracking-[0.2em] italic">
-                Bridging global physical real estate and gold reserves with institutional-grade digital liquidity.
-            </p>
-
-            <div class="flex gap-12 items-center pt-6">
-                <div class="flex flex-col">
-                    <span class="orbitron text-3xl font-black text-white italic tracking-tighter">1.2B+</span>
-                    <span class="text-[9px] uppercase tracking-[0.3em] text-purple-500 font-bold">Backing Capacity</span>
-                </div>
-                <div class="w-[1px] h-12 bg-white/10"></div>
-                <div class="flex flex-col">
-                    <span class="orbitron text-3xl font-black text-white italic tracking-tighter">Verified</span>
-                    <span class="text-[9px] uppercase tracking-[0.3em] text-purple-500 font-bold">Legal Shield</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-vault p-1.5 rounded-[3rem] shadow-2xl relative">
-            <div class="bg-[#080808] rounded-[2.8rem] p-10 lg:p-12 relative overflow-hidden">
-                
-                <div class="absolute top-0 right-0 bg-red-600 px-8 py-3 rounded-bl-3xl shadow-lg">
-                    <span class="text-[10px] font-black tracking-[0.2em] uppercase text-white animate-pulse">94% Allocated</span>
-                </div>
-
-                <h3 class="orbitron text-2xl font-black mb-12 text-white italic tracking-widest flex items-center gap-4">
-                    <span class="w-8 h-[2px] bg-purple-600"></span> INVESTMENT FORGE
-                </h3>
-
-                <div class="space-y-10">
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-end px-2">
-                            <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Pay with USDT</label>
-                            <span class="text-[9px] text-purple-500 font-bold uppercase tracking-widest">Available Liquidity: Tier 1</span>
-                        </div>
-                        <div class="relative group">
-                            <input type="number" id="usdtInput" placeholder="0.00" 
-                                class="w-full bg-white/5 border border-white/10 p-6 rounded-2xl text-4xl font-black focus:border-purple-600 focus:bg-white/10 outline-none transition-all tracking-tighter orbitron">
-                            <span class="absolute right-6 top-1/2 -translate-y-1/2 orbitron text-gray-700 font-bold">USDT</span>
-                        </div>
-                    </div>
-
-                    <div class="p-8 rounded-2xl bg-gradient-to-br from-purple-900/20 via-black to-transparent border border-purple-500/20 text-center relative">
-                        <span class="text-[10px] font-black text-purple-500 uppercase tracking-[0.4em] block mb-4">You Acquire (Est. $ARX)</span>
-                        <div id="arxTokensDisplay" class="orbitron text-5xl font-black tracking-tighter italic text-white glow-text">0</div>
-                    </div>
-
-                    <button class="w-full py-7 bg-white text-black orbitron font-black text-2xl rounded-2xl hover:bg-purple-600 hover:text-white transition-all duration-700 shadow-[0_25px_50px_-15px_rgba(147,51,234,0.4)] uppercase italic group relative overflow-hidden">
-                        <span class="relative z-10">MINT $ARX TOKENS</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    </button>
-                    
-                    <div class="flex justify-between items-center px-4 opacity-40">
-                        <span class="text-[8px] font-bold uppercase tracking-[0.2em]">Instant Settlement</span>
-                        <span class="text-[8px] font-bold uppercase tracking-[0.2em]">Zero Gas Protocol</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    ```
-    <section id="vault" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div class="grid lg:grid-cols-3 gap-8">
+        <div class="glass p-8 md:p-12 rounded-[3rem] border-white/10 shadow-2xl relative overflow-hidden order-2 lg:order-1">
+            <div class="absolute top-0 right-0 bg-purple-600 px-6 py-2 text-[10px] font-black uppercase tracking-widest italic">Phase 1: 94% Sold</div>
             
-            <div class="lg:col-span-2 glass-vault p-10 rounded-[2.5rem] relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-8 opacity-10">
-                    <svg width="120" height="120" viewBox="0 0 24 24" fill="white"><path d="M13 3v6h8V3h-8zm6 4h-4V5h4v2zm-6 8h8v-6h-8v6zm6-4h-4v2h4v-2zm-16 4h8V9H3v6zm6-4H5V11h4v2zm0 8H3v-6h8v6zm-6-4h4v2H5v-2z"/></svg>
-                </div>
-                
-                <h3 class="orbitron text-2xl font-black mb-8 italic tracking-widest text-white">PROJECTION TERMINAL</h3>
-                
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors group">
-                        <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-4">Tier 1: Listing</span>
-                        <div class="text-3xl orbitron font-black text-white group-hover:text-purple-400 transition-colors" id="roiListing">$0.00</div>
-                        <span class="text-[10px] text-green-500 font-bold uppercase mt-2 block">Expected x5 ROI</span>
-                    </div>
-
-                    <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors group">
-                        <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-4">Tier 2: Expansion</span>
-                        <div class="text-3xl orbitron font-black text-white group-hover:text-purple-400 transition-colors" id="roiExpansion">$0.00</div>
-                        <span class="text-[10px] text-green-500 font-bold uppercase mt-2 block">Target x50 ROI</span>
-                    </div>
-
-                    <div class="p-6 rounded-2xl bg-purple-600/10 border border-purple-500/30 hover:bg-purple-600/20 transition-all group">
-                        <span class="text-[9px] font-black text-purple-400 uppercase tracking-widest block mb-4 italic">Dominance Level</span>
-                        <div class="text-3xl orbitron font-black text-white group-hover:animate-pulse" id="roiDominance">$0.00</div>
-                        <span class="text-[10px] text-purple-400 font-bold uppercase mt-2 block underline">Sovereign x500</span>
-                    </div>
-                </div>
-
-                <div class="mt-8 pt-8 border-t border-white/5">
-                    <p class="text-[10px] text-gray-600 uppercase tracking-[0.4em] font-medium leading-loose">
-                        * Calculations are based on Jan 2026 market analysis. Value fluctuates based on underlying physical asset performance and protocol burn rate.
-                    </p>
-                </div>
-            </div>
-
-            <div class="glass-vault p-10 rounded-[2.5rem] flex flex-col justify-between border-purple-500/20">
-                <div>
-                    <h4 class="orbitron text-sm font-black text-purple-500 tracking-[0.3em] mb-6 uppercase">Asset Stability Index</h4>
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Real Estate Pool</span>
-                            <span class="text-xs font-black orbitron">74.2%</span>
-                        </div>
-                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-purple-600 h-full w-[74%] rounded-full shadow-[0_0_10px_#9333ea]"></div>
-                        </div>
-                        
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Gold Reserves</span>
-                            <span class="text-xs font-black orbitron">25.8%</span>
-                        </div>
-                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-blue-600 h-full w-[25%] rounded-full shadow-[0_0_10px_#1e3a8a]"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-10 p-6 bg-gradient-to-t from-purple-900/20 to-transparent rounded-2xl border border-white/5">
-                    <span class="text-[8px] text-gray-500 font-black uppercase tracking-[0.5em] block mb-2 text-center">Protocol Security</span>
-                    <div class="flex justify-around items-center">
-                        <span class="orbitron text-xs font-black italic">CERTIK</span>
-                        <div class="w-[1px] h-4 bg-white/20"></div>
-                        <span class="orbitron text-xs font-black italic">HACKEN</span>
-                        <div class="w-[1px] h-4 bg-white/20"></div>
-                        <span class="orbitron text-xs font-black italic">CHAINLINK</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    ```
-    <section id="roadmap" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div class="text-center mb-20">
-            <h2 class="orbitron text-4xl md:text-5xl font-black italic tracking-tighter mb-4">THE CONQUEST <span class="text-purple-600">ROADMAP</span></h2>
-            <p class="text-[10px] text-gray-500 font-black uppercase tracking-[0.5em]">Phase 1 Deployment - Strategic Milestones</p>
-        </div>
-
-        <div class="grid md:grid-cols-4 gap-4">
-            <div class="glass-vault p-8 rounded-[2rem] border-purple-500/20 relative group hover:bg-purple-600/5 transition-all">
-                <div class="text-purple-600 font-black orbitron text-5xl opacity-10 absolute top-4 right-6 group-hover:opacity-30 transition-opacity">01</div>
-                <h4 class="orbitron text-sm font-black text-white mb-6 uppercase tracking-widest italic">Genesis Launch</h4>
-                <ul class="space-y-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full"></span> Smart Contract Audit</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full"></span> Global Presale Live</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full"></span> Legal Shield Sync</li>
-                </ul>
-            </div>
-
-            <div class="glass-vault p-8 rounded-[2rem] border-white/5 relative group hover:bg-purple-600/5 transition-all">
-                <div class="text-white font-black orbitron text-5xl opacity-5 absolute top-4 right-6 group-hover:opacity-20 transition-opacity">02</div>
-                <h4 class="orbitron text-sm font-black text-white mb-6 uppercase tracking-widest italic">Asset Linking</h4>
-                <ul class="space-y-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Real Estate Tokenization</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Gold Reserve Pegging</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Institutional Beta</li>
-                </ul>
-            </div>
-
-            <div class="glass-vault p-8 rounded-[2rem] border-white/5 relative group hover:bg-purple-600/5 transition-all">
-                <div class="text-white font-black orbitron text-5xl opacity-5 absolute top-4 right-6 group-hover:opacity-20 transition-opacity">03</div>
-                <h4 class="orbitron text-sm font-black text-white mb-6 uppercase tracking-widest italic">Global Exchange</h4>
-                <ul class="space-y-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Tier-1 CEX Listings</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Liquidity Injection</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> ARXION Pay V1</li>
-                </ul>
-            </div>
-
-            <div class="glass-vault p-8 rounded-[2rem] border-white/5 relative group hover:bg-purple-600/5 transition-all">
-                <div class="text-white font-black orbitron text-5xl opacity-5 absolute top-4 right-6 group-hover:opacity-20 transition-opacity">04</div>
-                <h4 class="orbitron text-sm font-black text-white mb-6 uppercase tracking-widest italic">Full Dominance</h4>
-                <ul class="space-y-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Sovereign Debit Card</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> DAO Asset Voting</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-700 rounded-full"></span> Global Asset Hub</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    ```
-    <section id="team" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div class="text-left mb-20">
-            <h2 class="orbitron text-4xl font-black italic tracking-tighter mb-4">LEADERSHIP <span class="text-purple-600">COUNCIL</span></h2>
-            <p class="text-[10px] text-gray-500 font-black uppercase tracking-[0.6em]">The Architects of the Sovereign Future</p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <h2 class="orbitron text-2xl font-black mb-10 italic tracking-widest text-white">ASSET FORGE</h2>
             
-            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
-                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
-                    <div class="absolute inset-0 bg-purple-600/10 group-hover:bg-transparent transition-colors"></div>
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Julian" alt="CEO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                </div>
-                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Julian Sterling</h5>
-                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Chief Executive</span>
-            </div>
-
-            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
-                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus" alt="CTO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                </div>
-                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Marcus Vane</h5>
-                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Technology Lead</span>
-            </div>
-
-            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
-                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Elena" alt="CLO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                </div>
-                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Elena Rossi</h5>
-                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Legal Counsel</span>
-            </div>
-
-            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
-                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Adrian" alt="CFO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                </div>
-                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Dr. Adrian Thorne</h5>
-                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Financial Officer</span>
-            </div>
-
-            <div class="glass-vault p-6 rounded-[2rem] text-center group hover:border-purple-500/40 transition-all">
-                <div class="w-full aspect-square bg-gradient-to-b from-purple-900/20 to-black rounded-2xl mb-6 overflow-hidden relative">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="CMO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                </div>
-                <h5 class="orbitron text-xs font-black text-white uppercase tracking-widest mb-1">Sarah Jenkins</h5>
-                <span class="text-[8px] text-purple-500 font-black uppercase tracking-[0.2em]">Growth Strategy</span>
-            </div>
-
-        </div>
-    </section>
-    ```
-    <section id="compliance" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div class="glass-vault rounded-[3rem] p-12 overflow-hidden relative">
-            
-            <div class="absolute -right-20 -bottom-20 opacity-5 rotate-12">
-                <svg width="400" height="400" viewBox="0 0 24 24" fill="white"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-16 relative z-10">
-                <div>
-                    <h2 class="orbitron text-4xl font-black italic tracking-tighter mb-8 text-white uppercase leading-tight">
-                        GLOBAL LEGAL <br> <span class="text-purple-600">JURISDICTION</span>
-                    </h2>
-                    <p class="text-gray-400 text-sm font-bold uppercase tracking-[0.2em] leading-relaxed mb-10">
-                        ARXION operates under a hybrid legal framework, merging Swiss financial excellence with international asset-tokenization standards. Every $ARX token is a legally binding claim on a diversified physical asset vault.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-                            <span class="text-purple-500 font-black orbitron text-[10px] tracking-widest block mb-2 uppercase">Licensing</span>
-                            <p class="text-[9px] text-gray-300 font-bold uppercase tracking-widest">VASP Compliant Structure</p>
-                        </div>
-                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-                            <span class="text-purple-500 font-black orbitron text-[10px] tracking-widest block mb-2 uppercase">Auditing</span>
-                            <p class="text-[9px] text-gray-300 font-bold uppercase tracking-widest">Quarterly Proof-of-Reserves</p>
-                        </div>
-                    </div>
+            <div class="space-y-8">
+                <div class="grid grid-cols-3 md:grid-cols-5 gap-2">
+                    <button onclick="setCurrency('USDT')" class="currency-btn active p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">USDT</button>
+                    <button onclick="setCurrency('USDC')" class="currency-btn p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">USDC</button>
+                    <button onclick="setCurrency('ETH')" class="currency-btn p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">ETH</button>
+                    <button onclick="setCurrency('BNB')" class="currency-btn p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">BNB</button>
+                    <button onclick="setCurrency('SOL')" class="currency-btn p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">SOL</button>
                 </div>
 
-                <div class="flex flex-col justify-center">
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-6 p-5 rounded-2xl bg-gradient-to-r from-purple-900/20 to-transparent border-l-4 border-purple-600">
-                            <div class="w-10 h-10 flex-shrink-0 bg-white/5 rounded-full flex items-center justify-center">
-                                <span class="text-purple-500 font-black italic">✓</span>
-                            </div>
-                            <div>
-                                <h4 class="text-[10px] font-black text-white uppercase tracking-widest">KYC/AML Integrated</h4>
-                                <p class="text-[8px] text-gray-500 uppercase tracking-widest mt-1 font-bold">Identity Verification Protocol</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-6 p-5 rounded-2xl bg-gradient-to-r from-purple-900/20 to-transparent border-l-4 border-purple-600">
-                            <div class="w-10 h-10 flex-shrink-0 bg-white/5 rounded-full flex items-center justify-center">
-                                <span class="text-purple-500 font-black italic">✓</span>
-                            </div>
-                            <div>
-                                <h4 class="text-[10px] font-black text-white uppercase tracking-widest">Smart Contract Immutable</h4>
-                                <p class="text-[8px] text-gray-500 uppercase tracking-widest mt-1 font-bold">Verified by CertiK & PeckShield</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-6 p-5 rounded-2xl bg-gradient-to-r from-purple-900/20 to-transparent border-l-4 border-purple-600">
-                            <div class="w-10 h-10 flex-shrink-0 bg-white/5 rounded-full flex items-center justify-center">
-                                <span class="text-purple-500 font-black italic">✓</span>
-                            </div>
-                            <div>
-                                <h4 class="text-[10px] font-black text-white uppercase tracking-widest">Swiss Trust Custody</h4>
-                                <p class="text-[8px] text-gray-500 uppercase tracking-widest mt-1 font-bold">Independent Asset Stewardship</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="relative group">
+                    <label class="text-[9px] text-gray-500 font-black uppercase tracking-[0.3em] mb-3 block px-2">Deposit Amount (<span id="selectedCurr">USDT</span>)</label>
+                    <input type="number" id="mainInput" placeholder="0.00" class="w-full bg-black/40 border border-white/10 p-6 rounded-2xl text-4xl font-black outline-none focus:border-purple-600 transition-all orbitron text-white placeholder:text-gray-800">
                 </div>
+
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-purple-900/20 to-transparent border border-purple-500/20 text-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-purple-600/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
+                    <span class="text-[10px] text-purple-400 font-black uppercase mb-3 block tracking-[0.5em] relative z-10">Receiving $ARX Tokens</span>
+                    <div id="arxVal" class="orbitron text-5xl md:text-6xl font-black italic text-white relative z-10">0</div>
+                </div>
+
+                <button class="w-full py-6 md:py-8 bg-white text-black orbitron font-black text-xl md:text-2xl rounded-2xl hover:bg-purple-600 hover:text-white transition-all shadow-2xl shadow-purple-600/20 uppercase italic active:scale-95">Initiate Minting</button>
             </div>
         </div>
-    </section>
-    ```
-    <section id="tokenomics" class="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div class="text-center mb-16">
-            <h2 class="orbitron text-4xl font-black italic tracking-tighter mb-4 text-white uppercase">TOKEN <span class="text-purple-600">DISTRIBUTION</span></h2>
-            <p class="text-[10px] text-gray-500 font-black uppercase tracking-[0.6em]">Sustainable Growth Model & Liquidity Control</p>
-        </div>
 
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            
-            <div class="flex justify-center items-center py-10">
-                <div class="relative w-72 h-72 rounded-full border-[20px] border-purple-900/20 flex items-center justify-center">
-                    <div class="absolute inset-0 rounded-full border-[20px] border-purple-600 border-t-transparent border-l-transparent -rotate-45 shadow-[0_0_30px_rgba(147,51,234,0.3)]"></div>
-                    <div class="text-center">
-                        <span class="orbitron text-4xl font-black italic block">1.0B</span>
-                        <span class="text-[9px] text-gray-500 font-black uppercase tracking-widest">Total Supply</span>
-                    </div>
-                </div>
-            </div>
-
+        <div class="order-1 lg:order-2 space-y-12 pt-6">
             <div class="space-y-4">
-                <div class="glass-vault p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-purple-600">
-                    <div>
-                        <h5 class="text-xs font-black text-white uppercase tracking-widest italic">Presale Allocation</h5>
-                        <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Strategic Investors & Seed</p>
-                    </div>
-                    <div class="orbitron text-2xl font-black italic text-white">40%</div>
+                <div class="flex items-center gap-3 text-purple-500">
+                    <div class="w-8 h-[2px] bg-purple-500"></div>
+                    <span class="text-[10px] font-black uppercase tracking-[0.4em] italic">Projection Engine v2.0</span>
                 </div>
+                <h3 class="orbitron text-4xl md:text-5xl font-black leading-tight italic">YOUR WEALTH, <br> <span class="text-gray-500">REALIZED.</span></h3>
+            </div>
 
-                <div class="glass-vault p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-blue-600">
+            <div class="grid gap-4">
+                <div class="glass p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all">
                     <div>
-                        <h5 class="text-xs font-black text-white uppercase tracking-widest italic">Asset Reserves</h5>
-                        <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Locked Physical Backing</p>
+                        <div class="text-[8px] text-gray-500 font-black uppercase tracking-widest mb-1">Listing Scenario (5x)</div>
+                        <div class="orbitron text-xl font-bold italic text-white uppercase tracking-tighter">Exchange Entry</div>
                     </div>
-                    <div class="orbitron text-2xl font-black italic text-white">30%</div>
+                    <div id="r1" class="orbitron text-2xl font-black text-purple-500">$0</div>
                 </div>
-
-                <div class="glass-vault p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-gray-600">
+                <div class="glass p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-purple-600">
                     <div>
-                        <h5 class="text-xs font-black text-white uppercase tracking-widest italic">Ecosystem & Growth</h5>
-                        <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Platform Development</p>
+                        <div class="text-[8px] text-purple-500 font-black uppercase tracking-widest mb-1">Asset Expansion (50x)</div>
+                        <div class="orbitron text-xl font-bold italic text-white uppercase tracking-tighter">Global Growth</div>
                     </div>
-                    <div class="orbitron text-2xl font-black italic text-white">20%</div>
+                    <div id="r2" class="orbitron text-2xl font-black text-white">$0</div>
                 </div>
-
-                <div class="glass-vault p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-red-900">
+                <div class="glass p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all">
                     <div>
-                        <h5 class="text-xs font-black text-white uppercase tracking-widest italic">Liquidity Burn</h5>
-                        <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Deflationary Mechanism</p>
+                        <div class="text-[8px] text-gray-500 font-black uppercase tracking-widest mb-1">Sovereign Dominance (500x)</div>
+                        <div class="orbitron text-xl font-bold italic text-white uppercase tracking-tighter">Market Leader</div>
                     </div>
-                    <div class="orbitron text-2xl font-black italic text-white">10%</div>
+                    <div id="r3" class="orbitron text-2xl font-black text-purple-500">$0</div>
                 </div>
             </div>
         </div>
     </section>
-    ```
-    <footer class="relative z-10 border-t border-white/5 bg-black/40 backdrop-blur-3xl pt-24 pb-12">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-4 gap-12 mb-20">
-                
-                <div class="col-span-1 lg:col-span-1">
-                    <div class="flex items-center gap-3 mb-8">
-                        <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-                            <span class="orbitron font-black text-sm italic">X</span>
-                        </div>
-                        <span class="orbitron text-xl font-black tracking-[0.2em] text-white">ARXION</span>
-                    </div>
-                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-loose mb-8 italic">
-                        The Global Benchmark for Asset-Backed Sovereignty. Engineered for the 2026 Financial Paradigm.
-                    </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-purple-600 hover:bg-purple-600/10 transition-all">
-                            <span class="text-[10px] font-black orbitron">X</span>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-purple-600 hover:bg-purple-600/10 transition-all">
-                            <span class="text-[10px] font-black orbitron">TG</span>
-                        </a>
-                    </div>
-                </div>
 
-                <div class="grid grid-cols-2 col-span-1 lg:col-span-2 gap-8 text-right lg:text-left">
-                    <div class="space-y-6">
-                        <h6 class="text-[11px] font-black text-white uppercase tracking-[0.4em] mb-4">Ecosystem</h6>
-                        <ul class="space-y-4 text-[9px] text-gray-500 font-bold uppercase tracking-widest">
-                            <li><a href="#" class="hover:text-purple-500 transition-colors">The Forge</a></li>
-                            <li><a href="#" class="hover:text-purple-500 transition-colors">Asset Vault</a></li>
-                            <li><a href="#" class="hover:text-purple-500 transition-colors">Staking Terminal</a></li>
-                        </ul>
-                    </div>
-                    <div class="space-y-6">
-                        <h6 class="text-[11px] font-black text-white uppercase tracking-[0.4em] mb-4">Resources</h6>
-                        <ul class="space-y-4 text-[9px] text-gray-500 font-bold uppercase tracking-widest">
-                            <li><a href="#" class="hover:text-purple-500 transition-colors">Whitepaper 2.0</a></li>
-                            <li><a href="#" class="hover:text-purple-500 transition-colors">Audit Reports</a></li>
-                            <li><a href="#" class="hover:text-purple-500 transition-colors">Legal Framework</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="bg-white/5 p-8 rounded-[2rem] border border-white/10">
-                    <h6 class="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-4 italic">Get Sovereign Updates</h6>
-                    <div class="space-y-4">
-                        <input type="email" placeholder="ENCRYPTED EMAIL" class="w-full bg-black/50 border border-white/10 p-4 rounded-xl text-[10px] font-black focus:border-purple-600 outline-none transition-all uppercase tracking-widest">
-                        <button class="w-full py-4 bg-purple-600 text-white orbitron font-black text-[10px] rounded-xl hover:bg-white hover:text-black transition-all uppercase tracking-widest shadow-lg shadow-purple-600/20">
-                            Join Intel Stream
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                <span class="text-[8px] text-gray-600 font-black uppercase tracking-[0.5em]">© 2026 ARXION PROTOCOL | ALL RIGHTS RESERVED</span>
-                <div class="flex gap-8">
-                    <span class="text-[8px] text-gray-600 font-black uppercase tracking-[0.3em]">Privacy Policy</span>
-                    <span class="text-[8px] text-gray-600 font-black uppercase tracking-[0.3em]">Terms of Minting</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-    ```
     <script>
-        // Configuration Constants
-        const ARX_PRICE = 0.05; // Launch Phase Price
-        const MULTIPLIERS = {
-            listing: 5,     // Tier 1 ROI
-            expansion: 50,  // Tier 2 ROI
-            dominance: 500  // Tier 3 ROI
-        };
+        // SMART LOGIC ENGINE
+        const arxPrice = 0.05;
+        let currentCurrency = 'USDT';
+        
+        const mainInput = document.getElementById('mainInput');
+        const arxVal = document.getElementById('arxVal');
+        const r1 = document.getElementById('r1'), r2 = document.getElementById('r2'), r3 = document.getElementById('r3');
 
-        // DOM Elements
-        const usdtInput = document.getElementById('usdtInput');
-        const arxDisplay = document.getElementById('arxTokensDisplay');
-        const roiListing = document.getElementById('roiListing');
-        const roiExpansion = document.getElementById('roiExpansion');
-        const roiDominance = document.getElementById('roiDominance');
-        const walletBtn = document.getElementById('walletConnect');
-
-        // Main Calculation Engine
-        function updateCalculations(amount) {
-            const val = parseFloat(amount) || 0;
-
-            // Update Token Minting Estimation
-            const tokens = val / ARX_PRICE;
-            arxDisplay.innerText = tokens.toLocaleString(undefined, { maximumFractionDigits: 0 });
-
-            // Update ROI Projections
-            roiListing.innerText = '$' + (val * MULTIPLIERS.listing).toLocaleString();
-            roiExpansion.innerText = '$' + (val * MULTIPLIERS.expansion).toLocaleString();
-            roiDominance.innerText = '$' + (val * MULTIPLIERS.dominance).toLocaleString();
+        function setCurrency(curr) {
+            currentCurrency = curr;
+            document.getElementById('selectedCurr').innerText = curr;
+            document.querySelectorAll('.currency-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-purple-500', 'bg-purple-600/20');
+                if(btn.innerText === curr) {
+                    btn.classList.add('active', 'border-purple-500', 'bg-purple-600/20');
+                }
+            });
+            calculate();
         }
 
-        // Input Event Listener
-        usdtInput.addEventListener('input', (e) => {
-            updateCalculations(e.target.value);
-        });
+        mainInput.oninput = calculate;
 
-        // Wallet Connection Simulation (Web3 Ready Structure)
-        walletBtn.addEventListener('click', async () => {
-            walletBtn.innerText = "CONNECTING...";
-            walletBtn.classList.add('animate-pulse');
+        function calculate() {
+            let val = parseFloat(mainInput.value) || 0;
+            // Note: Real rates would be fetched via API, here we use 1:1 for USDT/USDC for logic demo
+            let multiplier = (currentCurrency === 'ETH') ? 2500 : (currentCurrency === 'BNB' ? 300 : (currentCurrency === 'SOL' ? 100 : 1));
+            let totalUSD = val * multiplier;
             
-            // Artificial delay to simulate blockchain handshake
-            setTimeout(() => {
-                walletBtn.innerText = "VAULT CONNECTED";
-                walletBtn.classList.remove('animate-pulse');
-                walletBtn.style.background = "linear-gradient(to r, #9333ea, #1e3a8a)";
-                walletBtn.style.color = "white";
-                console.log("Web3 Provider: Ready | Wallet: 0x...V26");
-            }, 1500);
-        });
-
-        // Smooth Scroll & Interaction Polish
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Initialize with 0 values
-        updateCalculations(0);
+            arxVal.innerText = Math.floor(totalUSD / arxPrice).toLocaleString();
+            r1.innerText = '$' + (totalUSD * 5).toLocaleString();
+            r2.innerText = '$' + (totalUSD * 50).toLocaleString();
+            r3.innerText = '$' + (totalUSD * 500).toLocaleString();
+        }
     </script>
+    <section id="vault" class="max-w-7xl mx-auto px-6 py-24">
+        
+        <div class="text-center mb-20">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/5 mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-[9px] font-black tracking-[0.4em] text-emerald-400 uppercase">Live Proof of Reserve</span>
+            </div>
+            <h2 class="orbitron text-4xl md:text-6xl font-black italic tracking-tighter">THE SOVEREIGN <span class="text-purple-600">TIERS</span></h2>
+            <p class="text-gray-500 text-[10px] uppercase tracking-[0.5em] mt-4 font-bold italic text-center">Exclusive privileges for institutional-grade investors</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-32">
+            <div class="glass p-10 rounded-[2.5rem] border-white/5 hover:border-purple-500/30 transition-all group relative overflow-hidden">
+                <div class="absolute -right-8 -top-8 w-24 h-24 bg-orange-900/10 rounded-full blur-3xl"></div>
+                <span class="orbitron text-xs font-black text-orange-500 tracking-widest mb-4 block italic">RANK 01</span>
+                <h4 class="orbitron text-3xl font-black mb-6 italic">BRONZE</h4>
+                <ul class="space-y-4 mb-10 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span> Entry Level Access</li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span> Standard Yield</li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span> Community Discord</li>
+                </ul>
+                <div class="text-[10px] font-black text-white/20 uppercase tracking-[0.2em] italic border-t border-white/5 pt-6">Required: > $100</div>
+            </div>
+
+            <div class="glass p-10 rounded-[2.5rem] border-purple-500/40 bg-purple-900/5 transition-all group relative overflow-hidden scale-105 shadow-2xl shadow-purple-900/20">
+                <div class="absolute -right-8 -top-8 w-32 h-32 bg-purple-600/20 rounded-full blur-3xl"></div>
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-purple-600 px-4 py-1 rounded-b-xl text-[8px] font-black tracking-widest">MOST POPULAR</div>
+                <span class="orbitron text-xs font-black text-purple-400 tracking-widest mb-4 block italic uppercase">RANK 02</span>
+                <h4 class="orbitron text-3xl font-black mb-6 italic">GOLDEN CITIZEN</h4>
+                <ul class="space-y-4 mb-10 text-[10px] font-bold text-white uppercase tracking-widest leading-relaxed">
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> 5% Asset Bridge Discount</li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> Priority Liquidity Access</li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> Early Alpha Drops</li>
+                </ul>
+                <div class="text-[10px] font-black text-purple-400 uppercase tracking-[0.2em] italic border-t border-white/10 pt-6">Required: > $5,000</div>
+            </div>
+
+            <div class="glass p-10 rounded-[2.5rem] border-white/5 hover:border-white/20 transition-all group relative overflow-hidden">
+                <div class="absolute -right-8 -top-8 w-24 h-24 bg-white/5 rounded-full blur-3xl"></div>
+                <span class="orbitron text-xs font-black text-gray-300 tracking-widest mb-4 block italic uppercase">RANK 03</span>
+                <h4 class="orbitron text-3xl font-black mb-6 italic">SOVEREIGN ELITE</h4>
+                <ul class="space-y-4 mb-10 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-white rounded-full"></span> DAO Voting Rights</li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-white rounded-full"></span> Private Concierge</li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-white rounded-full"></span> Real-Asset Ownership</li>
+                </ul>
+                <div class="text-[10px] font-black text-white/20 uppercase tracking-[0.2em] italic border-t border-white/5 pt-6">Required: > $20,000</div>
+            </div>
+        </div>
+
+        <div class="glass p-12 rounded-[3rem] border-white/5 relative overflow-hidden">
+            <div class="grid lg:grid-cols-3 gap-12 items-center">
+                <div class="space-y-6 text-center lg:text-left">
+                    <h5 class="orbitron text-2xl font-black italic">GLOBAL ASSET <br> <span class="text-purple-600">RESERVE</span></h5>
+                    <p class="text-[10px] text-gray-500 font-bold leading-relaxed uppercase tracking-widest">Audited physical gold and real estate holdings backing every $ARX token in circulation.</p>
+                </div>
+                
+                <div class="text-center space-y-2">
+                    <span class="text-[9px] font-black text-emerald-400 tracking-[0.6em] uppercase">Total Value Locked (TVL)</span>
+                    <div class="orbitron text-5xl md:text-7xl font-black text-white glow-title tracking-tighter italic tabular-nums">$12,480,000</div>
+                </div>
+
+                <div class="flex justify-center lg:justify-end">
+                    <button class="px-10 py-4 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all italic">View Audit Reports</button>
+                </div>
+            </div>
+            
+            <div class="mt-12 w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                <div class="w-3/4 h-full bg-gradient-to-r from-purple-600 via-emerald-500 to-blue-600 animate-shimmer" style="background-size: 200% 100%;"></div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .animate-shimmer {
+            animation: shimmer 5s linear infinite;
+        }
+    </style>
+    <section id="roadmap" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            
+            <div class="relative group order-2 lg:order-1">
+                <div class="absolute -inset-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000"></div>
+                <div class="relative glass p-8 md:p-12 rounded-[3rem] border-white/10">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center animate-pulse">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="orbitron text-lg font-black italic tracking-widest text-white">ARXION AI ORACLE</h4>
+                            <span class="text-[8px] text-emerald-400 font-black uppercase tracking-[0.4em]">Processing Global Markets...</span>
+                        </div>
+                    </div>
+
+                    <div id="aiResponse" class="min-h-[150px] text-gray-400 text-xs md:text-sm font-bold leading-loose italic mb-8 border-l-2 border-purple-600 pl-6 uppercase tracking-widest">
+                        "Greetings Sovereign Investor. I am analyzing the 2026 real-estate and gold trends. Type an amount in the forge to see my projection."
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="flex-1 h-[1px] bg-white/10 my-auto"></div>
+                        <span class="text-[8px] font-black text-white/20 uppercase tracking-[0.5em]">Neural Link Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2 space-y-12">
+                <div class="space-y-4">
+                    <span class="text-[10px] font-black text-purple-500 uppercase tracking-[0.5em] italic">The Path to Dominance</span>
+                    <h3 class="orbitron text-4xl md:text-5xl font-black italic">ROADMAP <br> <span class="text-gray-500">2026</span></h3>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="relative pl-10 border-l border-purple-600/30">
+                        <div class="absolute left-[-5px] top-0 w-2.5 h-2.5 bg-purple-600 rounded-full shadow-[0_0_15px_rgba(147,51,234,1)]"></div>
+                        <div class="text-[9px] font-black text-purple-400 uppercase tracking-widest mb-1">Q1 - Genesis Phase</div>
+                        <h5 class="orbitron text-lg font-bold text-white mb-2 italic">Token Launch & Audit</h5>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Completion of smart contract security audits by CertiK and initial presale deployment.</p>
+                    </div>
+
+                    <div class="relative pl-10 border-l border-white/10">
+                        <div class="absolute left-[-5px] top-0 w-2.5 h-2.5 bg-gray-800 rounded-full"></div>
+                        <div class="text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1">Q2 - Asset Acquisition</div>
+                        <h5 class="orbitron text-lg font-bold text-white mb-2 italic">Physical Gold Integration</h5>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Acquisition of first real-world asset reserves and linking them to the Sovereign Protocol.</p>
+                    </div>
+
+                    <div class="relative pl-10 border-l border-white/10">
+                        <div class="absolute left-[-5px] top-0 w-2.5 h-2.5 bg-gray-800 rounded-full"></div>
+                        <div class="text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1">Q3 - Global Expansion</div>
+                        <h5 class="orbitron text-lg font-bold text-white mb-2 italic">Tier-1 Exchange Listing</h5>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Strategic listing on Binance and OKX to ensure maximum liquidity for $ARX holders.</p>
+                    </div>
+
+                    <div class="relative pl-10 border-l border-white/10">
+                        <div class="absolute left-[-5px] top-0 w-2.5 h-2.5 bg-gray-800 rounded-full"></div>
+                        <div class="text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1">Q4 - Sovereign Utility</div>
+                        <h5 class="orbitron text-lg font-bold text-white mb-2 italic">ARXION Card Launch</h5>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Global rollout of the ARXION payment card, allowing direct spending of asset-backed wealth.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // AI Oracle Live Logic Update
+        // This links with the calculate() function from Part 2
+        function updateAI(usdAmount) {
+            const aiText = document.getElementById('aiResponse');
+            if(usdAmount > 10000) {
+                aiText.innerText = "Elite Investor detected. My projections show that a $${usdAmount.toLocaleString()} investment in $ARX could potentially stabilize the protocol's first real-estate acquisition in Dubai. High probability of Sovereign Tier benefits.";
+            } else if(usdAmount > 0) {
+                aiText.innerText = "Analyzing your $${usdAmount.toLocaleString()} entry. Based on 2026 market scarcity, this position aligns with our Q3 expansion goals. Expected asset-backing ratio remains 1:1.";
+            } else {
+                aiText.innerText = "Greetings Sovereign Investor. I am analyzing the 2026 real-estate and gold trends. Type an amount in the forge to see my projection.";
+            }
+        }
+        
+        // Note: You need to add 'updateAI(totalUSD);' inside the calculate() function in Part 2.
+    </script>
+    <section id="team" class="max-w-7xl mx-auto px-6 py-24">
+        
+        <div class="glass p-8 md:p-16 rounded-[4rem] border-emerald-500/30 bg-emerald-500/5 mb-32 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 bg-emerald-500 px-8 py-2 text-[10px] font-black uppercase tracking-[0.3em] text-black italic">Investor Protection Active</div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="orbitron text-3xl md:text-5xl font-black italic mb-6 text-emerald-400">95% GUARANTEED <br> <span class="text-white">SAFE-EXIT</span></h3>
+                    <p class="text-gray-400 text-xs md:text-sm font-bold leading-relaxed uppercase tracking-widest mb-8">
+                        To ensure absolute trust, 95% of all presale funds are locked in a decentralized Escrow. If the protocol doesn't reach its launch milestone, a smart-contract refund is triggered automatically.
+                    </p>
+                    <div class="flex gap-6">
+                        <div class="text-center">
+                            <div class="text-2xl font-black orbitron text-white">95%</div>
+                            <div class="text-[8px] text-gray-500 uppercase tracking-widest">Refund Base</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-black orbitron text-white">0%</div>
+                            <div class="text-[8px] text-gray-500 uppercase tracking-widest">Counterparty Risk</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="w-64 h-64 rounded-full border-4 border-emerald-500/20 flex items-center justify-center relative">
+                        <div class="absolute inset-0 rounded-full border-t-4 border-emerald-500 animate-spin"></div>
+                        <div class="text-center">
+                            <span class="orbitron text-4xl font-black text-emerald-500 italic uppercase">Secure</span>
+                            <span class="block text-[8px] text-gray-500 uppercase tracking-[0.4em] mt-2">Verified Contract</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-16">
+            <h2 class="orbitron text-4xl font-black italic tracking-tighter mb-4 uppercase">The Sovereign <span class="text-purple-600">Council</span></h2>
+            <p class="text-[10px] text-gray-500 font-bold tracking-[0.5em] uppercase italic">Global Expertise in Finance, Law & Technology</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="group">
+                <div class="aspect-square glass rounded-[2.5rem] mb-6 border-white/5 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <div class="orbitron text-lg font-black italic">ALEXANDER VANE</div>
+                        <div class="text-[8px] text-purple-500 font-black uppercase tracking-widest">Chief Executive Officer</div>
+                    </div>
+                </div>
+            </div>
+            <div class="group pt-8">
+                <div class="aspect-square glass rounded-[2.5rem] mb-6 border-white/5 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <div class="orbitron text-lg font-black italic">SARAH JENKINS</div>
+                        <div class="text-[8px] text-purple-500 font-black uppercase tracking-widest">Head of Legal (Swiss)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="group">
+                <div class="aspect-square glass rounded-[2.5rem] mb-6 border-white/5 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <div class="orbitron text-lg font-black italic">MARCUS CHEN</div>
+                        <div class="text-[8px] text-purple-500 font-black uppercase tracking-widest">CTO & AI Architect</div>
+                    </div>
+                </div>
+            </div>
+            <div class="group pt-8">
+                <div class="aspect-square glass rounded-[2.5rem] mb-6 border-white/5 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <div class="orbitron text-lg font-black italic">ELENA ROSSI</div>
+                        <div class="text-[8px] text-purple-500 font-black uppercase tracking-widest">Asset Management</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-32 p-8 border-t border-white/5 text-center">
+            <p class="max-w-4xl mx-auto text-[9px] text-gray-600 font-bold leading-relaxed uppercase tracking-[0.2em]">
+                Legal Notice: $ARX is a utility-backed protocol. Participation involves high market volatility. The 95% refund is governed by the smart-contract protocols visible on the blockchain. Not available in prohibited jurisdictions. 2026 Arxion Foundation, Zurich, Switzerland.
+            </p>
+        </div>
+    </section>
+
+    <footer class="py-12 glass border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:row justify-between items-center gap-8">
+            <div class="orbitron font-black text-xl italic tracking-widest">ARXION</div>
+            <div class="flex gap-10">
+                <a href="#" class="text-[9px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition">Twitter / X</a>
+                <a href="#" class="text-[9px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition">Telegram</a>
+                <a href="#" class="text-[9px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition">Discord</a>
+            </div>
+            <div class="text-[8px] text-gray-700 font-bold uppercase tracking-[0.5em]">© 2026 ARXION GLOBAL. ALL RIGHTS RESERVED.</div>
+        </div>
+    </footer>
 </body>
 </html>
