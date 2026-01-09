@@ -83,72 +83,70 @@
             The world's first protocol bridging elite real-world assets with digital sovereignty.
         </p>
     </div>
-    <section id="forge" class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-start">
+    <section id="forge" class="max-w-4xl mx-auto px-6 pt-32 pb-20">
+    <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-[3rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
         
-        <div class="glass p-8 md:p-12 rounded-[3rem] border-white/10 shadow-2xl relative overflow-hidden order-2 lg:order-1">
-            <div class="absolute top-0 right-0 bg-purple-600 px-6 py-2 text-[10px] font-black uppercase tracking-widest italic">Phase 1: 94% Sold</div>
+        <div class="relative glass p-10 md:p-16 rounded-[3rem] border-white/10 shadow-2xl overflow-hidden">
             
-            <h2 class="orbitron text-2xl font-black mb-10 italic tracking-widest text-white">ASSET FORGE</h2>
-            
-            <div class="space-y-8">
-                <div class="grid grid-cols-3 md:grid-cols-5 gap-2">
-                    <button onclick="setCurrency('USDT')" class="currency-btn active p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">USDT</button>
-                    <button onclick="setCurrency('USDC')" class="currency-btn p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">USDC</button>
-                    <button onclick="setCurrency('ETH')" class="currency-btn p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">ETH</button>
-                    <button onclick="setCurrency('BNB')" class="currency-btn p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">BNB</button>
-                    <button onclick="setCurrency('SOL')" class="currency-btn p-3 rounded-xl border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-tighter hover:border-purple-500 transition-all">SOL</button>
+            <div class="flex justify-between items-center mb-12">
+                <div>
+                    <h2 class="orbitron text-3xl font-black tracking-tighter italic text-white">GENESIS <span class="text-purple-500">MINT</span></h2>
+                    <p class="text-[8px] uppercase tracking-[0.5em] text-gray-500 font-bold mt-2">Sovereign Asset Acquisition</p>
                 </div>
-
-                <div class="relative group">
-                    <label class="text-[9px] text-gray-500 font-black uppercase tracking-[0.3em] mb-3 block px-2">Deposit Amount (<span id="selectedCurr">USDT</span>)</label>
-                    <input type="number" id="mainInput" placeholder="0.00" class="w-full bg-black/40 border border-white/10 p-6 rounded-2xl text-4xl font-black outline-none focus:border-purple-600 transition-all orbitron text-white placeholder:text-gray-800">
+                <div class="text-right">
+                    <span class="text-[10px] font-black text-emerald-500 uppercase tracking-widest animate-pulse">● System Live</span>
                 </div>
-
-                <div class="p-8 rounded-3xl bg-gradient-to-br from-purple-900/20 to-transparent border border-purple-500/20 text-center relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-purple-600/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
-                    <span class="text-[10px] text-purple-400 font-black uppercase mb-3 block tracking-[0.5em] relative z-10">Receiving $ARX Tokens</span>
-                    <div id="arxVal" class="orbitron text-5xl md:text-6xl font-black italic text-white relative z-10">0</div>
-                </div>
-
-                <button class="w-full py-6 md:py-8 bg-white text-black orbitron font-black text-xl md:text-2xl rounded-2xl hover:bg-purple-600 hover:text-white transition-all shadow-2xl shadow-purple-600/20 uppercase italic active:scale-95">Initiate Minting</button>
             </div>
+
+            <div class="grid grid-cols-5 gap-3 mb-10">
+                <button onclick="setCurrency('USDT')" class="curr-card group flex flex-col items-center p-4 rounded-2xl border border-white/5 bg-white/5 hover:border-purple-500 transition-all">
+                    <span class="text-[10px] font-black text-gray-500 group-hover:text-white">USDT</span>
+                </button>
+                <button onclick="setCurrency('USDC')" class="curr-card group flex flex-col items-center p-4 rounded-2xl border border-white/5 bg-white/5 hover:border-purple-500 transition-all">
+                    <span class="text-[10px] font-black text-gray-500 group-hover:text-white">USDC</span>
+                </button>
+                <button onclick="setCurrency('ETH')" class="curr-card group flex flex-col items-center p-4 rounded-2xl border border-white/5 bg-white/5 hover:border-purple-500 transition-all">
+                    <span class="text-[10px] font-black text-gray-500 group-hover:text-white">ETH</span>
+                </button>
+                <button onclick="setCurrency('BNB')" class="curr-card group flex flex-col items-center p-4 rounded-2xl border border-white/5 bg-white/5 hover:border-purple-500 transition-all">
+                    <span class="text-[10px] font-black text-gray-500 group-hover:text-white">BNB</span>
+                </button>
+                <button onclick="setCurrency('SOL')" class="curr-card group flex flex-col items-center p-4 rounded-2xl border border-white/5 bg-white/5 hover:border-purple-500 transition-all">
+                    <span class="text-[10px] font-black text-gray-500 group-hover:text-white">SOL</span>
+                </button>
+            </div>
+
+            <div class="bg-black/50 border border-white/5 p-8 rounded-[2rem] mb-8 group-focus-within:border-purple-500/50 transition-all">
+                <div class="flex justify-between text-[9px] font-black text-gray-600 uppercase tracking-widest mb-4">
+                    <span>Amount to Invest</span>
+                    <span id="selectedCurrDisplay">USDT</span>
+                </div>
+                <input type="number" id="mainInput" placeholder="0.00" class="w-full bg-transparent text-5xl md:text-6xl font-black outline-none orbitron text-white placeholder:text-white/5">
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+                <div class="p-6 rounded-[2rem] bg-gradient-to-br from-purple-900/40 to-transparent border border-purple-500/20">
+                    <span class="text-[8px] font-black text-purple-400 uppercase tracking-widest mb-2 block">Estimated $ARX</span>
+                    <div id="arxVal" class="orbitron text-3xl font-black italic text-white">0</div>
+                </div>
+                <div class="p-6 rounded-[2rem] bg-white/5 border border-white/5">
+                    <span class="text-[8px] font-black text-gray-500 uppercase tracking-widest mb-2 block">Growth Projection (50x)</span>
+                    <div id="r2" class="orbitron text-3xl font-black italic text-gray-400">$0</div>
+                </div>
+            </div>
+
+            <button class="relative w-full overflow-hidden group rounded-2xl">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 group-hover:scale-105 transition-transform duration-500"></div>
+                <div class="relative py-6 md:py-8 flex items-center justify-center gap-4">
+                    <span class="orbitron text-xl md:text-2xl font-black italic text-white tracking-widest uppercase">Initiate Sovereignty</span>
+                    <svg class="w-6 h-6 text-white group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </button>
+
         </div>
-
-        <div class="order-1 lg:order-2 space-y-12 pt-6">
-            <div class="space-y-4">
-                <div class="flex items-center gap-3 text-purple-500">
-                    <div class="w-8 h-[2px] bg-purple-500"></div>
-                    <span class="text-[10px] font-black uppercase tracking-[0.4em] italic">Projection Engine v2.0</span>
-                </div>
-                <h3 class="orbitron text-4xl md:text-5xl font-black leading-tight italic">YOUR WEALTH, <br> <span class="text-gray-500">REALIZED.</span></h3>
-            </div>
-
-            <div class="grid gap-4">
-                <div class="glass p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all">
-                    <div>
-                        <div class="text-[8px] text-gray-500 font-black uppercase tracking-widest mb-1">Listing Scenario (5x)</div>
-                        <div class="orbitron text-xl font-bold italic text-white uppercase tracking-tighter">Exchange Entry</div>
-                    </div>
-                    <div id="r1" class="orbitron text-2xl font-black text-purple-500">$0</div>
-                </div>
-                <div class="glass p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all border-l-4 border-purple-600">
-                    <div>
-                        <div class="text-[8px] text-purple-500 font-black uppercase tracking-widest mb-1">Asset Expansion (50x)</div>
-                        <div class="orbitron text-xl font-bold italic text-white uppercase tracking-tighter">Global Growth</div>
-                    </div>
-                    <div id="r2" class="orbitron text-2xl font-black text-white">$0</div>
-                </div>
-                <div class="glass p-6 rounded-2xl flex justify-between items-center group hover:bg-white/5 transition-all">
-                    <div>
-                        <div class="text-[8px] text-gray-500 font-black uppercase tracking-widest mb-1">Sovereign Dominance (500x)</div>
-                        <div class="orbitron text-xl font-bold italic text-white uppercase tracking-tighter">Market Leader</div>
-                    </div>
-                    <div id="r3" class="orbitron text-2xl font-black text-purple-500">$0</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    </div>
+</section>
     <script>
         // SMART LOGIC ENGINE
         const arxPrice = 0.05;
